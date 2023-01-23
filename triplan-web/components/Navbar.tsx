@@ -5,6 +5,7 @@ const Navbar = () => {
 				<button className=''>Main Menu</button>
 				<button className=''>Make a Plan</button>
 				<button className=''>User Profile</button>
+				<button className=''>User Profile</button>
 			</div>
 			<div className='mr-10 flex gap-2'>
 				<button className='w-32 flex'>
