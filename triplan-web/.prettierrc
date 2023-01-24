@@ -1,0 +1,14 @@
+{
+    "semi": true,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "tabWidth": 4,
+    "overrides": [
+      {
+        "files": ["**/*.css", "**/*.scss", "**/*.html"],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
+  }
