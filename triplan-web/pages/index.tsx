@@ -9,7 +9,7 @@ export default function Home() {
             <Head>
                 <title>TriPlan</title>
             </Head>
-            <main className="grid place-items-center h-full pt-24 bg-neutral-100 text-black">
+            <main className="grid place-items-center min-h-screen h-full pt-24 bg-neutral-100 text-black">
                 <div className="w-80 m-auto text-center">
                     <h1 className="text-4xl font-bold p-3">TRIPLAN</h1>
                     <p className="p-3">
