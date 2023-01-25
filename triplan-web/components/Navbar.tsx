@@ -8,6 +8,15 @@ interface INavbarProps {
 
 const Navbar = ({ user, isLoading }: INavbarProps) => {
     const router = useRouter();
+    const onLogin = () => {
+        router.push("/api/auth/login");
+    };
+    const onCheckProfile = () => {
+        router.push("/profile");
+    };
+    const onLogout = () => {
+        router.push("/api/auth/logout");
+    };
     return (
         <div className="fixed h-24 bg-slate-200 shadow-lg w-full flex gap-1 items-center place-items-center justify-between top-0 left-0">
             <div className="ml-10 flex gap-2">
@@ -30,10 +39,7 @@ const Navbar = ({ user, isLoading }: INavbarProps) => {
             </div>
             <div className="mr-10 flex gap-2">
                 {!isLoading && !user ? (
-                    <button
-                        onClick={() => router.push("/api/auth/login")}
-                        className="w-32 flex"
-                    >
+                    <button onClick={onLogin} className="w-32 flex">
                         Log in
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -46,13 +52,8 @@ const Navbar = ({ user, isLoading }: INavbarProps) => {
                     </button>
                 ) : !isLoading ? (
                     <div className="flex">
-                        <button onClick={() => router.push("/profile")}>
-                            Check Profile
-                        </button>
-                        <button
-                            onClick={() => router.push("/api/auth/logout")}
-                            className="w-32 flex mx-2"
-                        >
+                        <button onClick={onCheckProfile}>Check Profile</button>
+                        <button onClick={onLogout} className="w-32 flex mx-2">
                             Log out
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
