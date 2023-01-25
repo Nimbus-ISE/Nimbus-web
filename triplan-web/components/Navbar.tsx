@@ -9,7 +9,7 @@ interface INavbarProps {
 const Navbar = ({ user, isLoading }: INavbarProps) => {
     const router = useRouter();
     return (
-        <div className="fixed h-24 bg-slate-200 shadow-lg w-full flex gap-1 items-center place-items-center justify-between top-0">
+        <div className="fixed h-24 bg-slate-200 shadow-lg w-full flex gap-1 items-center place-items-center justify-between top-0 left-0">
             <div className="ml-10 flex gap-2">
                 <button
                     className=""
