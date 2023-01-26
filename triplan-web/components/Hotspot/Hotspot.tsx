@@ -33,8 +33,8 @@ const Hotspot = (props: any) => {
     }, [current]);
     return (
         <div className="relative flex text-black h-[30rem]">
-            <div className="grid grid-flow-col gap-2 m-auto z-30">
-                <div className="w-80 h-80 bg-white text-center shadow-md m-auto rounded-xl">
+            <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full">
+                <div className="w-full max-w-[20rem] h-80 bg-white text-center shadow-md m-auto md:m-1 rounded-xl">
                     <h1 className="text-5xl font-extrabold p-5">
                         ICONIC PLACES
                     </h1>
@@ -46,7 +46,7 @@ const Hotspot = (props: any) => {
                         reprehenderit voluptatum.
                     </p>
                 </div>
-                <div className="relative">
+                <div className="relative w-full max-w-[20rem] h-80 m-auto mt-2 md:m-1">
                     {places.map((obj: any, index: number) => {
                         return (
                             <HotspotCard
@@ -62,25 +62,25 @@ const Hotspot = (props: any) => {
                             />
                         );
                     })}
+                    <div
+                        onMouseEnter={() => setAdd(10)}
+                        onMouseLeave={() => setAdd(0)}
+                        onClick={() => {
+                            if (expand[current]) toggleCard(current);
+                            setTransition(true);
+                            setTimeout(() => {
+                                calculateZIndexes();
+                                setCurrent((prev) => {
+                                    if (prev + 1 === expand.length) return 0;
+                                    return prev + 1;
+                                });
+                                setTransition(false);
+                            }, 500);
+                        }}
+                        className="absolute left-[15rem] bg-pink-500 opacity-50 w-20 h-full z-40 
+                        duration-500 cursor-pointer"
+                    ></div>
                 </div>
-                <div
-                    onMouseEnter={() => setAdd(10)}
-                    onMouseLeave={() => setAdd(0)}
-                    onClick={() => {
-                        if (expand[current]) toggleCard(current);
-                        setTransition(true);
-                        setTimeout(() => {
-                            calculateZIndexes();
-                            setCurrent((prev) => {
-                                if (prev + 1 === expand.length) return 0;
-                                return prev + 1;
-                            });
-                            setTransition(false);
-                        }, 500);
-                    }}
-                    className="bg-black opacity-0 ml-[14.5rem] w-20 h-full z-40 
-                    duration-500 cursor-pointer"
-                ></div>
             </div>
         </div>
     );
