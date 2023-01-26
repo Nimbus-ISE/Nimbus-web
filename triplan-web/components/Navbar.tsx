@@ -1,3 +1,4 @@
+import { checkout } from "@/checkout";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 
@@ -22,7 +23,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
             <div className="ml-10 flex gap-2">
                 <button
                     className=""
-                    /*onClick={() => {
+                    onClick={() => {
                         checkout({
                             lineItems: [
                                 {
@@ -31,7 +32,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                                 },
                             ],
                         });
-                    }}*/
+                    }}
                 >
                     BECOME A PREMIUM USER!!!
                 </button>
