@@ -1,5 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import MainCardExtender from "./MainCardExtender";
+import MobileCardExtender from "./MobileCardExtender";
 
 interface IProps {
     obj: any;
@@ -24,6 +27,7 @@ const HotspotCard = ({
     index,
     toggleCard,
 }: IProps) => {
+    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const offsetCalculator = (add: number, index: number) => {
         const added = current !== index ? add / 5 : 0;
         return (
@@ -40,8 +44,9 @@ const HotspotCard = ({
                 transition && current === index
                     ? "-translate-x-[80%] opacity-0"
                     : "translate-x-0"
-            } ${current === index ? "hover:scale-105" : ""}
-            absolute flex bg-sky-200 h-80 w-60 shadow-md duration-[700ms]
+            } ${current === index ? "md:hover:scale-105" : ""}
+            absolute flex  bg-gradient-to-r
+            to-tricolorgreen from-lime-200 md:bg-tricolorgreen h-80 w-60 shadow-md duration-[700ms]
             ease-in-out cursor-pointer`}
             onClick={() => (current === index ? toggleCard(index) : null)}
         >
@@ -57,30 +62,11 @@ const HotspotCard = ({
                     alt={obj.location}
                 />
             </div>
-            <div
-                className={`${
-                    expand[index] ? "scale-x-[150%] -translate-x-[120%]" : ""
-                } absolute flex top-0 bottom-0 left-0 right-0 p-5 w-60 h-80 bg-gradient-to-r
-                to-sky-200 from-lime-200 transform-gpu duration-500`}
-            >
-                <div
-                    className={` ${
-                        expand[index]
-                            ? "scale-x-[66.66%] -translate-x-[12%] opacity-100"
-                            : "opacity-0"
-                    } absolute top-0 bottom-0 left-0 right-0 h-full transition duration-500 p-5`}
-                >
-                    <h1 className="font-extrabold text-3xl text-black">
-                        {obj.placeName}
-                    </h1>
-                    <h2 className="font-bold text-xl text-black">{obj.city}</h2>
-                    <p className="text-sm py-5">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Voluptates nobis eum, tenetur assumenda officia quisquam
-                        nulla recusandae nisi asperiores quia
-                    </p>
-                </div>
-            </div>
+            {isLargerThanMedium ? (
+                <MainCardExtender obj={obj} expand={expand} index={index} />
+            ) : (
+                <MobileCardExtender obj={obj} expand={expand} index={index} />
+            )}
         </div>
     );
 };

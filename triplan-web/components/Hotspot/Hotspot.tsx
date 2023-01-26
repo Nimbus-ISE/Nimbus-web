@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import HotspotCard from "./HotspotCard";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const Hotspot = (props: any) => {
     const [places] = React.useState<Array<any>>(Object.values(props));
@@ -13,6 +13,7 @@ const Hotspot = (props: any) => {
     const [z, setZ] = React.useState<Array<string>>(
         Object.keys(props).map((index) => "-" + index)
     );
+    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const calculateZIndexes = () => {
         setZ((prev: any) => {
             prev.unshift(prev[prev.length - 1]);
@@ -28,13 +29,13 @@ const Hotspot = (props: any) => {
         });
     };
     React.useEffect(() => {
-        if (current !== 0 && !expand[current])
+        if (current !== 0 && !expand[current] && isLargerThanMedium)
             setTimeout(() => toggleCard(current), 200);
     }, [current]);
     return (
         <div className="relative flex text-black h-[30rem]">
             <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full">
-                <div className="w-full max-w-[20rem] h-80 bg-white text-center shadow-md m-auto md:m-1 rounded-xl">
+                <div className="w-full max-w-[20rem] h-80 md:bg-white text-center md:shadow-md m-auto md:m-1 rounded-xl">
                     <h1 className="text-5xl font-extrabold p-5">
                         ICONIC PLACES
                     </h1>
@@ -77,7 +78,7 @@ const Hotspot = (props: any) => {
                                 setTransition(false);
                             }, 500);
                         }}
-                        className="absolute left-[15rem] bg-pink-500 opacity-50 w-20 h-full z-40 
+                        className="absolute left-[15rem] opacity-50 w-20 h-full z-40 
                         duration-500 cursor-pointer"
                     ></div>
                 </div>
