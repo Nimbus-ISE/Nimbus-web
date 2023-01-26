@@ -1,4 +1,4 @@
-import Hotspot from "@/components/Hotspot";
+import Hotspot from "@/components/Hotspot/Hotspot";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { places } from "@/public/data";
 

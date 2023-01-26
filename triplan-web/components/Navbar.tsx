@@ -1,12 +1,12 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 
-interface INavbarProps {
+interface IProps {
     user: unknown;
     isLoading: boolean;
 }
 
-const Navbar = ({ user, isLoading }: INavbarProps) => {
+const Navbar = ({ user, isLoading }: IProps) => {
     const router = useRouter();
     const onLogin = () => {
         router.push("/api/auth/login");
