@@ -45,8 +45,7 @@ const HotspotCard = ({
                     ? "-translate-x-[80%] opacity-0"
                     : "translate-x-0"
             } ${current === index ? "md:hover:scale-105" : ""}
-            absolute flex  bg-gradient-to-r
-            to-tricolorgreen from-lime-200 md:bg-tricolorgreen h-80 w-60 shadow-md duration-[700ms]
+            absolute flex bg-tricolorgreen h-80 w-60 shadow-md duration-[700ms]
             ease-in-out cursor-pointer`}
             onClick={() => (current === index ? toggleCard(index) : null)}
         >
@@ -56,7 +55,7 @@ const HotspotCard = ({
             >
                 <Image
                     className={`h-[95%] w-[95%] m-auto object-cover border-white border-[10px]`}
-                    src={"http://localhost:3000/" + obj.image}
+                    src={obj.image}
                     width={240}
                     height={320}
                     alt={obj.location}

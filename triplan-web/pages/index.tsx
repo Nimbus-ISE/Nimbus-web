@@ -2,6 +2,7 @@ import classes from "../styles/Home.module.css";
 import Head from "next/head";
 import Card from "../components/Card";
 import { places } from "@/public/data";
+import Hotspot from "@/components/Hotspot/Hotspot";
 
 export default function Home() {
     return (
@@ -9,7 +10,7 @@ export default function Home() {
             <Head>
                 <title>TriPlan</title>
             </Head>
-            <main className="grid place-items-center min-h-screen h-full pt-24 bg-neutral-100 text-black">
+            <div className="flex flex-col min-h-screen h-full pt-24 bg-neutral-100 text-black">
                 <div className="w-80 m-auto text-center">
                     <h1 className="text-4xl font-bold p-3">TRIPLAN</h1>
                     <p className="p-3">
@@ -20,6 +21,7 @@ export default function Home() {
                         deleniti voluptatum.
                     </p>
                 </div>
+                <Hotspot props={places} />
                 <div className="flex">
                     {places.map((place: any) => (
                         <Card
@@ -31,7 +33,7 @@ export default function Home() {
                         />
                     ))}
                 </div>
-            </main>
+            </div>
         </>
     );
 }

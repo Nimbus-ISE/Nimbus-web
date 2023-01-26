@@ -13,4 +13,4 @@ const Template: ComponentStory<typeof Hotspot> = (args) => (
 
 export const Primary = Template.bind({});
 
-Primary.args = places;
+Primary.args = { props: places };
