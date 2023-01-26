@@ -2,12 +2,12 @@ import { checkout } from "@/checkout";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useRouter } from "next/router";
 
-interface INavbarProps {
+interface IProps {
     user: unknown;
     isLoading: boolean;
 }
 
-const Navbar = ({ user, isLoading }: INavbarProps) => {
+const Navbar = ({ user, isLoading }: IProps) => {
     const router = useRouter();
     const onLogin = () => {
         router.push("/api/auth/login");
@@ -19,7 +19,7 @@ const Navbar = ({ user, isLoading }: INavbarProps) => {
         router.push("/api/auth/logout");
     };
     return (
-        <div className="fixed h-24 bg-slate-200 shadow-lg w-full flex gap-1 items-center place-items-center justify-between top-0 left-0">
+        <div className="fixed h-24 bg-slate-200 shadow-lg w-full flex gap-1 items-center place-items-center justify-between top-0 left-0 z-[100]">
             <div className="ml-10 flex gap-2">
                 <button
                     className=""
