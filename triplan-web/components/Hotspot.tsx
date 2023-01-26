@@ -25,6 +25,17 @@ const Hotspot = (props: any) => {
             return prev;
         });
     };
+    const toggleCard = (index: number) => {
+        setExpand((prev) => {
+            const newArr = [...prev];
+            newArr[index] = !newArr[index];
+            return newArr;
+        });
+    };
+    React.useEffect(() => {
+        if (current !== 0 && !expand[current])
+            setTimeout(() => toggleCard(current), 200);
+    }, [current]);
     return (
         <div className="relative flex text-black h-[30rem]">
             <div className="grid grid-flow-col gap-2 m-auto z-30">
@@ -60,20 +71,15 @@ const Hotspot = (props: any) => {
                                     }
                                     absolute flex bg-sky-200 h-80 w-60 shadow-md duration-[700ms]
                                     ease-in-out cursor-pointer`}
-                                    onClick={(e) => {
-                                        if (current == index) {
-                                            setExpand((prev) => {
-                                                const newArr = [...prev];
-                                                newArr[index] = !newArr[index];
-                                                return newArr;
-                                            });
-                                            e.preventDefault();
-                                        }
-                                    }}
+                                    onClick={() =>
+                                        current === index
+                                            ? toggleCard(index)
+                                            : null
+                                    }
                                 >
                                     <div
                                         className={`absolute flex top-0 bottom-0 left-0 right-0
-                                    z-10 h-80 w-60 transform-gpu duration-500 bg-lime-200`}
+                                    z-10 h-80 w-60 transform-gpu duration-500`}
                                     >
                                         <Image
                                             className={`h-[95%] w-[95%] m-auto object-cover 
@@ -94,7 +100,7 @@ const Hotspot = (props: any) => {
                                                 ? "scale-x-[150%] -translate-x-[120%]"
                                                 : ""
                                         } absolute flex top-0 bottom-0 left-0 right-0 p-5 w-60 h-80 bg-gradient-to-r
-                                        from-sky-200 to-lime-200 transform-gpu duration-500`}
+                                        to-sky-200 from-lime-200 transform-gpu duration-500`}
                                     >
                                         <div
                                             className={` ${
@@ -128,12 +134,7 @@ const Hotspot = (props: any) => {
                     onMouseEnter={() => setAdd(10)}
                     onMouseLeave={() => setAdd(0)}
                     onClick={() => {
-                        if (expand[current])
-                            setExpand((prev) => {
-                                const newArr = [...prev];
-                                newArr[current] = !newArr[current];
-                                return newArr;
-                            });
+                        if (expand[current]) toggleCard(current);
                         setTransition(true);
                         setTimeout(() => {
                             calculateZIndexes();
