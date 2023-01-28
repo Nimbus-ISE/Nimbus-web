@@ -52,7 +52,15 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                                     <ListItemIcon>
                                         {iconMapping[listItem.name]}
                                     </ListItemIcon>
-                                    <ListItemText primary={listItem.name} />
+                                    <ListItemText
+                                        primaryTypographyProps={{
+                                            fontFamily: [
+                                                "Montserrat",
+                                                "sans-serif",
+                                            ],
+                                        }}
+                                        primary={listItem.name}
+                                    />
                                 </ListItemButton>
                             </ListItem>
                         ) : listItem === "divider" ? (
@@ -70,9 +78,15 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                                         height={30}
                                     />
                                 </ListItemIcon>
-                                <ListItemText>
-                                    {user ? user.name : "Guest User"}
-                                </ListItemText>
+                                <ListItemText
+                                    primaryTypographyProps={{
+                                        fontFamily: [
+                                            "Montserrat",
+                                            "sans-serif",
+                                        ],
+                                    }}
+                                    primary={user ? user.name : "Guest User"}
+                                />
                             </ListItem>
                         )
                     )}
