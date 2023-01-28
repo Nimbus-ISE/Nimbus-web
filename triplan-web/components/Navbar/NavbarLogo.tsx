@@ -12,11 +12,11 @@ const NavbarLogo = () => {
             <Image
                 className="w-[40px] h-[30px]"
                 src={"/images/logo.png"}
-                alt="Profile picture"
+                alt="Logo"
                 width={40}
                 height={30}
             />
-            <div className="text-2xl font-bold mx-2">NIMSUS</div>
+            <div className="text-2xl font-bold mx-2">TRIPLAN</div>
         </div>
     );
 };

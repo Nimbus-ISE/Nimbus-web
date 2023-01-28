@@ -50,7 +50,7 @@ const rightListLogout = [
 
 const Navbar = ({ user, isLoading }: IProps) => {
     const router = useRouter();
-    const isLargerThanMedium = useMediaQuery("(min-width: 785px)");
+    const isLargerThanMedium = useMediaQuery("(min-width: 800px)");
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     const calculateMobileList = () => {
         return user && !isLoading
@@ -72,9 +72,9 @@ const Navbar = ({ user, isLoading }: IProps) => {
             >
                 {isLargerThanMedium ? (
                     <>
-                        <div className="flex px-5 text-md">
+                        <div className="flex pl-5 text-md">
                             <NavbarLogo />
-                            <div className="grid grid-flow-col gap-5 px-5">
+                            <div className="grid grid-flow-col gap-4 pl-5">
                                 {leftList.map((navItem) => (
                                     <RouteButton
                                         name={navItem.name}

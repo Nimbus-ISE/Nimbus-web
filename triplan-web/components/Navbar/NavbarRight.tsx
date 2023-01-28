@@ -27,7 +27,7 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
         });
     };
     return (
-        <div className="grid grid-flow-col gap-5 px-5 text-md">
+        <div className="grid grid-flow-col gap-4 px-5 text-md">
             {!isLoading && !user ? (
                 <>
                     {listLogin.map((navItem) => (
@@ -39,7 +39,7 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                     ))}
                     <button>
                         <Image
-                            className="rounded-full w-10 h-10 bg-red-200"
+                            className="rounded-full w-10 h-10"
                             src="/images/BlackHole.jpg"
                             alt="Profile picture"
                             width={40}
@@ -73,7 +73,7 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                         />
                     ))}
                     <Image
-                        className="rounded-full w-10 h-10 bg-red-200"
+                        className="rounded-full w-10 h-10 bg-black"
                         src="/images/ThorsWell.jpg"
                         alt="Profile picture"
                         width={40}

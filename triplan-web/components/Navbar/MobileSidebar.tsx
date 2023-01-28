@@ -71,7 +71,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                             <ListItem key={index}>
                                 <ListItemIcon>
                                     <Image
-                                        className="rounded-full w-[30px] h-[30px] bg-red-200"
+                                        className="rounded-full w-[30px] h-[30px] bg-black"
                                         src="/images/ThorsWell.jpg"
                                         alt="Profile picture"
                                         width={30}
