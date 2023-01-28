@@ -53,6 +53,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                                         {iconMapping[listItem.name]}
                                     </ListItemIcon>
                                     <ListItemText
+                                        disableTypography
                                         primaryTypographyProps={{
                                             fontFamily: [
                                                 "Montserrat",
@@ -79,6 +80,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                                     />
                                 </ListItemIcon>
                                 <ListItemText
+                                    disableTypography
                                     primaryTypographyProps={{
                                         fontFamily: [
                                             "Montserrat",
