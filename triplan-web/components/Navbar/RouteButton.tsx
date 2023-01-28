@@ -8,7 +8,10 @@ interface IProps {
 const RouteButton = ({ name, route, router }: IProps) => {
     const onClick = () => router.push(route);
     return (
-        <button onClick={onClick} className="hover:text-tricolorgreen">
+        <button
+            onClick={onClick}
+            className="hover:text-tricolorgreen whitespace-nowrap"
+        >
             {name}
         </button>
     );
