@@ -63,7 +63,7 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                             color="orange"
                             className="m-auto mr-2 drop-shadow-sm"
                         />
-                        <div className="m-auto">Upgrade</div>
+                        <div className="m-auto font-montserrat">Upgrade</div>
                     </Button>
                     {listLogout.map((navItem) => (
                         <RouteButton

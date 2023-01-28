@@ -18,7 +18,7 @@ const RouteButton = ({ name, route, router }: IProps) => {
             onClick={onClick}
             className="hover:text-tricolorgreen whitespace-nowrap"
         >
-            {name}
+            <div className="font-montserrat">{name}</div>
         </Button>
     );
 };
