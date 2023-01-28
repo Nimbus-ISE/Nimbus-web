@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@mui/material";
 
 interface IProps {
     name: string;
@@ -8,12 +9,17 @@ interface IProps {
 const RouteButton = ({ name, route, router }: IProps) => {
     const onClick = () => router.push(route);
     return (
-        <button
+        <Button
+            sx={{
+                textTransform: "none",
+                color: "gray",
+            }}
+            variant="text"
             onClick={onClick}
             className="hover:text-tricolorgreen whitespace-nowrap"
         >
             {name}
-        </button>
+        </Button>
     );
 };
 
