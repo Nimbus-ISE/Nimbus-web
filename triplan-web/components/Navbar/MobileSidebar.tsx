@@ -1,5 +1,4 @@
 import React, { SetStateAction } from "react";
-import Image from "next/image";
 import {
     Box,
     Drawer,
@@ -8,52 +7,75 @@ import {
     ListItemButton,
     ListItem,
     ListItemText,
+    Divider,
 } from "@mui/material";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
+import MobileLeft from "./MobileLeft";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 interface IProps {
     list: Array<any>;
     openDrawer: boolean;
     setOpenDrawer: React.Dispatch<SetStateAction<boolean>>;
+    user: any;
 }
 
-const MobileSidebar = ({ list, openDrawer, setOpenDrawer }: IProps) => {
+const iconMapping: { [key: string]: React.ReactNode } = {
+    Home: <HomeOutlinedIcon />,
+    Plan: <MapOutlinedIcon />,
+    About: <InfoOutlinedIcon />,
+    Login: <LoginOutlinedIcon />,
+    Profile: <AccountBoxOutlinedIcon />,
+    Signout: <LogoutOutlinedIcon />,
+};
+
+const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
     return (
         <Drawer
             anchor="left"
             open={openDrawer}
             onClose={() => setOpenDrawer(false)}
         >
-            <div
-                className="relative bg-neutral-100 flex gap-1 items-center place-items-center 
-        justify-between h-16 text-neutral-600"
-            >
-                <FontAwesomeIcon
-                    icon={faBars}
-                    color="gray"
-                    onClick={() => setOpenDrawer(false)}
-                    className="m-auto mx-5 drop-shadow-sm fa-xl"
-                />
-                <Image
-                    className="w-[40px] h-auto select-none"
-                    src={"http://localhost:3000" + "/images/logo.png"}
-                    alt="Profile picture"
-                    width={40}
-                    height={30}
-                />
-                <div className="text-2xl font-bold mx-2">TRIPLAN</div>
-            </div>
-            <Box sx={{ width: 250 }}>
+            <MobileLeft setOpenDrawer={setOpenDrawer} />
+            <div className="flex w-full h-1 shadow-sm bg-gradient-to-r from-tricolorgreen to-yellow-300" />
+            <Box sx={{ width: 250, paddingTop: 0 }}>
                 <List>
-                    {list.map((listItem, index) => (
-                        <ListItem key={index} disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon></ListItemIcon>
-                                <ListItemText primary={listItem.name} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                    {list.map((listItem, index) =>
+                        typeof listItem !== "string" ? (
+                            <ListItem key={index} disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {iconMapping[listItem.name]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={listItem.name} />
+                                </ListItemButton>
+                            </ListItem>
+                        ) : listItem === "divider" ? (
+                            <div className="my-4">
+                                <Divider />
+                            </div>
+                        ) : (
+                            <ListItem key={index}>
+                                <ListItemIcon>
+                                    <Image
+                                        className="rounded-full w-[30px] h-[30px] bg-red-200"
+                                        src="/images/ThorsWell.jpg"
+                                        alt="Profile picture"
+                                        width={30}
+                                        height={30}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText>
+                                    {user ? user.name : "Guest User"}
+                                </ListItemText>
+                            </ListItem>
+                        )
+                    )}
                 </List>
             </Box>
         </Drawer>

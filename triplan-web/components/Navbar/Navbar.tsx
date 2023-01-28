@@ -8,6 +8,7 @@ import React from "react";
 import MobileSidebar from "./MobileSidebar";
 import NavbarRight from "./NavbarRight";
 import NavbarLogo from "./NavbarLogo";
+import MobileLeft from "./MobileLeft";
 
 interface IProps {
     user: unknown;
@@ -24,7 +25,7 @@ const leftList = [
         route: "/",
     },
     {
-        name: "About Us",
+        name: "About",
         route: "/",
     },
 ];
@@ -38,7 +39,7 @@ const rightListLogin = [
 
 const rightListLogout = [
     {
-        name: "Check Profile",
+        name: "Profile",
         route: "/profile",
     },
     {
@@ -49,19 +50,24 @@ const rightListLogout = [
 
 const Navbar = ({ user, isLoading }: IProps) => {
     const router = useRouter();
-    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
+    const isLargerThanMedium = useMediaQuery("(min-width: 785px)");
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
+    const calculateMobileList = () => {
+        return user && !isLoading
+            ? [...leftList, "divider", "profile", ...rightListLogout]
+            : [...leftList, "divider", "profile", ...rightListLogin];
+    };
+    const [mobileList, setMobileList] = React.useState<Array<any>>(
+        calculateMobileList()
+    );
+    React.useEffect(() => {
+        console.log(mobileList);
+        setMobileList(calculateMobileList());
+    }, [user, isLoading]);
     return (
         <div className="fixed w-full z-[100] top-0 left-0 drop-shadow-sm select-none">
-            {!isLargerThanMedium && (
-                <MobileSidebar
-                    list={leftList}
-                    openDrawer={openDrawer}
-                    setOpenDrawer={setOpenDrawer}
-                />
-            )}
             <div
-                className="relative bg-neutral-100 flex gap-1 items-center place-items-center 
+                className="relative bg-white flex gap-1 items-center place-items-center 
                 justify-between h-16 text-neutral-600"
             >
                 {isLargerThanMedium ? (
@@ -86,17 +92,14 @@ const Navbar = ({ user, isLoading }: IProps) => {
                         />
                     </>
                 ) : (
-                    <div
-                        className="relative bg-neutral-100 flex gap-1 items-center place-items-center 
-                        justify-between h-16 text-neutral-600"
-                    >
-                        <FontAwesomeIcon
-                            icon={faBars}
-                            color="gray"
-                            onClick={() => setOpenDrawer(true)}
-                            className="m-auto mx-5 drop-shadow-sm fa-xl"
+                    <div className="mr-5 w-[250px]">
+                        <MobileSidebar
+                            list={mobileList}
+                            openDrawer={openDrawer}
+                            setOpenDrawer={setOpenDrawer}
+                            user={user}
                         />
-                        <NavbarLogo />
+                        <MobileLeft setOpenDrawer={setOpenDrawer} />
                     </div>
                 )}
             </div>

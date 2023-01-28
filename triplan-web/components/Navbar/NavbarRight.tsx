@@ -49,23 +49,22 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                 </>
             ) : !isLoading ? (
                 <>
-                    <button onClick={onCheckout} className="flex px-5">
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            sx={{
-                                marginY: "auto",
-                                textTransform: "none",
-                            }}
-                        >
-                            <FontAwesomeIcon
-                                icon={faCrown}
-                                color="orange"
-                                className="m-auto mr-2 drop-shadow-sm"
-                            />
-                            <div className="m-auto">Upgrade</div>
-                        </Button>
-                    </button>
+                    <Button
+                        onClick={onCheckout}
+                        variant="outlined"
+                        color="primary"
+                        sx={{
+                            marginY: "auto",
+                            textTransform: "none",
+                        }}
+                    >
+                        <FontAwesomeIcon
+                            icon={faCrown}
+                            color="orange"
+                            className="m-auto mr-2 drop-shadow-sm"
+                        />
+                        <div className="m-auto">Upgrade</div>
+                    </Button>
                     {listLogout.map((navItem) => (
                         <RouteButton
                             name={navItem.name}
@@ -73,15 +72,13 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                             route={navItem.route}
                         />
                     ))}
-                    <button>
-                        <Image
-                            className="rounded-full w-10 h-10 bg-red-200"
-                            src="/images/ThorsWell.jpg"
-                            alt="Profile picture"
-                            width={40}
-                            height={40}
-                        />
-                    </button>
+                    <Image
+                        className="rounded-full w-10 h-10 bg-red-200"
+                        src="/images/ThorsWell.jpg"
+                        alt="Profile picture"
+                        width={40}
+                        height={40}
+                    />
                 </>
             ) : null}
         </div>
