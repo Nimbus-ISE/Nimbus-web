@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 const user = {

@@ -45,8 +45,9 @@ const HotspotCard = ({
                     ? "-translate-x-[80%] opacity-0"
                     : "translate-x-0"
             } ${current === index ? "md:hover:scale-105" : ""}
-            absolute flex bg-tricolorgreen h-80 w-60 shadow-md duration-[700ms]
-            ease-in-out cursor-pointer`}
+            absolute flex bg-gradient-to-r to-tricolorgreen from-lime-200
+             md:from-tricolorgreen md:to-tricolorgreen h-80 w-60 shadow-md duration-[700ms]
+            ease-in-out cursor-pointer `}
             onClick={() => (current === index ? toggleCard(index) : null)}
         >
             <div

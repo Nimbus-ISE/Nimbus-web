@@ -6,6 +6,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                montserrat: ["Montserrat", "sans-serif"],
+            },
             animation: {
                 "fade-in": "fade 0.3s ease-in",
             },
