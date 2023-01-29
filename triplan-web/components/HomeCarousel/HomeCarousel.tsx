@@ -1,4 +1,5 @@
 import useElementSize from "@/hooks/useElementSize";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import React from "react";
 import styles from "./Button.module.css";
 import CarouselImage from "./CarouselImage";
@@ -25,6 +26,7 @@ const carouselList = [
 const HomeCarousel = () => {
     const paragraphSize = useElementSize("carousel-paragraph");
     const carouselSize = useElementSize("carousel");
+    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const [current, setCurrent] = React.useState<number>(0);
     const [disableTransition, setDisableTransition] =
         React.useState<boolean>(false);
@@ -44,7 +46,7 @@ const HomeCarousel = () => {
     return (
         <div
             id="carousel"
-            className="relative flex text-black h-[35rem] py-5 overflow-hidden"
+            className="relative flex flex-col md:flex-row text-black h-[40rem] py-5 overflow-hidden"
         >
             {carouselList.map((carouselObj, index) => {
                 return (
@@ -61,17 +63,18 @@ const HomeCarousel = () => {
             })}
             <div
                 style={{
+                    paddingTop: isLargerThanMedium ? undefined : 100,
                     paddingBottom: paragraphSize.height,
                 }}
                 className="relative m-auto text-center z-10"
             >
-                <div className="text-7xl font-extrabold text-white drop-shadow-lg w-fit">
+                <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit">
                     <h1 className="mb-2">LET US DESIGN</h1>
                     <h1>YOUR HOLIDAY</h1>
                 </div>
                 <p
                     id="carousel-paragraph"
-                    className="absolute text-white text-justify text-sm drop-shadow-sm p-3"
+                    className="absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3"
                 >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Repudiandae eveniet, repellat consequuntur consequatur
@@ -82,6 +85,7 @@ const HomeCarousel = () => {
             </div>
             <div
                 style={{
+                    marginTop: isLargerThanMedium ? undefined : 30,
                     marginBottom: paragraphSize.height,
                 }}
                 className="m-auto z-10"
