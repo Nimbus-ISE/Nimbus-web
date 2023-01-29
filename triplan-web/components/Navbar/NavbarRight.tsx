@@ -15,7 +15,6 @@ interface IProps {
 }
 
 const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
-    const router = useRouter();
     const onCheckout = () => {
         checkout({
             lineItems: [
@@ -33,7 +32,6 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                     {listLogin.map((navItem) => (
                         <RouteButton
                             name={navItem.name}
-                            router={router}
                             route={navItem.route}
                         />
                     ))}
@@ -66,7 +64,6 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                     {listLogout.map((navItem) => (
                         <RouteButton
                             name={navItem.name}
-                            router={router}
                             route={navItem.route}
                         />
                     ))}
