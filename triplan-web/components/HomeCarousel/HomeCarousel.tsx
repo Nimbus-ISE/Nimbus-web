@@ -1,8 +1,6 @@
 import useElementSize from "@/hooks/useElementSize";
 import React from "react";
 import styles from "./Button.module.css";
-import Image from "next/image";
-import Filter from "./Filter";
 import CarouselImage from "./CarouselImage";
 
 const carouselList = [
@@ -12,25 +10,50 @@ const carouselList = [
     },
     {
         src: "/images/ThorsWell.jpg",
-        filter: "bg-blue-500",
+        filter: "bg-sky-500",
     },
     {
         src: "/images/BlackHole.jpg",
-        filter: "bg-red-500",
+        filter: "bg-orange-500",
+    },
+    {
+        src: "/images/bg.webp",
+        filter: "bg-emerald-500",
     },
 ];
 
 const HomeCarousel = () => {
     const paragraphSize = useElementSize("carousel-paragraph");
     const carouselSize = useElementSize("carousel");
+    const [current, setCurrent] = React.useState<number>(0);
+    const [disableTransition, setDisableTransition] =
+        React.useState<boolean>(false);
+    React.useEffect(() => {
+        const periodicSlide = setInterval(() => {
+            setCurrent((prev: number) => {
+                if (prev + 1 === carouselList.length) {
+                    setDisableTransition(true);
+                } else {
+                    setDisableTransition(false);
+                }
+                return (prev + 1) % carouselList.length;
+            });
+        }, 5000);
+        return () => clearInterval(periodicSlide);
+    }, []);
     return (
         <div
             id="carousel"
-            className="relative flex text-black h-[35rem] bg-green-700 py-5 overflow-hidden"
+            className="relative flex text-black h-[35rem] py-5 overflow-hidden"
         >
-            {carouselList.map((carouselObj) => {
+            {carouselList.map((carouselObj, index) => {
                 return (
                     <CarouselImage
+                        disableTransition={disableTransition}
+                        translate={
+                            carouselSize.width * index -
+                            carouselSize.width * current
+                        }
                         src={carouselObj.src}
                         filter={carouselObj.filter}
                     />
