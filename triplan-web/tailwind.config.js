@@ -10,12 +10,17 @@ module.exports = {
                 montserrat: ["Montserrat", "sans-serif"],
             },
             animation: {
-                "fade-in": "fade 0.3s ease-in",
+                "move-in": "move 0.5s ease-in",
+                "tab-expand": "tabExpand 1s ease-in",
             },
             keyframes: {
-                fade: {
-                    "0%": { opacity: 0 },
-                    "100%": { opacity: 1 },
+                move: {
+                    "0%": { transform: "translateX(-100%)" },
+                    "100%": { transform: "translateX(0%)" },
+                },
+                tabExpand: {
+                    "0%": { width: "6rem" },
+                    "100%": { width: "33%" },
                 },
             },
             scale: {

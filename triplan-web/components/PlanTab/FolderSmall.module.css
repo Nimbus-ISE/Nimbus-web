@@ -1,0 +1,93 @@
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-column-start: 0;
+    grid-column-end: span 4;
+    height: 100%;
+    width: 100%;
+}
+.uncheckedLabel {
+    order: 1;
+    color: white;
+    display: block;
+    padding: 1rem;
+    margin-right: 0.2rem;
+    cursor: pointer;
+    background: #a6a6a6;
+    opacity: 0.85;
+    font-weight: bold;
+    transition: background ease 0.2s;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    margin-top: 20px;
+    height: 50px;
+}
+.tabs .tab {
+    order: 99;
+    flex-grow: 1;
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    background: #fff;
+}
+.tab {
+    display: block;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    height: 90%;
+}
+.tabs input[type="radio"] {
+    display: none;
+}
+.checkedLabel {
+    order: 1;
+    margin-top: 20px;
+    display: block;
+    padding: 1rem;
+    margin-right: 0.2rem;
+    cursor: pointer;
+    height: 50px;
+    font-weight: bold;
+    transition: background ease 0.2s;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #fff;
+    color: black;
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+    display: block;
+}
+.openTabButton {
+    position: absolute;
+    background: #fff;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    height: 5rem;
+    width: 1.5rem;
+    z-index: 15;
+    font-weight: 500;
+    top: 55%;
+    left: 33%;
+}
+.fullTab {
+    position: absolute;
+    display: block;
+    background-color: #fff;
+    height: 42rem;
+    width: 90rem;
+    left: 0;
+    bottom: 0;
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+    z-index: 20;
+}
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
