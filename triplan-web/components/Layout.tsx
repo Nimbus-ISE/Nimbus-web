@@ -21,6 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 />
             </Head>
             <Navbar user={user} isLoading={isLoading} />
+            <div className="flex w-full h-16 shadow-md bg-gradient-to-r from-tricolorgreen to-yellow-300" />
             {children}
         </div>
     ) : (
