@@ -75,20 +75,27 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                         ) : (
                             <ListItem key={index}>
                                 <ListItemIcon>
-                                    <Image
-                                        className="rounded-full w-[30px] h-[30px] bg-black"
-                                        src={
-                                            user
-                                                ? (user?.picture as string)
-                                                : "/images/guest.jpg"
-                                        }
-                                        alt="Profile picture"
-                                        width={30}
-                                        height={30}
-                                    />
+                                    {user ? (
+                                        <img
+                                            src={user.picture as string}
+                                            className="rounded-full w-[30px] h-[30px] shadow-md"
+                                            alt="Profile picture"
+                                        />
+                                    ) : (
+                                        <Image
+                                            className="rounded-full w-[30px] h-[30px] bg-black shadow-md"
+                                            src="/images/guest.jpg"
+                                            alt="Profile picture"
+                                            width={30}
+                                            height={30}
+                                        />
+                                    )}
                                 </ListItemIcon>
                                 <ListItemText
                                     disableTypography
+                                    sx={{
+                                        wordBreak: "break-word",
+                                    }}
                                     primaryTypographyProps={{
                                         fontFamily: [
                                             "Montserrat",

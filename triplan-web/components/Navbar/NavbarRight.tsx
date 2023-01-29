@@ -37,15 +37,13 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                             route={navItem.route}
                         />
                     ))}
-                    <button>
-                        <Image
-                            className="rounded-full w-10 h-10 shadow-md"
-                            src="/images/guest.jpg"
-                            alt="Profile picture"
-                            width={40}
-                            height={40}
-                        />
-                    </button>
+                    <Image
+                        className="rounded-full w-[40px] h-[40px] shadow-md"
+                        src="/images/guest.jpg"
+                        alt="Profile picture"
+                        width={40}
+                        height={40}
+                    />
                 </>
             ) : !isLoading ? (
                 <>
@@ -72,12 +70,10 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                             route={navItem.route}
                         />
                     ))}
-                    <Image
-                        className="rounded-full w-10 h-10 bg-black shadow-md"
-                        src={user.picture}
+                    <img
+                        className="rounded-full w-[40px] h-[40px] bg-black shadow-md"
+                        src={user.picture as string}
                         alt="Profile picture"
-                        width={40}
-                        height={40}
                     />
                 </>
             ) : null}
