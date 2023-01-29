@@ -39,8 +39,8 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                     ))}
                     <button>
                         <Image
-                            className="rounded-full w-10 h-10"
-                            src="/images/BlackHole.jpg"
+                            className="rounded-full w-10 h-10 shadow-md"
+                            src="/images/guest.jpg"
                             alt="Profile picture"
                             width={40}
                             height={40}
@@ -73,8 +73,8 @@ const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
                         />
                     ))}
                     <Image
-                        className="rounded-full w-10 h-10 bg-black"
-                        src="/images/ThorsWell.jpg"
+                        className="rounded-full w-10 h-10 bg-black shadow-md"
+                        src={user.picture}
                         alt="Profile picture"
                         width={40}
                         height={40}
