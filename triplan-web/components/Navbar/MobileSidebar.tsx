@@ -17,6 +17,7 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { useRouter } from "next/router";
 
 interface IProps {
     list: Array<any>;
@@ -35,6 +36,7 @@ const iconMapping: { [key: string]: React.ReactNode } = {
 };
 
 const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
+    const router = useRouter();
     return (
         <Drawer
             anchor="left"
@@ -48,7 +50,9 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                     {list.map((listItem, index) =>
                         typeof listItem !== "string" ? (
                             <ListItem key={index} disablePadding>
-                                <ListItemButton>
+                                <ListItemButton
+                                    onClick={() => router.push(listItem.route)}
+                                >
                                     <ListItemIcon>
                                         {iconMapping[listItem.name]}
                                     </ListItemIcon>
