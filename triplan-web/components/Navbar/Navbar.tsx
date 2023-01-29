@@ -82,7 +82,6 @@ const Navbar = ({ user, isLoading }: IProps) => {
                                 {leftList.map((navItem) => (
                                     <RouteButton
                                         name={navItem.name}
-                                        router={router}
                                         route={navItem.route}
                                     />
                                 ))}

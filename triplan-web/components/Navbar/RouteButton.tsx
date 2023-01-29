@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 interface IProps {
     name: string;
     route: string;
-    router: any;
 }
-const RouteButton = ({ name, route, router }: IProps) => {
+const RouteButton = ({ name, route }: IProps) => {
+    const router = useRouter();
     const onClick = () => router.push(route);
     return (
         <Button
