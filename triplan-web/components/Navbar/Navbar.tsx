@@ -1,7 +1,4 @@
 import { useRouter } from "next/router";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown, faBars } from "@fortawesome/free-solid-svg-icons";
 import RouteButton from "./RouteButton";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import React from "react";
@@ -54,7 +51,14 @@ const Navbar = ({ user, isLoading }: IProps) => {
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     const calculateMobileList = () => {
         return user && !isLoading
-            ? [...leftList, "divider", "profile", ...rightListLogout]
+            ? [
+                  ...leftList,
+                  "divider",
+                  "profile",
+                  rightListLogout[0],
+                  "upgrade",
+                  rightListLogout[1],
+              ]
             : [...leftList, "divider", "profile", ...rightListLogin];
     };
     const [mobileList, setMobileList] = React.useState<Array<any>>(
