@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const NavbarLogo = () => {
     const router = useRouter();
     return (
-        <div
+        <button
             onClick={() => router.push("/")}
             className="flex select-none my-auto"
         >
@@ -17,7 +17,7 @@ const NavbarLogo = () => {
                 height={30}
             />
             <div className="text-2xl font-bold mx-2">NIMBUS</div>
-        </div>
+        </button>
     );
 };
 
