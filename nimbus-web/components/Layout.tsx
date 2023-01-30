@@ -8,18 +8,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
     return !isLoading ? (
         <div>
-            <Head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link
-                    rel="preconnect"
-                    href="https://fonts.gstatic.com"
-                    crossOrigin="anonymous"
-                />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
-                    rel="stylesheet"
-                />
-            </Head>
             <Navbar user={user} isLoading={isLoading} />
             <div className="flex w-full h-16 shadow-md bg-gradient-to-r from-tricolorgreen to-yellow-300" />
             {children}
