@@ -9,7 +9,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>TriPlan</title>
+                <title>Nimbus</title>
             </Head>
             <div className="flex flex-col min-h-screen h-full bg-neutral-100 text-black">
                 <HomeCarousel />

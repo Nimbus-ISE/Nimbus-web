@@ -1,2 +1,3 @@
-# TriPlan-Web
-Web app for TriPlan
+# Nimbus-Web
+
+Web app for Nimbus
