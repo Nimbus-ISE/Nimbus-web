@@ -68,7 +68,10 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                         typeof listItem !== "string" ? (
                             <ListItem key={index} disablePadding>
                                 <ListItemButton
-                                    onClick={() => router.push(listItem.route)}
+                                    onClick={() => {
+                                        router.push(listItem.route);
+                                        setOpenDrawer(false);
+                                    }}
                                 >
                                     <ListItemIcon>
                                         {iconMapping[listItem.name]}

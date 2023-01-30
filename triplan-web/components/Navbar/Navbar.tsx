@@ -69,7 +69,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
         setMobileList(calculateMobileList());
     }, [user, isLoading]);
     return (
-        <div className="fixed w-full z-[100] top-0 left-0 drop-shadow-sm select-none">
+        <div className="fixed w-full z-[100] top-0 left-0 select-none">
             <div
                 className="relative bg-white flex gap-1 items-center place-items-center 
                 justify-between h-16 text-neutral-600"
@@ -82,7 +82,6 @@ const Navbar = ({ user, isLoading }: IProps) => {
                                 {leftList.map((navItem) => (
                                     <RouteButton
                                         name={navItem.name}
-                                        router={router}
                                         route={navItem.route}
                                     />
                                 ))}
@@ -107,7 +106,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                     </div>
                 )}
             </div>
-            <div className="flex w-full h-1 shadow-sm bg-gradient-to-r from-tricolorgreen to-yellow-300" />
+            <div className="flex w-full h-1 bg-gradient-to-r from-tricolorgreen to-yellow-300" />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Card from "../components/Card";
 import { places } from "@/public/data";
 import Hotspot from "@/components/Hotspot/Hotspot";
+import HomeCarousel from "@/components/HomeCarousel/HomeCarousel";
 
 export default function Home() {
     return (
@@ -10,17 +11,8 @@ export default function Home() {
             <Head>
                 <title>TriPlan</title>
             </Head>
-            <div className="flex flex-col min-h-screen h-full pt-24 bg-neutral-100 text-black">
-                <div className="w-80 m-auto text-center">
-                    <h1 className="text-4xl font-bold p-3">TRIPLAN</h1>
-                    <p className="p-3">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Nostrum omnis consequatur maxime accusamus ea
-                        voluptates sequi delectus quasi voluptatibus modi
-                        aliquid, cum harum iusto soluta iste rem? Voluptates,
-                        deleniti voluptatum.
-                    </p>
-                </div>
+            <div className="flex flex-col min-h-screen h-full bg-neutral-100 text-black">
+                <HomeCarousel />
                 <Hotspot props={places} />
                 <div className="flex">
                     {places.map((place: any) => (
