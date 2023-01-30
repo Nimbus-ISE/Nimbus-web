@@ -1,5 +1,6 @@
 import useElementSize from "@/hooks/useElementSize";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useObserver from "@/hooks/useObserver";
 import React from "react";
 import styles from "./Button.module.css";
 import CarouselImage from "./CarouselImage";
@@ -18,6 +19,10 @@ const carouselList = [
         filter: "bg-orange-500",
     },
     {
+        src: "/images/db11.jpg",
+        filter: "bg-yellow-500",
+    },
+    {
         src: "/images/bg.webp",
         filter: "bg-emerald-500",
     },
@@ -27,9 +32,12 @@ const HomeCarousel = () => {
     const paragraphSize = useElementSize("carousel-paragraph");
     const carouselSize = useElementSize("carousel");
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
+    const carouselTitleIsIntersecting = useObserver({
+        elementId: "carousel-text-container",
+    });
     const [current, setCurrent] = React.useState<number>(0);
     const [disableTransition, setDisableTransition] =
-        React.useState<boolean>(false);
+        React.useState<boolean>(true);
     React.useEffect(() => {
         const periodicSlide = setInterval(() => {
             setCurrent((prev: number) => {
@@ -52,29 +60,34 @@ const HomeCarousel = () => {
                 return (
                     <CarouselImage
                         disableTransition={disableTransition}
-                        translate={
-                            carouselSize.width * index -
-                            carouselSize.width * current
-                        }
+                        translate={carouselSize.width * (index - current)}
                         src={carouselObj.src}
                         filter={carouselObj.filter}
                     />
                 );
             })}
             <div
+                id="carousel-text-container"
                 style={{
                     paddingTop: isLargerThanMedium ? undefined : 100,
                     paddingBottom: paragraphSize.height,
                 }}
-                className="relative m-auto text-center z-10"
+                className={`${
+                    carouselTitleIsIntersecting
+                        ? "opacity-100"
+                        : "translate-y-[300px] opacity-0"
+                } relative m-auto text-center z-10 transition duration-1000`}
             >
-                <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit">
+                <div
+                    className={`text-3xl sm:text-5xl md:text-6xl
+                    lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit`}
+                >
                     <h1 className="mb-2">LET US DESIGN</h1>
                     <h1>YOUR HOLIDAY</h1>
                 </div>
                 <p
                     id="carousel-paragraph"
-                    className="absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3"
+                    className={`absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3`}
                 >
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Repudiandae eveniet, repellat consequuntur consequatur
