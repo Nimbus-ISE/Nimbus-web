@@ -14,6 +14,7 @@ const Hotspot = ({ props }: IProps) => {
     );
     const [current, setCurrent] = React.useState<number>(0);
     const [add, setAdd] = React.useState<number>(0);
+    const [isCooldown, setIsCoolDown] = React.useState<boolean>(false);
     const [transition, setTransition] = React.useState<boolean>(false);
     const [z, setZ] = React.useState<Array<string>>(
         Object.keys(props).map((index) => "-" + index)
@@ -46,6 +47,9 @@ const Hotspot = ({ props }: IProps) => {
             setTimeout(() => toggleCard(current), 200);
         }
     }, [current]);
+    React.useEffect(() => {
+        if (isCooldown) setTimeout(() => setIsCoolDown(false), 1000);
+    }, [isCooldown]);
     return (
         <div
             id="hotspot"
@@ -99,20 +103,24 @@ const Hotspot = ({ props }: IProps) => {
                         onMouseEnter={() => setAdd(10)}
                         onMouseLeave={() => setAdd(0)}
                         onClick={() => {
-                            if (expand[current]) toggleCard(current);
-                            setTransition(true);
-                            setTimeout(() => {
-                                calculateZIndexes();
-                                setCurrent((prev) => {
-                                    if (prev + 1 === expand.length) return 0;
-                                    return prev + 1;
-                                });
-                                setTransition(false);
-                            }, 500);
+                            if (!isCooldown) {
+                                if (expand[current]) toggleCard(current);
+                                setTransition(true);
+                                setTimeout(() => {
+                                    calculateZIndexes();
+                                    setCurrent((prev) => {
+                                        if (prev + 1 === expand.length)
+                                            return 0;
+                                        return prev + 1;
+                                    });
+                                    setTransition(false);
+                                }, 500);
+                                setIsCoolDown(true);
+                            }
                         }}
                         className="absolute left-[15rem] opacity-50 w-20 h-full z-40 
                         duration-500 cursor-pointer"
-                    ></div>
+                    />
                 </div>
             </div>
         </div>
