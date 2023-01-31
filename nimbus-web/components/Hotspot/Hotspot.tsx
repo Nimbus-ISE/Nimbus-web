@@ -2,6 +2,8 @@ import React from "react";
 import HotspotCard from "./HotspotCard";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useObserver from "@/hooks/useObserver";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
     props: Array<any>;
@@ -118,9 +120,20 @@ const Hotspot = ({ props }: IProps) => {
                                 setIsCoolDown(true);
                             }
                         }}
-                        className="absolute left-[15rem] opacity-50 w-20 h-full z-40 
-                        duration-500 cursor-pointer"
-                    />
+                        className="absolute flex left-[15rem] w-20 h-full z-40 
+                        duration-500 cursor-pointer hover:scale-125"
+                    >
+                        <div
+                            className="transition duration-500 flex m-auto 
+                           scale-x-[150%] scale-y-[300%] rounded-full opacity-30"
+                        >
+                            <FontAwesomeIcon
+                                icon={faPlay}
+                                color="black"
+                                className="m-auto aspect-square drop-shadow-sm fa-lg"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
