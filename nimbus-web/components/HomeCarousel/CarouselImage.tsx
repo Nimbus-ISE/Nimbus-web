@@ -14,7 +14,6 @@ const CarouselImage = ({
     translate,
     disableTransition,
 }: IProps) => {
-    const [] = React.useState<number>();
     return (
         <div
             style={{
