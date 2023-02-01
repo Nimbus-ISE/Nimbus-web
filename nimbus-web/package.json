@@ -33,6 +33,7 @@
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "react-map-gl": "^7.0.21",
+        "react-scroll": "^1.8.9",
         "storybook": "^6.5.15",
         "stripe": "^11.7.0",
         "typescript": "4.9.4"
