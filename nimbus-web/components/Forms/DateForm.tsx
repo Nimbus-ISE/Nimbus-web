@@ -17,7 +17,7 @@ const DateForm = (props: any) => {
                             Select Dates
                         </h1>
                     </div>
-                    <div className="flex flex-wrap justify-around">
+                    <div className="flex flex-wrap justify-aroundr">
                         <div className="start-date my-2">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
