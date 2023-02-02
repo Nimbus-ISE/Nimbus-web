@@ -19,26 +19,37 @@ const useMap = () => {
             image: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_871/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fpwqzr45vjmfzvr6hdkw/VanaNavaWaterparkTicketinHuaHin.webp",
         },
     };
-    const mapRef = React.useRef<MapRef>();
-    const [route, setRoute] = useState([] as Array<number[]>);
-    const [openFullTab, setOpenFullTab] = useState(false);
     const initialPinState: Array<string> = [];
     Object.keys(points).forEach(() => {
         initialPinState.push("#000");
     });
+    const mapRef = React.useRef<MapRef>();
+    const [route, setRoute] = useState([] as Array<number[]>);
+    const [openFullTab, setOpenFullTab] = useState(false);
+    const [closed, setClosed] = useState(false);
     const [pinState, setPinState] = useState(initialPinState);
-    const toggleOpenFullTab = () => {
-        setOpenFullTab(!openFullTab);
+    const [openReview, setOpenReview] = useState(false);
+    const toggleOpenReview = () => {
+        setOpenReview(!openReview);
+    };
+    const openTab = () => {
+        setOpenFullTab(true);
+        setClosed(false);
+        setOpenReview(false);
+    };
+    const closeFullTab = () => {
+        setOpenFullTab(false);
+        setClosed(true);
     };
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
         console.log("called");
-
         mapRef.current?.flyTo({
             center: [longitude, latitude],
             duration: 1000,
         });
     }, []);
+
     const togglePinState = (changeIndex: number) => {
         pinState.forEach((_, index) => {
             if (index === changeIndex) {
@@ -50,6 +61,7 @@ const useMap = () => {
 
         setPinState([...pinState]);
     };
+
     useEffect(() => {
         // const fetchRoute = async () => {
         //     const res = await fetch(
@@ -109,8 +121,12 @@ const useMap = () => {
         geojson,
         layerStyle,
         pinState,
-        toggleOpenFullTab,
+        openTab,
+        closeFullTab,
+        closed,
         openFullTab,
+        toggleOpenReview,
+        openReview,
     };
 };
 export default useMap;
