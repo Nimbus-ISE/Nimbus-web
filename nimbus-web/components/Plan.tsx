@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "@/components/Form/Form";
+import Form from "@/components/Forms/Form";
 import PageIndicator from "@/components/PageIndicator/PageIndicator";
 import useScrollPercentage from "@/hooks/useScrollPercentage";
 
