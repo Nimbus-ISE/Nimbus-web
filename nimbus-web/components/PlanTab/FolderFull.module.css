@@ -3,38 +3,25 @@
     flex-wrap: wrap;
     flex-direction: row;
     grid-column-start: 0;
-    grid-column-end: span 4;
-    height: 70%;
+    grid-column-end: span 12;
+    height: 100%;
     width: 100%;
+    animation: cardStretch;
+    animation-duration: 1s;
+    overflow: hidden;
 }
-.uncheckedLabel {
-    order: 1;
-    height: 4rem;
-    color: white;
-    display: block;
-    padding: 1rem;
-    margin-right: 0.2rem;
-    cursor: pointer;
-    background: #a6a6a6;
-    opacity: 0.85;
-    font-weight: bold;
-    transition: background ease 0.2s;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
-}
+
 .tabs .tab {
     order: 99;
     width: 100%;
     display: block;
-    padding: 1rem;
-    background: #fff;
-    overflow-y: scroll;
-    height: 40rem;
+    background-color: #fff;
     scrollbar-width: none;
 }
 .tab::-webkit-scrollbar {
     display: none;
 }
+
 .tab {
     display: block;
     border-top-right-radius: 12px;
@@ -42,27 +29,33 @@
     border-bottom-left-radius: 12px;
     height: 90%;
 }
+
 .tabs input[type="radio"] {
+    display: none;
+}
+.tabsClosed input[type="radio"] {
     display: none;
 }
 .checkedLabel {
     order: 1;
-    height: 4rem;
+    width: 30%;
     display: block;
     padding: 1rem;
     margin-right: 0.2rem;
-    cursor: pointer;
     font-weight: bold;
     transition: background ease 0.2s;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     background: #fff;
     color: black;
+    animation-name: tabStretch;
+    animation: 2s ease-in;
 }
 
 .tabs input[type="radio"]:checked + label + .tab {
     display: block;
 }
+
 .openTabButton {
     position: absolute;
     background: #fff;
@@ -96,17 +89,27 @@
 }
 @keyframes tabStretch {
     0% {
-        width: auto;
+        width: 0%;
     }
     100% {
-        width: 33%;
+        width: 10%;
     }
 }
+
 @keyframes cardStretch {
     0% {
-        width: auto;
+        padding-right: 70%;
     }
     100% {
-        width: 100%;
+        padding-right: 0%;
+    }
+}
+
+@keyframes cardCollapse {
+    0% {
+        margin-right: 0rem;
+    }
+    100% {
+        margin-right: 110rem;
     }
 }
