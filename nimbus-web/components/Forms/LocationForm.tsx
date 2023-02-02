@@ -21,27 +21,11 @@ const iconPlaceHolder = (
 
 const LocationForm = (props: any) => {
     return (
-        <>
-            <form action="/" method="">
-                <div className="flex justify-items-start">
-                    <h1 className="text-4xl font-extrabold px-0 py-5">
-                        Where would you like to go?
-                    </h1>
-                </div>
-                <div className="my-7 text-xs flex justify-center">
-                    <input
-                        className="loc-input w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white hover:opacity-70"
-                        type="text"
-                        placeholder="Enter Location of Interest"
-                    />
-                </div>
-
-                {/*<div className="flex justify-between mt-40">
-                    <ButtonBack />
-                    <ButtonNext />
-                </div>*/}
-            </form>
-        </>
+        <input
+            className="loc-input w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white hover:opacity-70"
+            type="text"
+            placeholder="Enter Location of Interest"
+        />
     );
 };
 

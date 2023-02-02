@@ -1,12 +1,12 @@
 import PageIndicator from "@/components/PageIndicator/PageIndicator";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-const list = [
-    { name: "Location" },
-    { name: "Dates" },
-    { name: "Style" },
-    { name: "Budget" },
-    { name: "Tags" },
+const formArr: Array<IForm> = [
+    { type: "Location", title: "Where would you like to go?" },
+    { type: "Dates", title: "Select the dates" },
+    { type: "Style", title: "What kind of trip?" },
+    { type: "Budget", title: "What is your budget?" },
+    { type: "Tags", title: "Select some tags" },
 ];
 
 export default {
@@ -21,5 +21,5 @@ const Template: ComponentStory<typeof PageIndicator> = (args) => (
 export const Primary = Template.bind({});
 
 Primary.args = {
-    list: list,
+    formArr: formArr,
 };

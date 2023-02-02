@@ -19,7 +19,7 @@ const leftList = [
     },
     {
         name: "Plan",
-        route: "/",
+        route: "/plan",
     },
     {
         name: "About",
@@ -71,8 +71,9 @@ const Navbar = ({ user, isLoading }: IProps) => {
     return (
         <div className="fixed w-full z-[100] top-0 left-0 select-none">
             <div
+                id="navbar"
                 className="relative bg-white flex gap-1 items-center place-items-center 
-                justify-between h-16 text-neutral-600"
+                justify-between h-[64px] text-neutral-600"
             >
                 {isLargerThanMedium ? (
                     <>

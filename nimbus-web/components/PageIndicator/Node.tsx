@@ -11,7 +11,7 @@ interface IProps {
 
 const Node = ({ size, active, index, name }: IProps) => {
     const pageSize = useElementSize("input-container");
-    const hello = () => {
+    const handleOnClick = () => {
         const scroll = Scroll.animateScroll;
         scroll.scrollTo(index * pageSize.height, {
             duration: 1000,
@@ -21,7 +21,7 @@ const Node = ({ size, active, index, name }: IProps) => {
     };
     return (
         <button
-            onClick={hello}
+            onClick={handleOnClick}
             style={{
                 height: size,
                 width: size,

@@ -1,36 +1,43 @@
-import React from "react";
+import useElementSize from "@/hooks/useElementSize";
+import React, { ReactElement } from "react";
 import DateForm from "./DateForm";
 import LocationForm from "./LocationForm";
 
 interface IProps {
-    formArr: Array<{ title: string; type: string }>;
-    formMapper: any;
+    formArr: Array<IForm>;
 }
 
-const formMapper = {
-    location: <LocationForm />,
-    date: <DateForm />,
+const formMapper: { [key: string]: ReactElement<any, any> } = {
+    Location: <LocationForm />,
+    Dates: <DateForm />,
+    Style: <LocationForm />,
+    Budget: <LocationForm />,
+    Tags: <LocationForm />,
 };
 
-const formArr = [
-    { title: "some title", type: "location" },
-    { title: "some title", type: "date" },
-];
-
-const Form = ({ formArr, formMapper }: IProps) => {
+const Form = ({ formArr }: IProps) => {
+    const { height } = useElementSize("plan-card");
     return (
-        <>
+        <form>
             {formArr.map((item) => {
                 return (
-                    <>
-                        <div className="flex-col text-black max-w-2xl min-h-96 rounded-xl justify-center overflow-hidden shadow-lg bg-white py-12 px-12">
-                            {item.title}
-                            {formMapper[item.type]}
+                    <div
+                        style={{ height: height }}
+                        id="input-container"
+                        className="flex px-2"
+                    >
+                        <div className="m-auto">
+                            <div className="text-center text-4xl font-extrabold px-0 py-5">
+                                {item.title}
+                            </div>
+                            <div className="my-7 text-xs flex justify-center">
+                                {formMapper[item.type]}
+                            </div>
                         </div>
-                    </>
+                    </div>
                 );
             })}
-        </>
+        </form>
     );
 };
 
