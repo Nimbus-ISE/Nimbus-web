@@ -5,25 +5,28 @@ const useElementSize = (elementId: string) => {
         width: 0,
         height: 0,
     });
-    const [element, setElement] = React.useState<any>(null);
-    const handleResize = () => {
+    const [element, setElement] = React.useState<HTMLElement>();
+    const handleResize = (element: HTMLElement) => {
         setElementSize({
             width: element.offsetWidth,
             height: element.offsetHeight,
         });
     };
     React.useEffect(() => {
-        console.log(elementId);
-        if (elementId) {
-            setElement(document.getElementById(elementId));
-        }
+        const element = document.getElementById(elementId);
+        if (element) setElement(element);
     }, [elementId]);
     React.useEffect(() => {
         if (element) {
-            handleResize();
-            window.addEventListener("resize", handleResize);
+            handleResize(element);
+            let observer = new ResizeObserver((entries) => {
+                entries.forEach((entry) => {
+                    handleResize(element);
+                });
+            });
+            observer.observe(element);
+            return () => observer.unobserve(element);
         }
-        return () => window.removeEventListener("resize", handleResize);
     }, [element]);
 
     return elementSize;
