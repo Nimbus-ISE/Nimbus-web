@@ -19,7 +19,7 @@ const leftList = [
     },
     {
         name: "Plan",
-        route: "/",
+        route: "/plan",
     },
     {
         name: "About",
