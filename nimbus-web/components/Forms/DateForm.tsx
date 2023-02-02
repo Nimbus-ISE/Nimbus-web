@@ -9,7 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 const DateForm = (props: any) => {
     const [value, setValue] = React.useState<Dayjs | null>(null);
     return (
-        <div className="flex flex-wrap justify-aroundr">
+        <div className="flex flex-wrap justify-around mx-auto">
             <div className="start-date my-2">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker

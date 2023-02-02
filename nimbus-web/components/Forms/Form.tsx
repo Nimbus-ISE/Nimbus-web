@@ -1,3 +1,4 @@
+import useElementSize from "@/hooks/useElementSize";
 import React, { ReactElement } from "react";
 import DateForm from "./DateForm";
 import LocationForm from "./LocationForm";
@@ -15,19 +16,23 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
 };
 
 const Form = ({ formArr }: IProps) => {
+    const { height } = useElementSize("plan-card");
     return (
         <form>
             {formArr.map((item) => {
                 return (
                     <div
+                        style={{ height: height }}
                         id="input-container"
-                        className="flex-col text-black max-w-2xl min-h-96 rounded-xl justify-center overflow-hidden shadow-lg bg-white py-12 px-12"
+                        className="flex px-2"
                     >
-                        <div className="text-center text-4xl font-extrabold px-0 py-5">
-                            {item.title}
-                        </div>
-                        <div className="my-7 text-xs flex justify-center">
-                            {formMapper[item.type]}
+                        <div className="m-auto">
+                            <div className="text-center text-4xl font-extrabold px-0 py-5">
+                                {item.title}
+                            </div>
+                            <div className="my-7 text-xs flex justify-center">
+                                {formMapper[item.type]}
+                            </div>
                         </div>
                     </div>
                 );
