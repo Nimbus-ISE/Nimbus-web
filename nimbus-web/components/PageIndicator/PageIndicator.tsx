@@ -5,12 +5,10 @@ import ProgressBar from "./ProgressBar";
 import useScrollPercentage from "@/hooks/useScrollPercentage";
 
 interface IProps {
-    list: Array<{
-        name: string;
-    }>;
+    formArr: Array<IForm>;
 }
 
-const PageIndicator = ({ list }: IProps) => {
+const PageIndicator = ({ formArr }: IProps) => {
     const percent = useScrollPercentage({ rootId: "form-container" });
     const indicatorContainerSize = useElementSize("indicator-container");
     const nodeSize = 40;
@@ -20,7 +18,7 @@ const PageIndicator = ({ list }: IProps) => {
     };
     const calculateCurrent = () => {
         const trueValue =
-            (percent + percentOffset()) / (100 / (list.length - 1));
+            (percent + percentOffset()) / (100 / (formArr.length - 1));
         return Math.floor(trueValue) + 1;
     };
     return (
@@ -28,12 +26,12 @@ const PageIndicator = ({ list }: IProps) => {
             id="indicator-container"
             className="relative grid gap-10 w-fit h-full place-items-center"
         >
-            {list.map((item, index) => (
+            {formArr.map((item, index) => (
                 <Node
                     size={nodeSize}
                     active={index + 1 <= calculateCurrent()}
                     index={index}
-                    name={item.name}
+                    name={item.type}
                 />
             ))}
             <ProgressBar
