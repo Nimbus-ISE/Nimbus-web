@@ -3,76 +3,23 @@ import classes from "./FolderFull.module.css";
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
+import { testData } from "@/test_data/testData";
+
 interface IProps {
     expand: boolean;
     children?: ReactElement;
     onClose?: any;
+    currentView: number;
 }
-const testData = [
-    [
-        {
-            name: "John",
-            description: "lorem",
-            imgLink:
-                "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-        },
-        {
-            name: "Taobin",
-            description: "Ipsum",
-            imgLink:
-                "https://images.unsplash.com/photo-1559912147-f62c767ec0e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpZmZ8ZW58MHx8MHx8&w=1000&q=80",
-        },
-    ],
-    [
-        {
-            name: "John",
-            description: "lorem",
-            imgLink:
-                "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-        },
-        {
-            name: "Taobin",
-            description: "Ipsum",
-            imgLink:
-                "https://images.unsplash.com/photo-1559912147-f62c767ec0e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpZmZ8ZW58MHx8MHx8&w=1000&q=80",
-        },
-    ],
-    [
-        {
-            name: "John",
-            description: "lorem",
-            imgLink:
-                "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-        },
-        {
-            name: "Taobin",
-            description: "Ipsum",
-            imgLink:
-                "https://images.unsplash.com/photo-1559912147-f62c767ec0e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpZmZ8ZW58MHx8MHx8&w=1000&q=80",
-        },
-    ],
-    [
-        {
-            name: "John",
-            description: "lorem",
-            imgLink:
-                "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
-        },
-        {
-            name: "Taobin",
-            description: "Ipsum",
-            imgLink:
-                "https://images.unsplash.com/photo-1559912147-f62c767ec0e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xpZmZ8ZW58MHx8MHx8&w=1000&q=80",
-        },
-    ],
-];
+
 const FolderFull = (props: IProps) => {
     return (
         <>
             <>
                 <div className={classes.tabs}>
                     <label htmlFor="tabone" className={classes.checkedLabel}>
-                        Day One
+                        Day{" "}
+                        {capitalizeFirst(numberToWords(props.currentView + 1))}
                     </label>
                     <div className={classes.tab}>
                         <div
@@ -81,7 +28,10 @@ const FolderFull = (props: IProps) => {
                             }
                         >
                             {testData.map((data, index) => {
-                                if (index < 3) {
+                                if (
+                                    index >= props.currentView &&
+                                    index < props.currentView + 3
+                                ) {
                                     return (
                                         <div className="h-[40rem] overflow-y-scroll overflow-x-hidden scrollbar-hide p-2 ">
                                             <PlanGraph
@@ -104,7 +54,10 @@ const FolderFull = (props: IProps) => {
                     </div>
 
                     {testData.map((data, index) => {
-                        if (index != 0 && index < 3) {
+                        if (
+                            index > props.currentView &&
+                            index < props.currentView + 3
+                        ) {
                             return (
                                 <label
                                     htmlFor={`tab${index + 1}`}
