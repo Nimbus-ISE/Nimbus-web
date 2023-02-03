@@ -30,6 +30,7 @@ const PageIndicator = ({ formArr }: IProps) => {
                 <Node
                     size={nodeSize}
                     active={index + 1 <= calculateCurrent()}
+                    isCurrent={index + 1 === calculateCurrent()}
                     index={index}
                     name={item.type}
                 />
