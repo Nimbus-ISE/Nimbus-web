@@ -3,10 +3,13 @@ interface planGraphProps {
     dayNumber: number;
     toggleOpenReview?: any;
     clickable: boolean;
+    address: string;
 }
 interface PlaceType {
-    name: string;
-    description: string;
+    placeTitle: string;
+    placeSummary: string;
+    placeDescription: string;
+    address: string;
     imgLink: string;
 }
 const PlanGraph = (props: planGraphProps) => {
@@ -26,21 +29,27 @@ const PlanGraph = (props: planGraphProps) => {
                                     ? "h-28 w-28 rounded-full hover:scale-110 duration-300 cursor-pointer shadow"
                                     : "h-28 w-28 rounded-full shadow"
                             }
-                            onMouseDown={props.toggleOpenReview}
+                            onMouseDown={() => {
+                                props.toggleOpenReview({
+                                    placeTitle: place.placeTitle,
+                                    placeDescription: place.placeDescription,
+                                    address: place.address,
+                                });
+                            }}
                         />
                         <div className="flex flex-col">
-                            {place.name.length < 20 && (
+                            {place.placeTitle.length < 20 && (
                                 <div className="text-2xl font-extrabold">
-                                    {place.name}
+                                    {place.placeTitle}
                                 </div>
                             )}
-                            {place.name.length > 20 && (
+                            {place.placeTitle.length > 20 && (
                                 <div className="text-[16px] font-extrabold">
-                                    {place.name}
+                                    {place.placeTitle}
                                 </div>
                             )}
                             <div className="w-64 text-[10px]">
-                                {place.description}
+                                {place.placeSummary}
                             </div>
                         </div>
                     </div>

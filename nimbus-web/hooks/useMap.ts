@@ -1,9 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MapRef } from "react-map-gl";
-
 import polyline from "@mapbox/polyline";
 import React from "react";
+import { testData } from "@/test_data/testData";
+
+interface reviewDataType {
+    placeTitle: string;
+    address: string;
+    placeDescription: string;
+}
+
 const useMap = () => {
     const points: any = {
         start: {
@@ -29,9 +36,19 @@ const useMap = () => {
     const [closed, setClosed] = useState(false);
     const [pinState, setPinState] = useState(initialPinState);
     const [openReview, setOpenReview] = useState(false);
-    const toggleOpenReview = () => {
-        setOpenReview(!openReview);
+    const [reviewData, setReviewData] = useState({} as reviewDataType);
+
+    const toggleOpenReview = (reviewData?: reviewDataType) => {
+        console.log(reviewData);
+
+        if (reviewData?.placeTitle) {
+            setOpenReview(true);
+            setReviewData(reviewData);
+        } else {
+            setOpenReview(false);
+        }
     };
+
     const openTab = () => {
         setOpenFullTab(true);
         setClosed(false);
@@ -127,6 +144,7 @@ const useMap = () => {
         openFullTab,
         toggleOpenReview,
         openReview,
+        reviewData,
     };
 };
 export default useMap;
