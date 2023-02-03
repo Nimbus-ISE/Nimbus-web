@@ -2,7 +2,6 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading";
-import Head from "next/head";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
