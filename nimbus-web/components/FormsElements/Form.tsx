@@ -1,18 +1,18 @@
 import useElementSize from "@/hooks/useElementSize";
 import React, { ReactElement } from "react";
-import DateForm from "./DateForm";
-import LocationForm from "./LocationForm";
+import DateForm from "./DateInput";
+import LocationInput from "./LocationInput";
 
 interface IProps {
     formArr: Array<IForm>;
 }
 
 const formMapper: { [key: string]: ReactElement<any, any> } = {
-    Location: <LocationForm />,
+    Location: <LocationInput />,
     Dates: <DateForm />,
-    Style: <LocationForm />,
-    Budget: <LocationForm />,
-    Tags: <LocationForm />,
+    Style: <LocationInput />,
+    Budget: <LocationInput />,
+    Tags: <LocationInput />,
 };
 
 const Form = ({ formArr }: IProps) => {
