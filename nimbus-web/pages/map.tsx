@@ -33,6 +33,7 @@ export default function map() {
         openFullTab,
         openReview,
         toggleOpenReview,
+        reviewData,
     } = useMap();
 
     return (
@@ -55,11 +56,13 @@ export default function map() {
                 {!openFullTab && (
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
-                            <div className=" bg-slate-400 bg-opacity-70 w-full h-[89.5%] fixed ">
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-[89.5%] fixed ">
                                 <PlaceDetail
-                                    placeTitle="Thor's Well"
-                                    address="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, "
-                                    placeDescription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, magnam cupiditate error qui quos saepe quidem blanditiis facilis nostrum in commodi fugit recusandae illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, magnam cupiditate error qui quos saepe quidem blanditiis facilis nostrum in commodi fugit recusandae illo."
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
                                     toggleOpenReview={toggleOpenReview}
                                 />
                             </div>

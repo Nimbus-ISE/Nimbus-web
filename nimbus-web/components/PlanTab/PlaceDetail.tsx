@@ -8,8 +8,11 @@ interface IProps {
     address: string;
     toggleOpenReview?: any;
 }
+import useMap from "@/hooks/useMap";
 
 const PlaceDetail = (props: IProps) => {
+    console.log(props);
+
     return (
         <>
             <div
@@ -25,11 +28,10 @@ const PlaceDetail = (props: IProps) => {
                     </div>
                     <div className="flex col-span-5 flex-col gap-2">
                         <div className="text-2xl font-extrabold">
-                            {" "}
                             {props.placeTitle}
                         </div>
                         <div className="text-xs">{props.address}</div>
-                        <div className="w-full h-12 bg-yellow-300"> Stars</div>
+                        <div className="w-full h-12 bg-yellow-300">Stars</div>
                     </div>
                     <div className="text-base col-span-12">
                         {props.placeDescription}

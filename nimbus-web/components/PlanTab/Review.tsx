@@ -15,7 +15,7 @@ const Review = (props: IProps) => {
                         <div className="text-lg font-extrabold">
                             {props.user}
                         </div>
-                        <div className="bg-yellow-300 w-24 h-6"></div>
+                        <div className="bg-yellow-300 w-24 h-6">Stars</div>
                     </div>
 
                     <div className="text-xs w-[36rem] ">{props.reviewText}</div>
