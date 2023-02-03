@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "@/components/Forms/Form";
+import Form from "@/components/FormsElements/Form";
 import PageIndicator from "@/components/PageIndicator/PageIndicator";
 import useViewportHeight from "@/hooks/useViewportHeight";
 import { useMediaQuery } from "@mui/material";

@@ -4,6 +4,7 @@
     flex-direction: row;
     grid-column-start: 0;
     grid-column-end: span 4;
+
     height: 70%;
     width: 100%;
 }
@@ -16,6 +17,21 @@
     margin-right: 0.2rem;
     cursor: pointer;
     background: #a6a6a6;
+    opacity: 0.85;
+    font-weight: bold;
+    transition: background ease 0.2s;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+.arrowLabel {
+    order: 1;
+    height: 4rem;
+    color: black;
+    display: block;
+    padding: 1rem;
+    margin-right: 0.3rem;
+    cursor: pointer;
+    background: #45d8d0;
     opacity: 0.85;
     font-weight: bold;
     transition: background ease 0.2s;
