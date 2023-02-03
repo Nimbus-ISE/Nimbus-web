@@ -3,7 +3,6 @@ interface planGraphProps {
     dayNumber: number;
     toggleOpenReview?: any;
     clickable: boolean;
-    address: string;
 }
 interface PlaceType {
     placeTitle: string;

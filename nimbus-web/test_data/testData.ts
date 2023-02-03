@@ -24,6 +24,7 @@ export const testData = [
         {
             placeTitle: "Wilma",
             address: "lorem",
+            placeDescription: "hi",
             placeSummary: "lorem",
             imgLink:
                 "https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0ZXJmYWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
