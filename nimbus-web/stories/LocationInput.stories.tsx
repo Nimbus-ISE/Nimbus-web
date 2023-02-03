@@ -1,4 +1,4 @@
-import LocationInput from "@/components/Forms/LocationInput";
+import LocationInput from "@/components/FormsElements/LocationInput";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {

@@ -1,4 +1,4 @@
-import DateInput from "@/components/Forms/DateInput";
+import DateInput from "@/components/FormsElements/DateInput";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
