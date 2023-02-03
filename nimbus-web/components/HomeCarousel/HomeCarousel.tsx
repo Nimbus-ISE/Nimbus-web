@@ -1,6 +1,7 @@
 import useElementSize from "@/hooks/useElementSize";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useObserver from "@/hooks/useObserver";
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "./Button.module.css";
 import CarouselImage from "./CarouselImage";
@@ -38,6 +39,7 @@ const HomeCarousel = () => {
     const [current, setCurrent] = React.useState<number>(0);
     const [disableTransition, setDisableTransition] =
         React.useState<boolean>(true);
+    const router = useRouter();
     React.useEffect(() => {
         const periodicSlide = setInterval(() => {
             setCurrent((prev: number) => {
@@ -103,7 +105,10 @@ const HomeCarousel = () => {
                 }}
                 className="m-auto z-10"
             >
-                <button className={styles.button}>
+                <button
+                    onClick={() => router.push("/plan")}
+                    className={styles.button}
+                >
                     <div className="font-bold text-xl">PLAN NOW</div>
                 </button>
             </div>
