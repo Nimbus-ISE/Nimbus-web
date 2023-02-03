@@ -1,6 +1,4 @@
 import React from "react";
-import ButtonBack from "../Buttons/ButtonBack";
-import ButtonNext from "../Buttons/ButtonNext";
 
 const iconPlaceHolder = (
     <svg
@@ -19,7 +17,7 @@ const iconPlaceHolder = (
     </svg>
 );
 
-const LocationForm = (props: any) => {
+const LocationInput = (props: any) => {
     return (
         <input
             className="loc-input w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white hover:opacity-70"
@@ -29,4 +27,4 @@ const LocationForm = (props: any) => {
     );
 };
 
-export default LocationForm;
+export default LocationInput;
