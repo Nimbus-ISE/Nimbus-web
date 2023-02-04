@@ -28,7 +28,7 @@ const PageIndicator = ({ formArr }: IProps) => {
     return (
         <div
             id="indicator-container"
-            className="relative grid gap-10 w-fit h-full place-items-center shrink-0"
+            className="relative grid gap-8 w-fit h-full place-items-center shrink-0"
         >
             {formArr.map((item, index) => (
                 <Node

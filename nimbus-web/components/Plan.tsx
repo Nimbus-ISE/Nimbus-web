@@ -15,6 +15,7 @@ const formArr: Array<IForm> = [
     { type: "Dates", title: "Select the dates" },
     { type: "Style", title: "What kind of trip?" },
     { type: "Budget", title: "What is your budget?" },
+    { type: "Distance", title: "Select traveling distance" },
     { type: "Tags", title: "Select some tags" },
 ];
 

@@ -12,6 +12,7 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
     Dates: <DateForm />,
     Style: <LocationInput />,
     Budget: <LocationInput />,
+    Distance: <LocationInput />,
     Tags: <LocationInput />,
 };
 
