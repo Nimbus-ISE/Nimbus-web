@@ -39,3 +39,8 @@ export interface PlaceDetailProps {
     address: string;
     toggleOpenReview?: any;
 }
+
+export interface AlternativeItemProps {
+    title: string;
+    description: string;
+}

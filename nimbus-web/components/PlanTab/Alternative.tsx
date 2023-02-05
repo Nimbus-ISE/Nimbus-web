@@ -10,9 +10,18 @@ const Alternative = () => {
                         Alternatives
                     </div>
                     <div className="flex gap-10 place-items-center">
-                        <AlternativeItem />
-                        <AlternativeItem />
-                        <AlternativeItem />
+                        <AlternativeItem
+                            title="title"
+                            description="lorem ipsum"
+                        />
+                        <AlternativeItem
+                            title="title"
+                            description="lorem ipsum"
+                        />
+                        <AlternativeItem
+                            title="title"
+                            description="lorem ipsum"
+                        />
                     </div>
                 </div>
             </div>
