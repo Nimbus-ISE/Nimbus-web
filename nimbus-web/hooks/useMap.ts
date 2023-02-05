@@ -12,6 +12,41 @@ interface reviewDataType {
 }
 
 const useMap = () => {
+    // Interface data and functions
+    const [openFullTab, setOpenFullTab] = useState(false);
+    const [closed, setClosed] = useState(false);
+    const [openReview, setOpenReview] = useState(false);
+    const [reviewData, setReviewData] = useState({} as reviewDataType);
+    const [openAlternatives, setOpenAlternative] = useState(false);
+
+    const toggleOpenReview = (reviewData?: reviewDataType) => {
+        console.log(reviewData);
+
+        if (reviewData?.placeTitle) {
+            setOpenReview(true);
+            setReviewData(reviewData);
+        } else {
+            setOpenReview(false);
+        }
+    };
+
+    const openTab = () => {
+        setOpenFullTab(true);
+        setClosed(false);
+        setOpenReview(false);
+    };
+
+    const closeFullTab = () => {
+        setOpenFullTab(false);
+        setClosed(true);
+    };
+
+    const toggleOpenAlternative = () => {
+        setOpenAlternative(!openAlternatives);
+    };
+
+    // Map data and functions
+
     const points: any = {
         start: {
             coordinates: { lat: 13.746389, lng: 100.535004 },
@@ -30,34 +65,10 @@ const useMap = () => {
     Object.keys(points).forEach(() => {
         initialPinState.push("#000");
     });
+
     const mapRef = React.useRef<MapRef>();
     const [route, setRoute] = useState([] as Array<number[]>);
-    const [openFullTab, setOpenFullTab] = useState(false);
-    const [closed, setClosed] = useState(false);
     const [pinState, setPinState] = useState(initialPinState);
-    const [openReview, setOpenReview] = useState(false);
-    const [reviewData, setReviewData] = useState({} as reviewDataType);
-
-    const toggleOpenReview = (reviewData?: reviewDataType) => {
-        console.log(reviewData);
-
-        if (reviewData?.placeTitle) {
-            setOpenReview(true);
-            setReviewData(reviewData);
-        } else {
-            setOpenReview(false);
-        }
-    };
-
-    const openTab = () => {
-        setOpenFullTab(true);
-        setClosed(false);
-        setOpenReview(false);
-    };
-    const closeFullTab = () => {
-        setOpenFullTab(false);
-        setClosed(true);
-    };
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
         console.log("called");
@@ -130,6 +141,7 @@ const useMap = () => {
             "line-width": 3,
         },
     };
+
     return {
         mapRef,
         points,
@@ -145,6 +157,8 @@ const useMap = () => {
         toggleOpenReview,
         openReview,
         reviewData,
+        toggleOpenAlternative,
+        openAlternatives,
     };
 };
 export default useMap;

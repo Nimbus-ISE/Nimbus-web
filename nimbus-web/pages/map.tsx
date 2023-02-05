@@ -34,6 +34,8 @@ export default function map() {
         openReview,
         toggleOpenReview,
         reviewData,
+        openAlternatives,
+        toggleOpenAlternative,
     } = useMap();
 
     return (
@@ -43,6 +45,7 @@ export default function map() {
                     <SideBar
                         toggleOpenReview={toggleOpenReview}
                         openTab={openTab}
+                        openAlternatives={toggleOpenAlternative}
                     />
                 )}
 
@@ -50,6 +53,7 @@ export default function map() {
                     <FullScreenPlan
                         openFullTab={openFullTab}
                         closeFullTab={closeFullTab}
+                        openAlternatives={toggleOpenAlternative}
                     />
                 )}
 
@@ -65,6 +69,11 @@ export default function map() {
                                     }
                                     toggleOpenReview={toggleOpenReview}
                                 />
+                            </div>
+                        )}
+                        {!openReview && openAlternatives && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-[89.5%] fixed ">
+                                <div>Review</div>
                             </div>
                         )}
 
