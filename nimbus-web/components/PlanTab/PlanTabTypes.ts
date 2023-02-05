@@ -6,10 +6,12 @@ export interface FolderFullProps {
     onClose?: any;
     currentView: number;
     openAlternatives: any;
+    openFullTab: boolean;
 }
 export interface FolderSmallProps {
     toggleOpenReview: any;
     openAlternatives: any;
+    openFullTab: boolean;
 }
 export interface SideBarProps {
     toggleOpenReview: any;
@@ -17,6 +19,7 @@ export interface SideBarProps {
     openAlternatives: any;
 }
 export interface PlanGraphProps {
+    openFullTab: boolean;
     places: Array<PlaceType>;
     dayNumber: number;
     toggleOpenReview?: any;

@@ -17,6 +17,7 @@ const FullScreenPlan = (props: IProps) => {
                 onClose={props.closeFullTab}
                 currentView={currentView}
                 openAlternatives={props.openAlternatives}
+                openFullTab={props.openFullTab}
             />
             {testData.length > 3 && (
                 <div className="absolute top-0 right-0 w-[8.5rem] h-16  ">
