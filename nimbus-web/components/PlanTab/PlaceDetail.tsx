@@ -8,7 +8,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     return (
         <>
             <div
-                className="bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-14 left-[53.5rem] z-50 cursor-pointer"
+                className="bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[53.5rem] z-50 cursor-pointer"
                 onMouseDown={props.toggleOpenReview}
             >
                 <div className="ml-4">x</div>
