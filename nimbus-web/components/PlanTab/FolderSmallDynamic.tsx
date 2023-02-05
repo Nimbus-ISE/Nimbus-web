@@ -5,7 +5,9 @@ import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
 import usePlanTab from "@/hooks/usePlanTab";
-const FolderSmall = (props: any) => {
+import { FolderSmallProps } from "./PlanTabTypes";
+
+const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
@@ -57,6 +59,9 @@ const FolderSmall = (props: any) => {
                                                 }
                                                 dayNumber={index + 1}
                                                 places={[...day]}
+                                                openAlternatives={
+                                                    props.openAlternatives
+                                                }
                                             />
                                         </div>
                                     )}

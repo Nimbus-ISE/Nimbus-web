@@ -1,16 +1,8 @@
 import Review from "./Review";
 import React from "react";
-interface IProps {
-    imgLink?: string;
-    placeTitle: string;
-    placeDescription: string;
-    numberOfStars?: number;
-    address: string;
-    toggleOpenReview?: any;
-}
-import useMap from "@/hooks/useMap";
+import { PlaceDetailProps } from "./PlanTabTypes";
 
-const PlaceDetail = (props: IProps) => {
+const PlaceDetail = (props: PlaceDetailProps) => {
     console.log(props);
 
     return (

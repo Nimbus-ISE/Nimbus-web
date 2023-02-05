@@ -5,6 +5,7 @@ import usePlanTab from "@/hooks/usePlanTab";
 interface IProps {
     openFullTab: any;
     closeFullTab: any;
+    openAlternatives: any;
 }
 
 const FullScreenPlan = (props: IProps) => {
@@ -15,6 +16,7 @@ const FullScreenPlan = (props: IProps) => {
                 expand={props.openFullTab}
                 onClose={props.closeFullTab}
                 currentView={currentView}
+                openAlternatives={props.openAlternatives}
             />
             {testData.length > 3 && (
                 <div className="absolute top-0 right-0 w-[8.5rem] h-16  ">
