@@ -25,18 +25,24 @@
 }
 .arrowLabel {
     order: 1;
-    height: 4rem;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 3rem;
+    height: 3rem;
     color: black;
     display: block;
     padding: 1rem;
+    text-align: center;
     margin-right: 0.3rem;
     cursor: pointer;
-    background: #45d8d0;
+
     opacity: 0.85;
     font-weight: bold;
+    border-radius: 100%;
     transition: background ease 0.2s;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
+}
+.arrowLabel:hover {
+    background: #a6a6a6;
 }
 .tabs .tab {
     order: 99;
