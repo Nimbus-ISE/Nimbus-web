@@ -62,6 +62,7 @@ const FolderSmall = (props: FolderSmallProps) => {
                                                 openAlternatives={
                                                     props.openAlternatives
                                                 }
+                                                openFullTab={true}
                                             />
                                         </div>
                                     )}

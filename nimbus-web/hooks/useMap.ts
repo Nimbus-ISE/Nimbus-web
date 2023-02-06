@@ -33,6 +33,7 @@ const useMap = () => {
     const openTab = () => {
         setOpenFullTab(true);
         setClosed(false);
+        setOpenAlternative(false);
         setOpenReview(false);
     };
 

@@ -35,6 +35,7 @@ const FolderFull = (props: FolderFullProps) => {
                                                 openAlternatives={
                                                     props.openAlternatives
                                                 }
+                                                openFullTab={false}
                                             />
                                         </div>
                                     );

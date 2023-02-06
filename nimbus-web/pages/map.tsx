@@ -17,6 +17,7 @@ import useMap from "@/hooks/useMap";
 import PlaceDetail from "@/components/PlanTab/PlaceDetail";
 import SideBar from "@/components/PlanTab/SideBar";
 import FullScreenPlan from "@/components/PlanTab/FullScreenPlan";
+import Alternative from "@/components/PlanTab/Alternative";
 
 export default function map() {
     const {
@@ -60,7 +61,7 @@ export default function map() {
                 {!openFullTab && (
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-[89.5%] fixed ">
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
                                 <PlaceDetail
                                     placeTitle={reviewData.placeTitle}
                                     address={reviewData.address}
@@ -72,8 +73,8 @@ export default function map() {
                             </div>
                         )}
                         {!openReview && openAlternatives && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-[89.5%] fixed ">
-                                <div>Review</div>
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
+                                <Alternative />
                             </div>
                         )}
 

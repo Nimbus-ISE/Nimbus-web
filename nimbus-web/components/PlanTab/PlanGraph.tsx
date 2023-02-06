@@ -32,13 +32,15 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         {place.placeTitle}
                                     </div>
                                 )}
-                                <button
-                                    onClick={() => {
-                                        props.openAlternatives();
-                                    }}
-                                >
-                                    <EditIcon />
-                                </button>
+                                {props.openFullTab && (
+                                    <button
+                                        onClick={() => {
+                                            props.openAlternatives();
+                                        }}
+                                    >
+                                        <EditIcon />
+                                    </button>
+                                )}
                             </div>
                             {place.placeTitle.length > 20 && (
                                 <div className="text-[16px] font-extrabold">
