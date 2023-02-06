@@ -1,3 +1,7 @@
 module.exports = {
-    extends: [" plugin:@next/next/recommended", "plugin:storybook/recommended"],
+    extends: [
+        "next/babel",
+        "next/core-web-vitals",
+        "plugin:storybook/recommended",
+    ],
 };

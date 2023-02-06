@@ -11,7 +11,6 @@ export interface FolderFullProps {
 export interface FolderSmallProps {
     toggleOpenReview: any;
     openAlternatives: any;
-    openFullTab: boolean;
 }
 export interface SideBarProps {
     toggleOpenReview: any;
