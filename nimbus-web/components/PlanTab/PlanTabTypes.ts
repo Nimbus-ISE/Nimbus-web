@@ -16,6 +16,7 @@ export interface SideBarProps {
     toggleOpenReview: any;
     openTab: any;
     openAlternatives: any;
+    isBigScreen: boolean;
 }
 export interface PlanGraphProps {
     openFullTab: boolean;

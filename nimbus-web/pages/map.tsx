@@ -38,21 +38,21 @@ export default function map() {
         openAlternatives,
         toggleOpenAlternative,
     } = useMap();
-    const isBigScreenWidth = screen.width >= 1384;
+    const isBigScreen = screen.width >= 1384;
 
     return (
         <div>
             <div
                 className={
-                    isBigScreenWidth
+                    isBigScreen
                         ? "grid place-items-center  z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
                         : "flex flex-col  place-items-center  z-50 bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                 }
             >
-                {!isBigScreenWidth && (
+                {!isBigScreen && (
                     <div
                         className={
-                            isBigScreenWidth
+                            isBigScreen
                                 ? "bg-rose-400 w-full h-[100%] text-[10rem] "
                                 : "bg-rose-400 w-full h-[24.7rem] text-[10rem] "
                         }
@@ -62,6 +62,7 @@ export default function map() {
                 )}
                 {!openFullTab && (
                     <SideBar
+                        isBigScreen={isBigScreen}
                         toggleOpenReview={toggleOpenReview}
                         openTab={openTab}
                         openAlternatives={toggleOpenAlternative}

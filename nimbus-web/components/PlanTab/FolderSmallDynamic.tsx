@@ -11,8 +11,8 @@ const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
-    const isBigScreenWidth = screen.width >= 1384;
-    const displayNum = isBigScreenWidth ? 3 : 2;
+    const isBigScreen = screen.width >= 1384;
+    const displayNum = isBigScreen ? 3 : 2;
 
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
@@ -27,9 +27,7 @@ const FolderSmall = (props: FolderSmallProps) => {
         <>
             <>
                 <div
-                    className={
-                        isBigScreenWidth ? classes.tabs : classes.mobileTabs
-                    }
+                    className={isBigScreen ? classes.tabs : classes.mobileTabs}
                 >
                     {testData.map((day, index) => {
                         if (
