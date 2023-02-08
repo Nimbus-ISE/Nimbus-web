@@ -4,10 +4,32 @@
     flex-direction: row;
     grid-column-start: 0;
     grid-column-end: span 4;
-
-    height: 70%;
+    height: 100%;
     width: 100%;
 }
+.mobileTabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-column-start: 0;
+    grid-column-end: span 4;
+    height: 35%;
+    width: 100%;
+}
+.mobileTabs .tab {
+    order: 99;
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    background: #fff;
+    overflow-y: scroll;
+    height: 20rem;
+    scrollbar-width: none;
+}
+.mobileTabs input[type="radio"] {
+    display: none;
+}
+
 .uncheckedLabel {
     order: 1;
     height: 4rem;

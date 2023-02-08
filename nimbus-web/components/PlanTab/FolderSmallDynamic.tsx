@@ -11,6 +11,7 @@ const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
+    const isBigScreenWidth = screen.width >= 1384;
 
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
@@ -24,7 +25,11 @@ const FolderSmall = (props: FolderSmallProps) => {
     return (
         <>
             <>
-                <div className={classes.tabs}>
+                <div
+                    className={
+                        isBigScreenWidth ? classes.tabs : classes.mobileTabs
+                    }
+                >
                     {testData.map((day, index) => {
                         if (index >= currentView && index < currentView + 3)
                             return (
@@ -69,7 +74,8 @@ const FolderSmall = (props: FolderSmallProps) => {
                                 </>
                             );
                     })}
-                    {testData.length > 3 && (
+
+                    {testData.length > 3 && isBigScreenWidth && (
                         <>
                             <input type="radio" name="tabs" id={`arrow`} />
                             <label
