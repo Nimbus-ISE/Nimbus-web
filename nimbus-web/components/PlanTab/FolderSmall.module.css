@@ -57,7 +57,6 @@
     text-align: center;
     margin-right: 0.3rem;
     cursor: pointer;
-
     opacity: 0.85;
     font-weight: bold;
     border-radius: 100%;
@@ -65,6 +64,28 @@
 }
 .arrowLabel:hover {
     background: #a6a6a6;
+}
+.arrowLabelSmallDevice {
+    width: 3rem;
+    height: 3rem;
+    color: black;
+    display: block;
+    padding: 1rem;
+    text-align: center;
+    margin-right: 0.3rem;
+    cursor: pointer;
+
+    opacity: 0.85;
+    font-weight: bold;
+    border-radius: 100%;
+    transition: background ease 0.2s;
+}
+.arrowLabelSmallDevice :hover {
+    background: #a6a6a6;
+}
+
+.arrowSmallDevice input[type="radio"] {
+    display: none;
 }
 .tabs .tab {
     order: 99;
