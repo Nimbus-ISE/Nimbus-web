@@ -6,17 +6,27 @@ export interface FolderFullProps {
     onClose?: any;
     currentView: number;
     openAlternatives: any;
+    isBigScreen: boolean;
     openFullTab: boolean;
+}
+export interface FullScreenProps {
+    openFullTab: any;
+    closeFullTab: any;
+    openAlternatives: any;
+    isBigScreen: boolean;
 }
 export interface FolderSmallProps {
     toggleOpenReview: any;
     openAlternatives: any;
+    openFullTab: any;
 }
 export interface SideBarProps {
     toggleOpenReview: any;
     openTab: any;
     openAlternatives: any;
     isBigScreen: boolean;
+    openFullTab?: boolean;
+    closeFullTab?: any;
 }
 export interface PlanGraphProps {
     openFullTab: boolean;

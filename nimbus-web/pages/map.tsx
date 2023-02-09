@@ -49,7 +49,7 @@ export default function map() {
                         : "flex flex-col  place-items-center  z-50 bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                 }
             >
-                {!isBigScreen && (
+                {!isBigScreen && !openFullTab && (
                     <div
                         className={
                             isBigScreen
@@ -68,12 +68,25 @@ export default function map() {
                         openAlternatives={toggleOpenAlternative}
                     />
                 )}
+                {openFullTab && (
+                    <div>
+                        <SideBar
+                            isBigScreen={isBigScreen}
+                            toggleOpenReview={toggleOpenReview}
+                            openTab={openTab}
+                            openAlternatives={toggleOpenAlternative}
+                            openFullTab={openFullTab}
+                            closeFullTab={closeFullTab}
+                        />
+                    </div>
+                )}
 
-                {openFullTab && !closed && (
+                {openFullTab && !closed && isBigScreen && (
                     <FullScreenPlan
                         openFullTab={openFullTab}
                         closeFullTab={closeFullTab}
                         openAlternatives={toggleOpenAlternative}
+                        isBigScreen={isBigScreen}
                     />
                 )}
 

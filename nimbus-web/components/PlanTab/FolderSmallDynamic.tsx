@@ -11,6 +11,7 @@ const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
+    const [tabsClass, setTabsClass] = useState(classes.tabs);
     const isBigScreen = screen.width >= 1384;
     const displayNum = isBigScreen ? 3 : 2;
 
@@ -21,14 +22,23 @@ const FolderSmall = (props: FolderSmallProps) => {
     useEffect(() => {
         setOpenedTab(`tab${currentView}`);
         console.log("fulltab");
+        if (isBigScreen && !props.openFullTab) {
+            setTabsClass(classes.tabs);
+        } else if (!isBigScreen && !props.openFullTab) {
+            setTabsClass(classes.mobileTabs);
+        } else if (!isBigScreen && props.openFullTab) {
+            setTabsClass(classes.fullMobileTabs);
+        }
     }, [openFullTab, currentView]);
 
     return (
         <>
-            <>
-                <div
-                    className={isBigScreen ? classes.tabs : classes.mobileTabs}
-                >
+            <div
+                className={
+                    tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
+                }
+            >
+                <div className={tabsClass}>
                     {testData.map((day, index) => {
                         if (
                             index >= currentView &&
@@ -98,7 +108,7 @@ const FolderSmall = (props: FolderSmallProps) => {
                         </>
                     )}
                 </div>
-            </>
+            </div>
         </>
     );
 };

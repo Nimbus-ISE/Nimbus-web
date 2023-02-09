@@ -29,6 +29,31 @@
 .mobileTabs input[type="radio"] {
     display: none;
 }
+.fullMobileTabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-column-start: 0;
+    grid-column-end: span 4;
+    height: 100%;
+    width: 100%;
+}
+.fullMobileTabs .tab {
+    order: 99;
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    background: #fff;
+    overflow-y: scroll;
+    height: 44.5rem;
+    scrollbar-width: none;
+}
+.fullMobileTabs input[type="radio"] {
+    display: none;
+}
+.slideIn {
+    animation: slideInFromBottomTabs 1.5s;
+}
 
 .uncheckedLabel {
     order: 1;
@@ -154,6 +179,15 @@
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromBottomTabs {
+    0% {
+        transform: translateY(100%);
     }
     100% {
         transform: translateX(0);
