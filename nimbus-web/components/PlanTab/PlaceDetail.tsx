@@ -3,8 +3,6 @@ import React from "react";
 import { PlaceDetailProps } from "./PlanTabTypes";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    console.log(props);
-
     return (
         <>
             <div
@@ -13,9 +11,21 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             >
                 <div className="ml-4">x</div>
             </div>
-            <div className="bg-white rounded-xl h-[35rem] w-[50rem] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll scrollbar-hide  animate-fade-in ">
+            <div
+                className={
+                    props.isBigScreen
+                        ? "bg-white rounded-xl h-[35rem] w-[50rem] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll scrollbar-hide  animate-fade-in "
+                        : "bg-white rounded-xl h-[15rem] w-[20rem] absolute top-1/2 left-1/3 transform -translate-x-1/2 overflow-y-scroll scrollbar-hide  animate-fade-in "
+                }
+            >
                 <div className="grid grid-cols-12 p-6 gap-6">
-                    <div className="rounded-xl border-2 bg-blue-100 col-span-7 h-48 ">
+                    <div
+                        className={
+                            props.isBigScreen
+                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-48 "
+                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-48 "
+                        }
+                    >
                         Image
                     </div>
                     <div className="flex col-span-5 flex-col gap-2">
@@ -23,7 +33,15 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                             {props.placeTitle}
                         </div>
                         <div className="text-xs">{props.address}</div>
-                        <div className="w-full h-12 bg-yellow-300">Stars</div>
+                        <div
+                            className={
+                                props.isBigScreen
+                                    ? "w-full h-12 bg-yellow-300"
+                                    : "w-[15rem] h-12 bg-yellow-300"
+                            }
+                        >
+                            Stars
+                        </div>
                     </div>
                     <div className="text-base col-span-12">
                         {props.placeDescription}
@@ -31,14 +49,17 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        isBigScreen={props.isBigScreen}
                     />
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        isBigScreen={props.isBigScreen}
                     />
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        isBigScreen={props.isBigScreen}
                     />
                 </div>
             </div>

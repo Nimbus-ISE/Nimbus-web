@@ -38,7 +38,10 @@ export default function map() {
         openAlternatives,
         toggleOpenAlternative,
     } = useMap();
-    const isBigScreen = screen.width >= 1384;
+    const [isBigScreen, setIsBigScreen] = useState(false);
+    useEffect(() => {
+        setIsBigScreen(screen.width >= 1384);
+    }, []);
 
     return (
         <div>
@@ -68,7 +71,7 @@ export default function map() {
                         openAlternatives={toggleOpenAlternative}
                     />
                 )}
-                {openFullTab && (
+                {openFullTab && !isBigScreen && (
                     <div>
                         <SideBar
                             isBigScreen={isBigScreen}
@@ -90,7 +93,7 @@ export default function map() {
                     />
                 )}
 
-                {!openFullTab && (
+                {!openFullTab && isBigScreen && (
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
@@ -101,12 +104,31 @@ export default function map() {
                                         reviewData.placeDescription
                                     }
                                     toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
                                 />
                             </div>
                         )}
+
                         {!openReview && openAlternatives && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
                                 <Alternative />
+                            </div>
+                        )}
+                    </div>
+                )}
+                {!openFullTab && !isBigScreen && (
+                    <div>
+                        {openReview && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
+                                <PlaceDetail
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
+                                    toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
+                                />
                             </div>
                         )}
                     </div>

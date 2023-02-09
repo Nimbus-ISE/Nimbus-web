@@ -51,8 +51,15 @@ export interface PlaceDetailProps {
     numberOfStars?: number;
     address: string;
     toggleOpenReview?: any;
+    isBigScreen?: boolean;
 }
-
+export interface ReviewProps {
+    imgLink?: string;
+    user: string;
+    reviewText: string;
+    numberOfStars?: number;
+    isBigScreen?: boolean;
+}
 export interface AlternativeItemProps {
     title: string;
     description: string;

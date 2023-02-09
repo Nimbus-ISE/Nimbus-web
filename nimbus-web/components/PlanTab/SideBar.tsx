@@ -29,7 +29,7 @@ const SideBar = (props: SideBarProps) => {
             )}
             {!props.isBigScreen && props.openFullTab && (
                 <button
-                    className="absolute bg-white  p-2 z-10 top-[4.5rem] left-[22rem] font-extrabold text-2xl"
+                    className="absolute bg-white  p-2 z-10 top-[4.5rem] left-[22rem] font-extrabold text-2xl animate-slide-in"
                     onClick={() => {
                         props.closeFullTab();
                     }}
