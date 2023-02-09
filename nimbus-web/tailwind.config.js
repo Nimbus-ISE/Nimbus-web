@@ -16,11 +16,16 @@ module.exports = {
                 "graph-expand": "graphExpand 1s ",
                 "graph-collapse": "graphCollapse 1s",
                 "fade-in": "fadeIn 1s",
+                "slide-in": "slideIn 1.5s",
             },
             keyframes: {
                 fadeIn: {
                     "0%": { opacity: "0%" },
                     "100%": { opacity: "100%" },
+                },
+                slideIn: {
+                    "0%": { transform: "translateY(3000%)" },
+                    "100%": { transform: "translateY(0%)" },
                 },
                 moveIn: {
                     "0%": { transform: "translateX(-100%)" },

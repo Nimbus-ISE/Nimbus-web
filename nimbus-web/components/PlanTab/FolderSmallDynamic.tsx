@@ -11,7 +11,9 @@ const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
-    const isBigScreenWidth = screen.width >= 1384;
+    const [tabsClass, setTabsClass] = useState(classes.tabs);
+    const isBigScreen = screen.width >= 1384;
+    const displayNum = isBigScreen ? 3 : 2;
 
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
@@ -20,18 +22,28 @@ const FolderSmall = (props: FolderSmallProps) => {
     useEffect(() => {
         setOpenedTab(`tab${currentView}`);
         console.log("fulltab");
+        if (isBigScreen && !props.openFullTab) {
+            setTabsClass(classes.tabs);
+        } else if (!isBigScreen && !props.openFullTab) {
+            setTabsClass(classes.mobileTabs);
+        } else if (!isBigScreen && props.openFullTab) {
+            setTabsClass(classes.fullMobileTabs);
+        }
     }, [openFullTab, currentView]);
 
     return (
         <>
-            <>
-                <div
-                    className={
-                        isBigScreenWidth ? classes.tabs : classes.mobileTabs
-                    }
-                >
+            <div
+                className={
+                    tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
+                }
+            >
+                <div className={tabsClass}>
                     {testData.map((day, index) => {
-                        if (index >= currentView && index < currentView + 3)
+                        if (
+                            index >= currentView &&
+                            index < currentView + displayNum
+                        )
                             return (
                                 <>
                                     <input
@@ -75,7 +87,7 @@ const FolderSmall = (props: FolderSmallProps) => {
                             );
                     })}
 
-                    {testData.length > 3 && isBigScreenWidth && (
+                    {testData.length > 3 && (
                         <>
                             <input type="radio" name="tabs" id={`arrow`} />
                             <label
@@ -96,7 +108,7 @@ const FolderSmall = (props: FolderSmallProps) => {
                         </>
                     )}
                 </div>
-            </>
+            </div>
         </>
     );
 };

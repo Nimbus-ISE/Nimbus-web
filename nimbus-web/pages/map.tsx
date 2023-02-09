@@ -38,21 +38,24 @@ export default function map() {
         openAlternatives,
         toggleOpenAlternative,
     } = useMap();
-    const isBigScreenWidth = screen.width >= 1384;
+    const [isBigScreen, setIsBigScreen] = useState(false);
+    useEffect(() => {
+        setIsBigScreen(screen.width >= 1384);
+    }, []);
 
     return (
         <div>
             <div
                 className={
-                    isBigScreenWidth
+                    isBigScreen
                         ? "grid place-items-center  z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
                         : "flex flex-col  place-items-center  z-50 bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                 }
             >
-                {!isBigScreenWidth && (
+                {!isBigScreen && !openFullTab && (
                     <div
                         className={
-                            isBigScreenWidth
+                            isBigScreen
                                 ? "bg-rose-400 w-full h-[100%] text-[10rem] "
                                 : "bg-rose-400 w-full h-[24.7rem] text-[10rem] "
                         }
@@ -62,21 +65,35 @@ export default function map() {
                 )}
                 {!openFullTab && (
                     <SideBar
+                        isBigScreen={isBigScreen}
                         toggleOpenReview={toggleOpenReview}
                         openTab={openTab}
                         openAlternatives={toggleOpenAlternative}
                     />
                 )}
+                {openFullTab && !isBigScreen && (
+                    <div>
+                        <SideBar
+                            isBigScreen={isBigScreen}
+                            toggleOpenReview={toggleOpenReview}
+                            openTab={openTab}
+                            openAlternatives={toggleOpenAlternative}
+                            openFullTab={openFullTab}
+                            closeFullTab={closeFullTab}
+                        />
+                    </div>
+                )}
 
-                {openFullTab && !closed && (
+                {openFullTab && !closed && isBigScreen && (
                     <FullScreenPlan
                         openFullTab={openFullTab}
                         closeFullTab={closeFullTab}
                         openAlternatives={toggleOpenAlternative}
+                        isBigScreen={isBigScreen}
                     />
                 )}
 
-                {!openFullTab && (
+                {!openFullTab && isBigScreen && (
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
@@ -87,12 +104,31 @@ export default function map() {
                                         reviewData.placeDescription
                                     }
                                     toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
                                 />
                             </div>
                         )}
+
                         {!openReview && openAlternatives && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
                                 <Alternative />
+                            </div>
+                        )}
+                    </div>
+                )}
+                {!openFullTab && !isBigScreen && (
+                    <div>
+                        {openReview && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
+                                <PlaceDetail
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
+                                    toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
+                                />
                             </div>
                         )}
                     </div>
