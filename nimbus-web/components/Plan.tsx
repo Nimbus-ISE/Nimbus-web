@@ -34,7 +34,7 @@ const Plan = () => {
     const handleOnClick = (index: number) => {
         const scroll = Scroll.animateScroll;
         scroll.scrollTo(index * pageSize.height, {
-            duration: 1000,
+            duration: 500,
             smooth: true,
             containerId: "form-container",
         });
@@ -83,7 +83,7 @@ const Plan = () => {
                             clearTimeout(scrollTimerRef.current);
                             scrollTimerRef.current = setTimeout(
                                 scrollCallback,
-                                100
+                                50
                             );
                         }}
                         id="form-container"
