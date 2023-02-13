@@ -4,15 +4,9 @@ import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
+import { FolderFullProps } from "./PlanTabTypes";
 
-interface IProps {
-    expand: boolean;
-    children?: ReactElement;
-    onClose?: any;
-    currentView: number;
-}
-
-const FolderFull = (props: IProps) => {
+const FolderFull = (props: FolderFullProps) => {
     return (
         <>
             <>
@@ -38,6 +32,10 @@ const FolderFull = (props: IProps) => {
                                                 clickable={false}
                                                 dayNumber={index + 1}
                                                 places={[...data]}
+                                                openAlternatives={
+                                                    props.openAlternatives
+                                                }
+                                                openFullTab={false}
                                             />
                                         </div>
                                     );
