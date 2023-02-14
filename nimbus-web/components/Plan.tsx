@@ -15,6 +15,7 @@ const formArr: Array<IForm> = [
     { type: "Dates", title: "Select the dates" },
     { type: "Style", title: "What kind of trip?" },
     { type: "Budget", title: "What is your budget?" },
+    { type: "Distance", title: "Select traveling distance" },
     { type: "Tags", title: "Select some tags" },
 ];
 
@@ -33,7 +34,7 @@ const Plan = () => {
     const handleOnClick = (index: number) => {
         const scroll = Scroll.animateScroll;
         scroll.scrollTo(index * pageSize.height, {
-            duration: 1000,
+            duration: 500,
             smooth: true,
             containerId: "form-container",
         });
@@ -82,7 +83,7 @@ const Plan = () => {
                             clearTimeout(scrollTimerRef.current);
                             scrollTimerRef.current = setTimeout(
                                 scrollCallback,
-                                100
+                                50
                             );
                         }}
                         id="form-container"
