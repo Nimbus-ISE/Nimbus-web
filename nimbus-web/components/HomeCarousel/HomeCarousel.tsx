@@ -1,9 +1,11 @@
 import useElementSize from "@/hooks/useElementSize";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useObserver from "@/hooks/useObserver";
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "./Button.module.css";
 import CarouselImage from "./CarouselImage";
+import Filter from "./Filter";
 
 const carouselList = [
     {
@@ -38,6 +40,7 @@ const HomeCarousel = () => {
     const [current, setCurrent] = React.useState<number>(0);
     const [disableTransition, setDisableTransition] =
         React.useState<boolean>(true);
+    const router = useRouter();
     React.useEffect(() => {
         const periodicSlide = setInterval(() => {
             setCurrent((prev: number) => {
@@ -89,11 +92,14 @@ const HomeCarousel = () => {
                     id="carousel-paragraph"
                     className={`absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3`}
                 >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae eveniet, repellat consequuntur consequatur
-                    aliquid rerum minus voluptas quibusdam magni delectus ipsum
-                    laudantium dolore, illum fugiat dignissimos. Voluptatum illo
-                    dolorum deleniti.
+                    Our app combines the convenience of searching for
+                    destinations, comparing prices, hotels, and activities all
+                    in one place, with the customization of personalizing your
+                    itinerary and adding personal notes. With our user-friendly
+                    interface and intuitive navigation, you can design your
+                    perfect getaway, whether you're an adventure seeker, a
+                    foodie, a culture buff, or just looking to relax. So, sit
+                    back, relax, and let us design your holiday today!
                 </p>
             </div>
             <div
@@ -103,10 +109,21 @@ const HomeCarousel = () => {
                 }}
                 className="m-auto z-10"
             >
-                <button className={styles.button}>
+                <button
+                    onClick={() => router.push("/plan")}
+                    className={styles.button}
+                >
                     <div className="font-bold text-xl">PLAN NOW</div>
                 </button>
             </div>
+            <Filter
+                color=""
+                className={{
+                    background: isLargerThanMedium
+                        ? "rgba(0,0,0,0)"
+                        : "linear-gradient(0deg, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 0%, rgba(245,245,245,0) 30%)",
+                }}
+            />
         </div>
     );
 };

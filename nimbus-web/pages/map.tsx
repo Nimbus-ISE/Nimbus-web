@@ -17,6 +17,7 @@ import useMap from "@/hooks/useMap";
 import PlaceDetail from "@/components/PlanTab/PlaceDetail";
 import SideBar from "@/components/PlanTab/SideBar";
 import FullScreenPlan from "@/components/PlanTab/FullScreenPlan";
+import Alternative from "@/components/PlanTab/Alternative";
 
 export default function map() {
     const {
@@ -33,41 +34,103 @@ export default function map() {
         openFullTab,
         openReview,
         toggleOpenReview,
+        reviewData,
+        openAlternatives,
+        toggleOpenAlternative,
     } = useMap();
+    const [isBigScreen, setIsBigScreen] = useState(false);
+    useEffect(() => {
+        setIsBigScreen(screen.width >= 1384);
+    }, []);
 
     return (
         <div>
-            <div className="grid place-items-center  z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden ">
+            <div
+                className={
+                    isBigScreen
+                        ? "grid place-items-center  z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
+                        : "flex flex-col  place-items-center  z-50 bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
+                }
+            >
+                {!isBigScreen && !openFullTab && (
+                    <div
+                        className={
+                            isBigScreen
+                                ? "bg-rose-400 w-full h-[100%] text-[10rem] "
+                                : "bg-rose-400 w-full h-[24.7rem] text-[10rem] "
+                        }
+                    >
+                        MAP
+                    </div>
+                )}
                 {!openFullTab && (
                     <SideBar
+                        isBigScreen={isBigScreen}
                         toggleOpenReview={toggleOpenReview}
                         openTab={openTab}
+                        openAlternatives={toggleOpenAlternative}
                     />
                 )}
+                {openFullTab && !isBigScreen && (
+                    <div>
+                        <SideBar
+                            isBigScreen={isBigScreen}
+                            toggleOpenReview={toggleOpenReview}
+                            openTab={openTab}
+                            openAlternatives={toggleOpenAlternative}
+                            openFullTab={openFullTab}
+                            closeFullTab={closeFullTab}
+                        />
+                    </div>
+                )}
 
-                {openFullTab && !closed && (
+                {openFullTab && !closed && isBigScreen && (
                     <FullScreenPlan
                         openFullTab={openFullTab}
                         closeFullTab={closeFullTab}
+                        openAlternatives={toggleOpenAlternative}
+                        isBigScreen={isBigScreen}
                     />
                 )}
 
-                {!openFullTab && (
+                {!openFullTab && isBigScreen && (
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
-                            <div className=" bg-slate-400 bg-opacity-70 w-full h-[89.5%] fixed ">
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
                                 <PlaceDetail
-                                    placeTitle="Thor's Well"
-                                    address="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, "
-                                    placeDescription="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, magnam cupiditate error qui quos saepe quidem blanditiis facilis nostrum in commodi fugit recusandae illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima autem itaque molestias sunt suscipit? Ipsam, magnam cupiditate error qui quos saepe quidem blanditiis facilis nostrum in commodi fugit recusandae illo."
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
                                     toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
                                 />
                             </div>
                         )}
 
-                        <div className="bg-rose-400  w-full h-[100%] text-[10rem]">
-                            MAP
-                        </div>
+                        {!openReview && openAlternatives && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
+                                <Alternative />
+                            </div>
+                        )}
+                    </div>
+                )}
+                {!openFullTab && !isBigScreen && (
+                    <div>
+                        {openReview && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
+                                <PlaceDetail
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
+                                    toggleOpenReview={toggleOpenReview}
+                                    isBigScreen={isBigScreen}
+                                />
+                            </div>
+                        )}
                     </div>
                 )}
 

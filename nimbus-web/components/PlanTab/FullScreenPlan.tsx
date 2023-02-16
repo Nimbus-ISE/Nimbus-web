@@ -2,12 +2,9 @@ import React from "react";
 import FolderFullDynamic from "./FolderFullDynamic";
 import { testData } from "@/test_data/testData";
 import usePlanTab from "@/hooks/usePlanTab";
-interface IProps {
-    openFullTab: any;
-    closeFullTab: any;
-}
+import { FullScreenProps } from "./PlanTabTypes";
 
-const FullScreenPlan = (props: IProps) => {
+const FullScreenPlan = (props: FullScreenProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     return (
         <>
@@ -15,6 +12,9 @@ const FullScreenPlan = (props: IProps) => {
                 expand={props.openFullTab}
                 onClose={props.closeFullTab}
                 currentView={currentView}
+                openAlternatives={props.openAlternatives}
+                openFullTab={props.openFullTab}
+                isBigScreen={props.isBigScreen}
             />
             {testData.length > 3 && (
                 <div className="absolute top-0 right-0 w-[8.5rem] h-16  ">

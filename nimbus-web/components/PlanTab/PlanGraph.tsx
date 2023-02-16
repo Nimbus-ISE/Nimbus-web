@@ -1,15 +1,6 @@
-interface planGraphProps {
-    places: Array<PlaceType>;
-    dayNumber: number;
-    toggleOpenReview?: any;
-    clickable: boolean;
-}
-interface PlaceType {
-    name: string;
-    description: string;
-    imgLink: string;
-}
-const PlanGraph = (props: planGraphProps) => {
+import EditIcon from "@mui/icons-material/Edit";
+import { PlanGraphProps, PlaceType } from "./PlanTabTypes";
+const PlanGraph = (props: PlanGraphProps) => {
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
@@ -18,7 +9,7 @@ const PlanGraph = (props: planGraphProps) => {
             {props.places?.map((place: PlaceType) => (
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div className="flex flex-row items-center text-xs gap-4">
+                    <div className="flex flex-row items-center text-xs gap-4 rounded-xl hover:bg-[#efeded] hover:h-32 ">
                         <img
                             src={place.imgLink}
                             className={
@@ -26,21 +17,38 @@ const PlanGraph = (props: planGraphProps) => {
                                     ? "h-28 w-28 rounded-full hover:scale-110 duration-300 cursor-pointer shadow"
                                     : "h-28 w-28 rounded-full shadow"
                             }
-                            onMouseDown={props.toggleOpenReview}
+                            onMouseDown={() => {
+                                props.toggleOpenReview({
+                                    placeTitle: place.placeTitle,
+                                    placeDescription: place.placeDescription,
+                                    address: place.address,
+                                });
+                            }}
                         />
                         <div className="flex flex-col">
-                            {place.name.length < 20 && (
-                                <div className="text-2xl font-extrabold">
-                                    {place.name}
-                                </div>
-                            )}
-                            {place.name.length > 20 && (
+                            <div className="flex gap-4">
+                                {place.placeTitle.length < 20 && (
+                                    <div className="text-2xl font-extrabold">
+                                        {place.placeTitle}
+                                    </div>
+                                )}
+                                {props.openFullTab && (
+                                    <button
+                                        onClick={() => {
+                                            props.openAlternatives();
+                                        }}
+                                    >
+                                        <EditIcon />
+                                    </button>
+                                )}
+                            </div>
+                            {place.placeTitle.length > 20 && (
                                 <div className="text-[16px] font-extrabold">
-                                    {place.name}
+                                    {place.placeTitle}
                                 </div>
                             )}
                             <div className="w-64 text-[10px]">
-                                {place.description}
+                                {place.placeSummary}
                             </div>
                         </div>
                     </div>
