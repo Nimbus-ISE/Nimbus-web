@@ -30,7 +30,7 @@ const TripTypeInput = (props: IProps) => {
                         value={tripType}
                         label="Select trip type"
                         onChange={handleChange}
-                        className="select bg-gray-100 rounded-xl hover:opacity-80 focus:bg-white w-60"
+                        className="select bg-gray-100 rounded-xl hover:brightness-125 focus:bg-white w-60"
                         sx={TripTypeStyles}
                     >
                         <MenuItem value={"hangout"}>Hangout</MenuItem>

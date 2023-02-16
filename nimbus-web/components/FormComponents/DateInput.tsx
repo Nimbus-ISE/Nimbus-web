@@ -53,7 +53,7 @@ const datePickerStyles = {
 };
 
 const datePickerClass =
-    "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
+    "bg-gray-100 rounded-xl hover:brightness-125 focus:bg-white";
 
 const DateInput = (props: any) => {
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
