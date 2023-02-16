@@ -1,13 +1,13 @@
-import TripPaceInput from "@/components/FormComponents/TripTypeInput";
+import TripTypeInput from "@/components/FormsElements/TripTypeInput";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
-    title: "TripPaceInput",
-    component: TripPaceInput,
-} as ComponentMeta<typeof TripPaceInput>;
+    title: "TripTypeInput",
+    component: TripTypeInput,
+} as ComponentMeta<typeof TripTypeInput>;
 
-const Template: ComponentStory<typeof TripPaceInput> = (args) => (
-    <TripPaceInput {...args} />
+const Template: ComponentStory<typeof TripTypeInput> = (args) => (
+    <TripTypeInput {...args} />
 );
 
-export const TripPace = Template.bind({});
+export const TripType = Template.bind({});
