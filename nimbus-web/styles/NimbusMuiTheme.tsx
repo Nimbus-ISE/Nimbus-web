@@ -10,9 +10,27 @@ export const nimbusTheme = createTheme({
             main: "#e57373",
             dark: "#e57373",
         },
+        secondary: {
+            main: "#A2ECE8",
+            light: "#FFF",
+        },
     },
     typography: {
         fontFamily: ["Montserrat", "sans-serif"].join(","),
+    },
+    components: {
+        MuiChip: {
+            variants: [
+                {
+                    props: { variant: "outlined" },
+                    style: {
+                        borderColor: "#000",
+                        color: "#000",
+                        borderWidth: "2px",
+                    },
+                },
+            ],
+        },
     },
 });
 
@@ -46,11 +64,16 @@ export const datePickerStyles = {
 };
 
 export const TripTypeStyles = {
+    borderRadius: "12px",
     "& .MuiOutlinedInput-notchedOutline": {
         border: "none",
-        borderRadius: "12px",
     },
     "& fieldset": {
         borderRadius: "12px",
     },
+};
+
+export const TagsStyles = {
+    margin: "3px",
+    borderRadius: "12px",
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { nimbusTheme } from "../../styles/NimbusMuiTheme";
+import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 
 const tags = [
     "Mall",
@@ -31,10 +31,20 @@ const tags = [
     "Adventure & Sports",
 ];
 
-const selected: string[] = [];
+let selected: string[] = [];
 
 const TagsSelection = () => {
-    const [selecetTag, setSelectTag] = React.useState<string[]>(selected);
+    const handleClick = (selectedTag: string) => () => {
+        if (selected.indexOf(selectedTag) > -1) {
+            selected = selected.filter((e) => e !== selectedTag);
+        } else {
+            selected.push(selectedTag);
+        }
+        console.log(selected);
+        setSelectTag(selected);
+    };
+
+    const [selectTag, setSelectTag] = React.useState<string[]>(selected);
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
@@ -42,8 +52,16 @@ const TagsSelection = () => {
                     {tags.map((data) => {
                         return (
                             <Chip
+                                key={data}
                                 label={data}
-                                className="m-1 hover:brightness-125"
+                                onClick={handleClick(data)}
+                                color="secondary"
+                                sx={TagsStyles}
+                                variant={
+                                    selected.indexOf(data) > -1
+                                        ? "outlined"
+                                        : "filled"
+                                }
                             />
                         );
                     })}
