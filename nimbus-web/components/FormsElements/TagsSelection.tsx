@@ -31,20 +31,20 @@ const tags = [
     "Adventure & Sports",
 ];
 
-let selected: string[] = [];
-
 const TagsSelection = () => {
-    const handleClick = (selectedTag: string) => () => {
-        if (selected.indexOf(selectedTag) > -1) {
-            selected = selected.filter((e) => e !== selectedTag);
+    const [selectTag, setSelectTag] = React.useState<string[]>([]);
+    const handleClick = (tag: string) => () => {
+        let newSelectTag = [...selectTag];
+        if (newSelectTag.indexOf(tag) > -1) {
+            newSelectTag = newSelectTag.filter(
+                (element: string) => element !== tag
+            );
         } else {
-            selected.push(selectedTag);
+            newSelectTag.push(tag);
         }
-        console.log(selected);
-        setSelectTag(selected);
+        console.log(newSelectTag);
+        setSelectTag(newSelectTag);
     };
-
-    const [selectTag, setSelectTag] = React.useState<string[]>(selected);
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
@@ -58,7 +58,7 @@ const TagsSelection = () => {
                                 color="secondary"
                                 sx={TagsStyles}
                                 variant={
-                                    selected.indexOf(data) > -1
+                                    selectTag.indexOf(data) > -1
                                         ? "outlined"
                                         : "filled"
                                 }
