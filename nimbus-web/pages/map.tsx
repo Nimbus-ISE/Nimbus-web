@@ -40,46 +40,72 @@ export default function map() {
     } = useMap();
     const [isBigScreen, setIsBigScreen] = useState(false);
     useEffect(() => {
-        setIsBigScreen(screen.width >= 1384);
+        setIsBigScreen(screen.width >= 1000);
     }, []);
 
     return (
-        <div>
+        <div className="h-[40rem] w-[100vw] overflow-hidden">
             <div
                 className={
                     isBigScreen
-                        ? "grid place-items-center  z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
-                        : "flex flex-col  place-items-center  z-50 bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
+                        ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
+                        : "  h-[92vh] z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                 }
             >
-                {!isBigScreen && !openFullTab && (
-                    <div
-                        className={
-                            isBigScreen
-                                ? "bg-rose-400 w-full h-[100%] text-[10rem] "
-                                : "bg-rose-400 w-full h-[24.7rem] text-[10rem] "
-                        }
-                    >
-                        MAP
+                {!isBigScreen && (
+                    <div>
+                        {!openFullTab && (
+                            <div className="h-[70vh]">
+                                <div
+                                    className={
+                                        "bg-rose-400 w-[100%] h-[100%] text-[10rem] "
+                                    }
+                                >
+                                    MAP
+                                </div>
+                                <div>
+                                    {openReview && (
+                                        <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
+                                            <PlaceDetail
+                                                placeTitle={
+                                                    reviewData.placeTitle
+                                                }
+                                                address={reviewData.address}
+                                                placeDescription={
+                                                    reviewData.placeDescription
+                                                }
+                                                toggleOpenReview={
+                                                    toggleOpenReview
+                                                }
+                                                isBigScreen={isBigScreen}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                        {openFullTab && (
+                            <div>
+                                <SideBar
+                                    isBigScreen={isBigScreen}
+                                    toggleOpenReview={toggleOpenReview}
+                                    openTab={openTab}
+                                    openAlternatives={toggleOpenAlternative}
+                                    openFullTab={openFullTab}
+                                    closeFullTab={closeFullTab}
+                                />
+                            </div>
+                        )}
                     </div>
                 )}
-                {!openFullTab && (
-                    <SideBar
-                        isBigScreen={isBigScreen}
-                        toggleOpenReview={toggleOpenReview}
-                        openTab={openTab}
-                        openAlternatives={toggleOpenAlternative}
-                    />
-                )}
-                {openFullTab && !isBigScreen && (
-                    <div>
+
+                {!openFullTab && !isBigScreen && (
+                    <div className="-translate-y-16">
                         <SideBar
                             isBigScreen={isBigScreen}
                             toggleOpenReview={toggleOpenReview}
                             openTab={openTab}
                             openAlternatives={toggleOpenAlternative}
-                            openFullTab={openFullTab}
-                            closeFullTab={closeFullTab}
                         />
                     </div>
                 )}
@@ -94,46 +120,44 @@ export default function map() {
                 )}
 
                 {!openFullTab && isBigScreen && (
-                    <div className="col-span-8 w-full h-[100%]">
-                        {openReview && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
-                                <PlaceDetail
-                                    placeTitle={reviewData.placeTitle}
-                                    address={reviewData.address}
-                                    placeDescription={
-                                        reviewData.placeDescription
-                                    }
-                                    toggleOpenReview={toggleOpenReview}
-                                    isBigScreen={isBigScreen}
-                                />
-                            </div>
-                        )}
+                    <>
+                        <SideBar
+                            isBigScreen={isBigScreen}
+                            toggleOpenReview={toggleOpenReview}
+                            openTab={openTab}
+                            openAlternatives={toggleOpenAlternative}
+                        />
+                        <div
+                            className={
+                                "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
+                            }
+                        >
+                            MAP
+                        </div>
 
-                        {!openReview && openAlternatives && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
-                                <Alternative />
-                            </div>
-                        )}
-                    </div>
-                )}
-                {!openFullTab && !isBigScreen && (
-                    <div>
-                        {openReview && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
-                                <PlaceDetail
-                                    placeTitle={reviewData.placeTitle}
-                                    address={reviewData.address}
-                                    placeDescription={
-                                        reviewData.placeDescription
-                                    }
-                                    toggleOpenReview={toggleOpenReview}
-                                    isBigScreen={isBigScreen}
-                                />
-                            </div>
-                        )}
-                    </div>
-                )}
+                        <div className="col-span-8 w-full h-[100%]">
+                            {openReview && (
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
+                                    <PlaceDetail
+                                        placeTitle={reviewData.placeTitle}
+                                        address={reviewData.address}
+                                        placeDescription={
+                                            reviewData.placeDescription
+                                        }
+                                        toggleOpenReview={toggleOpenReview}
+                                        isBigScreen={isBigScreen}
+                                    />
+                                </div>
+                            )}
 
+                            {!openReview && openAlternatives && (
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
+                                    <Alternative />
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
                 {/* {!openFullTab && (
         <Map
             ref={mapRef}

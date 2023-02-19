@@ -13,7 +13,7 @@ const SideBar = (props: SideBarProps) => {
             />
             {props.isBigScreen && (
                 <button
-                    className="absolute bg-white top-[35vh]   p-2 h-28 rounded-r-xl z-10 hidden lg:block md:left-[60vh] lg:left-[40vh] xl:left-[54vh]   "
+                    className="absolute bg-white top-[35vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
                     onClick={props.openTab}
                 >
                     {">"}
@@ -21,7 +21,7 @@ const SideBar = (props: SideBarProps) => {
             )}
             {!props.isBigScreen && !props.openFullTab && (
                 <button
-                    className="absolute bg-white  p-2 z-10 top-[29rem] left-80 font-extrabold text-2xl"
+                    className="absolute bg-white  p-2 z-10 top-[40%] left-[90%] font-extrabold text-2xl"
                     onClick={props.openTab}
                 >
                     {"∧"}
