@@ -77,9 +77,27 @@
     border-top-left-radius: 12px;
     z-index: 100;
 }
+.checkedLabel {
+    order: 1;
+    height: 2rem;
+    display: block;
+    padding: 0.5vw;
+
+    margin-right: 0.2rem;
+    cursor: pointer;
+    font-size: smaller;
+    font-weight: bold;
+    transition: background ease 0.2s;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #fff;
+    color: black;
+    z-index: 100;
+}
 .arrowLabel {
     order: 1;
     margin-left: 1vw;
+    margin-right: 1vw;
     margin-top: 10px;
     width: 1vw;
     height: 3rem;
@@ -134,23 +152,6 @@
 }
 .tabs input[type="radio"] {
     display: none;
-}
-.checkedLabel {
-    order: 1;
-    height: 2rem;
-    display: block;
-    padding: 0.5vw;
-
-    margin-right: 0.2rem;
-    cursor: pointer;
-    font-size: smaller;
-    font-weight: bold;
-    transition: background ease 0.2s;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: #fff;
-    color: black;
-    z-index: 100;
 }
 
 .tabs input[type="radio"]:checked + label + .tab {

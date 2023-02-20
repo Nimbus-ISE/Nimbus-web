@@ -14,7 +14,7 @@ const FolderSmall = (props: FolderSmallProps) => {
     const [openFullTab, setOpenFullTab] = useState(false);
     const [tabsClass, setTabsClass] = useState(classes.tabs);
 
-    const displayNum = props.isBigScreen ? 3 : 2;
+    const displayNum = 3;
 
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
