@@ -7,6 +7,7 @@ const SideBar = (props: SideBarProps) => {
     return (
         <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic
+                isBigScreen={props.isBigScreen}
                 toggleOpenReview={props.toggleOpenReview}
                 openAlternatives={props.openAlternatives}
                 openFullTab={props.openFullTab}

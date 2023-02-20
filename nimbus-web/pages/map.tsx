@@ -18,6 +18,7 @@ import PlaceDetail from "@/components/PlanTab/PlaceDetail";
 import SideBar from "@/components/PlanTab/SideBar";
 import FullScreenPlan from "@/components/PlanTab/FullScreenPlan";
 import Alternative from "@/components/PlanTab/Alternative";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 export default function map() {
     const {
@@ -38,10 +39,7 @@ export default function map() {
         openAlternatives,
         toggleOpenAlternative,
     } = useMap();
-    const [isBigScreen, setIsBigScreen] = useState(false);
-    useEffect(() => {
-        setIsBigScreen(screen.width >= 1000);
-    }, []);
+    const isBigScreen = useMediaQuery("(min-width:1024px)");
 
     return (
         <div className="h-[40rem] w-[100vw] overflow-hidden">
