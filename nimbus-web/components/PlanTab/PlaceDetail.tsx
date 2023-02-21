@@ -8,8 +8,8 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             <div
                 className={
                     props.isBigScreen
-                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[53.5rem] z-50 cursor-pointer"
-                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-[5vw] left-[83vw] z-50 cursor-pointer"
+                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[57%] z-50 cursor-pointer"
+                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer "
                 }
                 onMouseDown={props.toggleOpenReview}
             >
@@ -18,16 +18,16 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             <div
                 className={
                     props.isBigScreen
-                        ? "bg-white rounded-xl h-[35rem] w-[50rem] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll scrollbar-hide  animate-fade-in "
-                        : "bg-white rounded-xl h-[25rem] w-[20rem] absolute top-1/2 left-1/3 transform translate-x-[10%] overflow-y-scroll scrollbar-hide  animate-fade-in "
+                        ? "bg-white rounded-xl h-[70%] w-[50%] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
+                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-1/2 left-1/3 transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in"
                 }
             >
-                <div className="grid grid-cols-12 p-6 gap-6">
+                <div className="grid grid-cols-12 p-6 gap-6 ">
                     <div
                         className={
                             props.isBigScreen
                                 ? "rounded-xl border-2 bg-blue-100 col-span-7 h-48 "
-                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-48 "
+                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-48  "
                         }
                     >
                         Image
@@ -47,7 +47,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                             Stars
                         </div>
                     </div>
-                    <div className="text-base col-span-12">
+                    <div className="text-[0.6rem] col-span-12">
                         {props.placeDescription}
                     </div>
                     <Review

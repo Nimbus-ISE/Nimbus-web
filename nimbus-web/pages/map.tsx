@@ -135,7 +135,7 @@ export default function map() {
 
                         <div className="col-span-8 w-full h-[100%]">
                             {openReview && (
-                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
                                     <PlaceDetail
                                         placeTitle={reviewData.placeTitle}
                                         address={reviewData.address}
@@ -149,7 +149,7 @@ export default function map() {
                             )}
 
                             {!openReview && openAlternatives && (
-                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
                                     <Alternative />
                                 </div>
                             )}
