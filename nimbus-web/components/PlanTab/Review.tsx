@@ -8,7 +8,7 @@ const Review = (props: ReviewProps) => {
                 className={
                     props.isBigScreen
                         ? "col-span-12 border-4 border-[#e6e6d6] rounded-full h-32 flex gap-4 items-center p-6"
-                        : "col-span-12  w-64  flex gap-4 items-center p-6"
+                        : "col-span-12  w-[80vw]  flex gap-4 items-center pt-2 "
                 }
             >
                 {props.isBigScreen && (
@@ -26,7 +26,7 @@ const Review = (props: ReviewProps) => {
                         className={
                             props.isBigScreen
                                 ? "text-xs w-96 "
-                                : "text-xs w-64 "
+                                : "text-[0.6rem] w-[70vw] "
                         }
                     >
                         {props.reviewText}

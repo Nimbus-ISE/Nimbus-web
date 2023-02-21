@@ -7,6 +7,7 @@ const SideBar = (props: SideBarProps) => {
     return (
         <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic
+                isBigScreen={props.isBigScreen}
                 toggleOpenReview={props.toggleOpenReview}
                 openAlternatives={props.openAlternatives}
                 openFullTab={props.openFullTab}
@@ -29,7 +30,7 @@ const SideBar = (props: SideBarProps) => {
             )}
             {!props.isBigScreen && props.openFullTab && (
                 <button
-                    className="absolute bg-white  p-2 z-10 top-[4.5rem] left-[22rem] font-extrabold text-2xl animate-slide-in"
+                    className="absolute bg-white  p-2 z-10 top-[10%] left-[90%] font-extrabold text-2xl animate-slide-in"
                     onClick={() => {
                         props.closeFullTab();
                     }}

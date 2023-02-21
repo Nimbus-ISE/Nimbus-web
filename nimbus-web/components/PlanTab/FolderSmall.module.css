@@ -6,8 +6,10 @@
     grid-column-end: span 4;
     height: 100%;
     width: 100%;
+    align-items: flex-end;
 }
 .mobileTabs {
+    text-align: center;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -15,6 +17,7 @@
     grid-column-end: span 4;
     height: 35%;
     width: 100%;
+    align-items: flex-end;
 }
 .mobileTabs .tab {
     order: 99;
@@ -23,7 +26,7 @@
     padding: 1rem;
     background: #fff;
     overflow-y: scroll;
-    height: 12rem;
+    height: 14rem;
     scrollbar-width: none;
 }
 .mobileTabs input[type="radio"] {
@@ -35,8 +38,9 @@
     flex-direction: row;
     grid-column-start: 0;
     grid-column-end: span 4;
-    height: 100%;
+    height: 100vh;
     width: 100%;
+    align-items: flex-end;
 }
 .fullMobileTabs .tab {
     order: 99;
@@ -45,7 +49,7 @@
     padding: 1rem;
     background: #fff;
     overflow-y: scroll;
-    height: 44.5rem;
+    height: 100%;
     scrollbar-width: none;
 }
 .fullMobileTabs input[type="radio"] {
@@ -57,23 +61,43 @@
 
 .uncheckedLabel {
     order: 1;
-    height: 4rem;
+    text-align: center;
+    height: 2rem;
     color: white;
     display: block;
-    padding: 1vw;
+    padding: 0.5vw;
     margin-right: 0.2rem;
     cursor: pointer;
     background: #a6a6a6;
     opacity: 0.85;
     font-weight: bold;
+    font-size: smaller;
     transition: background ease 0.2s;
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
     z-index: 100;
 }
+.checkedLabel {
+    order: 1;
+    height: 2rem;
+    display: block;
+    padding: 0.5vw;
+
+    margin-right: 0.2rem;
+    cursor: pointer;
+    font-size: smaller;
+    font-weight: bold;
+    transition: background ease 0.2s;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #fff;
+    color: black;
+    z-index: 100;
+}
 .arrowLabel {
     order: 1;
     margin-left: 1vw;
+    margin-right: 1vw;
     margin-top: 10px;
     width: 1vw;
     height: 3rem;
@@ -81,33 +105,25 @@
     display: block;
     padding: 1rem;
     text-align: center;
-    margin-right: 0.3rem;
+
     cursor: pointer;
     opacity: 0.85;
     font-weight: bold;
     border-radius: 100%;
     transition: background ease 0.2s;
 }
-.arrowLabel:hover {
-    background: #a6a6a6;
-}
+
 .arrowLabelSmallDevice {
     width: 3rem;
     height: 3rem;
     color: black;
     display: block;
     padding: 1rem;
-    text-align: center;
-    margin-right: 0.3rem;
     cursor: pointer;
-
     opacity: 0.85;
     font-weight: bold;
     border-radius: 100%;
     transition: background ease 0.2s;
-}
-.arrowLabelSmallDevice :hover {
-    background: #a6a6a6;
 }
 
 .arrowSmallDevice input[type="radio"] {
@@ -121,6 +137,7 @@
     background: #fff;
     overflow-y: scroll;
     height: 100vh;
+
     scrollbar-width: none;
 }
 .tab::-webkit-scrollbar {
@@ -135,21 +152,6 @@
 }
 .tabs input[type="radio"] {
     display: none;
-}
-.checkedLabel {
-    order: 1;
-    height: 4rem;
-    display: block;
-    padding: 1vw;
-    margin-right: 0.2rem;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background ease 0.2s;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    background: #fff;
-    color: black;
-    z-index: 100;
 }
 
 .tabs input[type="radio"]:checked + label + .tab {

@@ -1,30 +1,23 @@
 import { ReactElement } from "react";
+interface FolderProps {
+    openFullTab?: any;
+    openAlternatives: any;
+    isBigScreen?: boolean;
+    toggleOpenReview?: any;
+}
 
-export interface FolderFullProps {
+export interface FolderFullProps extends FolderProps {
     expand: boolean;
     children?: ReactElement;
     onClose?: any;
     currentView: number;
-    openAlternatives: any;
-    isBigScreen: boolean;
-    openFullTab: boolean;
 }
-export interface FullScreenProps {
-    openFullTab: any;
+export interface FullScreenProps extends FolderProps {
     closeFullTab: any;
-    openAlternatives: any;
-    isBigScreen: boolean;
 }
-export interface FolderSmallProps {
-    toggleOpenReview: any;
-    openAlternatives: any;
-    openFullTab: any;
-}
-export interface SideBarProps {
-    toggleOpenReview: any;
+export interface FolderSmallProps extends FolderProps {}
+export interface SideBarProps extends FolderProps {
     openTab: any;
-    openAlternatives: any;
-    isBigScreen: boolean;
     openFullTab?: boolean;
     closeFullTab?: any;
 }
@@ -36,6 +29,9 @@ export interface PlanGraphProps {
     clickable: boolean;
     openAlternatives: any;
 }
+export interface AlternativeCardProps {
+    isBigScreen: boolean;
+}
 export interface PlaceType {
     placeTitle: string;
     placeSummary: string;
@@ -44,23 +40,23 @@ export interface PlaceType {
     imgLink: string;
 }
 
-export interface PlaceDetailProps {
+interface DetailProps {
     imgLink?: string;
-    placeTitle: string;
-    placeDescription: string;
     numberOfStars?: number;
-    address: string;
-    toggleOpenReview?: any;
     isBigScreen?: boolean;
 }
-export interface ReviewProps {
-    imgLink?: string;
+export interface PlaceDetailProps extends DetailProps {
+    placeTitle: string;
+    placeDescription: string;
+    address: string;
+    toggleOpenReview?: any;
+}
+export interface ReviewProps extends DetailProps {
     user: string;
     reviewText: string;
-    numberOfStars?: number;
-    isBigScreen?: boolean;
 }
 export interface AlternativeItemProps {
     title: string;
+    isBigScreen: boolean;
     description: string;
 }

@@ -6,14 +6,15 @@ import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
 import usePlanTab from "@/hooks/usePlanTab";
 import { FolderSmallProps } from "./PlanTabTypes";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const FolderSmall = (props: FolderSmallProps) => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [openFullTab, setOpenFullTab] = useState(false);
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-    const isBigScreen = screen.width >= 1000;
-    const displayNum = isBigScreen ? 3 : 2;
+
+    const displayNum = 3;
 
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
@@ -22,17 +23,19 @@ const FolderSmall = (props: FolderSmallProps) => {
     useEffect(() => {
         setOpenedTab(`tab${currentView}`);
         console.log("fulltab");
-        if (isBigScreen && !props.openFullTab) {
+        if (props.isBigScreen && !props.openFullTab) {
             setTabsClass(classes.tabs);
-        } else if (!isBigScreen && !props.openFullTab) {
+        } else if (!props.isBigScreen && !props.openFullTab) {
             setTabsClass(classes.mobileTabs);
-        } else if (!isBigScreen && props.openFullTab) {
+        } else if (!props.isBigScreen && props.openFullTab) {
             setTabsClass(classes.fullMobileTabs);
+        } else {
+            setTabsClass(classes.tabs);
         }
     }, [openFullTab, currentView]);
 
     return (
-        <>
+        <div className="-translate-y-4">
             <div
                 className={
                     tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
@@ -109,7 +112,7 @@ const FolderSmall = (props: FolderSmallProps) => {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 export default FolderSmall;

@@ -18,6 +18,7 @@ import PlaceDetail from "@/components/PlanTab/PlaceDetail";
 import SideBar from "@/components/PlanTab/SideBar";
 import FullScreenPlan from "@/components/PlanTab/FullScreenPlan";
 import Alternative from "@/components/PlanTab/Alternative";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 export default function map() {
     const {
@@ -38,13 +39,10 @@ export default function map() {
         openAlternatives,
         toggleOpenAlternative,
     } = useMap();
-    const [isBigScreen, setIsBigScreen] = useState(false);
-    useEffect(() => {
-        setIsBigScreen(screen.width >= 1000);
-    }, []);
+    const isBigScreen = useMediaQuery("(min-width:1024px)");
 
     return (
-        <div className="h-[40rem] w-[100vw] overflow-hidden">
+        <div className="h-[90vh] w-[100vw] overflow-hidden">
             <div
                 className={
                     isBigScreen
@@ -96,6 +94,11 @@ export default function map() {
                                 />
                             </div>
                         )}
+                        {!openReview && openAlternatives && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 ">
+                                <Alternative isBigScreen={false} />
+                            </div>
+                        )}
                     </div>
                 )}
 
@@ -137,7 +140,7 @@ export default function map() {
 
                         <div className="col-span-8 w-full h-[100%]">
                             {openReview && (
-                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed ">
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
                                     <PlaceDetail
                                         placeTitle={reviewData.placeTitle}
                                         address={reviewData.address}
@@ -150,9 +153,9 @@ export default function map() {
                                 </div>
                             )}
 
-                            {!openReview && openAlternatives && (
-                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0">
-                                    <Alternative />
+                            {!openReview && openAlternatives && isBigScreen && (
+                                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
+                                    <Alternative isBigScreen={isBigScreen} />
                                 </div>
                             )}
                         </div>
