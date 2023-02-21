@@ -29,6 +29,9 @@ export interface PlanGraphProps {
     clickable: boolean;
     openAlternatives: any;
 }
+export interface AlternativeCardProps {
+    isBigScreen: boolean;
+}
 export interface PlaceType {
     placeTitle: string;
     placeSummary: string;
@@ -54,5 +57,6 @@ export interface ReviewProps extends DetailProps {
 }
 export interface AlternativeItemProps {
     title: string;
+    isBigScreen: boolean;
     description: string;
 }

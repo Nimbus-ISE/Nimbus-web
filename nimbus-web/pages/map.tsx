@@ -42,7 +42,7 @@ export default function map() {
     const isBigScreen = useMediaQuery("(min-width:1024px)");
 
     return (
-        <div className="h-[40rem] w-[100vw] overflow-hidden">
+        <div className="h-[90vh] w-[100vw] overflow-hidden">
             <div
                 className={
                     isBigScreen
@@ -92,6 +92,11 @@ export default function map() {
                                     openFullTab={openFullTab}
                                     closeFullTab={closeFullTab}
                                 />
+                            </div>
+                        )}
+                        {!openReview && openAlternatives && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 ">
+                                <Alternative isBigScreen={false} />
                             </div>
                         )}
                     </div>
@@ -148,9 +153,9 @@ export default function map() {
                                 </div>
                             )}
 
-                            {!openReview && openAlternatives && (
+                            {!openReview && openAlternatives && isBigScreen && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
-                                    <Alternative />
+                                    <Alternative isBigScreen={isBigScreen} />
                                 </div>
                             )}
                         </div>
