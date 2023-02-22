@@ -1,19 +1,21 @@
 import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { AlternativeItemProps } from "./PlanTabTypes";
+import { AlternativeItemProps } from "../PlanTabTypes";
+import { getPlanTabState } from "../PlanTabContext";
 
-const AlternativeItem = (props: AlternativeItemProps) => {
+const AlternativeItem = (props: any) => {
+    const { isBigScreen }: any = getPlanTabState();
     return (
         <div
             className={
-                props.isBigScreen
+                isBigScreen
                     ? "flex flex-col m-4 place-items-center gap-2"
                     : "flex flex-col  place-items-center gap-2"
             }
         >
             <div
                 className={
-                    props.isBigScreen
+                    isBigScreen
                         ? "bg-sky-300 h-[17.5vw] w-[17.5vw] rounded-full"
                         : "bg-sky-300 h-[25vw] w-[25vw] rounded-full"
                 }
