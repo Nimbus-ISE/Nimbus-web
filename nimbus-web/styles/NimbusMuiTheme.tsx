@@ -1,17 +1,20 @@
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material";
+
+const nimbusBlue = "#40E0D0";
+const nimbusLightBlue = "#A2ECE8";
 
 export const nimbusTheme = createTheme({
     palette: {
         primary: {
-            main: "#40E0D0",
-            dark: "#40E0D0",
+            main: nimbusBlue,
+            dark: nimbusBlue,
         },
         error: {
             main: "#e57373",
             dark: "#e57373",
         },
         secondary: {
-            main: "#A2ECE8",
+            main: nimbusLightBlue,
             light: "#FFF",
         },
     },
@@ -25,8 +28,16 @@ export const nimbusTheme = createTheme({
                     props: { variant: "outlined" },
                     style: {
                         borderColor: "#000",
+                        backgroundColor: "#FFF",
                         color: "#000",
                         borderWidth: "2px",
+                    },
+                },
+                {
+                    props: { variant: "filled" },
+                    style: {
+                        border: "2px solid",
+                        borderColor: nimbusLightBlue,
                     },
                 },
             ],
