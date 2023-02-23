@@ -88,3 +88,7 @@ export const TagsStyles = {
     margin: "3px",
     borderRadius: "12px",
 };
+
+export const BudgetStyles = {
+    shrink: "false",
+};

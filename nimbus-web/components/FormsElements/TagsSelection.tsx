@@ -1,6 +1,6 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 
 const tags = [
