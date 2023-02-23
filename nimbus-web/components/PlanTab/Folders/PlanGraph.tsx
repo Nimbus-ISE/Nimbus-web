@@ -1,6 +1,9 @@
 import EditIcon from "@mui/icons-material/Edit";
-import { PlanGraphProps, PlaceType } from "./PlanTabTypes";
+import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const PlanGraph = (props: PlanGraphProps) => {
+    const dispatch: any = getPlanTabDispatch();
+    const { openFullTab }: any = getPlanTabState();
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
@@ -18,10 +21,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     : "h-28 w-28 rounded-full shadow"
                             }
                             onMouseDown={() => {
-                                props.toggleOpenReview({
-                                    placeTitle: place.placeTitle,
-                                    placeDescription: place.placeDescription,
-                                    address: place.address,
+                                dispatch({
+                                    type: "TOGGLE_PLACE_DETAILS",
+                                    payload: {
+                                        placeTitle: place.placeTitle,
+                                        placeDescription:
+                                            place.placeDescription,
+                                        address: place.address,
+                                    },
                                 });
                             }}
                         />
@@ -32,10 +39,12 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         {place.placeTitle}
                                     </div>
                                 )}
-                                {props.openFullTab && (
+                                {!openFullTab && (
                                     <button
                                         onClick={() => {
-                                            props.openAlternatives();
+                                            dispatch({
+                                                type: "TOGGLE_ALTERNATIVES",
+                                            });
                                         }}
                                     >
                                         <EditIcon />

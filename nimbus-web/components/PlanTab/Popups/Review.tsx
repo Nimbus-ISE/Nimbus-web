@@ -1,17 +1,19 @@
 import React from "react";
-import { ReviewProps } from "./PlanTabTypes";
+import { ReviewProps } from "../PlanTabTypes";
+import { getPlanTabState } from "../PlanTabContext";
 
 const Review = (props: ReviewProps) => {
+    const { isBigScreen }: any = getPlanTabState();
     return (
         <>
             <div
                 className={
-                    props.isBigScreen
+                    isBigScreen
                         ? "col-span-12 border-4 border-[#e6e6d6] rounded-full h-32 flex gap-4 items-center p-6"
                         : "col-span-12  w-[80vw]  flex gap-4 items-center pt-2 "
                 }
             >
-                {props.isBigScreen && (
+                {isBigScreen && (
                     <div className="rounded-full bg-slate-500 w-20 h-20"></div>
                 )}
                 <div className="flex flex-col gap-2 ">
@@ -24,7 +26,7 @@ const Review = (props: ReviewProps) => {
 
                     <div
                         className={
-                            props.isBigScreen
+                            isBigScreen
                                 ? "text-xs w-96 "
                                 : "text-[0.6rem] w-[70vw] "
                         }

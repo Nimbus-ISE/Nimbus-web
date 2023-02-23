@@ -1,23 +1,28 @@
 import Review from "./Review";
 import React from "react";
-import { PlaceDetailProps } from "./PlanTabTypes";
+import { PlaceDetailProps } from "../PlanTabTypes";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
+    const { isBigScreen }: any = getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
     return (
         <>
             <div
                 className={
-                    props.isBigScreen
+                    isBigScreen
                         ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[57%] z-50 cursor-pointer"
                         : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer "
                 }
-                onMouseDown={props.toggleOpenReview}
+                onMouseDown={() => {
+                    dispatch({ type: "TOGGLE_PLACE_DETAILS" });
+                }}
             >
                 <div className="ml-4">x</div>
             </div>
             <div
                 className={
-                    props.isBigScreen
+                    isBigScreen
                         ? "bg-white rounded-xl h-[70%] w-[50%] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
                         : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-1/2 left-1/3 transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in"
                 }
@@ -25,7 +30,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 <div className="grid grid-cols-12 p-6 gap-6 ">
                     <div
                         className={
-                            props.isBigScreen
+                            isBigScreen
                                 ? "rounded-xl border-2 bg-blue-100 col-span-7 h-48 "
                                 : "rounded-xl border-2 bg-blue-100 col-span-12 h-48  "
                         }
@@ -39,7 +44,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         <div className="text-xs">{props.address}</div>
                         <div
                             className={
-                                props.isBigScreen
+                                isBigScreen
                                     ? "w-full h-12 bg-yellow-300"
                                     : "w-[15rem] h-12 bg-yellow-300"
                             }
@@ -53,17 +58,14 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
-                        isBigScreen={props.isBigScreen}
                     />
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
-                        isBigScreen={props.isBigScreen}
                     />
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
-                        isBigScreen={props.isBigScreen}
                     />
                 </div>
             </div>

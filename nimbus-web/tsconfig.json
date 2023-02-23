@@ -23,7 +23,9 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
-        "test_data/testData.ts"
+        "test_data/testData.ts",
+        "components/PlanTab/PlanTabContext.tsx",
+        "components/PlanTab/PlanTabContext.tss"
     ],
     "exclude": ["node_modules"]
 }

@@ -14,11 +14,16 @@ import Map, {
 import Pin from "@/components/Pin";
 import polyline from "@mapbox/polyline";
 import useMap from "@/hooks/useMap";
-import PlaceDetail from "@/components/PlanTab/PlaceDetail";
-import SideBar from "@/components/PlanTab/SideBar";
-import FullScreenPlan from "@/components/PlanTab/FullScreenPlan";
-import Alternative from "@/components/PlanTab/Alternative";
+import PlaceDetail from "@/components/PlanTab/Popups/PlaceDetail";
+import SideBar from "@/components/PlanTab/Folders/SideBar";
+import FullScreenPlan from "@/components/PlanTab/Folders/FullScreenPlan";
+import Alternative from "@/components/PlanTab/Popups/Alternative";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import {
+    PlanTabProvider,
+    getPlanTabDispatch,
+    getPlanTabState,
+} from "@/components/PlanTab/PlanTabContext";
 
 export default function map() {
     const {
@@ -29,17 +34,25 @@ export default function map() {
         geojson,
         layerStyle,
         pinState,
-        openTab,
-        closeFullTab,
-        closed,
+    } = useMap();
+
+    const {
+        isBigScreen,
         openFullTab,
         openReview,
-        toggleOpenReview,
-        reviewData,
         openAlternatives,
-        toggleOpenAlternative,
-    } = useMap();
-    const isBigScreen = useMediaQuery("(min-width:1024px)");
+        reviewData,
+    }: any = getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
+    const screenSize = useMediaQuery("(min-width:1000px)");
+
+    useEffect(() => {
+        dispatch({
+            type: "SET_SCREEN_SIZE",
+            payload: screenSize,
+        });
+        console.log(screenSize);
+    }, [screenSize]);
 
     return (
         <div className="h-[90vh] w-[100vw] overflow-hidden">
@@ -72,10 +85,6 @@ export default function map() {
                                                 placeDescription={
                                                     reviewData.placeDescription
                                                 }
-                                                toggleOpenReview={
-                                                    toggleOpenReview
-                                                }
-                                                isBigScreen={isBigScreen}
                                             />
                                         </div>
                                     )}
@@ -84,19 +93,12 @@ export default function map() {
                         )}
                         {openFullTab && (
                             <div>
-                                <SideBar
-                                    isBigScreen={isBigScreen}
-                                    toggleOpenReview={toggleOpenReview}
-                                    openTab={openTab}
-                                    openAlternatives={toggleOpenAlternative}
-                                    openFullTab={openFullTab}
-                                    closeFullTab={closeFullTab}
-                                />
+                                <SideBar />
                             </div>
                         )}
                         {!openReview && openAlternatives && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 ">
-                                <Alternative isBigScreen={false} />
+                                <Alternative />
                             </div>
                         )}
                     </div>
@@ -104,32 +106,16 @@ export default function map() {
 
                 {!openFullTab && !isBigScreen && (
                     <div className="-translate-y-16">
-                        <SideBar
-                            isBigScreen={isBigScreen}
-                            toggleOpenReview={toggleOpenReview}
-                            openTab={openTab}
-                            openAlternatives={toggleOpenAlternative}
-                        />
+                        <SideBar isBigScreen={isBigScreen} />
                     </div>
                 )}
 
-                {openFullTab && !closed && isBigScreen && (
-                    <FullScreenPlan
-                        openFullTab={openFullTab}
-                        closeFullTab={closeFullTab}
-                        openAlternatives={toggleOpenAlternative}
-                        isBigScreen={isBigScreen}
-                    />
-                )}
+                {openFullTab && !closed && isBigScreen && <FullScreenPlan />}
 
                 {!openFullTab && isBigScreen && (
                     <>
-                        <SideBar
-                            isBigScreen={isBigScreen}
-                            toggleOpenReview={toggleOpenReview}
-                            openTab={openTab}
-                            openAlternatives={toggleOpenAlternative}
-                        />
+                        <SideBar isBigScreen={isBigScreen} />
+
                         <div
                             className={
                                 "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
@@ -147,15 +133,13 @@ export default function map() {
                                         placeDescription={
                                             reviewData.placeDescription
                                         }
-                                        toggleOpenReview={toggleOpenReview}
-                                        isBigScreen={isBigScreen}
                                     />
                                 </div>
                             )}
 
                             {!openReview && openAlternatives && isBigScreen && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
-                                    <Alternative isBigScreen={isBigScreen} />
+                                    <Alternative />
                                 </div>
                             )}
                         </div>

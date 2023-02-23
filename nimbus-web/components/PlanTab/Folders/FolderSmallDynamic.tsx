@@ -5,15 +5,14 @@ import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
 import usePlanTab from "@/hooks/usePlanTab";
-import { FolderSmallProps } from "./PlanTabTypes";
-import useMediaQuery from "@/hooks/useMediaQuery";
 
-const FolderSmall = (props: FolderSmallProps) => {
+import { getPlanTabState } from "../PlanTabContext";
+
+const FolderSmall = () => {
     const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
-    const [openFullTab, setOpenFullTab] = useState(false);
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-
+    const { openFullTab, isBigScreen }: any = getPlanTabState();
     const displayNum = 3;
 
     const toggleTabs = (tab: string) => {
@@ -23,11 +22,11 @@ const FolderSmall = (props: FolderSmallProps) => {
     useEffect(() => {
         setOpenedTab(`tab${currentView}`);
         console.log("fulltab");
-        if (props.isBigScreen && !props.openFullTab) {
+        if (isBigScreen && !openFullTab) {
             setTabsClass(classes.tabs);
-        } else if (!props.isBigScreen && !props.openFullTab) {
+        } else if (!isBigScreen && openFullTab) {
             setTabsClass(classes.mobileTabs);
-        } else if (!props.isBigScreen && props.openFullTab) {
+        } else if (!isBigScreen && openFullTab) {
             setTabsClass(classes.fullMobileTabs);
         } else {
             setTabsClass(classes.tabs);
@@ -74,15 +73,8 @@ const FolderSmall = (props: FolderSmallProps) => {
                                         <div className={classes.tab}>
                                             <PlanGraph
                                                 clickable={true}
-                                                toggleOpenReview={
-                                                    props.toggleOpenReview
-                                                }
                                                 dayNumber={index + 1}
                                                 places={[...day]}
-                                                openAlternatives={
-                                                    props.openAlternatives
-                                                }
-                                                openFullTab={true}
                                             />
                                         </div>
                                     )}
