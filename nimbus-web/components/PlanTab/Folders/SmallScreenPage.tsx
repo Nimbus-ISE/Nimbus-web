@@ -1,16 +1,17 @@
 import React from "react";
 import { getPlanTabState } from "../PlanTabContext";
-import FullScreenPlan from "./FullScreenPlan";
+
 import Alternative from "../Popups/Alternative";
 import PlaceDetail from "../Popups/PlaceDetail";
 import SideBar from "./SideBar";
+import FullScreenPlan from "./FullScreenPlan";
 
 const SmallScreenPage = () => {
     const {
         openFullTab,
         openAlternatives,
         openReview,
-        isBigScreen,
+
         reviewData,
     }: any = getPlanTabState();
     return (

@@ -2,27 +2,33 @@ import React from "react";
 import FolderFullDynamic from "./FolderFullDynamic";
 import { testData } from "@/test_data/testData";
 import usePlanTab from "@/hooks/usePlanTab";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FullScreenPlan = () => {
-    const { currentView, incrementView, decrementView } = usePlanTab();
+    const { currentFolderView }: any = getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
     return (
         <>
-            <FolderFullDynamic currentView={currentView} />
+            <FolderFullDynamic />
             {testData.length > 3 && (
                 <div className="absolute top-0 right-0 w-[8.5rem] h-16  ">
                     <div className="grid  w-[8.5rem] h-16 place-items-center items-center">
                         <div className="text-center">
                             <button
                                 className="text-blue-500 font-extrabold"
-                                onClick={decrementView}
+                                onClick={() => {
+                                    dispatch({ type: "DECREMENT_FOLDER" });
+                                }}
                             >
                                 {" "}
                                 {"<<"}
                             </button>{" "}
-                            Day {currentView + 1}-{currentView + 3}{" "}
+                            Day {currentFolderView + 1}-{currentFolderView + 3}{" "}
                             <button
                                 className="text-blue-500 font-extrabold"
-                                onClick={incrementView}
+                                onClick={() => {
+                                    dispatch({ type: "INCREMENT_FOLDER" });
+                                }}
                             >
                                 {" "}
                                 {">>"}

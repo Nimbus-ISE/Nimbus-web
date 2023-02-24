@@ -4,15 +4,15 @@ import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
-import usePlanTab from "@/hooks/usePlanTab";
 
-import { getPlanTabState } from "../PlanTabContext";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderSmall = () => {
-    const { currentView, incrementView, decrementView } = usePlanTab();
     const [opendedTab, setOpenedTab] = useState("");
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-    const { openFullTab, isBigScreen }: any = getPlanTabState();
+    const { openFullTab, isBigScreen, currentFolderView }: any =
+        getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
 
     const toggleTabs = (tab: string) => {
@@ -20,21 +20,21 @@ const FolderSmall = () => {
     };
 
     useEffect(() => {
-        setOpenedTab(`tab${currentView}`);
+        setOpenedTab(`tab${currentFolderView}`);
         console.log("fulltab");
         if (isBigScreen && !openFullTab) {
             setTabsClass(classes.tabs);
-        } else if (!isBigScreen && openFullTab) {
+        } else if (!isBigScreen && !openFullTab) {
             setTabsClass(classes.mobileTabs);
         } else if (!isBigScreen && openFullTab) {
             setTabsClass(classes.fullMobileTabs);
         } else {
             setTabsClass(classes.tabs);
         }
-    }, [openFullTab, currentView]);
+    }, [openFullTab, currentFolderView]);
 
     return (
-        <div className="-translate-y-4">
+        <div className="-translate-y-4 ">
             <div
                 className={
                     tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
@@ -43,8 +43,8 @@ const FolderSmall = () => {
                 <div className={tabsClass}>
                     {testData.map((day, index) => {
                         if (
-                            index >= currentView &&
-                            index < currentView + displayNum
+                            index >= currentFolderView &&
+                            index < currentFolderView + displayNum
                         )
                             return (
                                 <>
@@ -88,7 +88,9 @@ const FolderSmall = () => {
                             <label
                                 htmlFor={`arrow`}
                                 className={classes.arrowLabel}
-                                onMouseDown={decrementView}
+                                onMouseDown={() => {
+                                    dispatch({ type: "DECREMENT_FOLDER" });
+                                }}
                             >
                                 {"<<"}
                             </label>
@@ -96,7 +98,9 @@ const FolderSmall = () => {
                             <label
                                 htmlFor={`arrow`}
                                 className={classes.arrowLabel}
-                                onMouseDown={incrementView}
+                                onMouseDown={() => {
+                                    dispatch({ type: "INCREMENT_FOLDER" });
+                                }}
                             >
                                 {">>"}
                             </label>

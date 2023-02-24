@@ -21,14 +21,16 @@ const SideBar = () => {
                 </button>
             )}
             {!isBigScreen && !openFullTab && (
-                <button
-                    className="absolute bg-white  p-2 z-10 top-[40%] left-[90%] font-extrabold text-2xl"
+                <div
+                    className="absolute bg-black top-12 left-[90vw] z-10 w-12 h-12 text-white text-center font-extrabold text-2xl rounded-full cursor-pointer"
                     onClick={() => {
+                        console.log("hello");
+
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}
                 >
                     {"∧"}
-                </button>
+                </div>
             )}
             {!isBigScreen && openFullTab && (
                 <button

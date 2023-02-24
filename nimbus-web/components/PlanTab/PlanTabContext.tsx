@@ -11,6 +11,7 @@ interface PlanTabContextStateType {
     openReview: false;
     reviewData: reviewDataType;
     openAlternatives: boolean;
+    currentFolderView: number;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -57,6 +58,26 @@ function reducer(state: PlanTabContextStateType, action: any) {
         case "TOGGLE_ALTERNATIVES": {
             return { ...state, openAlternatives: !state.openAlternatives };
         }
+        case "INCREMENT_FOLDER": {
+            if (state.currentFolderView < 2) {
+                return {
+                    ...state,
+                    currentFolderView: state.currentFolderView + 1,
+                };
+            } else {
+                return state;
+            }
+        }
+        case "DECREMENT_FOLDER": {
+            if (state.currentFolderView > 0) {
+                return {
+                    ...state,
+                    currentFolderView: state.currentFolderView - 1,
+                };
+            } else {
+                return state;
+            }
+        }
         default: {
             console.log("error");
             break;
@@ -71,6 +92,7 @@ const initialState: PlanTabContextStateType = {
     openReview: false,
     reviewData: {} as reviewDataType,
     openAlternatives: false,
+    currentFolderView: 0,
 };
 
 const PlanTabContext = createContext(null);

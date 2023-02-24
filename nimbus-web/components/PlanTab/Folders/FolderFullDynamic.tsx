@@ -5,9 +5,10 @@ import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
 import { FolderFullProps } from "../PlanTabTypes";
-import { getPlanTabDispatch } from "../PlanTabContext";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
+    const { currentFolderView }: any = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>
@@ -15,7 +16,7 @@ const FolderFull = (props: FolderFullProps) => {
                 <div className={classes.tabs}>
                     <label htmlFor="tabone" className={classes.checkedLabel}>
                         Day{" "}
-                        {capitalizeFirst(numberToWords(props.currentView + 1))}
+                        {capitalizeFirst(numberToWords(currentFolderView + 1))}
                     </label>
                     <div className={classes.tab}>
                         <div
@@ -25,8 +26,8 @@ const FolderFull = (props: FolderFullProps) => {
                         >
                             {testData.map((data, index) => {
                                 if (
-                                    index >= props.currentView &&
-                                    index < props.currentView + 3
+                                    index >= currentFolderView &&
+                                    index < currentFolderView + 3
                                 ) {
                                     return (
                                         <div className="h-[40rem] overflow-y-scroll overflow-x-hidden scrollbar-hide p-2 ">
@@ -53,8 +54,8 @@ const FolderFull = (props: FolderFullProps) => {
 
                     {testData.map((data, index) => {
                         if (
-                            index > props.currentView &&
-                            index < props.currentView + 3
+                            index > currentFolderView &&
+                            index < currentFolderView + 3
                         ) {
                             return (
                                 <label
