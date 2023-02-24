@@ -33,7 +33,7 @@ export default function map() {
         pinState,
     } = useMap();
 
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const screenSize = useMediaQuery("(min-width:1000px)");
 

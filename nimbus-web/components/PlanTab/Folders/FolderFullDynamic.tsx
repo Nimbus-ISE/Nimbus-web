@@ -8,7 +8,7 @@ import { FolderFullProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
-    const { currentFolderView }: any = getPlanTabState();
+    const { currentFolderView } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>

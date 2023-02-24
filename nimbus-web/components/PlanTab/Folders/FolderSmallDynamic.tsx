@@ -10,8 +10,7 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const FolderSmall = () => {
     const [opendedTab, setOpenedTab] = useState("");
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-    const { openFullTab, isBigScreen, currentFolderView }: any =
-        getPlanTabState();
+    const { openFullTab, isBigScreen, currentFolderView } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
 

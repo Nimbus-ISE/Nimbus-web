@@ -4,7 +4,7 @@ import { PlaceDetailProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>

@@ -95,7 +95,9 @@ const initialState: PlanTabContextStateType = {
     currentFolderView: 0,
 };
 
-const PlanTabContext = createContext(null);
+const PlanTabContext = createContext(
+    null as unknown as PlanTabContextStateType
+);
 const PlanTabDisptachContext = createContext(null);
 
 export function getPlanTabState() {

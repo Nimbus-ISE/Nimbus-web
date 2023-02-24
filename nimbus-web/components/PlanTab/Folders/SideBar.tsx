@@ -6,7 +6,7 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab, isBigScreen }: any = getPlanTabState();
+    const { openFullTab, isBigScreen } = getPlanTabState();
     return (
         <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic />

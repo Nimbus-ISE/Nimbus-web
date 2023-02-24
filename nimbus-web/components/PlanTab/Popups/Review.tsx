@@ -4,7 +4,7 @@ import { getPlanTabState } from "../PlanTabContext";
 import { useMediaQuery } from "@mui/material";
 
 const Review = (props: ReviewProps) => {
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
     const showImg = useMediaQuery("(min-width:1110px)");
     return (
         <>

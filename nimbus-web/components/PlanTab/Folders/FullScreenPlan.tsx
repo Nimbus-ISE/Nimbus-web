@@ -5,7 +5,7 @@ import usePlanTab from "@/hooks/usePlanTab";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FullScreenPlan = () => {
-    const { currentFolderView }: any = getPlanTabState();
+    const { currentFolderView } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>

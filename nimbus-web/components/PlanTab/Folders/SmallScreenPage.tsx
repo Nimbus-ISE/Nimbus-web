@@ -7,13 +7,8 @@ import SideBar from "./SideBar";
 import FullScreenPlan from "./FullScreenPlan";
 
 const SmallScreenPage = () => {
-    const {
-        openFullTab,
-        openAlternatives,
-        openReview,
-
-        reviewData,
-    }: any = getPlanTabState();
+    const { openFullTab, openAlternatives, openReview, reviewData } =
+        getPlanTabState();
     return (
         <div>
             {!openFullTab && (

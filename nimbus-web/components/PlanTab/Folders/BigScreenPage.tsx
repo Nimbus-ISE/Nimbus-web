@@ -12,7 +12,7 @@ const BigScreenPage = () => {
         openReview,
         isBigScreen,
         reviewData,
-    }: any = getPlanTabState();
+    } = getPlanTabState();
     return (
         <>
             {openFullTab && !closed && <FullScreenPlan />}
