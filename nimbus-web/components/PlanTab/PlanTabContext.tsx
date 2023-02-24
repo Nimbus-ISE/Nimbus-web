@@ -1,12 +1,19 @@
-import useMediaQuery from "@/hooks/useMediaQuery";
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 interface reviewDataType {
     placeTitle: string;
     address: string;
     placeDescription: string;
 }
+interface PlanTabContextStateType {
+    isBigScreen: boolean;
+    openFullTab: boolean;
+    closed: boolean;
+    openReview: false;
+    reviewData: reviewDataType;
+    openAlternatives: boolean;
+}
 
-function reducer(state: any, action: any) {
+function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
@@ -57,7 +64,7 @@ function reducer(state: any, action: any) {
     }
 }
 
-const initialState = {
+const initialState: PlanTabContextStateType = {
     isBigScreen: true,
     openFullTab: false,
     closed: true,
@@ -68,6 +75,7 @@ const initialState = {
 
 const PlanTabContext = createContext(null);
 const PlanTabDisptachContext = createContext(null);
+
 export function getPlanTabState() {
     return useContext(PlanTabContext);
 }
@@ -75,7 +83,10 @@ export function getPlanTabDispatch() {
     return useContext(PlanTabDisptachContext);
 }
 export function PlanTabProvider({ children }: any) {
-    const [state, dispatch]: [any, any] = useReducer(reducer, initialState);
+    const [state, dispatch]: [any, any] = useReducer(
+        reducer as any,
+        initialState
+    );
     return (
         <PlanTabContext.Provider value={state}>
             <PlanTabDisptachContext.Provider value={dispatch}>

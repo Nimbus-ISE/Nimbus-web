@@ -4,13 +4,13 @@ import FolderSmallDynamic from "./FolderSmallDynamic";
 
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
-const SideBar = (props: any) => {
+const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab }: any = getPlanTabState();
+    const { openFullTab, isBigScreen }: any = getPlanTabState();
     return (
         <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic />
-            {props.isBigScreen && (
+            {isBigScreen && (
                 <button
                     className="absolute bg-white top-[35vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
                     onClick={() => {
@@ -20,7 +20,7 @@ const SideBar = (props: any) => {
                     {">"}
                 </button>
             )}
-            {!props.isBigScreen && !openFullTab && (
+            {!isBigScreen && !openFullTab && (
                 <button
                     className="absolute bg-white  p-2 z-10 top-[40%] left-[90%] font-extrabold text-2xl"
                     onClick={() => {
@@ -30,7 +30,7 @@ const SideBar = (props: any) => {
                     {"∧"}
                 </button>
             )}
-            {!props.isBigScreen && openFullTab && (
+            {!isBigScreen && openFullTab && (
                 <button
                     className="absolute bg-white  p-2 z-10 top-[10%] left-[90%] font-extrabold text-2xl animate-slide-in"
                     onClick={() => {

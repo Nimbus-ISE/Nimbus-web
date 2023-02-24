@@ -18,7 +18,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     dispatch({ type: "TOGGLE_PLACE_DETAILS" });
                 }}
             >
-                <div className="ml-4">x</div>
+                <div className="ml-4 text-center">x</div>
             </div>
             <div
                 className={
@@ -28,15 +28,18 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 }
             >
                 <div className="grid grid-cols-12 p-6 gap-6 ">
-                    <div
+                    {/* <div
                         className={
                             isBigScreen
-                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-48 "
-                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-48  "
+                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-40 "
+                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-40"
                         }
-                    >
-                        Image
-                    </div>
+                    > */}
+                    <img
+                        src="/images/ThorsWell.jpg"
+                        className="rounded-xl border-2 bg-blue-100 col-span-7 "
+                    />
+                    {/* </div> */}
                     <div className="flex col-span-5 flex-col gap-2">
                         <div className="text-2xl font-extrabold">
                             {props.placeTitle}
