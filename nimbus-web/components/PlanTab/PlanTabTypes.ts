@@ -1,37 +1,17 @@
 import { ReactElement } from "react";
-interface FolderProps {
-    openFullTab?: any;
-    openAlternatives: any;
-    isBigScreen?: boolean;
-    toggleOpenReview?: any;
-}
 
-export interface FolderFullProps extends FolderProps {
-    expand: boolean;
+export interface FolderFullProps {
     children?: ReactElement;
     onClose?: any;
     currentView: number;
 }
-export interface FullScreenProps extends FolderProps {
-    closeFullTab: any;
-}
-export interface FolderSmallProps extends FolderProps {}
-export interface SideBarProps extends FolderProps {
-    openTab: any;
-    openFullTab?: boolean;
-    closeFullTab?: any;
-}
+
 export interface PlanGraphProps {
-    openFullTab: boolean;
     places: Array<PlaceType>;
     dayNumber: number;
-    toggleOpenReview?: any;
     clickable: boolean;
-    openAlternatives: any;
 }
-export interface AlternativeCardProps {
-    isBigScreen: boolean;
-}
+
 export interface PlaceType {
     placeTitle: string;
     placeSummary: string;
@@ -43,13 +23,11 @@ export interface PlaceType {
 interface DetailProps {
     imgLink?: string;
     numberOfStars?: number;
-    isBigScreen?: boolean;
 }
 export interface PlaceDetailProps extends DetailProps {
     placeTitle: string;
     placeDescription: string;
     address: string;
-    toggleOpenReview?: any;
 }
 export interface ReviewProps extends DetailProps {
     user: string;
@@ -57,6 +35,5 @@ export interface ReviewProps extends DetailProps {
 }
 export interface AlternativeItemProps {
     title: string;
-    isBigScreen: boolean;
     description: string;
 }
