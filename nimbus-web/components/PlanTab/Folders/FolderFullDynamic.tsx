@@ -4,9 +4,11 @@ import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
-import { FolderFullProps } from "./PlanTabTypes";
+import { FolderFullProps } from "../PlanTabTypes";
+import { getPlanTabDispatch } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
+    const dispatch: any = getPlanTabDispatch();
     return (
         <>
             <>
@@ -32,10 +34,6 @@ const FolderFull = (props: FolderFullProps) => {
                                                 clickable={false}
                                                 dayNumber={index + 1}
                                                 places={[...data]}
-                                                openAlternatives={
-                                                    props.openAlternatives
-                                                }
-                                                openFullTab={false}
                                             />
                                         </div>
                                     );
@@ -44,7 +42,9 @@ const FolderFull = (props: FolderFullProps) => {
 
                             <button
                                 className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[20%] "
-                                onClick={props.onClose}
+                                onClick={() => {
+                                    dispatch({ type: "CLOSE_FULL_FOLDER" });
+                                }}
                             >
                                 {"X"}
                             </button>
