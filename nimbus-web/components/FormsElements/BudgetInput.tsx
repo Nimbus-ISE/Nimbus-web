@@ -1,11 +1,10 @@
 import * as React from "react";
 import { NumericFormat } from "react-number-format";
 
-const budgetClass =
-    "budget-input w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-gray-100 hover:opacity-70";
-
-const budgetInvalid =
-    "budget-input-invalid w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-gray-100 hover:opacity-70";
+const budgetClassName =
+    "w-full text-l h-14 bg-gray-100 shadow-md appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-gray-100 hover:opacity-70";
+const budgetValid = "budget-input " + budgetClassName;
+const budgetInvalid = "budget-input-invalid " + budgetClassName;
 
 const BudgetInput = (props: any) => {
     const [value, setValue] = React.useState<number>();
@@ -25,15 +24,15 @@ const BudgetInput = (props: any) => {
     return (
         <>
             <NumericFormat
-                id={"budget_input"}
                 onValueChange={handleValueChange}
                 thousandSeparator={true}
-                className={isValid ? budgetClass : budgetInvalid}
+                decimalScale={0}
+                className={isValid ? budgetValid : budgetInvalid}
                 placeholder="Enter your budget"
                 allowNegative={false}
             />
             <span className={isValid ? "help-block" : "help-block-invalid"}>
-                Please enter a budget between 100 to 1,000,000 Baht.
+                Please enter a budget between 100 and 1,000,000 Baht.
             </span>
         </>
     );

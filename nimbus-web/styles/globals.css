@@ -116,7 +116,7 @@
     background-image: var(--svg-bahtIcon);
     background-repeat: no-repeat;
     background-size: 30px 30px;
-    background-position: 7px 60%;
+    background-position: 7px 62%;
     padding-left: 40px;
     transition: border 300ms, background-image 300ms;
     margin: 3px;
@@ -132,7 +132,7 @@
     background-image: var(--svg-bahtIcon-red);
     background-repeat: no-repeat;
     background-size: 30px 30px;
-    background-position: 7px 60%;
+    background-position: 7px 62%;
     padding-left: 40px;
     transition: border 300ms, background-image 300ms;
     margin: 3px;
@@ -146,7 +146,7 @@
 .help-block-invalid {
     margin-left: 3px;
     color: var(--nimbus-light-red);
-    font-size: 14px;
+    font-size: 12px;
 }
 
 /* For hiding number input arrows in Chrome, Safari, Edge, Opera */

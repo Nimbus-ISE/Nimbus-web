@@ -2,6 +2,8 @@ import { createTheme } from "@mui/material";
 
 const nimbusBlue = "#40E0D0";
 const nimbusLightBlue = "#A2ECE8";
+const nimbusLightGray = "rgb(243 244 246);";
+const nimbusGray = "rgb(107 114 128)";
 
 export const nimbusTheme = createTheme({
     palette: {
@@ -14,6 +16,14 @@ export const nimbusTheme = createTheme({
             dark: "#e57373",
         },
         secondary: {
+            main: nimbusLightBlue,
+            light: "#FFF",
+        },
+        info: {
+            main: nimbusLightGray,
+            light: "#FFF",
+        },
+        success: {
             main: nimbusLightBlue,
             light: "#FFF",
         },
@@ -34,10 +44,40 @@ export const nimbusTheme = createTheme({
                     },
                 },
                 {
+                    props: { variant: "outlined", color: "secondary" },
+                    style: {
+                        borderColor: nimbusLightGray,
+                        backgroundColor: nimbusLightGray,
+                        color: nimbusGray,
+                        borderWidth: "2px",
+                    },
+                },
+                {
                     props: { variant: "filled" },
                     style: {
                         border: "2px solid",
                         borderColor: nimbusLightBlue,
+                    },
+                },
+                {
+                    props: { variant: "filled", color: "info" },
+                    style: {
+                        borderColor: nimbusLightGray,
+                        backgroundColor: nimbusLightGray,
+                        color: nimbusGray,
+                        borderWidth: "2px",
+                    },
+                },
+                {
+                    props: { variant: "filled", color: "success" },
+                    style: {
+                        borderColor: nimbusLightBlue,
+                        backgroundColor: nimbusLightBlue,
+                        color: "#000",
+                        borderWidth: "2px",
+                        "&:hover": {
+                            backgroundColor: nimbusLightBlue,
+                        },
                     },
                 },
             ],
@@ -47,6 +87,8 @@ export const nimbusTheme = createTheme({
 
 export const datePickerStyles = {
     width: 175,
+    boxShadow:
+        "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // tailwind shadow-md
     "& fieldset": {
         borderColor: "rgb(243 244 246)",
         borderWidth: "2px",
@@ -91,4 +133,12 @@ export const TagsStyles = {
 
 export const BudgetStyles = {
     shrink: "false",
+};
+
+export const distanceStyles = {
+    margin: "10px",
+    borderRadius: "12px",
+    width: "180px",
+    height: "200px",
+    fontSize: "16px",
 };

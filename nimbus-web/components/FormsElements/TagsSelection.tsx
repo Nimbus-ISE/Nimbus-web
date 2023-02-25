@@ -55,7 +55,12 @@ const TagsSelection = () => {
                                 key={data}
                                 label={data}
                                 onClick={handleClick(data)}
-                                color="secondary"
+                                // className="shadow-md"
+                                color={
+                                    selectTag.indexOf(data) > -1
+                                        ? "primary"
+                                        : "secondary"
+                                }
                                 sx={TagsStyles}
                                 variant={
                                     selectTag.indexOf(data) > -1

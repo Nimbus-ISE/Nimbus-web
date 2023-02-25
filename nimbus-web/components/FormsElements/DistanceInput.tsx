@@ -3,43 +3,58 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
 import { ThemeProvider } from "@mui/material";
-import { nimbusTheme, TripTypeStyles } from "../../styles/NimbusMuiTheme";
+import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
+import DirectionsWalkRoundedIcon from "@mui/icons-material/DirectionsWalkRounded";
+import TimeToLeaveRoundedIcon from "@mui/icons-material/TimeToLeaveRounded";
+import DirectionsRailwayRoundedIcon from "@mui/icons-material/DirectionsRailwayRounded";
 
-interface IProps {
-    value: string;
-}
+const choices = ["Close", "Medium", "Far"];
 
-const DistanceInput = (props: IProps) => {
+const DistanceInput = () => {
     const [tripDistance, setTripDistance] = React.useState<string>("");
 
     const handleChange = (event: SelectChangeEvent) => {
         setTripDistance(event.target.value);
     };
 
+    const handleClick = (choice: string) => () => {
+        console.log(choice);
+        setTripDistance(choice);
+    };
+
     return (
-        <ThemeProvider theme={nimbusTheme}>
-            <div className="flex flex-wrap justify-evenly mx-auto">
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label" shrink={false}>
-                        {tripDistance == "" && "Select distance"}
-                    </InputLabel>
-                    <Select
-                        labelId="Type"
-                        id="Type"
-                        value={tripDistance}
-                        label="Select trip type"
-                        onChange={handleChange}
-                        className="select bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white w-60"
-                        sx={TripTypeStyles}
-                    >
-                        <MenuItem value={"Close"}>Close</MenuItem>
-                        <MenuItem value={"Medium"}>Medium</MenuItem>
-                        <MenuItem value={"Far"}>Far</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
-        </ThemeProvider>
+        <>
+            <ThemeProvider theme={nimbusTheme}>
+                <div className="flex flex-initial flex-wrap justify-center">
+                    {choices.map((data) => {
+                        return (
+                            <Chip
+                                icon={
+                                    data === "Close" ? (
+                                        <DirectionsWalkRoundedIcon />
+                                    ) : data === "Medium" ? (
+                                        <TimeToLeaveRoundedIcon />
+                                    ) : (
+                                        <DirectionsRailwayRoundedIcon />
+                                    )
+                                }
+                                key={data}
+                                label={data}
+                                className={"shadow-md distance-" + data}
+                                onClick={handleClick(data)}
+                                color={
+                                    data === tripDistance ? "success" : "info"
+                                }
+                                sx={distanceStyles}
+                                variant="filled"
+                            />
+                        );
+                    })}
+                </div>
+            </ThemeProvider>
+        </>
     );
 };
 

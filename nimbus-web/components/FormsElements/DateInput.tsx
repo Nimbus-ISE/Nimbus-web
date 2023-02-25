@@ -17,8 +17,8 @@ const DateInput = (props: any) => {
 
     return (
         <ThemeProvider theme={nimbusTheme}>
-            <div className="flex flex-wrap justify-evenly mx-auto">
-                <div className="start-date my-2">
+            <div className="flex flex-wrap justify-center mx-auto">
+                <div className="start-date my-2 mx-3">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             value={startDate}
@@ -39,7 +39,7 @@ const DateInput = (props: any) => {
                         />
                     </LocalizationProvider>
                 </div>
-                <div className="end-date my-2">
+                <div className="end-date my-2 mx-3">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="End Date"
