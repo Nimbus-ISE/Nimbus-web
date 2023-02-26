@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof DistanceInput>;
 
 const Template: ComponentStory<typeof DistanceInput> = (args) => (
-    <DistanceInput {...args} />
+    <DistanceInput />
 );
 
 export const Distance = Template.bind({});
