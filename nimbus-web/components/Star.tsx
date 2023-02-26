@@ -7,16 +7,16 @@ interface IProps {
 
 const Star = ({ size, percent }: IProps) => {
     return (
-        <div className={`relative ${size}`}>
+        <div className={`relative ${size} drop-shadow-sm`}>
             <div className="absolute left-0 right-0 top-0 bottom-0 z-10">
                 <div
                     style={{
                         width: percent,
                     }}
-                    className="h-full overflow-hidden"
+                    className={`${size} overflow-hidden`}
                 >
                     <svg
-                        className={`${size} fill-yellow-500 opacity-100`}
+                        className={`${size} fill-yellow-400 opacity-100`}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 576 512"
                     >
@@ -25,7 +25,7 @@ const Star = ({ size, percent }: IProps) => {
                 </div>
             </div>
             <svg
-                className={`absolute left-0 right-0 top-0 bottom-0 fill-neutral-500 ${size}`}
+                className={`absolute left-0 right-0 top-0 bottom-0 fill-neutral-400 ${size}`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
             >
