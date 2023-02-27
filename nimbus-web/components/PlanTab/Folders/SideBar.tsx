@@ -22,7 +22,7 @@ const SideBar = () => {
             )}
             {!isBigScreen && !openFullTab && (
                 <div
-                    className="absolute bg-black top-12 left-[90vw] z-10 w-12 h-12 text-white text-center font-extrabold text-2xl rounded-full cursor-pointer"
+                    className="absolute bg-black top-12 left-[88vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded-full cursor-pointer"
                     onClick={() => {
                         console.log("hello");
 

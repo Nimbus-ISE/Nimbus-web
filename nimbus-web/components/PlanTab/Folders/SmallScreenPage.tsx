@@ -14,13 +14,10 @@ const SmallScreenPage = () => {
             {!openFullTab && (
                 <>
                     <div className="h-[70vh]">
-                        <div
-                            className={
-                                "bg-rose-400 w-[100%] h-[100%] text-[10rem] "
-                            }
-                        >
-                            MAP
-                        </div>
+                        <img
+                            src="/images/map_placeholder.webp"
+                            className=" w-[100%] h-[110vh]  col-span-8"
+                        />
                         <div>
                             {openReview && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">

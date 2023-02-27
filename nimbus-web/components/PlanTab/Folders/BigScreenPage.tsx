@@ -20,14 +20,17 @@ const BigScreenPage = () => {
                 <>
                     <SideBar />
 
-                    <div
+                    {/* <div
                         className={
                             "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
                         }
                     >
                         MAP
-                    </div>
-
+                    </div> */}
+                    <img
+                        src="/images/map_placeholder.webp"
+                        className=" w-[100%] h-[110vh]  col-span-8"
+                    />
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
