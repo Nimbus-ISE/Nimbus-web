@@ -9,14 +9,17 @@
     animation: cardStretch;
     animation-duration: 1s;
     overflow: hidden;
+    padding-right: 66.6666667%;
 }
 
 .tabs .tab {
     order: 99;
     width: 100%;
     display: block;
-    background-color: #fff;
-    scrollbar-width: none;
+    padding: 1rem;
+    background: #fff;
+    overflow-y: scroll;
+    height: 100vh;
 }
 .tab::-webkit-scrollbar {
     display: none;
@@ -38,11 +41,12 @@
 }
 .checkedLabel {
     order: 1;
-    width: 30%;
+    width: 18%;
     display: block;
-    padding: 0.25rem;
+    padding: 0.5vw;
     margin-right: 0.2rem;
     font-weight: bold;
+    font-size: smaller;
     transition: background ease 0.2s;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -50,6 +54,8 @@
     color: black;
     animation-name: tabStretch;
     animation: 2s ease-in;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
     height: 2rem;
 }
 
@@ -99,10 +105,10 @@
 
 @keyframes cardStretch {
     0% {
-        padding-right: 70%;
+        padding-right: 0%;
     }
     100% {
-        padding-right: 0%;
+        padding-right: 66.6666667%;
     }
 }
 

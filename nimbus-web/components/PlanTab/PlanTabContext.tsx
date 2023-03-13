@@ -1,12 +1,21 @@
-import useMediaQuery from "@/hooks/useMediaQuery";
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 interface reviewDataType {
     placeTitle: string;
     address: string;
     placeDescription: string;
 }
+interface PlanTabContextStateType {
+    isBigScreen: boolean;
+    openFullTab: boolean;
+    closed: boolean;
+    openReview: false;
+    reviewData: reviewDataType;
+    openAlternatives: boolean;
+    currentFolderView: number;
+    isClosingFullFolder: boolean;
+}
 
-function reducer(state: any, action: any) {
+function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
@@ -18,6 +27,13 @@ function reducer(state: any, action: any) {
                 closed: false,
                 openAlternatives: false,
                 openReview: false,
+                isClosingFullFolder: false,
+            };
+        case "ANIMATE_CLOSING_FOLDER":
+            return {
+                ...state,
+
+                isClosingFullFolder: true,
             };
         case "CLOSE_FULL_FOLDER":
             return {
@@ -26,6 +42,7 @@ function reducer(state: any, action: any) {
                 closed: true,
                 openAlternatives: false,
                 openReview: false,
+                isClosingFullFolder: false,
             };
         case "TOGGLE_ALTERNATIVES":
             return {
@@ -50,6 +67,26 @@ function reducer(state: any, action: any) {
         case "TOGGLE_ALTERNATIVES": {
             return { ...state, openAlternatives: !state.openAlternatives };
         }
+        case "INCREMENT_FOLDER": {
+            if (state.currentFolderView < 2) {
+                return {
+                    ...state,
+                    currentFolderView: state.currentFolderView + 1,
+                };
+            } else {
+                return state;
+            }
+        }
+        case "DECREMENT_FOLDER": {
+            if (state.currentFolderView > 0) {
+                return {
+                    ...state,
+                    currentFolderView: state.currentFolderView - 1,
+                };
+            } else {
+                return state;
+            }
+        }
         default: {
             console.log("error");
             break;
@@ -57,17 +94,22 @@ function reducer(state: any, action: any) {
     }
 }
 
-const initialState = {
+const initialState: PlanTabContextStateType = {
     isBigScreen: true,
     openFullTab: false,
     closed: true,
     openReview: false,
     reviewData: {} as reviewDataType,
     openAlternatives: false,
+    currentFolderView: 0,
+    isClosingFullFolder: false,
 };
 
-const PlanTabContext = createContext(null);
+const PlanTabContext = createContext(
+    null as unknown as PlanTabContextStateType
+);
 const PlanTabDisptachContext = createContext(null);
+
 export function getPlanTabState() {
     return useContext(PlanTabContext);
 }
@@ -75,7 +117,10 @@ export function getPlanTabDispatch() {
     return useContext(PlanTabDisptachContext);
 }
 export function PlanTabProvider({ children }: any) {
-    const [state, dispatch]: [any, any] = useReducer(reducer, initialState);
+    const [state, dispatch]: [any, any] = useReducer(
+        reducer as any,
+        initialState
+    );
     return (
         <PlanTabContext.Provider value={state}>
             <PlanTabDisptachContext.Provider value={dispatch}>

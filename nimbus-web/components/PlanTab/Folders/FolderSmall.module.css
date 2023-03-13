@@ -82,7 +82,6 @@
     height: 2rem;
     display: block;
     padding: 0.5vw;
-
     margin-right: 0.2rem;
     cursor: pointer;
     font-size: smaller;
@@ -98,7 +97,7 @@
     order: 1;
     margin-left: 1vw;
     margin-right: 1vw;
-    margin-top: 10px;
+    transform: translateY(-32px);
     width: 1vw;
     height: 3rem;
     color: black;

@@ -1,9 +1,11 @@
 import React from "react";
 import { ReviewProps } from "../PlanTabTypes";
 import { getPlanTabState } from "../PlanTabContext";
+import { useMediaQuery } from "@mui/material";
 
 const Review = (props: ReviewProps) => {
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
+    const showImg = useMediaQuery("(min-width:1110px)");
     return (
         <>
             <div
@@ -13,8 +15,13 @@ const Review = (props: ReviewProps) => {
                         : "col-span-12  w-[80vw]  flex gap-4 items-center pt-2 "
                 }
             >
-                {isBigScreen && (
-                    <div className="rounded-full bg-slate-500 w-20 h-20"></div>
+                {isBigScreen && showImg && (
+                    // <div className="rounded-full bg-slate-500 w-[7vw] h-[7vw]"></div>
+                    <img
+                        src="images/guest.jpg"
+                        alt="pfp"
+                        className="rounded-full bg-slate-500 w-[7vw] h-[7vw]"
+                    />
                 )}
                 <div className="flex flex-col gap-2 ">
                     <div className="flex gap-4 items-center">

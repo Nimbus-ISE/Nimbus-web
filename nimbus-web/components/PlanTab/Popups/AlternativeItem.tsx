@@ -2,6 +2,7 @@ import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { AlternativeItemProps } from "../PlanTabTypes";
 import { getPlanTabState } from "../PlanTabContext";
+import Star from "@/components/Star";
 
 const AlternativeItem = (props: any) => {
     const { isBigScreen }: any = getPlanTabState();
