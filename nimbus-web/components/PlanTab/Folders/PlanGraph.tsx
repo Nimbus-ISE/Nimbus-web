@@ -3,7 +3,7 @@ import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab } = getPlanTabState();
+    const { openFullTab, isClosingFullFolder } = getPlanTabState();
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
@@ -39,7 +39,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         {place.placeTitle}
                                     </div>
                                 )}
-                                {!openFullTab && (
+                                {(!openFullTab || isClosingFullFolder) && (
                                     <button
                                         onClick={() => {
                                             dispatch({

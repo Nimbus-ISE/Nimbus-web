@@ -17,7 +17,15 @@ const SideBar = () => {
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}
                 >
-                    {">"}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        version="1.1"
+                        width="10"
+                        height="100"
+                        className="rotate-180"
+                    >
+                        <polygon points="0,50 100,0 100,100" />
+                    </svg>
                 </button>
             )}
             {!isBigScreen && !openFullTab && (

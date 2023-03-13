@@ -12,6 +12,7 @@ interface PlanTabContextStateType {
     reviewData: reviewDataType;
     openAlternatives: boolean;
     currentFolderView: number;
+    isClosingFullFolder: boolean;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -26,6 +27,13 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 closed: false,
                 openAlternatives: false,
                 openReview: false,
+                isClosingFullFolder: false,
+            };
+        case "ANIMATE_CLOSING_FOLDER":
+            return {
+                ...state,
+
+                isClosingFullFolder: true,
             };
         case "CLOSE_FULL_FOLDER":
             return {
@@ -34,6 +42,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 closed: true,
                 openAlternatives: false,
                 openReview: false,
+                isClosingFullFolder: false,
             };
         case "TOGGLE_ALTERNATIVES":
             return {
@@ -93,6 +102,7 @@ const initialState: PlanTabContextStateType = {
     reviewData: {} as reviewDataType,
     openAlternatives: false,
     currentFolderView: 0,
+    isClosingFullFolder: false,
 };
 
 const PlanTabContext = createContext(

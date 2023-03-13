@@ -91,7 +91,14 @@ const FolderSmall = () => {
                                     dispatch({ type: "DECREMENT_FOLDER" });
                                 }}
                             >
-                                {"<<"}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    version="1.1"
+                                    width="20"
+                                    height="100"
+                                >
+                                    <polygon points="0,50 100,0 100,100" />
+                                </svg>
                             </label>
                             <input type="radio" name="tabs" id={`arrow`} />
                             <label
@@ -101,7 +108,15 @@ const FolderSmall = () => {
                                     dispatch({ type: "INCREMENT_FOLDER" });
                                 }}
                             >
-                                {">>"}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    version="1.1"
+                                    width="20"
+                                    height="100"
+                                    className="rotate-180"
+                                >
+                                    <polygon points="0,50 100,0 100,100" />
+                                </svg>
                             </label>
                         </>
                     )}

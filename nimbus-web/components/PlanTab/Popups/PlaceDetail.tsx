@@ -1,6 +1,7 @@
 import Review from "./Review";
 import React from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
+import Star from "@/components/Star";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
@@ -47,12 +48,10 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         <div className="text-xs">{props.address}</div>
                         <div
                             className={
-                                isBigScreen
-                                    ? "w-full h-12 bg-yellow-300"
-                                    : "w-[15rem] h-12 bg-yellow-300"
+                                isBigScreen ? "w-full h-12" : "w-[15rem] h-12 "
                             }
                         >
-                            Stars
+                            <Star size="h-10" percent="100" />
                         </div>
                     </div>
                     <div className="text-[0.6rem] col-span-12">
