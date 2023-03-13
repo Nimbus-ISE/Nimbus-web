@@ -1,6 +1,6 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 
 const tags = [
@@ -55,7 +55,12 @@ const TagsSelection = () => {
                                 key={data}
                                 label={data}
                                 onClick={handleClick(data)}
-                                color="secondary"
+                                // className="shadow-md"
+                                color={
+                                    selectTag.indexOf(data) > -1
+                                        ? "primary"
+                                        : "secondary"
+                                }
                                 sx={TagsStyles}
                                 variant={
                                     selectTag.indexOf(data) > -1

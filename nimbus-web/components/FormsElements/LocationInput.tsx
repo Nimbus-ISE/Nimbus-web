@@ -20,7 +20,7 @@ const iconPlaceHolder = (
 const LocationInput = (props: any) => {
     return (
         <input
-            className="loc-input w-full text-l h-14 bg-gray-100 appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-white hover:opacity-70"
+            className="loc-input w-full text-l h-14 bg-gray-100 shadow-md appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-gray-100 hover:opacity-70"
             type="text"
             placeholder="Enter Location of Interest"
         />

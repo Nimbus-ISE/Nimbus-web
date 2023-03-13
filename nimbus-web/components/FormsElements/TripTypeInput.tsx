@@ -3,40 +3,49 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { createTheme, ThemeProvider } from "@mui/material";
-import { nimbusTheme, TripTypeStyles } from "../../styles/NimbusMuiTheme";
+import Chip from "@mui/material/Chip";
+import { ThemeProvider } from "@mui/material";
+import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
+import HikingIcon from "@mui/icons-material/Hiking";
+import NightlifeIcon from "@mui/icons-material/Nightlife";
 
 interface IProps {
     value: string;
 }
 
+const tripTypes = ["Hangout", "Travel"];
+
 const TripTypeInput = (props: IProps) => {
     const [tripType, setTripType] = React.useState<string>("");
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setTripType(event.target.value);
+    const handleClick = (choice: string) => () => {
+        console.log(choice);
+        setTripType(choice);
     };
 
     return (
         <ThemeProvider theme={nimbusTheme}>
-            <div className="flex flex-wrap justify-evenly mx-auto">
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label" shrink={false}>
-                        {tripType == "" && "Select trip type"}
-                    </InputLabel>
-                    <Select
-                        labelId="Type"
-                        id="Type"
-                        value={tripType}
-                        label="Select trip type"
-                        onChange={handleChange}
-                        className="select bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white w-60"
-                        sx={TripTypeStyles}
-                    >
-                        <MenuItem value={"hangout"}>Hangout</MenuItem>
-                        <MenuItem value={"travel"}>Travel</MenuItem>
-                    </Select>
-                </FormControl>
+            <div className="flex flex-initial flex-wrap justify-center">
+                {tripTypes.map((data) => {
+                    return (
+                        <Chip
+                            icon={
+                                data === "Travel" ? (
+                                    <HikingIcon />
+                                ) : (
+                                    <NightlifeIcon />
+                                )
+                            }
+                            key={data}
+                            label={data}
+                            className={"shadow-md distance-" + data}
+                            onClick={handleClick(data)}
+                            color={data === tripType ? "success" : "info"}
+                            sx={distanceStyles}
+                            variant="filled"
+                        />
+                    );
+                })}
             </div>
         </ThemeProvider>
     );
