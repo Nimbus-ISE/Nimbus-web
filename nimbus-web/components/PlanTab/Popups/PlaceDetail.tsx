@@ -51,7 +51,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 isBigScreen ? "w-full h-12" : "w-[15rem] h-12 "
                             }
                         >
-                            <Star size="h-10" percent="100" />
+                            {/* <Star size="h-10" percent="100" /> */}
                         </div>
                     </div>
                     <div className="text-[0.6rem] col-span-12">
