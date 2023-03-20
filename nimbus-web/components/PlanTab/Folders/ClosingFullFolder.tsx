@@ -1,16 +1,15 @@
 import React from "react";
 import classes from "./ClosingFullFolder.module.css";
-import { ReactElement } from "react";
 
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
-import { FolderFullProps } from "../PlanTabTypes";
-import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+
+import { getPlanTabState } from "../PlanTabContext";
 const ClosingFullFolder = () => {
     const { currentFolderView } = getPlanTabState();
-    const dispatch: any = getPlanTabDispatch();
+
     return (
         <>
             <>
@@ -63,6 +62,7 @@ const ClosingFullFolder = () => {
                         }
                     })}
                 </div>
+
                 <img
                     src="/images/map_placeholder.webp"
                     className=" absolute z-[-100] right-0 top-0 h-[110vh] w-[66.6666666667vw]"

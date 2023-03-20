@@ -63,45 +63,55 @@ export default function map() {
                     {isBigScreen && <BigScreenPage />}
 
                     {/* {!openFullTab && (
-        <Map
-            ref={mapRef}
-            initialViewState={{
-                longitude: 100.5018,
-                latitude: 13.7563,
-                zoom: 10,
-            }}
-            style={{ gridColumnStart: 5, gridColumnEnd: "span 12" }}
-            mapboxAccessToken={
-                "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
-            }
-            mapStyle="mapbox://styles/mapbox/streets-v12"
-        >
-            {Object.keys(points).map((key: string, index: number) => {
-                return (
-                    <Marker
-                        longitude={points[key].coordinates.lng}
-                        latitude={points[key].coordinates.lat}
-                        anchor="bottom"
-                        onClick={(e) => {
-                            togglePinState(index);
-                            onSelect(
-                                points[key].coordinates.lng,
-                                points[key].coordinates.lat
-                            );
-                            e.originalEvent.stopPropagation();
-                        }}
-                    >
-                        <Pin fill={pinState[index]} />
-                    </Marker>
-                );
-            }, [])}
+                        <Map
+                            ref={mapRef}
+                            initialViewState={{
+                                longitude: 100.5018,
+                                latitude: 13.7563,
+                                zoom: 10,
+                            }}
+                            style={{
+                                gridColumnStart: 5,
+                                gridColumnEnd: "span 12",
+                            }}
+                            mapboxAccessToken={
+                                "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
+                            }
+                            mapStyle="mapbox://styles/mapbox/streets-v12"
+                        >
+                            {Object.keys(points).map(
+                                (key: string, index: number) => {
+                                    return (
+                                        <Marker
+                                            longitude={
+                                                points[key].coordinates.lng
+                                            }
+                                            latitude={
+                                                points[key].coordinates.lat
+                                            }
+                                            anchor="bottom"
+                                            onClick={(e) => {
+                                                togglePinState(index);
+                                                onSelect(
+                                                    points[key].coordinates.lng,
+                                                    points[key].coordinates.lat
+                                                );
+                                                e.originalEvent.stopPropagation();
+                                            }}
+                                        >
+                                            <Pin fill={pinState[index]} />
+                                        </Marker>
+                                    );
+                                },
+                                []
+                            )}
 
-            <ScaleControl />
-            <Source id="my-data" type="geojson" data={geojson}>
-                <Layer {...layerStyle} />
-            </Source>
-        </Map>
-    )} */}
+                            <ScaleControl />
+                            <Source id="my-data" type="geojson" data={geojson}>
+                                <Layer {...layerStyle} />
+                            </Source>
+                        </Map>
+                    )} */}
                 </div>
             </div>
         </>
