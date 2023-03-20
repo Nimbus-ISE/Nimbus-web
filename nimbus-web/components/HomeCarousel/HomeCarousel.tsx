@@ -107,7 +107,7 @@ const HomeCarousel = () => {
                     marginTop: isLargerThanMedium ? undefined : 30,
                     marginBottom: paragraphSize.height,
                 }}
-                className="m-auto z-10"
+                className="m-auto z-[11]"
             >
                 <button
                     onClick={() => router.push("/plan")}

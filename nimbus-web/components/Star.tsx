@@ -1,22 +1,34 @@
 import React from "react";
 
 interface IProps {
-    size: string;
+    size: number;
     percent: string;
 }
 
 const Star = ({ size, percent }: IProps) => {
     return (
-        <div className={`relative ${size} drop-shadow-sm`}>
-            <div className="absolute left-0 right-0 top-0 bottom-0 z-10">
+        <div
+            style={{
+                width: size,
+                height: size,
+            }}
+            className={`relative drop-shadow-sm`}
+        >
+            <div
+                className={`absolute left-0 right-0 top-0 bottom-0 w-full h-full z-10`}
+            >
                 <div
                     style={{
                         width: percent,
                     }}
-                    className={`${size} overflow-hidden`}
+                    className={`overflow-hidden opacity-100`}
                 >
                     <svg
-                        className={`${size} fill-yellow-400 opacity-100`}
+                        style={{
+                            width: size,
+                            height: size,
+                        }}
+                        className={`fill-yellow-400`}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 576 512"
                     >
@@ -25,7 +37,11 @@ const Star = ({ size, percent }: IProps) => {
                 </div>
             </div>
             <svg
-                className={`absolute left-0 right-0 top-0 bottom-0 fill-neutral-400 ${size}`}
+                style={{
+                    width: size,
+                    height: size,
+                }}
+                className={`fill-neutral-400`}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 576 512"
             >
