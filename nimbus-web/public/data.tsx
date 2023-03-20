@@ -6,7 +6,7 @@ export const places = [
         city: "Oregon",
         link: "https://oregonisforadventure.com/thors-well/",
         image: "/images/ThorsWell.jpg",
-        tags: ["#ocean", "#waterfall", "#usa"],
+        tags: ["#ocean", "#waterfall", "#usa", "#water"],
     },
     {
         placeName: "Sagittarius A",
@@ -20,7 +20,7 @@ export const places = [
         city: "Umbria",
         link: "https://www.reschio.com/",
         image: "/images/db11.jpg",
-        tags: ["#italy", "#castle", "#history"],
+        tags: ["#italy", "#castle", "#history", "#fields", "#Europe"],
     },
     {
         placeName: "Thor's Well",
