@@ -34,7 +34,7 @@ const FullScreenPlan = () => {
                             {/* Day {currentFolderView + 1}-{currentFolderView + 3}{" "} */}
 
                             <button
-                                className="text-blue-500 font-extrabold -translate-y-8 ml-4"
+                                className="text-blue-500 font-extrabold -translate-y-8 ml-10"
                                 onClick={() => {
                                     dispatch({ type: "INCREMENT_FOLDER" });
                                 }}
