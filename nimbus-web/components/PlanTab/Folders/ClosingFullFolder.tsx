@@ -63,10 +63,10 @@ const ClosingFullFolder = () => {
                     })}
                 </div>
 
-                <img
+                {/* <img
                     src="/images/map_placeholder.webp"
                     className=" absolute z-[-100] right-0 top-0 h-[110vh] w-[66.6666666667vw]"
-                />
+                /> */}
             </>
         </>
     );
