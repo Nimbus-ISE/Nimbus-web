@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getPlanTabState } from "../PlanTabContext";
 import Map, {
     Marker,
@@ -33,10 +33,10 @@ const SmallScreenPage = () => {
         getPlanTabState();
     return (
         <div>
-            {!openFullTab && (
+            {/* {!openFullTab && (
                 <>
                     <div className="h-[70vh] -z-10">
-                        {/* {!openFullTab && (
+                        {!openFullTab && (
                             <Map
                                 ref={mapRef}
                                 initialViewState={{
@@ -96,7 +96,7 @@ const SmallScreenPage = () => {
                                     <Layer {...layerStyle} />
                                 </Source>
                             </Map>
-                        )} */}
+                        )}
                         <div>
                             {openReview && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
@@ -115,7 +115,7 @@ const SmallScreenPage = () => {
                         <SideBar />
                     </div>
                 </>
-            )}
+            )} */}
             {openFullTab && (
                 <div>
                     <SideBar />
