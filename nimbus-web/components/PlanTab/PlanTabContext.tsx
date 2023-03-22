@@ -13,10 +13,14 @@ interface PlanTabContextStateType {
     openAlternatives: boolean;
     currentFolderView: number;
     isClosingFullFolder: boolean;
+    fullPlan: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
+        case "SET_FULL_PLAN": {
+            return { ...state, fullPlan: action.payload };
+        }
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
         }
@@ -103,6 +107,7 @@ const initialState: PlanTabContextStateType = {
     openAlternatives: false,
     currentFolderView: 0,
     isClosingFullFolder: false,
+    fullPlan: [],
 };
 
 const PlanTabContext = createContext(

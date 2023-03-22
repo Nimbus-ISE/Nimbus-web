@@ -6,13 +6,14 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import ClosingFullFolder from "./ClosingFullFolder";
 
 const FullScreenPlan = () => {
-    const { currentFolderView, isClosingFullFolder } = getPlanTabState();
+    const { currentFolderView, isClosingFullFolder, fullPlan } =
+        getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>
             {!isClosingFullFolder && <FolderFullDynamic />}
             {isClosingFullFolder && <ClosingFullFolder />}
-            {testData.length > 3 && !isClosingFullFolder && (
+            {fullPlan.length > 3 && !isClosingFullFolder && (
                 <div className="absolute top-0 right-0 w-[8.5rem] h-16  ">
                     <div className="grid  w-[8.5rem] h-16 place-items-center items-center ">
                         <div className="text-center">

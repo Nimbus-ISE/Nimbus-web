@@ -12,7 +12,7 @@ export interface PlanGraphProps {
 }
 
 export interface PlaceType {
-    placeTitle: string;
+    name: string;
     placeSummary: string;
     placeDescription: string;
     address: string;

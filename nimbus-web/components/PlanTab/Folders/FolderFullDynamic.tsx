@@ -8,7 +8,7 @@ import { FolderFullProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
-    const { currentFolderView } = getPlanTabState();
+    const { currentFolderView, fullPlan } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>
@@ -24,7 +24,7 @@ const FolderFull = (props: FolderFullProps) => {
                                 "flex w-full gap-20 animate-graph-expand"
                             }
                         >
-                            {testData.map((data, index) => {
+                            {fullPlan.map((data: any, index: any) => {
                                 if (
                                     index >= currentFolderView &&
                                     index < currentFolderView + 3
@@ -57,7 +57,7 @@ const FolderFull = (props: FolderFullProps) => {
                         </div>
                     </div>
 
-                    {testData.map((data, index) => {
+                    {fullPlan.map((data: any, index: any) => {
                         if (
                             index > currentFolderView &&
                             index < currentFolderView + 3

@@ -24,7 +24,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 dispatch({
                                     type: "TOGGLE_PLACE_DETAILS",
                                     payload: {
-                                        placeTitle: place.placeTitle,
+                                        placeTitle: place.name,
                                         placeDescription:
                                             place.placeDescription,
                                         address: place.address,
@@ -34,9 +34,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                         />
                         <div className="flex flex-col">
                             <div className="flex gap-4">
-                                {place.placeTitle.length < 20 && (
+                                {place?.name?.length < 20 && (
                                     <div className="text-2xl font-extrabold">
-                                        {place.placeTitle}
+                                        {place.name}
+                                    </div>
+                                )}
+                                {place?.name?.length >= 20 && (
+                                    <div className="text-[16px] font-bold">
+                                        {place.name}
                                     </div>
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
@@ -51,11 +56,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     </button>
                                 )}
                             </div>
-                            {place.placeTitle.length > 20 && (
-                                <div className="text-[16px] font-extrabold">
-                                    {place.placeTitle}
-                                </div>
-                            )}
+
                             <div className="w-64 text-[10px]">
                                 {place.placeSummary}
                             </div>
