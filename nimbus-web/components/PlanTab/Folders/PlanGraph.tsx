@@ -4,6 +4,8 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder } = getPlanTabState();
+    console.log(props.places);
+
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
@@ -57,8 +59,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 )}
                             </div>
 
-                            <div className="w-64 text-[10px]">
-                                {place.placeSummary}
+                            <div className="w-64 text-[12px]">
+                                opening hours:{" "}
+                                {place["opening hours"][0] + " am "}-
+                                {" " + place["opening hours"][1] + " pm"}
                             </div>
                         </div>
                     </div>
