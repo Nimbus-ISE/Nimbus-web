@@ -14,6 +14,7 @@ export interface PlanGraphProps {
 export interface PlaceType {
     name: string;
     "opening hours": string;
+    durationH: string;
     placeDescription: string;
     address: string;
     imgLink: string;

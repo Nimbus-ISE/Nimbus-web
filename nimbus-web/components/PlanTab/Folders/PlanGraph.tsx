@@ -64,6 +64,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 {place["opening hours"][0] + " am "}-
                                 {" " + place["opening hours"][1] + " pm"}
                             </div>
+                            <div className="w-64 text-[12px]">
+                                Estimate Time of Activty:{" "}
+                                {`${Number(place.durationH).toFixed(1)} hrs`}
+                            </div>
                         </div>
                     </div>
 
