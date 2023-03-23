@@ -13,7 +13,7 @@ export const places = [
         city: "Milky Way",
         link: "https://www.agoda.com/",
         image: "/images/BlackHole.jpg",
-        tags: ["#attraction", "#long-stay"],
+        tags: ["#attraction", "#fun", "#long-stay"],
     },
     {
         placeName: "Castello Di Reschio",
@@ -34,7 +34,7 @@ export const places = [
         city: "Milky Way",
         link: "https://www.agoda.com/",
         image: "/images/BlackHole.jpg",
-        tags: ["#attraction", "#long-stay"],
+        tags: ["#attraction", "#longstay"],
     },
     {
         placeName: "Castello Di Reschio",
@@ -42,5 +42,19 @@ export const places = [
         link: "https://www.reschio.com/",
         image: "/images/db11.jpg",
         tags: ["#italy", "#castle", "#history"],
+    },
+    {
+        placeName: "Castello Di Reschio",
+        city: "Umbria",
+        link: "https://www.reschio.com/",
+        image: "/images/db11.jpg",
+        tags: ["#italy"],
+    },
+    {
+        placeName: "Sagittarius A",
+        city: "Milky Way",
+        link: "https://www.agoda.com/",
+        image: "/images/BlackHole.jpg",
+        tags: ["#attraction", "#spaghetti"],
     },
 ];

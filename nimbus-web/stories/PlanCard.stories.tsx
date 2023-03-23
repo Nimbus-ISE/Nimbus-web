@@ -1,4 +1,4 @@
-import PlanCard from "@/components/PlanCard";
+import PlanCard from "@/components/Cards/PlanCard";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
