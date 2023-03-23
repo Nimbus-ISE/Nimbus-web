@@ -10,4 +10,4 @@ const Template: ComponentStory<typeof Star> = (args) => <Star {...args} />;
 
 export const Primary = Template.bind({});
 
-Primary.args = { size: "w-52 h-52", percent: "50%" };
+Primary.args = { size: 96, percent: "50%" };

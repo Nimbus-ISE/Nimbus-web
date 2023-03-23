@@ -1,15 +1,15 @@
-import { ReactElement } from "react";
-import classes from "./FolderFull.module.css";
+import React from "react";
+import classes from "./ClosingFullFolder.module.css";
+
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { testData } from "@/test_data/testData";
-import { FolderFullProps } from "../PlanTabTypes";
-import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
-const FolderFull = (props: FolderFullProps) => {
+import { getPlanTabState } from "../PlanTabContext";
+const ClosingFullFolder = () => {
     const { currentFolderView } = getPlanTabState();
-    const dispatch: any = getPlanTabDispatch();
+
     return (
         <>
             <>
@@ -27,7 +27,7 @@ const FolderFull = (props: FolderFullProps) => {
                             {testData.map((data, index) => {
                                 if (
                                     index >= currentFolderView &&
-                                    index < currentFolderView + 3
+                                    index < currentFolderView + 1
                                 ) {
                                     return (
                                         <div className="h-[40rem] overflow-y-scroll overflow-x-hidden scrollbar-hide p-2 ">
@@ -40,20 +40,6 @@ const FolderFull = (props: FolderFullProps) => {
                                     );
                                 }
                             })}
-
-                            <button
-                                className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[20%] "
-                                onClick={() => {
-                                    dispatch({
-                                        type: "ANIMATE_CLOSING_FOLDER",
-                                    });
-                                    setTimeout(() => {
-                                        dispatch({ type: "CLOSE_FULL_FOLDER" });
-                                    }, 1100);
-                                }}
-                            >
-                                {"X"}
-                            </button>
                         </div>
                     </div>
 
@@ -76,8 +62,14 @@ const FolderFull = (props: FolderFullProps) => {
                         }
                     })}
                 </div>
+
+                {/* <img
+                    src="/images/map_placeholder.webp"
+                    className=" absolute z-[-100] right-0 top-0 h-[110vh] w-[66.6666666667vw]"
+                /> */}
             </>
         </>
     );
 };
-export default FolderFull;
+
+export default ClosingFullFolder;

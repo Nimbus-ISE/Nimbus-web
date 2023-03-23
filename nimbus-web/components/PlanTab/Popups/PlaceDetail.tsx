@@ -1,10 +1,11 @@
 import Review from "./Review";
 import React from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
+import Star from "@/components/Star";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>
@@ -18,7 +19,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     dispatch({ type: "TOGGLE_PLACE_DETAILS" });
                 }}
             >
-                <div className="ml-4">x</div>
+                <div className="ml-4 text-center">x</div>
             </div>
             <div
                 className={
@@ -28,15 +29,18 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 }
             >
                 <div className="grid grid-cols-12 p-6 gap-6 ">
-                    <div
+                    {/* <div
                         className={
                             isBigScreen
-                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-48 "
-                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-48  "
+                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-40 "
+                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-40"
                         }
-                    >
-                        Image
-                    </div>
+                    > */}
+                    <img
+                        src="/images/ThorsWell.jpg"
+                        className="rounded-xl border-2 bg-blue-100 col-span-7 "
+                    />
+                    {/* </div> */}
                     <div className="flex col-span-5 flex-col gap-2">
                         <div className="text-2xl font-extrabold">
                             {props.placeTitle}
@@ -44,12 +48,10 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         <div className="text-xs">{props.address}</div>
                         <div
                             className={
-                                isBigScreen
-                                    ? "w-full h-12 bg-yellow-300"
-                                    : "w-[15rem] h-12 bg-yellow-300"
+                                isBigScreen ? "w-full h-12" : "w-[15rem] h-12 "
                             }
                         >
-                            Stars
+                            {/* <Star size="h-10" percent="100" /> */}
                         </div>
                     </div>
                     <div className="text-[0.6rem] col-span-12">

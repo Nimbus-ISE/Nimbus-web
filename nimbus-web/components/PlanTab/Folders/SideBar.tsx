@@ -4,33 +4,43 @@ import FolderSmallDynamic from "./FolderSmallDynamic";
 
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
-const SideBar = (props: any) => {
+const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab }: any = getPlanTabState();
+    const { openFullTab, isBigScreen } = getPlanTabState();
     return (
         <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic />
-            {props.isBigScreen && (
+            {isBigScreen && (
                 <button
                     className="absolute bg-white top-[35vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
                     onClick={() => {
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}
                 >
-                    {">"}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        version="1.1"
+                        width="10"
+                        height="100"
+                        className="rotate-180"
+                    >
+                        <polygon points="0,50 100,0 100,100" />
+                    </svg>
                 </button>
             )}
-            {!props.isBigScreen && !openFullTab && (
-                <button
-                    className="absolute bg-white  p-2 z-10 top-[40%] left-[90%] font-extrabold text-2xl"
+            {!isBigScreen && !openFullTab && (
+                <div
+                    className="absolute bg-black top-12 left-[88vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded-full cursor-pointer"
                     onClick={() => {
+                        console.log("hello");
+
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}
                 >
                     {"∧"}
-                </button>
+                </div>
             )}
-            {!props.isBigScreen && openFullTab && (
+            {!isBigScreen && openFullTab && (
                 <button
                     className="absolute bg-white  p-2 z-10 top-[10%] left-[90%] font-extrabold text-2xl animate-slide-in"
                     onClick={() => {

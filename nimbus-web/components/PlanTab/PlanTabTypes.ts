@@ -3,7 +3,6 @@ import { ReactElement } from "react";
 export interface FolderFullProps {
     children?: ReactElement;
     onClose?: any;
-    currentView: number;
 }
 
 export interface PlanGraphProps {

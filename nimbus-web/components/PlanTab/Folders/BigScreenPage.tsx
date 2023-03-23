@@ -1,6 +1,9 @@
-import { useEffect, useState, useRef, useCallback } from "react";
-import "mapbox-gl/dist/mapbox-gl.css";
-import Head from "next/head";
+import React from "react";
+import { getPlanTabState } from "../PlanTabContext";
+import FullScreenPlan from "./FullScreenPlan";
+import Alternative from "../Popups/Alternative";
+import PlaceDetail from "../Popups/PlaceDetail";
+import SideBar from "./SideBar";
 import Map, {
     Marker,
     Popup,
@@ -10,19 +13,20 @@ import Map, {
     Source,
     MarkerDragEvent,
     LngLat,
+    AttributionControl,
 } from "react-map-gl";
 import Pin from "@/components/Pin";
 import polyline from "@mapbox/polyline";
 import useMap from "@/hooks/useMap";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import {
-    getPlanTabDispatch,
-    getPlanTabState,
-} from "@/components/PlanTab/PlanTabContext";
-import BigScreenPage from "@/components/PlanTab/Folders/BigScreenPage";
-import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
 
-export default function map() {
+const BigScreenPage = () => {
+    const {
+        openFullTab,
+        openAlternatives,
+        openReview,
+        isBigScreen,
+        reviewData,
+    } = getPlanTabState();
     const {
         mapRef,
         points,
@@ -32,36 +36,20 @@ export default function map() {
         layerStyle,
         pinState,
     } = useMap();
-
-    const { isBigScreen } = getPlanTabState();
-    const dispatch: any = getPlanTabDispatch();
-    const screenSize = useMediaQuery("(min-width:1000px)");
-
-    useEffect(() => {
-        dispatch({
-            type: "SET_SCREEN_SIZE",
-            payload: screenSize,
-        });
-        console.log(screenSize);
-    }, [screenSize]);
-
     return (
         <>
-            <Head>
-                <title>Nimbus</title>
-            </Head>
-            <div className="h-[90vh] w-[100vw] overflow-hidden">
-                <div
-                    className={
-                        isBigScreen
-                            ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
-                            : "  h-[92vh] z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
-                    }
-                >
-                    {!isBigScreen && <SmallScreenPage />}
+            {openFullTab && !closed && <FullScreenPlan />}
+            {!openFullTab && (
+                <>
+                    <SideBar />
 
-                    {isBigScreen && <BigScreenPage />}
-
+                    {/* <div
+                        className={
+                            "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
+                        }
+                    >
+                        MAP
+                    </div> */}
                     {/* {!openFullTab && (
                         <Map
                             ref={mapRef}
@@ -70,6 +58,7 @@ export default function map() {
                                 latitude: 13.7563,
                                 zoom: 10,
                             }}
+                            attributionControl={false}
                             style={{
                                 gridColumnStart: 5,
                                 gridColumnEnd: "span 12",
@@ -106,14 +95,39 @@ export default function map() {
                                 []
                             )}
 
-                            <ScaleControl />
+                            <ScaleControl position="top-right" />
+                            <AttributionControl
+                                position="top-left"
+                                compact={true}
+                            />
                             <Source id="my-data" type="geojson" data={geojson}>
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
                     )} */}
-                </div>
-            </div>
+                    <div className="col-span-8 w-full h-[100%]">
+                        {openReview && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
+                                <PlaceDetail
+                                    placeTitle={reviewData.placeTitle}
+                                    address={reviewData.address}
+                                    placeDescription={
+                                        reviewData.placeDescription
+                                    }
+                                />
+                            </div>
+                        )}
+
+                        {!openReview && openAlternatives && isBigScreen && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
+                                <Alternative />
+                            </div>
+                        )}
+                    </div>
+                </>
+            )}
         </>
     );
-}
+};
+
+export default BigScreenPage;

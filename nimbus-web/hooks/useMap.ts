@@ -17,6 +17,7 @@ const useMap = () => {
     const [closed, setClosed] = useState(false);
     const [openReview, setOpenReview] = useState(false);
     const [reviewData, setReviewData] = useState({} as reviewDataType);
+    const [run, setRun] = useState(true);
     const [openAlternatives, setOpenAlternative] = useState(false);
 
     const toggleOpenReview = (reviewData?: reviewDataType) => {
@@ -91,36 +92,30 @@ const useMap = () => {
         setPinState([...pinState]);
     };
 
-    useEffect(() => {
-        // const fetchRoute = async () => {
-        //     const res = await fetch(
-        //         `http://localhost:3000/api/getRoute?origin=${
-        //             startMarker.latitude
-        //                 ? startMarker.latitude
-        //                 : points.start.coordinates.lat
-        //         },${
-        //             startMarker.longitude
-        //                 ? startMarker.longitude
-        //                 : points.start.coordinates.lng
-        //         }&destination=${points.end.coordinates.lat},${
-        //             points.end.coordinates.lng
-        //         }`
-        //     );
-        //     const coordinates = await res.json();
-        //     return coordinates;
-        // };
+    // useEffect(() => {
+    //     const fetchRoute = async () => {
+    //         const res = await fetch(`http://localhost:3000/api/getRoute`);
+    //         const coordinates = await res.json();
+    //         return coordinates;
+    //     };
+    //     const routeArrs: any = [];
+    //     if (run) {
+    //         fetchRoute().then((route) => {
+    //             const decoded = polyline.decode(route);
 
-        const routeArrs: any = [];
-        // fetchRoute().then((route) => {});
-        const decoded = polyline.decode(
-            "}x{rAk{rdRhD`@\\iAlFp@r[nCp[fCxPnAnGbA_BfFqB`GaDtJiHfVgEzMcBxFUbAhCrE~BfFvBtClGjCbTlAtSIhRkAdg@uJhHs@xMRtY`FzMpAtJMrKyB`OeIpL{M|KgMjIyFdCLfDjCdCtEhFnEfWpRzZxTvt@fi@pIvKhCnIr@rHk@l[cBbg@yHn^}Nxk@uCjJaDbFkFbEqJ`DkE~AoAzC`A|JfJ`g@dJjTzMtWvMlWroAbdCzVpe@de@xr@xk@l{@rOzTdXjYlgDneDfuAbtAnFhGfDhHnB|KHlOQ~K_@vYUdNShm@dFrWxGxVdPbk@pPpm@`Zbt@x_Aj{BtWnm@bTdXvlA`sA|VhYlIbRtBvOrBj`@lD`n@bBtPdFzV~\\nxAdYflAbg@`vBbl@ddCjt@roDvKhi@hCfJnInLrJlFtXvGba@jJv_AtTjb@|JlLtDxG`E`JjJ~[|i@|GtLjg@b|@nx@nuArb@pt@`c@p}@n|@jjB~Znn@z_@xa@f^|^`W`Znf@fx@vZ`f@xYpYbcAzcAzE~IlBzL]tcA^`KvCxLxFdJ`PlUhK~NlOnS~Vl^zp@|_A~RhY~EzM|H`p@~RfkBja@biCbLhu@pAl}@d@jk@pFrb@lFv\\bD~TlAf`@zBr~@|B`e@xBdBtCh@dOlAxc@~FpfAhKdzAfPv}BpUz[dD`QfBtN`@|\\aG`]gGx`@iHjNeCle@_HzJdA~Q|BzU~ChW`DzbAkIb{AwJtQeAjXqFzh@_LbkAcVd`@qItd@oNpd@kN~]mLdd@cYd}Ai`ApKmBzQkCtLoEnLoKxHwIhSwk@~JoTjCcEtBaEx@_IX}IbByNhGm\\~Mct@lOa}@xLsiA`I}t@zAaNvCcKxDoEpJcFxV{IxWmJtq@aVxm@gTha@oQjYgLvHu@pG`@jYlElQdCpdAtOdZnNp\\fQf_Aff@|xA~u@zoFdrCrL~FnFlAhF?tUsBfMaAzh@iEpU}AplAuJl{AaMruDoZv~BcRtZgCbX_Hr^}LpiB}m@lx@gXhjBan@|oBup@jFwCrFqI~Ro[~DoIa@m_@s@eYWcS~Dga@jAeGvB_DdD_BjHIpPdChWpDpWxDp}Bb\\rpFdu@hqAnPhSxBjb@Zxq@d@rcCpBz{BxAbh@p@lS`@lOlGfHbEdEv@dY|@t`@~@`d@}LxEa@|{@tApfAxAvkAnBjNaA~LoBnn@oJhc@mHlb@qQtQeEzTuJhViD~MyAdg@qF~{@sJvI{@vFb@jB`BvAjG`BnJxB~BpFTrKuCvIcB?i@He@"
-        );
+    //             decoded.forEach((arr) => {
+    //                 routeArrs.push(arr.reverse());
+    //             });
+    //             setRoute(routeArrs);
+    //             setRun(false);
+    //         });
 
-        decoded.forEach((arr) => {
-            routeArrs.push(arr.reverse());
-        });
-        setRoute(routeArrs);
-    }, []);
+    //         // const decoded = polyline.decode(
+    //         //     "ueqoIgjwwJpk@a_CbaJinDveHngJplAvr`@vkA`cNr`Er|Jtr@dyZifFhpSboCzf[bbFx{c@zfErrt@{zDtpuAm{Blsc@gjI`nb@}oFtzG{lCfrTwbHg`@brApoNsSh`TxnCzeZpuK`pYpbH~zVxaLfaThiIp|g@iw@~xf@mYnkTxuBlzMyjFl~YuxFze[umFhfRhSv_JwfDjd[{kAhtFhn@veI`yHluc@ppElwEnoD~{SbtJpujApdFjbcAdoH`nq@t}Nny^j\\pfn@{_C`dRnw@vnKmbCs{@mlHutFcsI`aBg{F~fGq}GjsA}{ChfOg}Ad`GekFvLmgEnqKmhIffLawGnsd@wkI|sPmdKhwJgsZfh`@orJjpTa_EzpIauBzsN{`Dbp]`jC`|TpbBdqTesCfqWa}@`ru@k}Jxz|@ugBvrSk{H`|g@qtKr_RwvFxjZjlJdhe@z{@ztUkjCzv[k~Az_MpPzzIupCtwF|wBziOseArnH_lLzqGa_E`uL{mDnzYleCrm[dtGvoTh`Hxip@dxGljV_\\j`Vb_Alhb@txAzua@w{F~oo@w~BfmbAxoD|{b@jeCbr_@ggClvTe_@xqT}iCdnTwaExbk@kaL`oOalHaMsmErfMo|EhiSjDrrP`|@ty_@t`InnInaLtnAnfFd}GdaEdyNsV`pVay@n{o@imF~y[uyBdmGojBf{RtwAli|@cmCveY{pFbyQooKlbPmvRffTm_FvmDkxDxaYc{CzgSjjFvaTl{Dlwi@_wA~jj@nb@dsc@fqAhlKd|FvyLimBny[yjE~rNyBxk{@c_@das@oo@vb\\lxFlbj@h|Anqu@kDnzOs{CrmFgnAdmXmuJ`i^wnCvyIro@fvMpqBbrFtiCfQlBh~CqfDlmNsiBjtSaiDrz_@oqHdFauItlFq|IxsDgA~}EvaBjqiAnrAf`x@~vKrnl@rjH`wXm]|e]utFxta@olBzl\\esAvpSva@dvl@xoBnfoApsAlcw@jZfqXxrJ|kLtgEtbSlFlq^x_Greq@{nAzhd@bvKfym@|cIndu@~}Cvzr@hlEn~~@nkHtjh@iShly@cwLh{DqgDhiZy|I|iTatN~sv@ceJtfb@o`Hlir@dhAbx\\xdMnu[`uAxrJohDdaNmbCtuUmeEhzXi`Lp~UmoLjrQ{~MzdN{}d@n_SisO~dXqrH|_Qq|AyiAchIvpi@iv@rq\\iqHpsR{xGjkCsjCph[snFl}Vg_C~`FmhNfyn@orOv|d@}pT`uXoiIj~UyzL|yTc`AcwJ"
+    //         // );
+    //     }
+    // }, [run]);
+
     const geojson: any = {
         type: "FeatureCollection",
         features: [
