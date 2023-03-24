@@ -116,8 +116,8 @@ const BigScreenPage = () => {
                             <Source id="my-data" type="geojson" data={geojson}>
                                 <Layer {...layerStyle} />
                             </Source>
-                        </Map> */}
-                    {/* )} */}
+                        </Map> )}*/}
+
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
