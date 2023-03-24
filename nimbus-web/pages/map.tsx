@@ -1,18 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Head from "next/head";
-import Map, {
-    Marker,
-    Popup,
-    ScaleControl,
-    MapRef,
-    Layer,
-    Source,
-    MarkerDragEvent,
-    LngLat,
-} from "react-map-gl";
-import Pin from "@/components/Pin";
-import polyline from "@mapbox/polyline";
 import useMap from "@/hooks/useMap";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import {
@@ -23,25 +11,16 @@ import BigScreenPage from "@/components/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
 
 export default function map() {
-    const {
-        mapRef,
-        points,
-        togglePinState,
-        onSelect,
-        geojson,
-        layerStyle,
-        pinState,
-    } = useMap();
-
-    const { isBigScreen } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
-    const screenSize = useMediaQuery("(min-width:1000px)");
 
+    const screenSize = useMediaQuery("(min-width:1000px)");
+    const { isBigScreen } = getPlanTabState();
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
+
         console.log(screenSize);
     }, [screenSize]);
 

@@ -3,20 +3,21 @@ import classes from "./FolderSmall.module.css";
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
-import { testData } from "@/test_data/testData";
 
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderSmall = () => {
     const [opendedTab, setOpenedTab] = useState("");
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-    const { openFullTab, isBigScreen, currentFolderView } = getPlanTabState();
+    const { openFullTab, isBigScreen, currentFolderView, fullPlan } =
+        getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
-
+    // console.log(fullPlan);
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
     };
+    console.log(fullPlan);
 
     useEffect(() => {
         setOpenedTab(`tab${currentFolderView}`);
@@ -33,14 +34,14 @@ const FolderSmall = () => {
     }, [openFullTab, currentFolderView]);
 
     return (
-        <div className="-translate-y-4 ">
+        <div className=" ">
             <div
                 className={
                     tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
                 }
             >
                 <div className={tabsClass}>
-                    {testData.map((day, index) => {
+                    {fullPlan.map((day: any, index: any) => {
                         if (
                             index >= currentFolderView &&
                             index < currentFolderView + displayNum
@@ -53,6 +54,10 @@ const FolderSmall = () => {
                                         id={`tab${index}`}
                                         onChange={() => {
                                             toggleTabs(`tab${index}`);
+                                            dispatch({
+                                                type: "SET_CURRENT_FOLDER",
+                                                payload: index,
+                                            });
                                         }}
                                     />
                                     <label
@@ -81,7 +86,7 @@ const FolderSmall = () => {
                             );
                     })}
 
-                    {testData.length > 3 && (
+                    {fullPlan.length > 3 && (
                         <>
                             <input type="radio" name="tabs" id={`arrow`} />
                             <label
