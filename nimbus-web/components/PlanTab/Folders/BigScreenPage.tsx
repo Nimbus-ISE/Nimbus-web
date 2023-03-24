@@ -61,9 +61,9 @@ const BigScreenPage = () => {
                         <Map
                             ref={mapRef}
                             initialViewState={{
-                                latitude: 13.7563,
-                                longitude: 100.5018,
-                                zoom: 14,
+                                latitude: points[currentFolder][0],
+                                longitude: points[currentFolder][1],
+                                zoom: 15,
                             }}
                             attributionControl={false}
                             style={{
