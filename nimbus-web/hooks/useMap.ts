@@ -14,17 +14,16 @@ interface reviewDataType {
 
 const useMap = () => {
     // Interface data and functions
+    const initialPinState: any = [];
+    const [pinState, setPinState] = useState(initialPinState);
     const [openFullTab, setOpenFullTab] = useState(false);
     const [closed, setClosed] = useState(false);
     const [openReview, setOpenReview] = useState(false);
     const [reviewData, setReviewData] = useState({} as reviewDataType);
-    const [run, setRun] = useState(true);
     const [openAlternatives, setOpenAlternative] = useState(false);
     const [fullPlan, setFullPlan] = useState({} as any);
     const dispatch: any = getPlanTabDispatch();
     const toggleOpenReview = (reviewData?: reviewDataType) => {
-        console.log(reviewData);
-
         if (reviewData?.placeTitle) {
             setOpenReview(true);
             setReviewData(reviewData);
@@ -63,18 +62,6 @@ const useMap = () => {
         });
     }, []);
 
-    const togglePinState = (changeIndex: number) => {
-        pinState.forEach((_, index) => {
-            if (index === changeIndex) {
-                pinState[changeIndex] = "#45D8D0";
-            } else {
-                pinState[index] = "#000";
-            }
-        });
-
-        setPinState([...pinState]);
-    };
-
     useEffect(() => {
         //     const fetchRoute = async () => {
         //         const res = await fetch(`http://localhost:3000/api/getRoute`);
@@ -106,32 +93,38 @@ const useMap = () => {
                 payload: trip,
             });
             const tempPoints: any[] = [];
+            const tempPinState: any[] = [];
             trip.forEach((day: any) => {
                 const temp: any = [];
+                const tempPin: any = [];
                 day.forEach((point: any) => {
                     temp.push(point.coordinate);
+                    tempPin.push("#000");
                 });
                 if (tempPoints.length < trip.length) {
                     tempPoints.push(temp);
                 }
+                if (tempPinState.length < trip.length) {
+                    tempPinState.push(tempPin);
+                }
             });
             setPoints(tempPoints);
-            console.log(tempPoints);
+            setPinState(tempPinState);
         });
     }, []);
 
-    const initialPinState: Array<string> = [];
-    const [pinState, setPinState] = useState(initialPinState);
+    const togglePinState = (day: number, changeIndex: number) => {
+        pinState[0].forEach((_: any, index: any) => {
+            if (index === changeIndex) {
+                pinState[day][changeIndex] = "#45D8D0";
+            } else {
+                pinState[day][index] = "#000";
+            }
+        });
 
-    Object.keys(points).forEach(() => {
-        initialPinState.push("#000");
-    });
+        setPinState([...pinState]);
+    };
 
-    // fullPlan?.forEach((day: any, index: any) => {
-    //     day.forEach((point: any) => {
-    //         points[index].push(point.coordinate);
-    //     });
-    // });
     const geojson: any = {
         type: "FeatureCollection",
         features: [

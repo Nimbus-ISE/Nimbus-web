@@ -38,17 +38,17 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    if (points[0]) {
-        console.log(points);
-    }
 
     useEffect(() => {
+        console.log("trigger");
+
         mapRef.current?.flyTo({
             center: [
                 initalCoordinates[currentFolder][1],
                 initalCoordinates[currentFolder][0],
             ],
         });
+        mapRef.current?.resize();
     }, [currentFolder]);
 
     return (
@@ -64,7 +64,7 @@ const BigScreenPage = () => {
                             initialViewState={{
                                 latitude: 13.7563,
                                 longitude: 100.5018,
-                                zoom: 10,
+                                zoom: 14,
                             }}
                             attributionControl={false}
                             style={{
@@ -85,17 +85,26 @@ const BigScreenPage = () => {
                                                     longitude={point[1]}
                                                     latitude={point[0]}
                                                     anchor="bottom"
-                                                    // onClick={(e) => {
-                                                    //     togglePinState(index);
-                                                    //     onSelect(
-                                                    //         point[index][1],
-                                                    //         point[index][0]
-                                                    //     );
-                                                    //     e.originalEvent.stopPropagation();
-                                                    // }}
+                                                    onClick={(e) => {
+                                                        console.log(index);
+
+                                                        togglePinState(
+                                                            currentFolder,
+                                                            index
+                                                        );
+                                                        onSelect(
+                                                            point[1],
+                                                            point[0]
+                                                        );
+                                                        e.originalEvent.stopPropagation();
+                                                    }}
                                                 >
                                                     <Pin
-                                                        fill={pinState[index]}
+                                                        fill={
+                                                            pinState[
+                                                                currentFolder
+                                                            ][index]
+                                                        }
                                                     />
                                                 </Marker>
                                             );
@@ -116,7 +125,8 @@ const BigScreenPage = () => {
                             <Source id="my-data" type="geojson" data={geojson}>
                                 <Layer {...layerStyle} />
                             </Source>
-                        </Map> )}*/}
+                        </Map>
+                    )} */}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (

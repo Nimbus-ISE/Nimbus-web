@@ -16,9 +16,7 @@ export default async function handler(
         // );
         const result = await response.json();
         res.status(200).json(result);
-        console.log("run");
     } catch (err) {
-        console.log(err);
         res.status(500).json("error invalid url");
     }
 } //13.746389,100.535004
