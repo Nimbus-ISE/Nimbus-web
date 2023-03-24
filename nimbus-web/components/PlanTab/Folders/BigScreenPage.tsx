@@ -57,7 +57,7 @@ const BigScreenPage = () => {
                 <>
                     <SideBar />
 
-                    {!openFullTab && (
+                    {/* {!openFullTab && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
@@ -119,7 +119,7 @@ const BigScreenPage = () => {
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
-                    )}
+                    )} */}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
