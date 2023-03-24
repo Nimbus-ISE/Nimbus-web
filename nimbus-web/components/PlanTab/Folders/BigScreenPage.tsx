@@ -38,10 +38,9 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
+    console.log(pinState);
 
     useEffect(() => {
-        console.log("trigger");
-
         mapRef.current?.flyTo({
             center: [
                 initalCoordinates[currentFolder][1],
@@ -58,7 +57,7 @@ const BigScreenPage = () => {
                 <>
                     <SideBar />
 
-                    {/* {!openFullTab && (
+                    {!openFullTab && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
@@ -79,40 +78,34 @@ const BigScreenPage = () => {
                             {points[0] &&
                                 points[currentFolder].map(
                                     (point: any, index: any) => {
-                                        try {
-                                            return (
-                                                <Marker
-                                                    longitude={point[1]}
-                                                    latitude={point[0]}
-                                                    anchor="bottom"
-                                                    onClick={(e) => {
-                                                        console.log(index);
+                                        return (
+                                            <Marker
+                                                longitude={point[1]}
+                                                latitude={point[0]}
+                                                anchor="bottom"
+                                                onClick={(e) => {
+                                                    console.log(index);
 
-                                                        togglePinState(
-                                                            currentFolder,
+                                                    togglePinState(
+                                                        currentFolder,
+                                                        index
+                                                    );
+                                                    onSelect(
+                                                        point[1],
+                                                        point[0]
+                                                    );
+                                                    e.originalEvent.stopPropagation();
+                                                }}
+                                            >
+                                                <Pin
+                                                    fill={
+                                                        pinState[currentFolder][
                                                             index
-                                                        );
-                                                        onSelect(
-                                                            point[1],
-                                                            point[0]
-                                                        );
-                                                        e.originalEvent.stopPropagation();
-                                                    }}
-                                                >
-                                                    <Pin
-                                                        fill={
-                                                            pinState[
-                                                                currentFolder
-                                                            ][index]
-                                                        }
-                                                    />
-                                                </Marker>
-                                            );
-                                        } catch {
-                                            console.log(
-                                                point[currentFolder][index][1]
-                                            );
-                                        }
+                                                        ]
+                                                    }
+                                                />
+                                            </Marker>
+                                        );
                                     },
                                     []
                                 )}
@@ -126,7 +119,7 @@ const BigScreenPage = () => {
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
-                    )} */}
+                    )}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (

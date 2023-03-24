@@ -90,31 +90,25 @@ const useMap = () => {
         fetchTrip().then((trip) => {
             dispatch({
                 type: "SET_FULL_PLAN",
-                payload: trip,
+                payload: trip.result,
             });
-            const tempPoints: any[] = [];
             const tempPinState: any[] = [];
-            trip.forEach((day: any) => {
-                const temp: any = [];
+            trip.result.forEach((day: any) => {
                 const tempPin: any = [];
-                day.forEach((point: any) => {
-                    temp.push(point.coordinate);
+                day.forEach(() => {
                     tempPin.push("#000");
                 });
-                if (tempPoints.length < trip.length) {
-                    tempPoints.push(temp);
-                }
-                if (tempPinState.length < trip.length) {
+                if (tempPinState.length < trip.result.length) {
                     tempPinState.push(tempPin);
                 }
             });
-            setPoints(tempPoints);
+            setPoints(trip.points);
             setPinState(tempPinState);
         });
     }, []);
 
     const togglePinState = (day: number, changeIndex: number) => {
-        pinState[0].forEach((_: any, index: any) => {
+        pinState[day].forEach((_: any, index: any) => {
             if (index === changeIndex) {
                 pinState[day][changeIndex] = "#45D8D0";
             } else {
