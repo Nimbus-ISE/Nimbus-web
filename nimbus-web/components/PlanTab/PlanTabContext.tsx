@@ -12,17 +12,30 @@ interface PlanTabContextStateType {
     reviewData: reviewDataType;
     openAlternatives: boolean;
     currentFolderView: number;
+    currentFolder: number;
     isClosingFullFolder: boolean;
     fullPlan: any;
+    initalCoordinates: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET_FULL_PLAN": {
-            return { ...state, fullPlan: action.payload };
+            const intialCoordinates: any = [];
+            action.payload.forEach((day: any) => {
+                intialCoordinates.push(day[0].coordinate);
+            });
+            return {
+                ...state,
+                fullPlan: action.payload,
+                initalCoordinates: intialCoordinates,
+            };
         }
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
+        }
+        case "SET_CURRENT_FOLDER": {
+            return { ...state, currentFolder: action.payload };
         }
         case "OPEN_FULL_FOLDER":
             return {
@@ -108,6 +121,8 @@ const initialState: PlanTabContextStateType = {
     currentFolderView: 0,
     isClosingFullFolder: false,
     fullPlan: [],
+    initalCoordinates: [{}],
+    currentFolder: 0,
 };
 
 const PlanTabContext = createContext(

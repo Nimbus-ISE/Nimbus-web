@@ -12,7 +12,7 @@ const SideBar = () => {
             <FolderSmallDynamic />
             {isBigScreen && (
                 <button
-                    className="absolute bg-white top-[35vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
+                    className="absolute bg-white top-[36vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
                     onClick={() => {
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}

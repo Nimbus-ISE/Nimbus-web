@@ -37,12 +37,12 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <div className="flex flex-col">
                             <div className="flex gap-4">
                                 {place?.name?.length < 20 && (
-                                    <div className="text-2xl font-extrabold">
+                                    <div className="text-xl font-extrabold">
                                         {place.name}
                                     </div>
                                 )}
                                 {place?.name?.length >= 20 && (
-                                    <div className="text-[16px] font-bold">
+                                    <div className="text-lg font-bold">
                                         {place.name}
                                     </div>
                                 )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getPlanTabState } from "../PlanTabContext";
 import FullScreenPlan from "./FullScreenPlan";
 import Alternative from "../Popups/Alternative";
@@ -26,6 +26,8 @@ const BigScreenPage = () => {
         openReview,
         isBigScreen,
         reviewData,
+        initalCoordinates,
+        currentFolder,
     } = getPlanTabState();
     const {
         mapRef,
@@ -36,26 +38,32 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
+    if (points[0]) {
+        console.log(points);
+    }
+
+    useEffect(() => {
+        mapRef.current?.flyTo({
+            center: [
+                initalCoordinates[currentFolder][1],
+                initalCoordinates[currentFolder][0],
+            ],
+        });
+    }, [currentFolder]);
+
     return (
         <>
             {openFullTab && !closed && <FullScreenPlan />}
-            {!openFullTab && (
+            {/* {!openFullTab && (
                 <>
                     <SideBar />
 
-                    {/* <div
-                        className={
-                            "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
-                        }
-                    >
-                        MAP
-                    </div> */}
-                    {/* {!openFullTab && (
+                    {!openFullTab && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
-                                longitude: 100.5018,
                                 latitude: 13.7563,
+                                longitude: 100.5018,
                                 zoom: 10,
                             }}
                             attributionControl={false}
@@ -68,32 +76,37 @@ const BigScreenPage = () => {
                             }
                             mapStyle="mapbox://styles/mapbox/streets-v12"
                         >
-                            {Object.keys(points).map(
-                                (key: string, index: number) => {
-                                    return (
-                                        <Marker
-                                            longitude={
-                                                points[key].coordinates.lng
-                                            }
-                                            latitude={
-                                                points[key].coordinates.lat
-                                            }
-                                            anchor="bottom"
-                                            onClick={(e) => {
-                                                togglePinState(index);
-                                                onSelect(
-                                                    points[key].coordinates.lng,
-                                                    points[key].coordinates.lat
-                                                );
-                                                e.originalEvent.stopPropagation();
-                                            }}
-                                        >
-                                            <Pin fill={pinState[index]} />
-                                        </Marker>
-                                    );
-                                },
-                                []
-                            )}
+                            {points[0] &&
+                                points[currentFolder].map(
+                                    (point: any, index: any) => {
+                                        try {
+                                            return (
+                                                <Marker
+                                                    longitude={point[1]}
+                                                    latitude={point[0]}
+                                                    anchor="bottom"
+                                                    // onClick={(e) => {
+                                                    //     togglePinState(index);
+                                                    //     onSelect(
+                                                    //         point[index][1],
+                                                    //         point[index][0]
+                                                    //     );
+                                                    //     e.originalEvent.stopPropagation();
+                                                    // }}
+                                                >
+                                                    <Pin
+                                                        fill={pinState[index]}
+                                                    />
+                                                </Marker>
+                                            );
+                                        } catch {
+                                            console.log(
+                                                point[currentFolder][index][1]
+                                            );
+                                        }
+                                    },
+                                    []
+                                )}
 
                             <ScaleControl position="top-right" />
                             <AttributionControl

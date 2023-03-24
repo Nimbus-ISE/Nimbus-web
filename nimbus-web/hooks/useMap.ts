@@ -3,7 +3,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { MapRef } from "react-map-gl";
 import polyline from "@mapbox/polyline";
 import React from "react";
-import { testData } from "@/test_data/testData";
+
 import { getPlanTabDispatch } from "@/components/PlanTab/PlanTabContext";
 
 interface reviewDataType {
@@ -51,31 +51,12 @@ const useMap = () => {
 
     // Map data and functions
 
-    const points: any = {
-        start: {
-            coordinates: { lat: 13.746389, lng: 100.535004 },
-            location: "Siam Center",
-            province: "Bangkok",
-            image: "https://cdn.britannica.com/57/20057-004-404C9F85/Grand-Palace-Bangkok-Thailand.jpg",
-        },
-        end: {
-            coordinates: { lat: 12.5324, lng: 99.9613 },
-            location: "Vana Nava Waterpark",
-            province: "Prachuap Khiri Khan",
-            image: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_871/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fpwqzr45vjmfzvr6hdkw/VanaNavaWaterparkTicketinHuaHin.webp",
-        },
-    };
-    const initialPinState: Array<string> = [];
-    Object.keys(points).forEach(() => {
-        initialPinState.push("#000");
-    });
+    const [points, setPoints] = useState([] as any);
 
     const mapRef = React.useRef<MapRef>();
     const [route, setRoute] = useState([] as Array<number[]>);
-    const [pinState, setPinState] = useState(initialPinState);
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
-        console.log("called");
         mapRef.current?.flyTo({
             center: [longitude, latitude],
             duration: 1000,
@@ -124,9 +105,33 @@ const useMap = () => {
                 type: "SET_FULL_PLAN",
                 payload: trip,
             });
+            const tempPoints: any[] = [];
+            trip.forEach((day: any) => {
+                const temp: any = [];
+                day.forEach((point: any) => {
+                    temp.push(point.coordinate);
+                });
+                if (tempPoints.length < trip.length) {
+                    tempPoints.push(temp);
+                }
+            });
+            setPoints(tempPoints);
+            console.log(tempPoints);
         });
     }, []);
 
+    const initialPinState: Array<string> = [];
+    const [pinState, setPinState] = useState(initialPinState);
+
+    Object.keys(points).forEach(() => {
+        initialPinState.push("#000");
+    });
+
+    // fullPlan?.forEach((day: any, index: any) => {
+    //     day.forEach((point: any) => {
+    //         points[index].push(point.coordinate);
+    //     });
+    // });
     const geojson: any = {
         type: "FeatureCollection",
         features: [

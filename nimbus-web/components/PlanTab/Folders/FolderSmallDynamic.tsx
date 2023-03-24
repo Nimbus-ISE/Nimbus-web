@@ -54,6 +54,10 @@ const FolderSmall = () => {
                                         id={`tab${index}`}
                                         onChange={() => {
                                             toggleTabs(`tab${index}`);
+                                            dispatch({
+                                                type: "SET_CURRENT_FOLDER",
+                                                payload: index,
+                                            });
                                         }}
                                     />
                                     <label
