@@ -26,8 +26,8 @@ const BigScreenPage = () => {
         openReview,
         isBigScreen,
         reviewData,
-        initalCoordinates,
         currentFolder,
+        fullPlan,
     } = getPlanTabState();
     const {
         mapRef,
@@ -38,17 +38,19 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    console.log(pinState);
 
     useEffect(() => {
-        mapRef.current?.flyTo({
-            center: [
-                initalCoordinates[currentFolder][1],
-                initalCoordinates[currentFolder][0],
-            ],
-        });
+        if (points[currentFolder]) {
+            mapRef.current?.flyTo({
+                center: [
+                    points[currentFolder][0][1],
+                    points[currentFolder][0][0],
+                ],
+            });
+        }
         mapRef.current?.resize();
-    }, [currentFolder]);
+        console.log(pinState);
+    }, [currentFolder, points[currentFolder], pinState]);
 
     return (
         <>
@@ -57,12 +59,12 @@ const BigScreenPage = () => {
                 <>
                     <SideBar />
 
-                    {/* {!openFullTab && (
+                    {!openFullTab && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
-                                latitude: points[currentFolder][0],
-                                longitude: points[currentFolder][1],
+                                latitude: 13.7563,
+                                longitude: 100.5018,
                                 zoom: 15,
                             }}
                             attributionControl={false}
@@ -73,7 +75,7 @@ const BigScreenPage = () => {
                             mapboxAccessToken={
                                 "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
                             }
-                            mapStyle="mapbox://styles/mapbox/streets-v12"
+                            mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                         >
                             {points[0] &&
                                 points[currentFolder].map(
@@ -97,6 +99,13 @@ const BigScreenPage = () => {
                                                     e.originalEvent.stopPropagation();
                                                 }}
                                             >
+                                                <span className="text-center bg-black text-cyan-300 p-[2px] rounded">
+                                                    {
+                                                        fullPlan[currentFolder][
+                                                            index
+                                                        ].name
+                                                    }
+                                                </span>
                                                 <Pin
                                                     fill={
                                                         pinState[currentFolder][
@@ -119,7 +128,7 @@ const BigScreenPage = () => {
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
-                    )} */}
+                    )}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
