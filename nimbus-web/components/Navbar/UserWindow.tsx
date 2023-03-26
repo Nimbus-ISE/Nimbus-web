@@ -24,9 +24,9 @@ const UserWindow = ({ user }: { user: any }) => {
     const handleOnSignout = () => {
         router.push("/api/auth/logout");
     };
-    const dot = (user: string | undefined) => {
-        if (user && user.length > 15) {
-            return user.slice(0, 15) + "..";
+    const dot = (user: string | undefined, maxLength: number) => {
+        if (user && user.length > maxLength) {
+            return user.slice(0, maxLength) + "..";
         } else {
             return user;
         }
@@ -39,9 +39,9 @@ const UserWindow = ({ user }: { user: any }) => {
             <div className="flex p-2">
                 <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
-                    <div className="font-semibold">{user.name}</div>
+                    <div className="font-semibold">{dot(user.name, 14)}</div>
                     <div className="text-sm text-neutral-500">
-                        {dot(user.email)}
+                        {dot(user.email, 15)}
                     </div>
                 </div>
             </div>
