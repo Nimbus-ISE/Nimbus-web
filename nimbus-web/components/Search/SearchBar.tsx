@@ -47,14 +47,14 @@ const SearchBar = () => {
             onBlur={() => {
                 setListIsShowing(false);
             }}
-            className="relative flex justify-between text-black md:border-[1px] bg-neutral-100 my-auto w-56 h-8 
-            shadow-md md:shadow-sm text-sm rounded-full z-10"
+            className="relative flex justify-between text-black my-auto w-56 h-8 text-sm rounded-full z-10"
         >
             <input
                 ref={inputRef}
                 onChange={handleOnChange}
                 placeholder="Search Location"
-                className="bg-neutral-100 rounded-full w-full h-full my-auto px-8"
+                className="bg-neutral-100 md:border-[1px] md:shadow-sm rounded-full 
+                w-full h-full my-auto px-8 shadow-md"
             />
             <svg
                 className="absolute left-2 top-0 bottom-0 w-4 h-4 m-auto fill-neutral-500"
@@ -81,12 +81,12 @@ const SearchBar = () => {
                     <path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z" />
                 </svg>
             </button>
-            {listIsShowing ? (
+            {listIsShowing && items.length !== 0 ? (
                 <div className="absolute flex flex-col w-full left-0 top-[1rem] pt-4 bg-neutral-100 -z-[5] rounded-xl shadow-md">
                     {items.map((item) => {
                         return (
                             <button
-                                className="relative flex text-left p-2 hover:bg-neutral-200 rounded-xl transition duration-[200ms] pl-9"
+                                className="relative flex text-left p-2 hover:bg-neutral-200 rounded-xl transition duration-[200ms] pl-8"
                                 onMouseDown={() =>
                                     handleNavigate(item.loc_id, item.loc_name)
                                 }
