@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { checkout } from "@/checkout";
+import UserProfile from "../UserProfile";
 
 interface IProps {
     list: Array<any>;
@@ -125,10 +126,9 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                             <ListItem key={index}>
                                 <ListItemIcon>
                                     {user ? (
-                                        <img
-                                            src={user.picture as string}
-                                            className="rounded-full w-[30px] h-[30px] shadow-md"
-                                            alt="Profile picture"
+                                        <UserProfile
+                                            src={user.picture}
+                                            size={30}
                                         />
                                     ) : (
                                         <Image

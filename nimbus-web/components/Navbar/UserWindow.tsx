@@ -4,6 +4,7 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { checkout } from "@/checkout";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
+import UserProfile from "../UserProfile";
 
 const UserWindow = ({ user }: { user: any }) => {
     const router = useRouter();
@@ -33,14 +34,10 @@ const UserWindow = ({ user }: { user: any }) => {
     return (
         <div
             className="absolute flex flex-col p-2 top-[68px] -right-2 bg-white 
-        shadow-md w-56 h-52 rounded-xl text-black"
+            shadow-md w-56 h-52 rounded-xl text-black"
         >
             <div className="flex p-2">
-                <img
-                    className="rounded-full w-[40px] h-[40px] bg-black shadow-md"
-                    src={user.picture as string}
-                    alt="Profile picture"
-                />
+                <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
                     <div className="font-semibold">{user.name}</div>
                     <div className="text-sm text-neutral-500">

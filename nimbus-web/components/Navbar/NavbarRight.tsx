@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import UserWindow from "./UserWindow";
+import UserProfile from "../UserProfile";
 
 interface IProps {
     isLoading: boolean;
@@ -31,7 +32,7 @@ const NavbarRight = ({ isLoading, user }: IProps) => {
                 </Button>
             ) : !isLoading ? (
                 <button
-                    className="relative"
+                    className="relative group w-[46px] h-[46px]"
                     onClick={() => {
                         if (userWindowVisible) setUserWindowVisible(false);
                         else setUserWindowVisible(true);
@@ -40,10 +41,10 @@ const NavbarRight = ({ isLoading, user }: IProps) => {
                         setUserWindowVisible(false);
                     }}
                 >
-                    <img
-                        className="rounded-full w-[40px] h-[40px] bg-black shadow-md"
-                        src={user.picture as string}
-                        alt="Profile picture"
+                    <UserProfile
+                        src={user.picture}
+                        className="absolute top-0 bottom-0 left-0 right-0 m-auto border-teal-400
+                        group-hover:border-2 group-hover:w-[44px] group-hover:h-[44px] w-[40px] h-[40px]"
                     />
                     {userWindowVisible ? <UserWindow user={user} /> : null}
                 </button>
