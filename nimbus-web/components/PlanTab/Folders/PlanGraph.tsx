@@ -1,20 +1,27 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import useMap from "@/hooks/useMap";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab, isClosingFullFolder } = getPlanTabState();
-    console.log(props.places);
+    const { openFullTab, isClosingFullFolder, currentFolder } =
+        getPlanTabState();
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
                 Day {props.dayNumber}
             </div>
-            {props.places?.map((place: PlaceType) => (
+            {props.places?.map((place: PlaceType, index: any) => (
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div className="flex flex-row items-center text-xs gap-4 rounded-xl hover:bg-[#efeded] hover:h-32 ">
+                    <div
+                        className="flex flex-row items-center text-xs gap-4 rounded-xl hover:bg-[#efeded] hover:h-32 "
+
+                        // onMouseLeave={() => {
+                        //     togglePinState(currentFolder, 999);
+                        // }}
+                    >
                         <img
                             src={place.imgLink}
                             className={
