@@ -32,8 +32,6 @@ const SideBar = () => {
                 <div
                     className="absolute bg-black top-12 left-[88vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded-full cursor-pointer"
                     onClick={() => {
-                        console.log("hello");
-
                         dispatch({ type: "OPEN_FULL_FOLDER" });
                     }}
                 >

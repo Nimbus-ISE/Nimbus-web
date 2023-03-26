@@ -25,7 +25,7 @@ const BigScreenPage = () => {
         openAlternatives,
         openReview,
         isBigScreen,
-        reviewData,
+        placeData,
         currentFolder,
         fullPlan,
     } = getPlanTabState();
@@ -134,10 +134,10 @@ const BigScreenPage = () => {
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
                                 <PlaceDetail
-                                    placeTitle={reviewData.placeTitle}
-                                    address={reviewData.address}
+                                    placeTitle={placeData.placeTitle}
+                                    address={placeData.address}
                                     placeDescription={
-                                        reviewData.placeDescription
+                                        placeData.placeDescription
                                     }
                                 />
                             </div>

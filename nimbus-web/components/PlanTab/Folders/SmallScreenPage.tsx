@@ -33,7 +33,7 @@ const SmallScreenPage = () => {
         openFullTab,
         openAlternatives,
         openReview,
-        reviewData,
+        placeData,
         fullPlan,
         currentFolderView,
         currentFolder,
@@ -134,10 +134,10 @@ const SmallScreenPage = () => {
                             {openReview && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
                                     <PlaceDetail
-                                        placeTitle={reviewData.placeTitle}
-                                        address={reviewData.address}
+                                        placeTitle={placeData.placeTitle}
+                                        address={placeData.address}
                                         placeDescription={
-                                            reviewData.placeDescription
+                                            placeData.placeDescription
                                         }
                                     />
                                 </div>
