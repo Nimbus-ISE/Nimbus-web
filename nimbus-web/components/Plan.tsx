@@ -14,7 +14,7 @@ interface IScrollContext {
 interface IPlanContext {
     isConfirmActive: boolean;
     setIsConfirmActive: React.Dispatch<React.SetStateAction<boolean>>;
-    formData: IFormData;
+    formData: any;
     setFormData: React.Dispatch<React.SetStateAction<IFormData>>;
     setFormDataField: (field: string, input: any) => void;
 }
@@ -37,7 +37,7 @@ export const PlanContext = React.createContext<IPlanContext>(
 );
 
 const Plan = () => {
-    const [formData, setFormData] = React.useState<IFormData>({});
+    const [formData, setFormData] = React.useState<any>({});
     const [isConfirmActive, setIsConfirmActive] =
         React.useState<boolean>(false);
     const setFormDataField = (field: string, payload: any) => {

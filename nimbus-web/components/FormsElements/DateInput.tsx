@@ -7,13 +7,22 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
+import { PlanContext } from "../Plan";
 
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
 
 const DateInput = () => {
+    const { setFormDataField } = React.useContext(PlanContext);
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
+
+    React.useEffect(() => {
+        setFormDataField("date", [
+            startDate?.toDate().toDateString(),
+            endDate?.toDate().toDateString(),
+        ]);
+    }, [startDate, endDate]);
 
     return (
         <ThemeProvider theme={nimbusTheme}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { PlanContext } from "../Plan";
 
 const iconPlaceHolder = (
     <svg
@@ -18,8 +19,16 @@ const iconPlaceHolder = (
 );
 
 const LocationInput = () => {
+    const { setFormDataField } = React.useContext(PlanContext);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const handleOnChange = () => {
+        if (inputRef.current)
+            setFormDataField("location", inputRef.current.value);
+    };
     return (
         <input
+            ref={inputRef}
+            onChange={handleOnChange}
             className="loc-input w-full text-l h-14 bg-gray-100 shadow-md appearance-none border-2 border-gray-100 rounded-xl py-2 px-4 text-gray-500 leading-tight focus:outline-none focus:bg-gray-100 hover:opacity-70"
             type="text"
             placeholder="Enter Location of Interest"

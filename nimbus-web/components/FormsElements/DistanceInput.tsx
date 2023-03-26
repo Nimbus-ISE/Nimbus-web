@@ -9,10 +9,12 @@ import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
 import DirectionsWalkRoundedIcon from "@mui/icons-material/DirectionsWalkRounded";
 import TimeToLeaveRoundedIcon from "@mui/icons-material/TimeToLeaveRounded";
 import DirectionsRailwayRoundedIcon from "@mui/icons-material/DirectionsRailwayRounded";
+import { PlanContext } from "../Plan";
 
 const choices = ["Close", "Medium", "Far"];
 
 const DistanceInput = () => {
+    const { setFormDataField } = React.useContext(PlanContext);
     const [tripDistance, setTripDistance] = React.useState<string>("");
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -23,6 +25,9 @@ const DistanceInput = () => {
         console.log(choice);
         setTripDistance(choice);
     };
+    React.useEffect(() => {
+        setFormDataField("tripDistance", tripDistance);
+    }, [tripDistance]);
 
     return (
         <>

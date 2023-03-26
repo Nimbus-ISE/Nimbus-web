@@ -33,7 +33,8 @@ const tags = [
 ];
 
 const TagsSelection = () => {
-    const { setIsConfirmActive } = React.useContext(PlanContext);
+    const { setFormDataField, setIsConfirmActive } =
+        React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -47,6 +48,9 @@ const TagsSelection = () => {
         console.log(newSelectTag);
         setSelectTag(newSelectTag);
     };
+    React.useEffect(() => {
+        setFormDataField("tags", selectTag);
+    }, [selectTag]);
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>

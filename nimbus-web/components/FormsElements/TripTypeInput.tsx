@@ -8,11 +8,17 @@ import { ThemeProvider } from "@mui/material";
 import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
 import HikingIcon from "@mui/icons-material/Hiking";
 import NightlifeIcon from "@mui/icons-material/Nightlife";
+import { PlanContext } from "../Plan";
 
 const tripTypes = ["Hangout", "Travel"];
 
 const TripTypeInput = () => {
+    const { setFormDataField } = React.useContext(PlanContext);
     const [tripType, setTripType] = React.useState<string>("");
+
+    React.useEffect(() => {
+        setFormDataField("tripType", tripType);
+    }, [tripType]);
 
     const handleClick = (choice: string) => () => {
         console.log(choice);
