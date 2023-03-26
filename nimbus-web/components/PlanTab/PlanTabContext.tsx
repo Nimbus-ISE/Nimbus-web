@@ -9,7 +9,7 @@ interface PlanTabContextStateType {
     openFullTab: boolean;
     closed: boolean;
     openReview: false;
-    reviewData: reviewDataType;
+    placeData: reviewDataType;
     openAlternatives: boolean;
     currentFolderView: number;
     currentFolder: number;
@@ -73,7 +73,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     openReview: true,
-                    reviewData: action.payload,
+                    placeData: action.payload,
                 };
             } else {
                 return {
@@ -116,7 +116,7 @@ const initialState: PlanTabContextStateType = {
     openFullTab: false,
     closed: true,
     openReview: false,
-    reviewData: {} as reviewDataType,
+    placeData: {} as reviewDataType,
     openAlternatives: false,
     currentFolderView: 0,
     isClosingFullFolder: false,
