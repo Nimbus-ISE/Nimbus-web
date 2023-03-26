@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof LocationInput>;
 
 const Template: ComponentStory<typeof LocationInput> = (args) => (
-    <LocationInput {...args} />
+    <LocationInput />
 );
 
 export const Location = Template.bind({});

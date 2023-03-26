@@ -6,8 +6,6 @@ export default {
     component: BudgetInput,
 } as ComponentMeta<typeof BudgetInput>;
 
-const Template: ComponentStory<typeof BudgetInput> = (args) => (
-    <BudgetInput {...args} />
-);
+const Template: ComponentStory<typeof BudgetInput> = (args) => <BudgetInput />;
 
 export const Budget = Template.bind({});

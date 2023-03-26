@@ -6,8 +6,6 @@ export default {
     component: DateInput,
 } as ComponentMeta<typeof DateInput>;
 
-const Template: ComponentStory<typeof DateInput> = (args) => (
-    <DateInput {...args} />
-);
+const Template: ComponentStory<typeof DateInput> = (args) => <DateInput />;
 
 export const Date = Template.bind({});
