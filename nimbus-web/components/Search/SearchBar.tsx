@@ -1,8 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-const test = ["hello", "lol", "samyan"];
-
 const SearchBar = () => {
     const router = useRouter();
     const [items, setItems] = React.useState<Array<any>>([]);
@@ -44,12 +42,10 @@ const SearchBar = () => {
         <div
             id="searchbar-container"
             onFocus={() => {
-                console.log("on focus");
                 setListIsShowing(true);
             }}
             onBlur={() => {
-                console.log("on blur");
-                setTimeout(() => setListIsShowing(false), 50);
+                setListIsShowing(false);
             }}
             className="relative flex justify-between text-black md:border-[1px] bg-neutral-100 my-auto w-56 h-8 
             shadow-md md:shadow-sm text-sm rounded-full z-10"

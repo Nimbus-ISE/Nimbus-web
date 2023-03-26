@@ -1,78 +1,52 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import RouteButton from "./RouteButton";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { checkout } from "@/checkout";
 import { Button } from "@mui/material";
+import UserWindow from "./UserWindow";
 
 interface IProps {
-    listLogin: Array<any>;
-    listLogout: Array<any>;
     isLoading: boolean;
     user: any;
 }
 
-const NavbarRight = ({ listLogin, listLogout, isLoading, user }: IProps) => {
-    const onCheckout = () => {
-        checkout({
-            lineItems: [
-                {
-                    price: "price_1MTOqPJkSNPL7Ztsvxm18ftd",
-                    quantity: 1,
-                },
-            ],
-        });
+const NavbarRight = ({ isLoading, user }: IProps) => {
+    const router = useRouter();
+    const handleOnLogIn = () => {
+        router.push("/api/auth/login");
     };
+    const [userWindowVisible, setUserWindowVisible] =
+        React.useState<boolean>(false);
     return (
-        <div className="grid grid-flow-col gap-4 px-5 text-md">
+        <div className="grid grid-flow-col gap-1 px-5 text-md">
             {!isLoading && !user ? (
-                <>
-                    {listLogin.map((navItem) => (
-                        <RouteButton
-                            name={navItem.name}
-                            route={navItem.route}
-                        />
-                    ))}
-                    <Image
-                        className="rounded-full w-[40px] h-[40px] shadow-md"
-                        src="/images/guest.jpg"
-                        alt="Profile picture"
-                        width={40}
-                        height={40}
-                    />
-                </>
+                <Button
+                    onClick={handleOnLogIn}
+                    variant="text"
+                    sx={{
+                        textTransform: "none",
+                        color: "gray",
+                    }}
+                    className="hover:text-tricolorgreen whitespace-nowrap"
+                >
+                    <div className="m-auto font-montserrat">Login</div>
+                </Button>
             ) : !isLoading ? (
-                <>
-                    <Button
-                        onClick={onCheckout}
-                        variant="outlined"
-                        color="primary"
-                        sx={{
-                            marginY: "auto",
-                            textTransform: "none",
-                        }}
-                    >
-                        <FontAwesomeIcon
-                            icon={faCrown}
-                            color="orange"
-                            className="m-auto mr-2 drop-shadow-sm"
-                        />
-                        <div className="m-auto font-montserrat">Upgrade</div>
-                    </Button>
-                    {listLogout.map((navItem) => (
-                        <RouteButton
-                            name={navItem.name}
-                            route={navItem.route}
-                        />
-                    ))}
+                <button
+                    className="relative"
+                    onClick={() => {
+                        if (userWindowVisible) setUserWindowVisible(false);
+                        else setUserWindowVisible(true);
+                    }}
+                    onBlur={() => {
+                        setUserWindowVisible(false);
+                    }}
+                >
                     <img
                         className="rounded-full w-[40px] h-[40px] bg-black shadow-md"
                         src={user.picture as string}
                         alt="Profile picture"
                     />
-                </>
+                    {userWindowVisible ? <UserWindow user={user} /> : null}
+                </button>
             ) : null}
         </div>
     );
