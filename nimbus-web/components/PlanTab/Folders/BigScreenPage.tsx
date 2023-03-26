@@ -25,9 +25,9 @@ const BigScreenPage = () => {
         openAlternatives,
         openReview,
         isBigScreen,
-        reviewData,
-        initalCoordinates,
+        placeData,
         currentFolder,
+        fullPlan,
     } = getPlanTabState();
     const {
         mapRef,
@@ -38,18 +38,19 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    if (points[0]) {
-        console.log(points);
-    }
 
     useEffect(() => {
-        mapRef.current?.flyTo({
-            center: [
-                initalCoordinates[currentFolder][1],
-                initalCoordinates[currentFolder][0],
-            ],
-        });
-    }, [currentFolder]);
+        if (points[currentFolder]) {
+            mapRef.current?.flyTo({
+                center: [
+                    points[currentFolder][0][1],
+                    points[currentFolder][0][0],
+                ],
+            });
+        }
+        mapRef.current?.resize();
+        console.log(pinState);
+    }, [currentFolder, points[currentFolder], pinState]);
 
     return (
         <>
@@ -64,7 +65,7 @@ const BigScreenPage = () => {
                             initialViewState={{
                                 latitude: 13.7563,
                                 longitude: 100.5018,
-                                zoom: 10,
+                                zoom: 15,
                             }}
                             attributionControl={false}
                             style={{
@@ -74,36 +75,46 @@ const BigScreenPage = () => {
                             mapboxAccessToken={
                                 "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
                             }
-                            mapStyle="mapbox://styles/mapbox/streets-v12"
+                            mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                         >
                             {points[0] &&
                                 points[currentFolder].map(
                                     (point: any, index: any) => {
-                                        try {
-                                            return (
-                                                <Marker
-                                                    longitude={point[1]}
-                                                    latitude={point[0]}
-                                                    anchor="bottom"
-                                                    // onClick={(e) => {
-                                                    //     togglePinState(index);
-                                                    //     onSelect(
-                                                    //         point[index][1],
-                                                    //         point[index][0]
-                                                    //     );
-                                                    //     e.originalEvent.stopPropagation();
-                                                    // }}
-                                                >
-                                                    <Pin
-                                                        fill={pinState[index]}
-                                                    />
-                                                </Marker>
-                                            );
-                                        } catch {
-                                            console.log(
-                                                point[currentFolder][index][1]
-                                            );
-                                        }
+                                        return (
+                                            <Marker
+                                                longitude={point[1]}
+                                                latitude={point[0]}
+                                                anchor="bottom"
+                                                onClick={(e) => {
+                                                    console.log(index);
+
+                                                    togglePinState(
+                                                        currentFolder,
+                                                        index
+                                                    );
+                                                    onSelect(
+                                                        point[1],
+                                                        point[0]
+                                                    );
+                                                    e.originalEvent.stopPropagation();
+                                                }}
+                                            >
+                                                <span className="text-center bg-black text-cyan-300 p-[2px] rounded">
+                                                    {
+                                                        fullPlan[currentFolder][
+                                                            index
+                                                        ].name
+                                                    }
+                                                </span>
+                                                <Pin
+                                                    fill={
+                                                        pinState[currentFolder][
+                                                            index
+                                                        ]
+                                                    }
+                                                />
+                                            </Marker>
+                                        );
                                     },
                                     []
                                 )}
@@ -116,16 +127,17 @@ const BigScreenPage = () => {
                             <Source id="my-data" type="geojson" data={geojson}>
                                 <Layer {...layerStyle} />
                             </Source>
-                        </Map> )}*/}
+                        </Map>
+                    )} */}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
                                 <PlaceDetail
-                                    placeTitle={reviewData.placeTitle}
-                                    address={reviewData.address}
+                                    placeTitle={placeData.placeTitle}
+                                    address={placeData.address}
                                     placeDescription={
-                                        reviewData.placeDescription
+                                        placeData.placeDescription
                                     }
                                 />
                             </div>
