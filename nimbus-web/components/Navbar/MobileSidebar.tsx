@@ -17,10 +17,13 @@ import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { checkout } from "@/checkout";
+import UserProfile from "../UserProfile";
 
 interface IProps {
     list: Array<any>;
@@ -33,6 +36,8 @@ const iconMapping: { [key: string]: React.ReactNode } = {
     Home: <HomeOutlinedIcon />,
     Plan: <MapOutlinedIcon />,
     About: <InfoOutlinedIcon />,
+    Search: <SearchIcon />,
+    "Register Place": <AddCircleOutlineIcon />,
     Login: <LoginOutlinedIcon />,
     Profile: <AccountBoxOutlinedIcon />,
     Signout: <LogoutOutlinedIcon />,
@@ -121,10 +126,9 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                             <ListItem key={index}>
                                 <ListItemIcon>
                                     {user ? (
-                                        <img
-                                            src={user.picture as string}
-                                            className="rounded-full w-[30px] h-[30px] shadow-md"
-                                            alt="Profile picture"
+                                        <UserProfile
+                                            src={user.picture}
+                                            size={30}
                                         />
                                     ) : (
                                         <Image
