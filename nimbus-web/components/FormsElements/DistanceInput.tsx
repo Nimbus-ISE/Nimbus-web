@@ -27,7 +27,7 @@ const DistanceInput = () => {
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex flex-initial flex-wrap justify-center">
+                <div className="grid grid-cols-3">
                     {choices.map((data) => {
                         return (
                             <Chip

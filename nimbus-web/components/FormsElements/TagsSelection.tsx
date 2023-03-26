@@ -1,7 +1,8 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
-import { ThemeProvider } from "@mui/material";
+import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
+import { PlanContext } from "../Plan";
 
 const tags = [
     "Mall",
@@ -32,6 +33,7 @@ const tags = [
 ];
 
 const TagsSelection = () => {
+    const { setIsConfirmActive } = React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -46,9 +48,9 @@ const TagsSelection = () => {
         setSelectTag(newSelectTag);
     };
     return (
-        <>
+        <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="basis-auto">
+                <div className="flex flex-wrap justify-center">
                     {tags.map((data) => {
                         return (
                             <Chip
@@ -67,12 +69,37 @@ const TagsSelection = () => {
                                         ? "outlined"
                                         : "filled"
                                 }
+                                className="shadow-md"
                             />
                         );
                     })}
                 </div>
+                <div className="flex mx-auto w-full">
+                    <Button
+                        onClick={() => {
+                            setIsConfirmActive(true);
+                        }}
+                        variant="outlined"
+                        sx={{
+                            borderRadius: "999px",
+                            borderColor: "black",
+                            color: "black",
+                            marginTop: "50px",
+                            paddingX: "5rem",
+                            marginX: "auto",
+                            textTransform: "none",
+                            "&:hover": {
+                                color: "black",
+                                backgroundColor: "Gainsboro",
+                                borderColor: "gray",
+                            },
+                        }}
+                    >
+                        <div className="m-auto font-montserrat">Continue</div>
+                    </Button>
+                </div>
             </ThemeProvider>
-        </>
+        </div>
     );
 };
 

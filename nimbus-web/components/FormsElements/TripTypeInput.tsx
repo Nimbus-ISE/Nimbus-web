@@ -9,13 +9,9 @@ import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
 import HikingIcon from "@mui/icons-material/Hiking";
 import NightlifeIcon from "@mui/icons-material/Nightlife";
 
-interface IProps {
-    value: string;
-}
-
 const tripTypes = ["Hangout", "Travel"];
 
-const TripTypeInput = (props: IProps) => {
+const TripTypeInput = () => {
     const [tripType, setTripType] = React.useState<string>("");
 
     const handleClick = (choice: string) => () => {

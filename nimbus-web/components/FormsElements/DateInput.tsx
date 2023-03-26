@@ -11,7 +11,7 @@ import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
 
-const DateInput = (props: any) => {
+const DateInput = () => {
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
 

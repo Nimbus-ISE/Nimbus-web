@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { NumericFormat } from "react-number-format";
 
 const budgetClassName =
@@ -6,7 +6,7 @@ const budgetClassName =
 const budgetValid = "budget-input " + budgetClassName;
 const budgetInvalid = "budget-input-invalid " + budgetClassName;
 
-const BudgetInput = (props: any) => {
+const BudgetInput = () => {
     const [value, setValue] = React.useState<number>();
     const [isValid, setIsValid] = React.useState<boolean>(true);
     React.useEffect(() => {
