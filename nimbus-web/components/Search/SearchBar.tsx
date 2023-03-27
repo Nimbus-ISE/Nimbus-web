@@ -47,7 +47,7 @@ const SearchBar = () => {
             onBlur={() => {
                 setListIsShowing(false);
             }}
-            className="relative flex justify-between text-black my-auto w-56 h-8 text-sm rounded-full z-10"
+            className="relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm rounded-full z-10"
         >
             <input
                 ref={inputRef}

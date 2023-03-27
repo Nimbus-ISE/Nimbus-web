@@ -1,37 +1,40 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
-import { ThemeProvider } from "@mui/material";
+import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
+import { PlanContext } from "../Plan";
 
 const tags = [
     "Mall",
-    "Restaurant",
     "Religion",
     "Nature",
-    "Asian",
-    "Thai",
+    "Temple",
     "Shopping",
-    "Park",
     "Must See Attraction",
     "Beach",
     "Local Culture",
-    "Local Cuisine",
     "Luxury",
-    "History",
-    "Wine",
+    "Historical Place",
     "Outdoor",
     "Wellness & Spa",
-    "Safari",
-    "Sustainable Travel",
-    "Local Beer",
-    "Live Sporting Event",
-    "Arts & Theatre",
+    "Zoo",
+    "Market",
+    "Sports",
+    "Arts",
+    "Theater",
     "Museum",
     "Nightlife",
-    "Adventure & Sports",
+    "Adventure",
+    "Amusement Park",
+    "Family",
+    "Modern",
+    "Restaurant",
+    "Park",
 ];
 
 const TagsSelection = () => {
+    const { setFormDataField, setIsConfirmActive } =
+        React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -45,10 +48,13 @@ const TagsSelection = () => {
         console.log(newSelectTag);
         setSelectTag(newSelectTag);
     };
+    React.useEffect(() => {
+        setFormDataField("tags", selectTag);
+    }, [selectTag]);
     return (
-        <>
+        <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="basis-auto">
+                <div className="flex flex-wrap justify-center">
                     {tags.map((data) => {
                         return (
                             <Chip
@@ -67,12 +73,37 @@ const TagsSelection = () => {
                                         ? "outlined"
                                         : "filled"
                                 }
+                                className="shadow-md"
                             />
                         );
                     })}
                 </div>
+                <div className="flex mx-auto w-full">
+                    <Button
+                        onClick={() => {
+                            setIsConfirmActive(true);
+                        }}
+                        variant="outlined"
+                        sx={{
+                            borderRadius: "999px",
+                            borderColor: "black",
+                            color: "black",
+                            marginTop: "50px",
+                            paddingX: "5rem",
+                            marginX: "auto",
+                            textTransform: "none",
+                            "&:hover": {
+                                color: "black",
+                                backgroundColor: "Gainsboro",
+                                borderColor: "gray",
+                            },
+                        }}
+                    >
+                        <div className="m-auto font-montserrat">Continue</div>
+                    </Button>
+                </div>
             </ThemeProvider>
-        </>
+        </div>
     );
 };
 
