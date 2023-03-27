@@ -1,4 +1,4 @@
-import ProfileCard from "@/components/RecentlyView/ProfileCard";
+import ProfileCard from "@/components/ProfileCard";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
