@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 const NavbarLogo = () => {
     const router = useRouter();
     return (
-        <div
+        <button
             onClick={() => router.push("/")}
-            className="flex select-none my-auto"
+            className="flex select-none m-auto"
         >
             <Image
                 className="w-[40px] h-[30px]"
@@ -16,8 +16,8 @@ const NavbarLogo = () => {
                 width={40}
                 height={30}
             />
-            <div className="text-2xl font-bold mx-2">NIMBUS</div>
-        </div>
+            <div className="text-xl font-bold mx-1">NIMBUS</div>
+        </button>
     );
 };
 

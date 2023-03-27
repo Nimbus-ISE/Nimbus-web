@@ -1,29 +1,42 @@
 import React from "react";
 
-const useElementSize = (elementId: string) => {
+const useElementSize = (elementId?: string) => {
     const [elementSize, setElementSize] = React.useState({
         width: 0,
         height: 0,
     });
-    const [element, setElement] = React.useState<any>(null);
-    const handleResize = () => {
+    const [element, setElement] = React.useState<HTMLElement>();
+    const handleResize = (element: HTMLElement) => {
         setElementSize({
             width: element.offsetWidth,
             height: element.offsetHeight,
         });
     };
     React.useEffect(() => {
-        console.log(elementId);
         if (elementId) {
-            setElement(document.getElementById(elementId));
+            const element = document.getElementById(elementId);
+            if (element) setElement(element);
+        } else {
+            setElement(document.documentElement);
         }
     }, [elementId]);
     React.useEffect(() => {
         if (element) {
-            handleResize();
-            window.addEventListener("resize", handleResize);
+            handleResize(element);
+            window.addEventListener("resize", () => handleResize(element));
+            let observer = new ResizeObserver((entries) => {
+                entries.forEach((entry) => {
+                    handleResize(element);
+                });
+            });
+            observer.observe(element);
+            return () => {
+                observer.unobserve(element);
+                window.removeEventListener("resize", () =>
+                    handleResize(element)
+                );
+            };
         }
-        return () => window.removeEventListener("resize", handleResize);
     }, [element]);
 
     return elementSize;

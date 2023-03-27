@@ -16,6 +16,7 @@ const useMediaQuery = (query: string) => {
                 setMatches(e.matches);
             });
     }, []);
+
     return matches;
 };
 

@@ -1,0 +1,122 @@
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-column-start: 0;
+    grid-column-end: span 12;
+    height: 100%;
+    width: 100%;
+    animation: cardStretch;
+    animation-duration: 1s;
+    overflow: hidden;
+    padding-right: 66.6666667%;
+}
+
+.tabs .tab {
+    order: 99;
+    width: 100%;
+    display: block;
+    padding: 1rem;
+    background: #fff;
+    overflow-y: scroll;
+    height: 100vh;
+}
+.tab::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    display: block;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    height: 100%;
+}
+
+.tabs input[type="radio"] {
+    display: none;
+}
+.tabsClosed input[type="radio"] {
+    display: none;
+}
+.checkedLabel {
+    order: 1;
+    width: 18%;
+    display: block;
+    padding: 0.5vw;
+    margin-right: 0.2rem;
+    font-weight: bold;
+    font-size: smaller;
+    transition: background ease 0.2s;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #fff;
+    color: black;
+    animation-name: tabStretch;
+    animation: 2s ease-in;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    height: 2rem;
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+    display: block;
+}
+
+.openTabButton {
+    position: absolute;
+    background: #fff;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    height: 5rem;
+    width: 1.5rem;
+    z-index: 15;
+    font-weight: 500;
+    top: 55%;
+    left: 33%;
+}
+.fullTab {
+    position: absolute;
+    display: block;
+    background-color: #fff;
+    height: 42rem;
+    width: 90rem;
+    left: 0;
+    bottom: 0;
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+    z-index: 20;
+}
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes tabStretch {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 10%;
+    }
+}
+
+@keyframes cardStretch {
+    0% {
+        padding-right: 0%;
+    }
+    100% {
+        padding-right: 66.6666667%;
+    }
+}
+
+@keyframes cardCollapse {
+    0% {
+        margin-right: 0rem;
+    }
+    100% {
+        margin-right: 110rem;
+    }
+}

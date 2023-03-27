@@ -11,18 +11,26 @@ interface IProps {
 const MobileLeft = ({ setOpenDrawer }: IProps) => {
     return (
         <div
-            className="relative flex gap-1 items-center place-items-center 
-            justify-evenly h-16 text-neutral-600"
+            className="relative flex gap-1 justify-left
+            h-16 text-neutral-600"
         >
-            <IconButton className="aspect-square">
+            <IconButton
+                onClick={() => setOpenDrawer((prev) => !prev)}
+                sx={{
+                    width: "50px",
+                    height: "50px",
+                    marginY: "auto",
+                    marginLeft: "7px",
+                    zIndex: 10,
+                }}
+            >
                 <FontAwesomeIcon
                     icon={faBars}
                     color="gray"
-                    onClick={() => setOpenDrawer((prev) => !prev)}
                     className="aspect-square drop-shadow-sm fa-lg"
                 />
             </IconButton>
-            <div className="">
+            <div className="absolute flex top-0 bottom-0 left-0 right-0 m-auto">
                 <NavbarLogo />
             </div>
         </div>
