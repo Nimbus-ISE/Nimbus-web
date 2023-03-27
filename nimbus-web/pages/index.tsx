@@ -1,6 +1,6 @@
 import classes from "../styles/Home.module.css";
 import Head from "next/head";
-import Card from "../components/Card";
+import Card from "../components/Cards/Card";
 import { places } from "@/public/data";
 import Hotspot from "@/components/Hotspot/Hotspot";
 import HomeCarousel from "@/components/HomeCarousel/HomeCarousel";
