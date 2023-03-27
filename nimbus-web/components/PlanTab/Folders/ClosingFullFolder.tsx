@@ -4,11 +4,10 @@ import classes from "./ClosingFullFolder.module.css";
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
-import { testData } from "@/test_data/testData";
 
 import { getPlanTabState } from "../PlanTabContext";
 const ClosingFullFolder = () => {
-    const { currentFolderView } = getPlanTabState();
+    const { currentFolderView, fullPlan } = getPlanTabState();
 
     return (
         <>
@@ -24,7 +23,7 @@ const ClosingFullFolder = () => {
                                 "flex w-full gap-20 animate-graph-expand"
                             }
                         >
-                            {testData.map((data, index) => {
+                            {fullPlan.map((data: any, index: any) => {
                                 if (
                                     index >= currentFolderView &&
                                     index < currentFolderView + 1
@@ -43,7 +42,7 @@ const ClosingFullFolder = () => {
                         </div>
                     </div>
 
-                    {testData.map((data, index) => {
+                    {fullPlan.map((data: any, index: any) => {
                         if (
                             index > currentFolderView &&
                             index < currentFolderView + 3

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getPlanTabState } from "../PlanTabContext";
 import FullScreenPlan from "./FullScreenPlan";
 import Alternative from "../Popups/Alternative";
@@ -25,7 +25,9 @@ const BigScreenPage = () => {
         openAlternatives,
         openReview,
         isBigScreen,
-        reviewData,
+        placeData,
+        currentFolder,
+        fullPlan,
     } = getPlanTabState();
     const {
         mapRef,
@@ -36,6 +38,20 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
+
+    useEffect(() => {
+        if (points[currentFolder]) {
+            mapRef.current?.flyTo({
+                center: [
+                    points[currentFolder][0][1],
+                    points[currentFolder][0][0],
+                ],
+            });
+        }
+        mapRef.current?.resize();
+        console.log(pinState);
+    }, [currentFolder, points[currentFolder], pinState]);
+
     return (
         <>
             {openFullTab && !closed && <FullScreenPlan />}
@@ -43,20 +59,13 @@ const BigScreenPage = () => {
                 <>
                     <SideBar />
 
-                    {/* <div
-                        className={
-                            "bg-rose-400 w-[100%] h-[110vh] text-[10rem] col-span-8  "
-                        }
-                    >
-                        MAP
-                    </div> */}
                     {/* {!openFullTab && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
-                                longitude: 100.5018,
                                 latitude: 13.7563,
-                                zoom: 10,
+                                longitude: 100.5018,
+                                zoom: 15,
                             }}
                             attributionControl={false}
                             style={{
@@ -66,34 +75,49 @@ const BigScreenPage = () => {
                             mapboxAccessToken={
                                 "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
                             }
-                            mapStyle="mapbox://styles/mapbox/streets-v12"
+                            mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                         >
-                            {Object.keys(points).map(
-                                (key: string, index: number) => {
-                                    return (
-                                        <Marker
-                                            longitude={
-                                                points[key].coordinates.lng
-                                            }
-                                            latitude={
-                                                points[key].coordinates.lat
-                                            }
-                                            anchor="bottom"
-                                            onClick={(e) => {
-                                                togglePinState(index);
-                                                onSelect(
-                                                    points[key].coordinates.lng,
-                                                    points[key].coordinates.lat
-                                                );
-                                                e.originalEvent.stopPropagation();
-                                            }}
-                                        >
-                                            <Pin fill={pinState[index]} />
-                                        </Marker>
-                                    );
-                                },
-                                []
-                            )}
+                            {points[0] &&
+                                points[currentFolder].map(
+                                    (point: any, index: any) => {
+                                        return (
+                                            <Marker
+                                                longitude={point[1]}
+                                                latitude={point[0]}
+                                                anchor="bottom"
+                                                onClick={(e) => {
+                                                    console.log(index);
+
+                                                    togglePinState(
+                                                        currentFolder,
+                                                        index
+                                                    );
+                                                    onSelect(
+                                                        point[1],
+                                                        point[0]
+                                                    );
+                                                    e.originalEvent.stopPropagation();
+                                                }}
+                                            >
+                                                <span className="text-center bg-black text-cyan-300 p-[2px] rounded">
+                                                    {
+                                                        fullPlan[currentFolder][
+                                                            index
+                                                        ].name
+                                                    }
+                                                </span>
+                                                <Pin
+                                                    fill={
+                                                        pinState[currentFolder][
+                                                            index
+                                                        ]
+                                                    }
+                                                />
+                                            </Marker>
+                                        );
+                                    },
+                                    []
+                                )}
 
                             <ScaleControl position="top-right" />
                             <AttributionControl
@@ -105,14 +129,15 @@ const BigScreenPage = () => {
                             </Source>
                         </Map>
                     )} */}
+
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
                                 <PlaceDetail
-                                    placeTitle={reviewData.placeTitle}
-                                    address={reviewData.address}
+                                    placeTitle={placeData.placeTitle}
+                                    address={placeData.address}
                                     placeDescription={
-                                        reviewData.placeDescription
+                                        placeData.placeDescription
                                     }
                                 />
                             </div>

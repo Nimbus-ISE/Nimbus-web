@@ -29,20 +29,39 @@ const SmallScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    const { openFullTab, openAlternatives, openReview, reviewData } =
-        getPlanTabState();
+    const {
+        openFullTab,
+        openAlternatives,
+        openReview,
+        placeData,
+        fullPlan,
+        currentFolderView,
+        currentFolder,
+    } = getPlanTabState();
+    useEffect(() => {
+        if (points[currentFolder]) {
+            mapRef.current?.flyTo({
+                center: [
+                    points[currentFolder][0][1],
+                    points[currentFolder][0][0],
+                ],
+            });
+        }
+        mapRef.current?.resize();
+        console.log(pinState);
+    }, [currentFolder, points[currentFolder], pinState]);
     return (
         <div>
-            {/* {!openFullTab && (
+            {!openFullTab && (
                 <>
                     <div className="h-[70vh] -z-10">
-                        {!openFullTab && (
+                        {/* {!openFullTab && (
                             <Map
                                 ref={mapRef}
                                 initialViewState={{
-                                    longitude: 100.5018,
                                     latitude: 13.7563,
-                                    zoom: 10,
+                                    longitude: 100.5018,
+                                    zoom: 15,
                                 }}
                                 attributionControl={false}
                                 style={{
@@ -52,36 +71,49 @@ const SmallScreenPage = () => {
                                 mapboxAccessToken={
                                     "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
                                 }
-                                mapStyle="mapbox://styles/mapbox/streets-v12"
+                                mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                             >
-                                {Object.keys(points).map(
-                                    (key: string, index: number) => {
-                                        return (
-                                            <Marker
-                                                longitude={
-                                                    points[key].coordinates.lng
-                                                }
-                                                latitude={
-                                                    points[key].coordinates.lat
-                                                }
-                                                anchor="bottom"
-                                                onClick={(e) => {
-                                                    togglePinState(index);
-                                                    onSelect(
-                                                        points[key].coordinates
-                                                            .lng,
-                                                        points[key].coordinates
-                                                            .lat
-                                                    );
-                                                    e.originalEvent.stopPropagation();
-                                                }}
-                                            >
-                                                <Pin fill={pinState[index]} />
-                                            </Marker>
-                                        );
-                                    },
-                                    []
-                                )}
+                                {points[0] &&
+                                    points[currentFolder].map(
+                                        (point: any, index: any) => {
+                                            return (
+                                                <Marker
+                                                    longitude={point[1]}
+                                                    latitude={point[0]}
+                                                    anchor="bottom"
+                                                    onClick={(e) => {
+                                                        console.log(index);
+
+                                                        togglePinState(
+                                                            currentFolder,
+                                                            index
+                                                        );
+                                                        onSelect(
+                                                            point[1],
+                                                            point[0]
+                                                        );
+                                                        e.originalEvent.stopPropagation();
+                                                    }}
+                                                >
+                                                    <span className="text-center bg-black text-cyan-300 p-[2px] rounded">
+                                                        {
+                                                            fullPlan[
+                                                                currentFolder
+                                                            ][index].name
+                                                        }
+                                                    </span>
+                                                    <Pin
+                                                        fill={
+                                                            pinState[
+                                                                currentFolder
+                                                            ][index]
+                                                        }
+                                                    />
+                                                </Marker>
+                                            );
+                                        },
+                                        []
+                                    )}
 
                                 <ScaleControl position="top-right" />
                                 <AttributionControl
@@ -96,15 +128,16 @@ const SmallScreenPage = () => {
                                     <Layer {...layerStyle} />
                                 </Source>
                             </Map>
-                        )}
+                        )} */}
+
                         <div>
                             {openReview && (
                                 <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
                                     <PlaceDetail
-                                        placeTitle={reviewData.placeTitle}
-                                        address={reviewData.address}
+                                        placeTitle={placeData.placeTitle}
+                                        address={placeData.address}
                                         placeDescription={
-                                            reviewData.placeDescription
+                                            placeData.placeDescription
                                         }
                                     />
                                 </div>
@@ -115,7 +148,7 @@ const SmallScreenPage = () => {
                         <SideBar />
                     </div>
                 </>
-            )} */}
+            )}
             {openFullTab && (
                 <div>
                     <SideBar />

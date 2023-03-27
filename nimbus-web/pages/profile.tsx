@@ -3,6 +3,7 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
+import UserProfile from "@/components/UserProfile";
 
 function Profile() {
     const { user, isLoading } = useUser();
@@ -18,11 +19,7 @@ function Profile() {
             {user && (
                 <div className="grid place-items-center min-h-screen h-full pt-24 bg-neutral-100 text-black">
                     <div>
-                        <img
-                            src={user.picture as string}
-                            alt="Profile"
-                            className="rounded-full w-12 h-12"
-                        />
+                        <UserProfile src={user.picture as string} size={40} />
                         <h2>{user.name}</h2>
                         <p className="">{user.email}</p>
                     </div>

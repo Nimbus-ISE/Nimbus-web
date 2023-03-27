@@ -6,6 +6,9 @@ import MobileSidebar from "./MobileSidebar";
 import NavbarRight from "./NavbarRight";
 import NavbarLogo from "./NavbarLogo";
 import MobileLeft from "./MobileLeft";
+import SearchBar from "../Search/SearchBar";
+import TagsButton from "../Search/TagsButton";
+import { Button } from "@mui/material";
 
 interface IProps {
     user: unknown;
@@ -20,10 +23,6 @@ const leftList = [
     {
         name: "Plan",
         route: "/plan",
-    },
-    {
-        name: "About",
-        route: "/",
     },
 ];
 
@@ -53,13 +52,24 @@ const Navbar = ({ user, isLoading }: IProps) => {
         return user && !isLoading
             ? [
                   ...leftList,
+                  { name: "Search", route: "/search" },
+                  "divider",
+                  { name: "Register Place", route: "/register" },
                   "divider",
                   "profile",
                   rightListLogout[0],
                   "upgrade",
                   rightListLogout[1],
               ]
-            : [...leftList, "divider", "profile", ...rightListLogin];
+            : [
+                  ...leftList,
+                  { name: "Search", route: "/search" },
+                  "divider",
+                  { name: "Register Place", route: "/register" },
+                  "divider",
+                  "profile",
+                  ...rightListLogin,
+              ];
     };
     const [mobileList, setMobileList] = React.useState<Array<any>>(
         calculateMobileList()
@@ -77,26 +87,48 @@ const Navbar = ({ user, isLoading }: IProps) => {
             >
                 {isLargerThanMedium ? (
                     <>
-                        <div className="flex pl-5 text-md">
+                        <div className="flex pl-3 text-md">
                             <NavbarLogo />
-                            <div className="grid grid-flow-col gap-4 pl-5">
+                            <div className="grid grid-flow-col gap-1 ml-3">
                                 {leftList.map((navItem) => (
                                     <RouteButton
                                         name={navItem.name}
                                         route={navItem.route}
                                     />
                                 ))}
+                                <SearchBar />
+                                <TagsButton />
                             </div>
+                            <Button
+                                onClick={() => {
+                                    router.push("/register");
+                                }}
+                                variant="outlined"
+                                color="primary"
+                                sx={{
+                                    height: "2rem",
+                                    borderRadius: "999px",
+                                    borderColor: "black",
+                                    color: "black",
+                                    marginY: "auto",
+                                    marginLeft: "0.75rem",
+                                    textTransform: "none",
+                                    "&:hover": {
+                                        color: "black",
+                                        backgroundColor: "Gainsboro",
+                                        borderColor: "gray",
+                                    },
+                                }}
+                            >
+                                <div className="m-auto text-xs font-montserrat whitespace-nowrap">
+                                    + Register Place
+                                </div>
+                            </Button>
                         </div>
-                        <NavbarRight
-                            listLogin={rightListLogin}
-                            listLogout={rightListLogout}
-                            isLoading={isLoading}
-                            user={user}
-                        />
+                        <NavbarRight isLoading={isLoading} user={user} />
                     </>
                 ) : (
-                    <div className="mr-5 w-[250px]">
+                    <div className=" w-full">
                         <MobileSidebar
                             list={mobileList}
                             openDrawer={openDrawer}
