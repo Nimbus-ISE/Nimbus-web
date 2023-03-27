@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof TripTypeInput>;
 
 const Template: ComponentStory<typeof TripTypeInput> = (args) => (
-    <TripTypeInput {...args} />
+    <TripTypeInput />
 );
 
 export const TripType = Template.bind({});

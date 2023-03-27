@@ -1,7 +1,11 @@
 import useElementSize from "@/hooks/useElementSize";
 import React, { ReactElement } from "react";
+import BudgetInput from "./BudgetInput";
 import DateForm from "./DateInput";
+import DistanceInput from "./DistanceInput";
 import LocationInput from "./LocationInput";
+import TagsSelection from "./TagsSelection";
+import TripTypeInput from "./TripTypeInput";
 
 interface IProps {
     formArr: Array<IForm>;
@@ -10,10 +14,10 @@ interface IProps {
 const formMapper: { [key: string]: ReactElement<any, any> } = {
     Location: <LocationInput />,
     Dates: <DateForm />,
-    Style: <LocationInput />,
-    Budget: <LocationInput />,
-    Distance: <LocationInput />,
-    Tags: <LocationInput />,
+    Style: <TripTypeInput />,
+    Budget: <BudgetInput />,
+    Distance: <DistanceInput />,
+    Tags: <TagsSelection />,
 };
 
 const Form = ({ formArr }: IProps) => {
