@@ -48,7 +48,6 @@ const SmallScreenPage = () => {
             });
         }
         mapRef.current?.resize();
-        console.log(pinState);
     }, [currentFolder, points[currentFolder], pinState]);
     return (
         <div>

@@ -13,15 +13,14 @@ const FolderSmall = () => {
         getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
-    // console.log(fullPlan);
+
     const toggleTabs = (tab: string) => {
         setOpenedTab(tab);
     };
-    console.log(fullPlan);
 
     useEffect(() => {
         setOpenedTab(`tab${currentFolderView}`);
-        console.log("fulltab");
+
         if (isBigScreen && !openFullTab) {
             setTabsClass(classes.tabs);
         } else if (!isBigScreen && !openFullTab) {

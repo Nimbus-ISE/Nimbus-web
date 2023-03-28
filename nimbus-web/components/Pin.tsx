@@ -10,7 +10,7 @@ const pinStyle = {
     stroke: "none",
 };
 
-function Pin({ size = 30, fill = "#000" }) {
+function Pin({ size = 30, fill = "#000", number = "" }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +24,16 @@ function Pin({ size = 30, fill = "#000" }) {
             className="feather feather-map-pin"
         >
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
+
+            <text
+                x="8.5"
+                y="15"
+                stroke="white"
+                font-weight="lighter"
+                font-family="monospace"
+            >
+                {number}
+            </text>
         </svg>
     );
 }

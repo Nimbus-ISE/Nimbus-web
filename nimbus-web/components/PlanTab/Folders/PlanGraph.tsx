@@ -37,6 +37,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         placeDescription:
                                             place.placeDescription,
                                         address: place.address,
+                                        loc_id: place.loc_id,
                                     },
                                 });
                             }}

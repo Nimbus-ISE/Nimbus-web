@@ -1,12 +1,17 @@
 import Review from "./Review";
-import React from "react";
+import React, { useEffect } from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
 import Star from "@/components/Star";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    const { isBigScreen } = getPlanTabState();
+    const { isBigScreen, placeData } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
+
+    useEffect(() => {
+        fetch(`@/api/getLocationData?loc_id=${placeData.loc_id}`);
+    }, []);
+
     return (
         <>
             <div
