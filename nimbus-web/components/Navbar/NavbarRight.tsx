@@ -18,6 +18,31 @@ const NavbarRight = ({ isLoading, user }: IProps) => {
         React.useState<boolean>(false);
     return (
         <div className="grid grid-flow-col gap-1 px-5 text-md">
+            <Button
+                onClick={() => {
+                    router.push("/register");
+                }}
+                variant="outlined"
+                color="primary"
+                sx={{
+                    height: "2rem",
+                    borderRadius: "999px",
+                    borderColor: "black",
+                    color: "black",
+                    marginY: "auto",
+                    marginX: "0.75rem",
+                    textTransform: "none",
+                    "&:hover": {
+                        color: "black",
+                        backgroundColor: "Gainsboro",
+                        borderColor: "gray",
+                    },
+                }}
+            >
+                <div className="m-auto text-xs font-montserrat whitespace-nowrap">
+                    + Register Place
+                </div>
+            </Button>
             {!isLoading && !user ? (
                 <Button
                     onClick={handleOnLogIn}
