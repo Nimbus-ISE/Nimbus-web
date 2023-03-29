@@ -10,13 +10,18 @@ export default async function handler(
     try {
         const splitted = (tags as string).split(",");
         const location_data = await sql`
-        SELECT L.loc_id, L.loc_name, string_agg(T.tag_name, ',') AS tag_list, L.est_time_stay, L.price_level, L.lat, L.long, L.rating
+        SELECT L.loc_id, L.loc_name, string_agg(B.tag_name, ',') as full_tag_list,
+        string_agg(CASE WHEN B.tag_name IN ${sql(
+            splitted
+        )} THEN B.tag_name END, ',') as filtered_tag_list,
+        I.url, L.est_time_stay, L.price_level, L.lat, L.lng, L.rating
         FROM location_data L
-        JOIN belong_to B ON L.loc_id = B.loc_id
-        JOIN tag T ON B.tag_name = T.tag_name
-        WHERE T.tag_name IN ${sql(splitted)}
-        GROUP BY L.loc_id, L.loc_name, L.est_time_stay, L.price_level, L.lat, L.long, L.rating
-        HAVING COUNT(DISTINCT T.tag_name) = ${splitted.length}`;
+        JOIN belong_to B ON L.loc_id = B.loc_id 
+        JOIN image I ON I.loc_id = L.loc_id
+        GROUP BY L.loc_id, I.url
+        HAVING COUNT(CASE WHEN B.tag_name IN ${sql(splitted)} THEN 1 END) = ${
+            splitted.length
+        }`;
         console.log(location_data);
         res.status(200).json(location_data);
     } catch (e) {
