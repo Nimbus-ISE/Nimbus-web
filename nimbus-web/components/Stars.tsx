@@ -3,7 +3,7 @@ import Star from "./Star";
 
 const Stars = ({ size, rating }: { size: number; rating: number }) => {
     const calculatePercent = (index: number) => {
-        const firstNumber = Number(rating.toString().slice(0, 1));
+        const firstNumber = Math.floor(rating);
         if (index < firstNumber) {
             return "100%";
         } else if (index === firstNumber) {
@@ -17,6 +17,9 @@ const Stars = ({ size, rating }: { size: number; rating: number }) => {
             {[...Array(5)].map((item, index) => {
                 return <Star size={size} percent={calculatePercent(index)} />;
             })}
+            <div className="text-slate-500 text-sm my-auto mx-2">
+                ({rating})
+            </div>
         </div>
     );
 };
