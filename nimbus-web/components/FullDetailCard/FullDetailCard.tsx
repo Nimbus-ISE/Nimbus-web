@@ -3,33 +3,43 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StarIcon from "@mui/icons-material/Star";
 import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
+import Stars from "../Stars";
 
 interface FullDetailCardProps {
-    data: {
-        title: string;
-        image: string[];
-        address: string;
-        openTime: string;
-        tag: string;
-        rate: number;
-        info: string;
+    location: {
+        loc_id: number;
+        loc_name: string;
+        description: string;
+        province: string;
+        location_rating: string;
+        url: string;
+        reviews: Array<IReview>;
     };
 }
 
-const FullDetailCard = ({ data }: FullDetailCardProps) => {
-    const [page, setPage] = useState(1);
-    const [imageList, setImageList] = useState(data.image[0]);
-    const count = data.image.length;
+const FullDetailCard = ({ location }: FullDetailCardProps) => {
+    const {
+        loc_id,
+        loc_name,
+        description,
+        province,
+        location_rating,
+        url,
+        reviews,
+    } = location;
+    //const [page, setPage] = useState(1);
+    //const [imageList, setImageList] = useState(data.image[0]);
+    //const count = data.image.length;
     const handleSelectDestination = () => {};
     const handlePages = (
         event: React.ChangeEvent<unknown>,
         updatePage: number
     ) => {
-        setImageList(data.image[updatePage - 1]);
-        setPage(updatePage);
+        //setImageList(data.image[updatePage - 1]);
+        //setPage(updatePage);
     };
     return (
-        <div className="bg-white text-black">
+        <div className="text-black">
             <Stack spacing={3}>
                 <Stack
                     direction="row"
@@ -39,12 +49,13 @@ const FullDetailCard = ({ data }: FullDetailCardProps) => {
                     <Stack width="60%">
                         <Box
                             component="img"
+                            className="shadow-md"
                             sx={{
                                 borderRadius: "8px 8px 0px 0px",
                                 width: "100%",
                                 height: "280px",
                             }}
-                            src={imageList}
+                            src={url}
                         />
                         <Box
                             display="flex"
@@ -58,15 +69,22 @@ const FullDetailCard = ({ data }: FullDetailCardProps) => {
                             }}
                         >
                             <Pagination
-                                count={count}
-                                page={page}
+                                count={1}
+                                page={1}
                                 size="small"
                                 onChange={handlePages}
                             />
                         </Box>
                     </Stack>
                     <Stack width="40%" pl={3}>
-                        <Typography variant="h4">{data.title}</Typography>
+                        <Typography
+                            sx={{
+                                fontWeight: 600,
+                            }}
+                            variant="h4"
+                        >
+                            {loc_name}
+                        </Typography>
                         <Stack
                             direction="row"
                             spacing={1}
@@ -76,17 +94,17 @@ const FullDetailCard = ({ data }: FullDetailCardProps) => {
                             <LocationOnIcon fontSize="large" />
                             <Stack spacing={1}>
                                 <Typography variant="body1">
-                                    {data.address}
+                                    {province}
                                 </Typography>
-                                <Typography
+                                {/*<Typography
                                     variant="body2"
                                     sx={{ fontStyle: "italic" }}
                                 >
-                                    {data.openTime}
-                                </Typography>
+						{data.openTime}
+						</Typography>*/}
                             </Stack>
                         </Stack>
-                        <Stack
+                        {/*<Stack
                             direction="row"
                             pl={1}
                             pb={3}
@@ -103,32 +121,32 @@ const FullDetailCard = ({ data }: FullDetailCardProps) => {
                                 sx={{ color: "#D9D9D9" }}
                             >
                                 {data.tag}
-                            </Typography>
-                        </Stack>
-                        <Stack direction="row" justifyContent="center" pb={1.5}>
-                            <StarIcon sx={{ color: "#F4C01E" }} />
-                            <StarIcon sx={{ color: "#F4C01E" }} />
-                            <StarIcon sx={{ color: "#F4C01E" }} />
-                            <StarIcon sx={{ color: "#F4C01E" }} />
-                            <StarIcon sx={{ color: "#F4C01E" }} />
-                        </Stack>
+						</Typography>
+                        </Stack>*/}
+                        <div className="mx-auto">
+                            <Stars size={20} rating={Number(location_rating)} />
+                        </div>
                         <Button
                             sx={{
                                 backgroundColor: "#45D8D0",
                                 borderRadius: "18px",
+                                marginY: "2rem",
                             }}
                             onClick={handleSelectDestination}
                         >
                             <Typography
                                 variant="body2"
-                                sx={{ color: "#FFFFFF", fontWeight: "bold" }}
+                                sx={{
+                                    color: "#FFFFFF",
+                                    fontWeight: "bold",
+                                }}
                             >
                                 SELECT AS DESTINATION
                             </Typography>
                         </Button>
                     </Stack>
                 </Stack>
-                <Typography>{data.info}</Typography>
+                <Typography>{description}</Typography>
             </Stack>
         </div>
     );
