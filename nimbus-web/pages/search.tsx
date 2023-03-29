@@ -62,9 +62,13 @@ const search = () => {
                 ) : locationList === undefined ? null : locationList.length !==
                   0 ? (
                     <>
-                        <div className="flex w-full justify-between px-8 pt-2 text-left mx-auto text-neutral-500 text-sm">
-                            <div>Tags: {tagsText}</div>
-                            <div>Found {locationList.length} results</div>
+                        <div className="flex place-items-center w-full px-8 pt-2 text-left mx-auto text-neutral-500 text-sm">
+                            <div className="text-left w-1/2">
+                                Tags: {tagsText}
+                            </div>
+                            <div className="text-right w-1/2">
+                                Found {locationList.length} results
+                            </div>
                         </div>
                         <div
                             className={`grid ${columns} gap-5 w-fit mx-auto m-5 my-8`}
