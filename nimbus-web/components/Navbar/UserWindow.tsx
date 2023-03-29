@@ -39,7 +39,7 @@ const UserWindow = ({ user }: { user: any }) => {
             <div className="flex p-2">
                 <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
-                    <div className="font-semibold">{dot(user.name, 14)}</div>
+                    <div className="font-semibold">{dot(user.name, 13)}</div>
                     <div className="text-sm text-neutral-500">
                         {dot(user.email, 15)}
                     </div>

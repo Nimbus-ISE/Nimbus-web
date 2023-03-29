@@ -41,7 +41,7 @@ export default function Card(props: any) {
                     </div>
                     <div className="">
                         <div
-                            className="flex flex-wrap content-start h-16 px-6 pt-4 pb-2 overflow-y-scroll"
+                            className="flex flex-wrap content-start h-16 px-6 pt-4 pb-2"
                             key="tag-row"
                         >
                             {props.tags.map((tag: string, index: number) => (
