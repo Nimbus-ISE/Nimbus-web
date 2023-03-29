@@ -6,6 +6,13 @@ import Image from "next/image";
 export default function Card({ location }: { location: any }) {
     const router = useRouter();
     const [tagList, setTagList] = React.useState<Array<string>>([]);
+    const dot = (str: string | undefined, maxLength: number) => {
+        if (str && str.length > maxLength) {
+            return str.slice(0, maxLength) + "..";
+        } else {
+            return str;
+        }
+    };
     React.useEffect(() => {
         setTagList(location.full_tag_list.split(","));
     }, [location.full_tag_list]);
@@ -26,7 +33,7 @@ export default function Card({ location }: { location: any }) {
                     />
                     <div className="px-6 py-4 pb-0">
                         <div className="text-left font-bold whitespace-nowrap text-sm mb-1 text-slate-700">
-                            {location.loc_name}
+                            {dot(location.loc_name, 30)}
                         </div>
                         <Stars size={20} rating={Number(location.rating)} />
                     </div>

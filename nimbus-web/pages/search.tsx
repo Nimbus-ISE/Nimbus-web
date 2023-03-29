@@ -19,14 +19,18 @@ const search = () => {
     const [locationList, setLocationList] = React.useState<Array<any>>();
     const [columns, setColumns] = React.useState<string>("");
     const [loading, setLoading] = React.useState<boolean>(false);
+    const [tagsText, setTagsText] = React.useState<string>("");
     const size = useElementSize();
     const query = async (tags: Array<string>) => {
         let tagsCollector = "";
+        let tagsCollector1 = "";
         tags.forEach((tag) => {
             tagsCollector += tag + ",";
+            tagsCollector1 += tag + ", ";
         });
         const tagString = tagsCollector.slice(0, tagsCollector.length - 1);
-        console.log(tagString);
+        const tagString1 = tagsCollector1.slice(0, tagsCollector1.length - 2);
+        setTagsText(tagString1);
         try {
             setLoading(true);
             const res = await fetch(`/api/tagsearch/${tagString}`);
@@ -48,7 +52,7 @@ const search = () => {
                 FILTER BY TAGS
             </div>
             <div className="bg-white rounded-3xl shadow-md mx-5 mb-5 text-center">
-                <div className="py-8 pb-5 border-b-[0.75px] border-neutral-400 mx-5">
+                <div className="py-5 border-b-[0.75px] border-neutral-400 mx-5">
                     <TagsSelect callback={query} />
                 </div>
                 {loading ? (
@@ -57,13 +61,19 @@ const search = () => {
                     </div>
                 ) : locationList === undefined ? null : locationList.length !==
                   0 ? (
-                    <div
-                        className={`grid ${columns} gap-5 w-fit mx-auto m-5 my-8`}
-                    >
-                        {locationList.map((location) => {
-                            return <Card location={location} />;
-                        })}
-                    </div>
+                    <>
+                        <div className="flex w-full justify-between px-8 pt-2 text-left mx-auto text-neutral-500 text-sm">
+                            <div>Tags: {tagsText}</div>
+                            <div>Found {locationList.length} results</div>
+                        </div>
+                        <div
+                            className={`grid ${columns} gap-5 w-fit mx-auto m-5 my-8`}
+                        >
+                            {locationList.map((location) => {
+                                return <Card location={location} />;
+                            })}
+                        </div>
+                    </>
                 ) : (
                     <div className="p-10 font-semibold">
                         No location was found with the following tags

@@ -2,6 +2,7 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
+import SearchIcon from "@mui/icons-material/Search";
 
 const tags = [
     "Mall",
@@ -52,7 +53,7 @@ const TagsSelect = ({ callback }: IProps) => {
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex flex-wrap justify-center border-[0.75px] p-5 rounded-xl border-teal-400">
+                <div className="flex flex-wrap justify-center border-[0.75px] p-5 rounded-xl border-teal-400 shadow-sm">
                     {tags.map((data) => {
                         return (
                             <Chip
@@ -78,10 +79,12 @@ const TagsSelect = ({ callback }: IProps) => {
                 </div>
                 <div className="flex mx-auto mt-2 w-full">
                     <Button
+                        disabled={selectTag.length === 0}
                         onClick={() => {
                             callback(selectTag);
                         }}
                         variant="outlined"
+                        startIcon={<SearchIcon />}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
