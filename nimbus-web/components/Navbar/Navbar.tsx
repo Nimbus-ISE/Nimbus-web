@@ -115,7 +115,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                     </div>
                 )}
             </div>
-            <div className="flex w-full h-1 bg-gradient-to-r from-tricolorgreen to-yellow-300" />
+            <div className="flex w-full h-[3px] bg-gradient-to-r from-tricolorgreen to-yellow-300" />
         </div>
     );
 };
