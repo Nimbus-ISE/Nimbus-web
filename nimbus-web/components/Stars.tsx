@@ -13,11 +13,17 @@ const Stars = ({ size, rating }: { size: number; rating: number }) => {
         }
     };
     return (
-        <div className="flex">
+        <div
+            style={{
+                width: size * 6 + 12,
+                height: size,
+            }}
+            className="grid grid-cols-6 gap-0.5"
+        >
             {[...Array(5)].map((item, index) => {
                 return <Star size={size} percent={calculatePercent(index)} />;
             })}
-            <div className="text-slate-500 text-sm my-auto mx-2">
+            <div className="text-slate-500 text-sm mx-1 my-auto">
                 ({rating})
             </div>
         </div>

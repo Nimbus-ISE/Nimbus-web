@@ -35,7 +35,7 @@ export default function Card({ location }: { location: any }) {
                         <div className="text-left font-bold whitespace-nowrap text-sm mb-1 text-slate-700">
                             {dot(location.loc_name, 30)}
                         </div>
-                        <Stars size={20} rating={Number(location.rating)} />
+                        <Stars size={16} rating={Number(location.rating)} />
                     </div>
                     <div className="">
                         <div
