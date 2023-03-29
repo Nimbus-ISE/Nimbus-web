@@ -1,7 +1,7 @@
 import React from "react";
 
 const Loading = () => (
-    <div className="w-100 h-100 m-auto">
+    <div className="m-auto">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="120"

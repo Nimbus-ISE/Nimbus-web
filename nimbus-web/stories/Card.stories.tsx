@@ -8,9 +8,9 @@ export default {
 
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
-export const card = Template.bind({});
+export const Primary = Template.bind({});
 
-card.args = {
+Primary.args = {
     location: {
         loc_id: 27,
         loc_name: "centralwOrld",
