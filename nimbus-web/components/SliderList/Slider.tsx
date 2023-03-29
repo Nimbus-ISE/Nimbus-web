@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
-    faChevronCircleLeft,
-    faChevronCircleRight,
+    faChevronRight,
+    faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import ProfileCard from ".";
+import CardItem from "./CardItem";
 import useElementSize from "@/hooks/useElementSize";
 
 interface IProps {
@@ -48,23 +48,35 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
                         {calculatedOffset !== 0 ? (
                             <button
                                 onClick={() => calculateOffset(false)}
-                                className="absolute left-0 top-0 bottom-0 h-full z-10 group px-2"
+                                className="flex w-20 h-full bg-gradient-to-r from-neutral-100 to-transparent 
+                                absolute -left-2 top-0 m-auto z-[9] group px-2"
                             >
-                                <FontAwesomeIcon
-                                    className="text-white drop-shadow-sm w-10 h-10 group-hover:opacity-100 group-hover:scale-110 duration-500 transform-gpu opacity-60"
-                                    icon={faChevronCircleLeft}
-                                />
+                                <div
+                                    className="flex w-12 h-12 bg-black rounded-full hover:bg-opacity-100 bg-opacity-60 
+                                    absolute left-4 top-0 bottom-0 m-auto z-10 group px-2"
+                                >
+                                    <FontAwesomeIcon
+                                        className="m-auto text-white drop-shadow-sm w-6 h-6 duration-500 transform-gpu"
+                                        icon={faChevronLeft}
+                                    />
+                                </div>
                             </button>
                         ) : null}
                         {calculatedOffset !== widthCal ? (
                             <button
                                 onClick={() => calculateOffset(true)}
-                                className="absolute right-0 top-0 bottom-0 z-10 group px-2"
+                                className="flex w-20 h-full bg-gradient-to-l from-neutral-100 to-transparent
+                                absolute -right-2 top-0 bottom-0 m-auto z-10 group px-2"
                             >
-                                <FontAwesomeIcon
-                                    className="text-white drop-shadow-sm w-10 h-10 group-hover:opacity-100 hover:scale-110 duration-500 transform-gpu opacity-60"
-                                    icon={faChevronCircleRight}
-                                />
+                                <div
+                                    className="flex w-12 h-12 bg-black rounded-full hover:bg-opacity-100 bg-opacity-60 
+                                    absolute right-4 top-0 bottom-0 m-auto z-10 group px-2"
+                                >
+                                    <FontAwesomeIcon
+                                        className="m-auto text-white drop-shadow-sm w-6 h-6 duration-500 transform-gpu"
+                                        icon={faChevronRight}
+                                    />
+                                </div>
                             </button>
                         ) : null}
                     </>
@@ -78,13 +90,13 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
                     }}
                     className={`${
                         !isLargerThanMedium
-                            ? "overflow-x-scroll hide-scrollbar"
+                            ? "overflow-x-scroll overflow-y-hidden hide-scrollbar"
                             : null
                     } w-full p-5 flex transform-gpu duration-500`}
                 >
                     {locationList.map((location: any, index) => {
                         return (
-                            <ProfileCard
+                            <CardItem
                                 id={location.loc_id}
                                 key={index}
                                 name={location.loc_name}

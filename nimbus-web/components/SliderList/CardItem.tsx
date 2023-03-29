@@ -4,7 +4,7 @@ import Image from "next/image";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useElementSize from "@/hooks/useElementSize";
 
-interface ProfileCardProps {
+interface IProps {
     id: number;
     title: string;
     image: string;
@@ -13,14 +13,7 @@ interface ProfileCardProps {
     onClick: (id: number) => void;
 }
 
-const ProfileCard = ({
-    id,
-    title,
-    image,
-    name,
-    shape,
-    onClick,
-}: ProfileCardProps) => {
+const CardItem = ({ id, title, image, name, shape, onClick }: IProps) => {
     const [style, setStyle] = React.useState<Array<string>>([]);
     const isLargerThanMedium = useMediaQuery("(min-width: 786px)");
     const { height } = useElementSize(title);
@@ -50,7 +43,7 @@ const ProfileCard = ({
                 onClick={() => onClick(id)}
                 className={`overflow-hidden ${
                     shape === "circle" ? "rounded-full" : "rounded-xl"
-                } w-full h-full shadow-md`}
+                } w-full h-full hover:shadow-lg shadow-md transition duration-300`}
             >
                 <Image
                     className="w-full h-full hover:scale-105 object-cover
@@ -74,4 +67,4 @@ const ProfileCard = ({
     );
 };
 
-export default ProfileCard;
+export default CardItem;

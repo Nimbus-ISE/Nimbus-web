@@ -1,4 +1,4 @@
-import Slider from "@/components/Slider/Slider";
+import Slider from "@/components/SliderList/Slider";
 import { mockLocations } from "@/test_data/locationList";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
