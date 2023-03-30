@@ -20,8 +20,6 @@ export default function map() {
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-
-        console.log(screenSize);
     }, [screenSize]);
 
     return (

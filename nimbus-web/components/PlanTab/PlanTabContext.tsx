@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
-interface reviewDataType {
+interface placeDataType {
+    loc_id: any;
     placeTitle: string;
     address: string;
     placeDescription: string;
@@ -9,7 +10,7 @@ interface PlanTabContextStateType {
     openFullTab: boolean;
     closed: boolean;
     openReview: false;
-    placeData: reviewDataType;
+    placeData: placeDataType;
     openAlternatives: boolean;
     currentFolderView: number;
     currentFolder: number;
@@ -116,7 +117,7 @@ const initialState: PlanTabContextStateType = {
     openFullTab: false,
     closed: true,
     openReview: false,
-    placeData: {} as reviewDataType,
+    placeData: {} as placeDataType,
     openAlternatives: false,
     currentFolderView: 0,
     isClosingFullFolder: false,

@@ -49,7 +49,6 @@ const BigScreenPage = () => {
             });
         }
         mapRef.current?.resize();
-        console.log(pinState);
     }, [currentFolder, points[currentFolder], pinState]);
 
     return (
@@ -112,6 +111,7 @@ const BigScreenPage = () => {
                                                             index
                                                         ]
                                                     }
+                                                    number={index + 1}
                                                 />
                                             </Marker>
                                         );

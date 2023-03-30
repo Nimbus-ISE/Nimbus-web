@@ -12,6 +12,7 @@ export interface PlanGraphProps {
 }
 
 export interface PlaceType {
+    loc_id: any;
     name: string;
     "opening hours": string;
     durationH: string;
@@ -25,6 +26,7 @@ interface DetailProps {
     numberOfStars?: number;
 }
 export interface PlaceDetailProps extends DetailProps {
+    loc_id?: string;
     placeTitle: string;
     placeDescription: string;
     address: string;

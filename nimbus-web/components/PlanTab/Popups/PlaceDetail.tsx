@@ -1,12 +1,29 @@
 import Review from "./Review";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
 import Star from "@/components/Star";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    const { isBigScreen } = getPlanTabState();
+    const { isBigScreen, placeData } = getPlanTabState();
+    const [detail, setDetail]: any = useState();
     const dispatch: any = getPlanTabDispatch();
+    const fetchDetail = async () => {
+        const response = await fetch(
+            `/api/getLocationData?loc_id=${placeData.loc_id}`
+        );
+        const result = await response.json();
+        return result;
+    };
+
+    useEffect(() => {
+        fetchDetail().then((data) => {
+            console.log(data[0]);
+
+            setDetail(data[0]);
+        });
+    }, []);
+
     return (
         <>
             <div
@@ -43,7 +60,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     {/* </div> */}
                     <div className="flex col-span-5 flex-col gap-2">
                         <div className="text-2xl font-extrabold">
-                            {props.placeTitle}
+                            {detail?.loc_name}
                         </div>
                         <div className="text-xs">{props.address}</div>
                         <div
@@ -55,7 +72,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                     </div>
                     <div className="text-[0.6rem] col-span-12">
-                        {props.placeDescription}
+                        {detail?.description}
                     </div>
                     <Review
                         user="John Taobin"
