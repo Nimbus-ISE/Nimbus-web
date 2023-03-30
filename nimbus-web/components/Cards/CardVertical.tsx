@@ -4,7 +4,7 @@ export default function Card(props: any) {
     return (
         <>
             <Link href={props.link} target="_blank">
-                <div className="group w-72 max-w-sm max-h-100 m-4 overflow-hidden shadow-lg bg-white hover:scale-105 duration-500 rounded-xl">
+                <div className="group w-72 max-w-sm overflow-hidden shadow-lg bg-white hover:scale-105 duration-500 rounded-xl">
                     <img
                         className="h-40 w-full aspect-auto scale-105 group-hover:brightness-125 duration-700"
                         src={props.image}
@@ -39,12 +39,20 @@ export default function Card(props: any) {
                             <div>{props.city}</div>
                         </div>
                     </div>
-                    <div className="px-6 pt-4 pb-2">
-                        {props.tags.map((tag: String) => (
-                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:opacity-80">
-                                {tag}
-                            </span>
-                        ))}
+                    <div className="">
+                        <div
+                            className="flex flex-wrap content-start h-16 px-6 pt-4 pb-2"
+                            key="tag-row"
+                        >
+                            {props.tags.map((tag: string, index: number) => (
+                                <span
+                                    className="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:opacity-80"
+                                    key={index}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </Link>

@@ -2,7 +2,7 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
-import { PlanContext } from "../Plan";
+import SearchIcon from "@mui/icons-material/Search";
 
 const tags = [
     "Mall",
@@ -32,9 +32,11 @@ const tags = [
     "Park",
 ];
 
-const TagsSelection = () => {
-    const { setFormDataField, setIsConfirmActive } =
-        React.useContext(PlanContext);
+interface IProps {
+    callback: (tags: Array<string>) => void;
+}
+
+const TagsSelect = ({ callback }: IProps) => {
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -48,13 +50,10 @@ const TagsSelection = () => {
         console.log(newSelectTag);
         setSelectTag(newSelectTag);
     };
-    React.useEffect(() => {
-        setFormDataField("tags", selectTag);
-    }, [selectTag]);
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center border-[0.75px] p-5 rounded-xl border-teal-400 shadow-sm">
                     {tags.map((data) => {
                         return (
                             <Chip
@@ -78,17 +77,19 @@ const TagsSelection = () => {
                         );
                     })}
                 </div>
-                <div className="flex mx-auto w-full">
+                <div className="flex mx-auto mt-2 w-full">
                     <Button
+                        disabled={selectTag.length === 0}
                         onClick={() => {
-                            setIsConfirmActive(true);
+                            callback(selectTag);
                         }}
                         variant="outlined"
+                        startIcon={<SearchIcon />}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
                             color: "black",
-                            marginTop: "50px",
+                            marginTop: "10px",
                             paddingX: "5rem",
                             marginX: "auto",
                             textTransform: "none",
@@ -99,7 +100,7 @@ const TagsSelection = () => {
                             },
                         }}
                     >
-                        <div className="m-auto font-montserrat">Continue</div>
+                        <div className="m-auto font-montserrat">Search</div>
                     </Button>
                 </div>
             </ThemeProvider>
@@ -107,4 +108,4 @@ const TagsSelection = () => {
     );
 };
 
-export default TagsSelection;
+export default TagsSelect;

@@ -6,9 +6,8 @@ import MobileSidebar from "./MobileSidebar";
 import NavbarRight from "./NavbarRight";
 import NavbarLogo from "./NavbarLogo";
 import MobileLeft from "./MobileLeft";
-import SearchBar from "../Search/SearchBar";
 import TagsButton from "../Search/TagsButton";
-import { Button } from "@mui/material";
+import SearchBar from "../Search/SearchBar";
 
 interface IProps {
     user: unknown;
@@ -86,7 +85,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                 justify-between h-[64px] text-neutral-600"
             >
                 {isLargerThanMedium ? (
-                    <>
+                    <div className="flex justify-between w-full">
                         <div className="flex pl-3 text-md">
                             <NavbarLogo />
                             <div className="grid grid-flow-col gap-1 ml-3">
@@ -96,37 +95,14 @@ const Navbar = ({ user, isLoading }: IProps) => {
                                         route={navItem.route}
                                     />
                                 ))}
-                                <SearchBar />
-                                <TagsButton />
                             </div>
-                            <Button
-                                onClick={() => {
-                                    router.push("/register");
-                                }}
-                                variant="outlined"
-                                color="primary"
-                                sx={{
-                                    height: "2rem",
-                                    borderRadius: "999px",
-                                    borderColor: "black",
-                                    color: "black",
-                                    marginY: "auto",
-                                    marginLeft: "0.75rem",
-                                    textTransform: "none",
-                                    "&:hover": {
-                                        color: "black",
-                                        backgroundColor: "Gainsboro",
-                                        borderColor: "gray",
-                                    },
-                                }}
-                            >
-                                <div className="m-auto text-xs font-montserrat whitespace-nowrap">
-                                    + Register Place
-                                </div>
-                            </Button>
+                        </div>
+                        <div className="grid grid-flow-col gap-1">
+                            <SearchBar />
+                            <TagsButton />
                         </div>
                         <NavbarRight isLoading={isLoading} user={user} />
-                    </>
+                    </div>
                 ) : (
                     <div className=" w-full">
                         <MobileSidebar
@@ -139,7 +115,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                     </div>
                 )}
             </div>
-            <div className="flex w-full h-1 bg-gradient-to-r from-tricolorgreen to-yellow-300" />
+            <div className="flex w-full h-[3px] bg-gradient-to-r from-tricolorgreen to-yellow-300" />
         </div>
     );
 };
