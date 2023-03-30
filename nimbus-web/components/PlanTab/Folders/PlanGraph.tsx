@@ -6,6 +6,7 @@ const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, currentFolder } =
         getPlanTabState();
+    console.log(props.places);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -33,10 +34,6 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 dispatch({
                                     type: "TOGGLE_PLACE_DETAILS",
                                     payload: {
-                                        placeTitle: place.name,
-                                        placeDescription:
-                                            place.placeDescription,
-                                        address: place.address,
                                         loc_id: place.loc_id,
                                     },
                                 });

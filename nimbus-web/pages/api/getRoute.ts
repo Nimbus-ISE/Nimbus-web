@@ -5,6 +5,8 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const day: number = Number(req.query.day);
+
     let origin;
     let destination;
     try {
@@ -13,19 +15,19 @@ export default async function handler(
         );
         let waypoints: string = "";
         await response.json().then((data) => {
-            origin = `${data[0][0].coordinate[0]},${data[0][0].coordinate[1]}`;
-            destination = `${data[0].at(-1).coordinate[0]},${
-                data[0].at(-1).coordinate[1]
+            origin = `${data[day][0].coordinate[0]},${data[day][0].coordinate[1]}`;
+            destination = `${data[day].at(-1).coordinate[0]},${
+                data[day].at(-1).coordinate[1]
             }`;
-            data[0].forEach((point: any, index: any) => {
+            data[day].forEach((point: any, index: any) => {
                 if (
                     index !== 1 &&
                     index !== 0 &&
-                    index !== data[0].length - 1
+                    index !== data[day].length - 1
                 ) {
                     waypoints += `via:${point.coordinate[0]},${
                         point.coordinate[1]
-                    }${index === data[0].length - 2 ? "" : "|"}`;
+                    }${index === data[day].length - 2 ? "" : "|"}`;
                 }
             });
         });

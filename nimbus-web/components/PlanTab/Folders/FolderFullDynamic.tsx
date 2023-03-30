@@ -10,6 +10,7 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const FolderFull = (props: FolderFullProps) => {
     const { currentFolderView, fullPlan } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
+
     return (
         <>
             <>

@@ -4,7 +4,10 @@ import { MapRef } from "react-map-gl";
 import polyline from "@mapbox/polyline";
 import React from "react";
 
-import { getPlanTabDispatch } from "@/components/PlanTab/PlanTabContext";
+import {
+    getPlanTabDispatch,
+    getPlanTabState,
+} from "@/components/PlanTab/PlanTabContext";
 
 interface reviewDataType {
     placeTitle: string;
@@ -22,6 +25,7 @@ const useMap = () => {
     const [reviewData, setReviewData] = useState({} as reviewDataType);
     const [openAlternatives, setOpenAlternative] = useState(false);
     const [fullPlan, setFullPlan] = useState({} as any);
+    const { currentFolder } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const toggleOpenReview = (reviewData?: reviewDataType) => {
         if (reviewData?.placeTitle) {
@@ -63,52 +67,49 @@ const useMap = () => {
     }, []);
 
     useEffect(() => {
-        //     const fetchRoute = async () => {
-        //         const res = await fetch(`http://localhost:3000/api/getRoute`);
-        //         const coordinates = await res.json();
-        //         return coordinates;
-        //     };
-        //
-        //     if (run) {
-        //         fetchRoute().then((route) => {
-        //             const decoded = polyline.decode(route);
-        //
-        //             setRun(false);
-        //         });
-        const decoded = polyline.decode(
-            "kgzrAserdRRPBLANMTKDM?KCKEIYAE@C[CsBQFkAF}@R_@LKHGLuAPaB@QDEHA|BPHcA@GBKJKLERGtF^lIp@tDRnDXvLdAxAkEpAwDb@cB^sAUMiDeAuBo@e@QBMDKtA`@dAZxC~@\\GZI`AeDvDuLh@qAjAuDhAsDn@}B|AaF@GW{AGWYEyDe@iFc@aIy@wHu@kAM_DWuBQKFKJAHAj@QpMM`KKxEApCE`AGjAA\\SEwA_@i@KqBU}Ea@yNkAiIo@mFc@sBQcAOkBSgDYWAc@K_Fe@_Fc@qD_@eCSqCScAKa@PQLI\\ELYlAs@jCc@dBUn@ORC@ITCLGVc@dBsAfFuBhIe@tBU|@U`ABJE^Mj@s@pCs@jCTf@`@DzGd@pBPtGj@vGh@pAJfA@bBHbD^`Jt@`Hh@jGd@vOnAfNlA~F`@rHr@hBJj@DAHGNi@E}AQiKy@mEa@BOlEXrGj@lBPh@UlAs@b@YLg@t@oCvAaFj@cBxAwEt@qB_EY{LcAgM{@aMcAyX}B_MmAm@GSTCNOtAIz@CZ"
-        );
-        const routeArrs: any = [];
-        decoded.forEach((arr) => {
-            routeArrs.push(arr.reverse());
+        const fetchRoute = async () => {
+            const res = await fetch(`api/getRoute?day=${currentFolder}`);
+            const result = await res.json();
+            return result;
+        };
+
+        fetchRoute().then((route) => {
+            const decoded = polyline.decode(route);
+            const routeArrs: any = [];
+            decoded.forEach((arr) => {
+                routeArrs.push(arr.reverse());
+            });
+            setRoute(routeArrs);
         });
-        setRoute(routeArrs);
+        // const decoded = polyline.decode(
+        //     "kgzrAserdRRPBLANMTKDM?KCKEIYAE@C[CsBQFkAF}@R_@LKHGLuAPaB@QDEHA|BPHcA@GBKJKLERGtF^lIp@tDRnDXvLdAxAkEpAwDb@cB^sAUMiDeAuBo@e@QBMDKtA`@dAZxC~@\\GZI`AeDvDuLh@qAjAuDhAsDn@}B|AaF@GW{AGWYEyDe@iFc@aIy@wHu@kAM_DWuBQKFKJAHAj@QpMM`KKxEApCE`AGjAA\\SEwA_@i@KqBU}Ea@yNkAiIo@mFc@sBQcAOkBSgDYWAc@K_Fe@_Fc@qD_@eCSqCScAKa@PQLI\\ELYlAs@jCc@dBUn@ORC@ITCLGVc@dBsAfFuBhIe@tBU|@U`ABJE^Mj@s@pCs@jCTf@`@DzGd@pBPtGj@vGh@pAJfA@bBHbD^`Jt@`Hh@jGd@vOnAfNlA~F`@rHr@hBJj@DAHGNi@E}AQiKy@mEa@BOlEXrGj@lBPh@UlAs@b@YLg@t@oCvAaFj@cBxAwEt@qB_EY{LcAgM{@aMcAyX}B_MmAm@GSTCNOtAIz@CZ"
+        // );
 
         //     }
-        const fetchTrip = async () => {
-            const res = await fetch(`http://localhost:3000/api/getTrip`);
-            const plan = await res.json();
-            return plan;
-        };
-        fetchTrip().then((trip) => {
-            dispatch({
-                type: "SET_FULL_PLAN",
-                payload: trip.result,
-            });
-            const tempPinState: any[] = [];
-            trip.result.forEach((day: any) => {
-                const tempPin: any = [];
-                day.forEach(() => {
-                    tempPin.push("#000");
-                });
-                if (tempPinState.length < trip.result.length) {
-                    tempPinState.push(tempPin);
-                }
-            });
-            setPoints(trip.points);
-            setPinState(tempPinState);
-        });
-    }, []);
+        // const fetchTrip = async () => {
+        //     const res = await fetch(`http://localhost:3000/api/getTrip`);
+        //     const plan = await res.json();
+        //     return plan;
+        // };
+        // fetchTrip().then((trip) => {
+        //     dispatch({
+        //         type: "SET_FULL_PLAN",
+        //         payload: trip.result,
+        //     });
+        //     const tempPinState: any[] = [];
+        //     trip.result.forEach((day: any) => {
+        //         const tempPin: any = [];
+        //         day.forEach(() => {
+        //             tempPin.push("#000");
+        //         });
+        //         if (tempPinState.length < trip.result.length) {
+        //             tempPinState.push(tempPin);
+        //         }
+        //     });
+        //     setPoints(trip.points);
+        //     setPinState(tempPinState);
+        // });
+    }, [currentFolder]);
 
     const togglePinState = (day: number, changeIndex: number) => {
         pinState[day].forEach((_: any, index: any) => {
