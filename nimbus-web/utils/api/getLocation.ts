@@ -17,7 +17,6 @@ interface ILocationItemData {
 const getLocation = async (loc_id: string) => {
     return new Promise(async (resolve, reject) => {
         try {
-            // TODO: Needs to select more stuff to render required data for full place detail pages
             const location_data = await sql`
             SELECT L.loc_id, L.loc_name, L.description, L.province, 
             L.rating AS location_rating, R.review_text, 
@@ -51,6 +50,11 @@ const getLocation = async (loc_id: string) => {
         } catch (e) {
             console.log(e);
             reject();
+        } finally {
+            //updates view count
+            await sql`UPDATE location_data
+            SET view_count = view_count+1
+            WHERE loc_id = ${loc_id}`;
         }
     });
 };

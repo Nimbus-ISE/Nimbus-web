@@ -1,7 +1,6 @@
 import Review from "./Review";
 import React, { useEffect, useState } from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
-import Star from "@/components/Star";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
@@ -75,16 +74,31 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         {detail?.description}
                     </div>
                     <Review
-                        user="John Taobin"
-                        reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        review={{
+                            author: "John Taobin",
+                            review_date: 1,
+                            review_rating: "4.4",
+                            review_text:
+                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
+                        }}
                     />
                     <Review
-                        user="John Taobin"
-                        reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        review={{
+                            author: "John Taobin",
+                            review_date: 1,
+                            review_rating: "4.4",
+                            review_text:
+                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
+                        }}
                     />
                     <Review
-                        user="John Taobin"
-                        reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."
+                        review={{
+                            author: "John Taobin",
+                            review_date: 1,
+                            review_rating: "4.4",
+                            review_text:
+                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
+                        }}
                     />
                 </div>
             </div>

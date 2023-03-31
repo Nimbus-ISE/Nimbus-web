@@ -5,6 +5,7 @@ import { checkout } from "@/checkout";
 import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import UserProfile from "../UserProfile";
+import truncateWithDot from "@/utils/truncateWithDot";
 
 const UserWindow = ({ user }: { user: any }) => {
     const router = useRouter();
@@ -24,13 +25,6 @@ const UserWindow = ({ user }: { user: any }) => {
     const handleOnSignout = () => {
         router.push("/api/auth/logout");
     };
-    const dot = (user: string | undefined, maxLength: number) => {
-        if (user && user.length > maxLength) {
-            return user.slice(0, maxLength) + "..";
-        } else {
-            return user;
-        }
-    };
     return (
         <div
             className="absolute flex flex-col p-2 top-[68px] -right-2 bg-white 
@@ -39,9 +33,11 @@ const UserWindow = ({ user }: { user: any }) => {
             <div className="flex p-2">
                 <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
-                    <div className="font-semibold">{dot(user.name, 13)}</div>
+                    <div className="font-semibold">
+                        {truncateWithDot(user.name, 13)}
+                    </div>
                     <div className="text-sm text-neutral-500">
-                        {dot(user.email, 15)}
+                        {truncateWithDot(user.email, 15)}
                     </div>
                 </div>
             </div>
