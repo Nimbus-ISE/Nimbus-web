@@ -55,7 +55,7 @@ const Hotspot = ({ props }: IProps) => {
     return (
         <div
             id="hotspot"
-            className="relative flex text-black md:h-[30rem] bg-neutral-100 py-5"
+            className="relative flex text-black md:h-[35rem] w-screen bg-neutral-100 py-5"
         >
             <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full">
                 <div
@@ -64,19 +64,24 @@ const Hotspot = ({ props }: IProps) => {
                         hotspotLeftIsIntersecting
                             ? "opacity-100"
                             : "translate-y-[300px] opacity-0"
-                    } transition duration-1000 w-full max-w-[20rem] h-fit md:h-80 md:bg-white 
+                    } flex transition duration-1000 w-full max-w-[20rem] h-fit md:h-[25rem] md:bg-white
                     text-center md:shadow-md m-auto md:m-1 rounded-xl`}
                 >
-                    <h1 className="text-5xl font-extrabold p-5">
-                        ICONIC PLACES
-                    </h1>
-                    <p className="text-sm px-5 pb-5 md:pb-0">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Voluptates nobis eum, tenetur assumenda officia quisquam
-                        nulla recusandae nisi asperiores quia quam maxime
-                        quibusdam nesciunt ea! Beatae corrupti saepe
-                        reprehenderit voluptatum.
-                    </p>
+                    <div className="m-auto">
+                        <h1 className="text-5xl font-extrabold p-5">
+                            ICONIC PLACES
+                        </h1>
+                        <p className="text-sm px-5 pb-5 md:pb-0">
+                            The "Iconic Places" category in our trip planner
+                            showcases the country's most enchanting landmarks
+                            and natural wonders. These gems offer a glimpse into
+                            Thailand's rich history, vibrant culture, and
+                            stunning landscapes. From ancient temples to
+                            pristine beaches, this curated selection ensures a
+                            memorable experience, capturing the unique spirit of
+                            this captivating destination.
+                        </p>
+                    </div>
                 </div>
                 <div
                     id="hotspot-right"
@@ -84,14 +89,14 @@ const Hotspot = ({ props }: IProps) => {
                         hotspotRightIsIntersecting
                             ? "opacity-100"
                             : "translate-y-[20rem] opacity-0"
-                    } transition duration-1000 relative w-full max-w-[20rem] h-80 m-auto mt-2 md:m-1`}
+                    } transition duration-1000 relative w-full max-w-[20rem] h-[25rem] m-auto mt-2 md:m-1`}
                 >
                     {places.map((obj: any, index: number) => {
                         return (
                             <HotspotCard
                                 obj={obj}
-                                index={index}
                                 places={places}
+                                index={index}
                                 expand={expand}
                                 current={current}
                                 add={add}
@@ -120,7 +125,7 @@ const Hotspot = ({ props }: IProps) => {
                                 setIsCoolDown(true);
                             }
                         }}
-                        className="absolute flex left-[15rem] w-20 h-full z-40 
+                        className="absolute flex left-[18rem] w-20 h-full z-40 
                         duration-500 cursor-pointer hover:scale-125"
                     >
                         <div
