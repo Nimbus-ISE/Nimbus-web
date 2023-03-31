@@ -9,7 +9,7 @@ interface IProps {
 
 const location = ({ location }: IProps) => {
     return (
-        <div className="font-montserrat p-10 bg-neutral-100">
+        <div className="min-h-screen h-full w-screen overflow-x-hidden font-montserrat p-10 bg-neutral-100">
             <FullDetailCard location={location} />
         </div>
     );
