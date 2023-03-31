@@ -86,7 +86,7 @@ const HomeCarousel = () => {
                     lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit`}
                 >
                     <h1 className="mb-2">LET US DESIGN</h1>
-                    <h1>YOUR HOLIDAY</h1>
+                    <h1 className="text-tricolorgreen">YOUR HOLIDAY</h1>
                 </div>
                 <p
                     id="carousel-paragraph"
