@@ -68,10 +68,10 @@ const Hotspot = ({ props }: IProps) => {
                     text-center md:shadow-md m-auto md:m-1 rounded-xl`}
                 >
                     <div className="m-auto">
-                        <h1 className="text-5xl font-extrabold p-5">
+                        <h1 className="text-4xl md:text-5xl font-extrabold p-5">
                             ICONIC PLACES
                         </h1>
-                        <p className="text-sm px-5 pb-5 md:pb-0">
+                        <p className="text-xs md:text-sm px-5 pb-5 md:pb-0">
                             The "Iconic Places" category in our trip planner
                             showcases the country's most enchanting landmarks
                             and natural wonders. These gems offer a glimpse into
