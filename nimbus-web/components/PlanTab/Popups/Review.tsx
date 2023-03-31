@@ -1,8 +1,8 @@
 import React from "react";
-import { ReviewProps } from "../PlanTabTypes";
 import { useMediaQuery } from "@mui/material";
 import Stars from "@/components/Stars";
 import Image from "next/image";
+import truncateWithDot from "@/utils/truncateWithDot";
 
 interface IProps {
     review: IReview;
@@ -30,7 +30,7 @@ const Review = ({ review }: IProps) => {
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-wrap items-center pr-2">
                         <div className="text-sm font-bold whitespace-nowrap w-fit mr-2">
-                            {author}
+                            {truncateWithDot(author, 23)}
                         </div>
                         <div className="my-auto">
                             <Stars size={12} rating={Number(review_rating)} />
