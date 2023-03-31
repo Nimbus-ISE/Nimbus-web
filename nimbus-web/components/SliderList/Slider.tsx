@@ -38,7 +38,7 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
         }
     };
     return (
-        <div className="h-full w-full text-black my-1 drop-shadow-sm">
+        <div className="h-full w-full overflow-hidden text-black pt-5 pb-6 drop-shadow-sm">
             <div className="px-5 font-montserrat font-bold text-3xl text-left">
                 {title}
             </div>
