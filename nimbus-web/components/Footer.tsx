@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <div className="flex flex-col text-neutral-700 bg-gradient-to-r from-neutral-300 to-neutral-200 w-full h-fit p-5">
+        <div className="flex flex-col w-screen overflow-x-hidden text-neutral-700 bg-gradient-to-r from-neutral-300 to-neutral-200 h-fit p-5">
             <div className="flex w-full">
                 <div className="flex flex-col justify-evenly p-5 w-[40%]">
                     <div className="text-3xl font-bold mb-5">NIMBUS</div>
