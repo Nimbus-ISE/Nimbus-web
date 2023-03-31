@@ -32,11 +32,7 @@ const MobileCardExtender = ({ obj, expand, index }: IProps) => {
                 </div>
                 <Stars size={16} rating={obj.rating} />
                 <p className="text-xs py-3">{obj.description}</p>
-                <Review
-                    user={obj.reviews[0].author}
-                    reviewText={obj.reviews[0].review_text}
-                    numberOfStars={obj.reviews[0].review_rating}
-                />
+                <Review review={obj.reviews[0]} />
             </div>
         </div>
     );
