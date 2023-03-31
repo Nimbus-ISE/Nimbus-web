@@ -3,11 +3,16 @@ import React from "react";
 import Head from "next/head";
 import Hotspot from "@/components/Hotspot/Hotspot";
 import HomeCarousel from "@/components/HomeCarousel/HomeCarousel";
-import Slider from "@/components/SliderList/Slider";
 import { mockLocations } from "@/test_data/locationList";
 import { useRouter } from "next/router";
+import Slider from "@/components/SliderList/Slider";
+import getTrendingList from "@/utils/api/getTrendingList";
 
-export default function Home() {
+interface IProps {
+    trendingList: Array<unknown>;
+}
+
+export default function Home({ trendingList }: IProps) {
     const router = useRouter();
     return (
         <>
@@ -19,7 +24,7 @@ export default function Home() {
                 <div className="mt-7">
                     <Slider
                         title="TRENDING NOW"
-                        locationList={mockLocations}
+                        locationList={trendingList}
                         shape="rectangle"
                         onClickCallback={(id) => {
                             router.push(`/location/${id}`);
@@ -30,4 +35,10 @@ export default function Home() {
             </div>
         </>
     );
+}
+
+export async function getServerSideProps() {
+    const trendingList = await getTrendingList();
+    console.log(trendingList);
+    return { props: { trendingList } };
 }
