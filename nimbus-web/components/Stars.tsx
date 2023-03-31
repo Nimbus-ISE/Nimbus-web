@@ -23,7 +23,15 @@ const Stars = ({ size, rating }: { size: number; rating: number }) => {
             {[...Array(5)].map((item, index) => {
                 return <Star size={size} percent={calculatePercent(index)} />;
             })}
-            <div className="text-slate-500 text-sm mx-1 my-auto">
+            <div
+                className={`text-slate-500 ${
+                    size > 15
+                        ? "text-sm"
+                        : size > 13
+                        ? "text-xs"
+                        : "text-[0.6rem]"
+                } mx-1 my-auto`}
+            >
                 ({rating})
             </div>
         </div>
