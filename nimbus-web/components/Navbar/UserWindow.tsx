@@ -19,6 +19,9 @@ const UserWindow = ({ user }: { user: any }) => {
             ],
         });
     };
+    const handleOnUpgrade = () => {
+        router.push("/upgrade");
+    };
     const handleOnProfile = () => {
         router.push("/profile");
     };
@@ -67,14 +70,17 @@ const UserWindow = ({ user }: { user: any }) => {
                         textTransform: "none",
                     }}
                 >
-                    <div className="flex justify-center">
+                    <button
+                        onClick={handleOnUpgrade}
+                        className="flex justify-center"
+                    >
                         <FontAwesomeIcon
                             icon={faCrown}
                             color="orange"
                             className="m-auto mr-2 drop-shadow-sm"
                         />
                         <div className="m-auto font-montserrat">Upgrade</div>
-                    </div>
+                    </button>
                 </Button>
                 <Button
                     onMouseDown={handleOnSignout}

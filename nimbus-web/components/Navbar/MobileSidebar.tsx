@@ -59,6 +59,9 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
             ],
         });
     };
+    const handleOnUpgrade = () => {
+        router.push("/upgrade");
+    };
     return (
         <Drawer
             anchor="left"
@@ -99,7 +102,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                             </div>
                         ) : listItem === "upgrade" ? (
                             <ListItem key={index} disablePadding>
-                                <ListItemButton onClick={onCheckout}>
+                                <ListItemButton onClick={handleOnUpgrade}>
                                     <ListItemIcon>
                                         <FontAwesomeIcon
                                             icon={faCrown}
