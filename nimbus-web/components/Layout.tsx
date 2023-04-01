@@ -3,9 +3,18 @@ import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading";
 import Footer from "./Footer";
+import updatePremiumStatus from "@/utils/updatePremiumStatus";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
+    React.useEffect(() => {
+        if (user) updatePremiumStatus(user);
+        const test = async () => {
+            console.log("running fetch test");
+            await fetch(`/api/test/does/this`);
+        };
+        test();
+    }, [user]);
     return !isLoading ? (
         <div>
             <Navbar user={user} isLoading={isLoading} />
