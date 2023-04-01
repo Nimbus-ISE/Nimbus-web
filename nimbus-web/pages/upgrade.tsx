@@ -6,7 +6,7 @@ import Loading from "@/components/Loading";
 const Upgrade = () => {
     const { user, isLoading } = useUser();
     const handleUpgrade = async (upgradeType: string) => {
-        if (user && user.premium_type === "None") {
+        if (user && user.premium === "None") {
             try {
                 const response = await fetch(
                     `/api/upgradeUser/${user.sub}/${upgradeType}`

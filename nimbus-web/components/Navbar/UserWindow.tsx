@@ -63,17 +63,14 @@ const UserWindow = ({ user }: { user: any }) => {
                     <div className="m-auto font-montserrat">Profile</div>
                 </Button>
                 <Button
-                    onMouseDown={handleOnCheckout}
+                    onMouseDown={handleOnUpgrade}
                     variant="outlined"
                     color="primary"
                     sx={{
                         textTransform: "none",
                     }}
                 >
-                    <button
-                        onClick={handleOnUpgrade}
-                        className="flex justify-center"
-                    >
+                    <button className="flex justify-center">
                         <FontAwesomeIcon
                             icon={faCrown}
                             color="orange"

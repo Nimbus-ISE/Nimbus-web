@@ -9,11 +9,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
     React.useEffect(() => {
         if (user) updatePremiumStatus(user);
-        const test = async () => {
-            console.log("running fetch test");
-            await fetch(`/api/test/does/this`);
-        };
-        test();
     }, [user]);
     return !isLoading ? (
         <div>

@@ -22,7 +22,7 @@ function Profile() {
                         <UserProfile src={user.picture as string} size={40} />
                         <h2>{user.name}</h2>
                         <p className="">{user.email}</p>
-                        <div>Status: {user?.premium_type as any} </div>
+                        <div>Status: {user?.premium as any} </div>
                         <div>Expire: {user?.premium_expire as any} </div>
                     </div>
                 </div>
