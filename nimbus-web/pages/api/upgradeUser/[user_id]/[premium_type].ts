@@ -24,7 +24,6 @@ export default withApiAuthRequired(async function handler(
         } else {
             res.status(500).json("Invalid premium_type");
         }
-        sessionStorage.removeItem("session-id");
         res.status(200).json("Success");
     } catch (e) {
         console.log(e);

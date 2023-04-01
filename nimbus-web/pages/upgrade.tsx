@@ -2,9 +2,11 @@ import React from "react";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
+import { useRouter } from "next/router";
 
 const Upgrade = () => {
     const { user, isLoading } = useUser();
+    const router = useRouter();
     const handleUpgrade = async (upgradeType: string) => {
         if (user && user.premium === "None") {
             try {
@@ -13,8 +15,10 @@ const Upgrade = () => {
                 );
                 if (response.ok) {
                     alert("Upgrade complete!");
+                    sessionStorage.removeItem("session-id");
+                    router.push("/");
                 } else {
-                    alert(`Error occured`);
+                    alert("Unknown error occured");
                 }
             } catch (e) {
                 console.log(e);
