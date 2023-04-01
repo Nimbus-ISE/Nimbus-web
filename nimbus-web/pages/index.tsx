@@ -48,7 +48,7 @@ export default function Home({ trendingList }: IProps) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const trendingList = await getTrendingList();
     console.log(trendingList);
     return { props: { trendingList } };
