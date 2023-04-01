@@ -3,6 +3,7 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
+import upgradePremiumStatus from "utils/updatePremiumStatus";
 
 const Upgrade = () => {
     const { user, isLoading } = useUser();
@@ -16,6 +17,7 @@ const Upgrade = () => {
                 if (response.ok) {
                     alert("Upgrade complete!");
                     sessionStorage.removeItem("session-id");
+                    upgradePremiumStatus(user);
                     router.push("/");
                 } else {
                     alert("Unknown error occured");
