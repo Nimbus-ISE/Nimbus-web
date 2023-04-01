@@ -61,6 +61,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
     };
     const handleOnUpgrade = () => {
         router.push("/upgrade");
+        setOpenDrawer(false);
     };
     return (
         <Drawer
@@ -77,6 +78,11 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                             <ListItem key={index} disablePadding>
                                 <ListItemButton
                                     onClick={() => {
+                                        if (listItem.route.includes("logout")) {
+                                            sessionStorage.removeItem(
+                                                "session-id"
+                                            );
+                                        }
                                         router.push(listItem.route);
                                         setOpenDrawer(false);
                                     }}

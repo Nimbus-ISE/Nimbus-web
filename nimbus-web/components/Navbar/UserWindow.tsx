@@ -26,6 +26,7 @@ const UserWindow = ({ user }: { user: any }) => {
         router.push("/profile");
     };
     const handleOnSignout = () => {
+        sessionStorage.removeItem("session-id");
         router.push("/api/auth/logout");
     };
     return (
