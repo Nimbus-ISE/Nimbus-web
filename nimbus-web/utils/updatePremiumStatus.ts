@@ -3,6 +3,7 @@ import { UserProfile } from "@auth0/nextjs-auth0/client";
 //verifies the premium status everytime a new session (browser) is detected
 const updatePremiumStatus = async (user: UserProfile) => {
     if (!sessionStorage.getItem("session-id") && user) {
+        console.log("update premium status trigger");
         let uuid = crypto.randomUUID();
         try {
             const response = await fetch(

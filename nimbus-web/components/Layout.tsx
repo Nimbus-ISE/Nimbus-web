@@ -8,7 +8,10 @@ import updatePremiumStatus from "@/utils/updatePremiumStatus";
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
     React.useEffect(() => {
-        if (user) updatePremiumStatus(user);
+        if (user) {
+            updatePremiumStatus(user);
+            console.log("check update premium status");
+        }
     }, [user]);
     return !isLoading ? (
         <div>
