@@ -1,7 +1,7 @@
 import Review from "./Review";
 import React, { useEffect, useState } from "react";
 import { PlaceDetailProps } from "../PlanTabTypes";
-import Star from "@/components/Star";
+import Stars from "@/components/Stars";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
@@ -63,17 +63,19 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                             {detail?.loc_name}
                         </div>
                         <div className="text-xs">{props.address}</div>
-                        <div
-                            className={
-                                isBigScreen ? "w-full h-12" : "w-[15rem] h-12 "
-                            }
-                        >
-                            {/* <Star size="h-10" percent="100" /> */}
+
+                        <Stars rating={100} size={40} />
+
+                        <div className="text-[0.8rem] col-span-12 mt-2">
+                            {detail?.description
+                                ? detail?.description
+                                : "No description provided"}
+                        </div>
+                        <div className="text-[0.8rem] col-span-12">
+                            {"Price Level: " + detail?.price_level}
                         </div>
                     </div>
-                    <div className="text-[0.6rem] col-span-12">
-                        {detail?.description}
-                    </div>
+
                     <Review
                         user="John Taobin"
                         reviewText="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo, consectetur, a odit perspiciatis est hic blanditiis delectus voluptas quibusdam quasi quaerat? Neque quod aut quia consequatur nihil explicabo placeat sunt."

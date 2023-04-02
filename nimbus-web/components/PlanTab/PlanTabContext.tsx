@@ -17,6 +17,8 @@ interface PlanTabContextStateType {
     isClosingFullFolder: boolean;
     fullPlan: any;
     initalCoordinates: any;
+    openSavePlan: boolean;
+    selectedLocationIndex: number;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -31,6 +33,24 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 fullPlan: action.payload,
                 initalCoordinates: intialCoordinates,
             };
+        }
+        case "CHANGE_PLAN": {
+            const changePlan = (day: number, oldLocationIndex: number) => {
+                state.fullPlan[day][oldLocationIndex] = {
+                    coordinate: [13.7346539, 100.5261501],
+                    type: "tourist spot",
+                    "opening hours": [8, 13],
+                    duration: 72,
+                    durationH: 1.2,
+                    name: "Joke Sam Yan",
+                    loc_id: "44",
+                    leaveTime: 10.22273878515078,
+                };
+            };
+            changePlan(action.payload.day, action.payload.oldLocationIndex);
+        }
+        case "SET_SELECTED_LOCATION_INDEX": {
+            return { ...state, selectedLocationIndex: action.payload };
         }
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
@@ -105,6 +125,12 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return state;
             }
         }
+        case "TOGGLE_SAVE_PLAN": {
+            return { ...state, openSavePlan: !state.openSavePlan };
+        }
+        case "SAVE_PLAN": {
+            return { ...state, openSavePlan: false };
+        }
         default: {
             console.log("error");
             break;
@@ -124,6 +150,8 @@ const initialState: PlanTabContextStateType = {
     fullPlan: [],
     initalCoordinates: [{}],
     currentFolder: 0,
+    openSavePlan: false,
+    selectedLocationIndex: 0,
 };
 
 const PlanTabContext = createContext(

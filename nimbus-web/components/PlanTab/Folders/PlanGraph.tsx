@@ -17,7 +17,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
                     <div
-                        className="flex flex-row items-center text-xs  rounded-xl hover:bg-[#efeded] hover:h-32 "
+                        className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] hover:h-32 "
 
                         // onMouseLeave={() => {
                         //     togglePinState(currentFolder, 999);
@@ -27,7 +27,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place.imgLink}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full hover:scale-110 duration-300 cursor-pointer shadow"
+                                    ? "h-[30vw] w-[30vw] rounded-full hover:scale-110 duration-300 cursor-pointer shadow bg-fuchsia-500"
                                     : "h-28 w-28 rounded-full shadow"
                             }
                             onMouseDown={() => {
@@ -46,12 +46,12 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     : "flex flex-col w-[55vw]"
                             }
                         >
-                            <div className="flex gap-4">
+                            <div className="flex gap-2">
                                 {place?.name?.length < 20 && (
                                     <div
                                         className={
                                             !isBigScreen
-                                                ? "text-[1rem] font-bold ml-4"
+                                                ? "text-[1rem] font-bold ml-4 "
                                                 : "text-xl font-bold ml-4"
                                         }
                                     >
@@ -62,11 +62,11 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     <div
                                         className={
                                             !isBigScreen
-                                                ? "text-[1rem] font-bold ml-4"
-                                                : "text-xl font-bold ml-4"
+                                                ? "text-[1rem] font-bold ml-4 text-left"
+                                                : "text-xl font-bold ml-4 text-left"
                                         }
                                     >
-                                        {place.name.substring(0, 10) + "..."}
+                                        {place.name}
                                     </div>
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
@@ -74,6 +74,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         onClick={() => {
                                             dispatch({
                                                 type: "TOGGLE_ALTERNATIVES",
+                                            });
+                                            dispatch({
+                                                type: "SET_SELECTED_LOCATION_INDEX",
+                                                payload: index,
                                             });
                                         }}
                                     >

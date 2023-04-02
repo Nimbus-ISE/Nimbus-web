@@ -67,48 +67,48 @@ const useMap = () => {
     }, []);
 
     useEffect(() => {
-        const fetchRoute = async () => {
-            const res = await fetch(`api/getRoute?day=${currentFolder}`);
-            const result = await res.json();
-            return result;
-        };
+        // const fetchRoute = async () => {
+        //     const res = await fetch(`api/getRoute?day=${currentFolder}`);
+        //     const result = await res.json();
+        //     return result;
+        // };
 
-        fetchRoute().then((route) => {
-            const decoded = polyline.decode(route);
-            const routeArrs: any = [];
-            decoded.forEach((arr) => {
-                routeArrs.push(arr.reverse());
-            });
-            setRoute(routeArrs);
-        });
+        // fetchRoute().then((route) => {
+        //     const decoded = polyline.decode(route);
+        //     const routeArrs: any = [];
+        //     decoded.forEach((arr) => {
+        //         routeArrs.push(arr.reverse());
+        //     });
+        //     setRoute(routeArrs);
+        // });
         // const decoded = polyline.decode(
         //     "kgzrAserdRRPBLANMTKDM?KCKEIYAE@C[CsBQFkAF}@R_@LKHGLuAPaB@QDEHA|BPHcA@GBKJKLERGtF^lIp@tDRnDXvLdAxAkEpAwDb@cB^sAUMiDeAuBo@e@QBMDKtA`@dAZxC~@\\GZI`AeDvDuLh@qAjAuDhAsDn@}B|AaF@GW{AGWYEyDe@iFc@aIy@wHu@kAM_DWuBQKFKJAHAj@QpMM`KKxEApCE`AGjAA\\SEwA_@i@KqBU}Ea@yNkAiIo@mFc@sBQcAOkBSgDYWAc@K_Fe@_Fc@qD_@eCSqCScAKa@PQLI\\ELYlAs@jCc@dBUn@ORC@ITCLGVc@dBsAfFuBhIe@tBU|@U`ABJE^Mj@s@pCs@jCTf@`@DzGd@pBPtGj@vGh@pAJfA@bBHbD^`Jt@`Hh@jGd@vOnAfNlA~F`@rHr@hBJj@DAHGNi@E}AQiKy@mEa@BOlEXrGj@lBPh@UlAs@b@YLg@t@oCvAaFj@cBxAwEt@qB_EY{LcAgM{@aMcAyX}B_MmAm@GSTCNOtAIz@CZ"
         // );
 
         //     }
-        // const fetchTrip = async () => {
-        //     const res = await fetch(`http://localhost:3000/api/getTrip`);
-        //     const plan = await res.json();
-        //     return plan;
-        // };
-        // fetchTrip().then((trip) => {
-        //     dispatch({
-        //         type: "SET_FULL_PLAN",
-        //         payload: trip.result,
-        //     });
-        //     const tempPinState: any[] = [];
-        //     trip.result.forEach((day: any) => {
-        //         const tempPin: any = [];
-        //         day.forEach(() => {
-        //             tempPin.push("#000");
-        //         });
-        //         if (tempPinState.length < trip.result.length) {
-        //             tempPinState.push(tempPin);
-        //         }
-        //     });
-        //     setPoints(trip.points);
-        //     setPinState(tempPinState);
-        // });
+        const fetchTrip = async () => {
+            const res = await fetch(`http://localhost:3000/api/getTrip`);
+            const plan = await res.json();
+            return plan;
+        };
+        fetchTrip().then((trip) => {
+            dispatch({
+                type: "SET_FULL_PLAN",
+                payload: trip.result,
+            });
+            const tempPinState: any[] = [];
+            trip.result.forEach((day: any) => {
+                const tempPin: any = [];
+                day.forEach(() => {
+                    tempPin.push("#000");
+                });
+                if (tempPinState.length < trip.result.length) {
+                    tempPinState.push(tempPin);
+                }
+            });
+            setPoints(trip.points);
+            setPinState(tempPinState);
+        });
     }, [currentFolder]);
 
     const togglePinState = (day: number, changeIndex: number) => {

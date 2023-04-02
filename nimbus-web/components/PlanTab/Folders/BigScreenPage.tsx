@@ -18,6 +18,7 @@ import Map, {
 import Pin from "@/components/Pin";
 import polyline from "@mapbox/polyline";
 import useMap from "@/hooks/useMap";
+import SavePlanPopUp from "../Popups/SavePlanPopUp";
 
 const BigScreenPage = () => {
     const {
@@ -28,6 +29,7 @@ const BigScreenPage = () => {
         placeData,
         currentFolder,
         fullPlan,
+        openSavePlan,
     } = getPlanTabState();
     const {
         mapRef,
@@ -57,6 +59,7 @@ const BigScreenPage = () => {
             {!openFullTab && (
                 <>
                     <SideBar />
+                    {openSavePlan && <SavePlanPopUp />}
 
                     {/* {!openFullTab && (
                         <Map
