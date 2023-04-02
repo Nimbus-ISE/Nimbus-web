@@ -42,16 +42,17 @@ const BigScreenPage = () => {
     } = useMap();
 
     useEffect(() => {
-        if (points[currentFolder]) {
+        if (fullPlan[currentFolder]) {
             mapRef.current?.flyTo({
                 center: [
-                    points[currentFolder][0][1],
-                    points[currentFolder][0][0],
+                    fullPlan[currentFolder][0].coordinate[1],
+                    fullPlan[currentFolder][0].coordinate[0],
                 ],
             });
         }
+
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState]);
+    }, [currentFolder, points[currentFolder], pinState, fullPlan]);
 
     return (
         <>
@@ -79,13 +80,13 @@ const BigScreenPage = () => {
                             }
                             mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                         >
-                            {points[0] &&
-                                points[currentFolder].map(
+                            {fullPlan[currentFolder] &&
+                                fullPlan[currentFolder].map(
                                     (point: any, index: any) => {
                                         return (
                                             <Marker
-                                                longitude={point[1]}
-                                                latitude={point[0]}
+                                                longitude={point.coordinate[1]}
+                                                latitude={point.coordinate[0]}
                                                 anchor="bottom"
                                                 onClick={(e) => {
                                                     console.log(index);
@@ -95,8 +96,8 @@ const BigScreenPage = () => {
                                                         index
                                                     );
                                                     onSelect(
-                                                        point[1],
-                                                        point[0]
+                                                        point.coordinate[1],
+                                                        point.coordinate[0]
                                                     );
                                                     e.originalEvent.stopPropagation();
                                                 }}
@@ -108,14 +109,16 @@ const BigScreenPage = () => {
                                                         ].name
                                                     }
                                                 </span>
-                                                <Pin
-                                                    fill={
-                                                        pinState[currentFolder][
-                                                            index
-                                                        ]
-                                                    }
-                                                    number={index + 1}
-                                                />
+                                                {pinState[currentFolder] && (
+                                                    <Pin
+                                                        fill={
+                                                            pinState[
+                                                                currentFolder
+                                                            ][index]
+                                                        }
+                                                        number={index + 1}
+                                                    />
+                                                )}
                                             </Marker>
                                         );
                                     },

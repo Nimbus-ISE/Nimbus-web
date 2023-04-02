@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MapRef } from "react-map-gl";
 import polyline from "@mapbox/polyline";
@@ -25,8 +25,10 @@ const useMap = () => {
     const [reviewData, setReviewData] = useState({} as reviewDataType);
     const [openAlternatives, setOpenAlternative] = useState(false);
     const [fullPlan, setFullPlan] = useState({} as any);
-    const { currentFolder } = getPlanTabState();
+    const { currentFolder, fullPlan: plan } = getPlanTabState();
+    const isMounted = useRef(false);
     const dispatch: any = getPlanTabDispatch();
+
     const toggleOpenReview = (reviewData?: reviewDataType) => {
         if (reviewData?.placeTitle) {
             setOpenReview(true);
@@ -110,6 +112,22 @@ const useMap = () => {
             setPinState(tempPinState);
         });
     }, [currentFolder]);
+
+    // useEffect(() => {
+    //     if (isMounted.current) {
+    //         const tempPoints: any = [];
+    //         plan.forEach((day: any) => {
+    //             const temp: any = [];
+    //             day.forEach((points: any) => {
+    //                 temp.push(points.coordinate);
+    //             });
+    //             tempPoints.push(temp);
+    //         });
+    //         setPoints(tempPoints);
+    //     } else {
+    //         isMounted.current = true;
+    //     }
+    // }, [plan]);
 
     const togglePinState = (day: number, changeIndex: number) => {
         pinState[day].forEach((_: any, index: any) => {

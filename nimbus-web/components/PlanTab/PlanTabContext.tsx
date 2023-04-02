@@ -58,6 +58,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
         case "SET_CURRENT_FOLDER": {
             return { ...state, currentFolder: action.payload };
         }
+
         case "OPEN_FULL_FOLDER":
             return {
                 ...state,
