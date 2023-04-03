@@ -28,7 +28,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 className={
                     isBigScreen
                         ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[57%] z-50 cursor-pointer"
-                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer "
+                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer  "
                 }
                 onMouseDown={() => {
                     dispatch({ type: "TOGGLE_PLACE_DETAILS" });
@@ -40,31 +40,44 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 className={
                     isBigScreen
                         ? "bg-white rounded-xl h-[70%] w-[50%] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
-                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-1/2 left-1/3 transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in"
+                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-1/2 left-1/3 transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
                 }
             >
-                <div className="grid grid-cols-12 p-6 gap-6 ">
-                    {/* <div
-                        className={
-                            isBigScreen
-                                ? "rounded-xl border-2 bg-blue-100 col-span-7 h-40 "
-                                : "rounded-xl border-2 bg-blue-100 col-span-12 h-40"
-                        }
-                    > */}
+                {!isBigScreen && (
                     <img
                         src={detail?.url}
-                        className="rounded-xl border-2 bg-blue-100 col-span-7 "
+                        className="rounded-xl border-2 bg-blue-100 w-[90%]  translate-x-[5.5vw]  "
                     />
-                    {/* </div> */}
+                )}
+                <div className="grid grid-cols-12 p-6 gap-6 ">
+                    {isBigScreen && (
+                        <img
+                            src={detail?.url}
+                            className="rounded-xl border-2 bg-blue-100 col-span-7 "
+                        />
+                    )}
+
                     <div className="flex col-span-5 flex-col gap-2">
-                        <div className="text-2xl font-extrabold">
+                        <div
+                            className={
+                                isBigScreen
+                                    ? "text-2xl font-extrabold "
+                                    : "text-2xl font-extrabold w-[80vw]"
+                            }
+                        >
                             {detail?.loc_name}
                         </div>
                         <div className="text-xs">{props.address}</div>
 
                         <Stars rating={100} size={40} />
 
-                        <div className="text-[0.8rem] col-span-12 mt-2">
+                        <div
+                            className={
+                                isBigScreen
+                                    ? "text-[0.8rem] col-span-12 mt-2"
+                                    : "text-[0.8rem] w-[80vw]"
+                            }
+                        >
                             {detail?.description
                                 ? detail?.description
                                 : "No description provided"}
