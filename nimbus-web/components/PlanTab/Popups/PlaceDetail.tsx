@@ -18,8 +18,6 @@ const PlaceDetail = (props: PlaceDetailProps) => {
 
     useEffect(() => {
         fetchDetail().then((data) => {
-            console.log(data[0]);
-
             setDetail(data[0]);
         });
     }, []);
@@ -54,7 +52,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         }
                     > */}
                     <img
-                        src="/images/ThorsWell.jpg"
+                        src={detail?.url}
                         className="rounded-xl border-2 bg-blue-100 col-span-7 "
                     />
                     {/* </div> */}

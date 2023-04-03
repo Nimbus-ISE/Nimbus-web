@@ -6,7 +6,6 @@ const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, currentFolder, isBigScreen } =
         getPlanTabState();
-    console.log(props.places);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">

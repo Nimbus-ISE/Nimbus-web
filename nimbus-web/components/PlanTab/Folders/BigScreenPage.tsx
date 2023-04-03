@@ -49,6 +49,8 @@ const BigScreenPage = () => {
                     fullPlan[currentFolder][0].coordinate[0],
                 ],
             });
+            // const str = { plan: fullPlan };
+            // console.log(JSON.stringify(str));
         }
 
         mapRef.current?.resize();
