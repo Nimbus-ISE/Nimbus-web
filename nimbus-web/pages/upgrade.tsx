@@ -3,22 +3,24 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
-import upgradePremiumStatus from "utils/updatePremiumStatus";
+import checkPremiumOnNewSession from "@/utils/checkPremiumOnNewSession";
+import getPremiumType from "@/utils/getPremiumType";
 
 const Upgrade = () => {
     const { user, isLoading } = useUser();
     const router = useRouter();
     const handleUpgrade = async (upgradeType: string) => {
-        if (user && user.premium === "None") {
+        if (user && getPremiumType(user) === "None") {
             try {
                 const response = await fetch(
                     `/api/upgradeUser/${user.sub}/${upgradeType}`
                 );
                 if (response.ok) {
                     alert("Upgrade complete!");
-                    sessionStorage.removeItem("session-id");
-                    upgradePremiumStatus(user);
-                    router.push("/");
+                    const url = `/api/auth/login?prompt=${encodeURIComponent(
+                        "none"
+                    )}`;
+                    router.push(url);
                 } else {
                     alert("Unknown error occured");
                 }
@@ -27,7 +29,7 @@ const Upgrade = () => {
                 alert(`Error occured ${e}`);
             }
         } else {
-            console.log("user is already premium");
+            console.log("user is already premium", user);
         }
     };
     return (

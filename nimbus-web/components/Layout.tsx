@@ -3,16 +3,18 @@ import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading";
 import Footer from "./Footer";
-import updatePremiumStatus from "@/utils/updatePremiumStatus";
+import checkPremiumOnNewSession from "@/utils/checkPremiumOnNewSession";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
+    const router = useRouter();
     React.useEffect(() => {
         if (user) {
-            updatePremiumStatus(user);
-            console.log("check update premium status");
+            console.log("check premium status on new session");
+            checkPremiumOnNewSession(user, router);
         }
-    }, [user]);
+    }, [user, router]);
     return !isLoading ? (
         <div>
             <Navbar user={user} isLoading={isLoading} />
