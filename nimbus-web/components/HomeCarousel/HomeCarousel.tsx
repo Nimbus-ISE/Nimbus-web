@@ -86,20 +86,20 @@ const HomeCarousel = () => {
                     lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit`}
                 >
                     <h1 className="mb-2">LET US DESIGN</h1>
-                    <h1>YOUR HOLIDAY</h1>
+                    <h1 className="text-tricolorgreen">YOUR HOLIDAY</h1>
                 </div>
                 <p
                     id="carousel-paragraph"
                     className={`absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3`}
                 >
-                    Our app combines the convenience of searching for
-                    destinations, comparing prices, hotels, and activities all
-                    in one place, with the customization of personalizing your
-                    itinerary and adding personal notes. With our user-friendly
-                    interface and intuitive navigation, you can design your
-                    perfect getaway, whether you're an adventure seeker, a
-                    foodie, a culture buff, or just looking to relax. So, sit
-                    back, relax, and let us design your holiday today!
+                    Introducing our innovative web application, tailored to
+                    craft personalized trip plans for unforgettable adventures
+                    in Thailand. By simply inputting your preferences, such as
+                    travel duration, interests, and budget, our novel algorithm
+                    will design a bespoke itinerary that caters to your unique
+                    desires. Our extensive database features a diverse range of
+                    attractions, accommodations, and activities, ensuring a
+                    well-rounded experience in the Land of Smiles.
                 </p>
             </div>
             <div

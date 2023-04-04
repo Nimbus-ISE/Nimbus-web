@@ -4,6 +4,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StarIcon from "@mui/icons-material/Star";
 import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
+import Review from "../PlanTab/Popups/Review";
 
 interface FullDetailCardProps {
     location: {
@@ -148,6 +149,14 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                 </Stack>
                 <Typography>{description}</Typography>
             </Stack>
+            <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
+                USER REVIEWS
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+                {reviews.map((review) => {
+                    return <Review review={review} />;
+                })}
+            </div>
         </div>
     );
 };

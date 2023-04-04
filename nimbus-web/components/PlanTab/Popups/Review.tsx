@@ -1,43 +1,50 @@
 import React from "react";
-import { ReviewProps } from "../PlanTabTypes";
-import { getPlanTabState } from "../PlanTabContext";
 import { useMediaQuery } from "@mui/material";
+import Stars from "@/components/Stars";
+import Image from "next/image";
+import truncateWithDot from "@/utils/truncateWithDot";
 
-const Review = (props: ReviewProps) => {
-    const isBigScreen = useMediaQuery("(min-width:1000px)");
+interface IProps {
+    review: IReview;
+}
+
+const Review = ({ review }: IProps) => {
+    const { author, review_rating, review_text } = review;
+    const isBigScreen = useMediaQuery("(min-width:768px)");
     return (
         <>
             <div
-                className={
-                    isBigScreen
-                        ? "col-span-12 border-4 border-[#e6e6d6] rounded-full h-32 flex gap-4 items-center p-6"
-                        : "col-span-12  w-[80vw]  flex gap-4 items-center pt-2 "
-                }
+                className={` text-black bg-white rounded-2xl border-2 col-span-12 flex gap-4 items-center shadow-sm h-fit
+                    ${isBigScreen ? "p-4" : "p-3"}`}
             >
                 {isBigScreen && (
                     // <div className="rounded-full bg-slate-500 w-[7vw] h-[7vw]"></div>
-                    <img
-                        src="images/guest.jpg"
+                    <Image
+                        src="/images/guest.jpg"
                         alt="pfp"
-                        className="rounded-full bg-slate-500 w-[7vw] h-[7vw]"
+                        width={32}
+                        height={32}
+                        className="aspect-square rounded-full place-self-start shadow-sm bg-slate-500 w-8 h-8"
                     />
                 )}
-                <div className="flex flex-col gap-2 ">
-                    <div className="flex gap-4 items-center">
-                        <div className="text-lg font-extrabold">
-                            {props.user}
+                <div className="flex flex-col gap-2">
+                    <div className="flex flex-wrap items-center pr-2">
+                        <div className="text-sm font-bold whitespace-nowrap w-fit mr-2">
+                            {truncateWithDot(author, 23)}
                         </div>
-                        <div className="bg-yellow-300 w-24 h-6">Stars</div>
+                        <div className="my-auto">
+                            <Stars size={12} rating={Number(review_rating)} />
+                        </div>
                     </div>
 
                     <div
                         className={
                             isBigScreen
-                                ? "text-xs w-96 "
-                                : "text-[0.6rem] w-[70vw] "
+                                ? "text-[0.8rem] w-full"
+                                : "text-[0.65rem] w-full"
                         }
                     >
-                        {props.reviewText}
+                        {review_text}
                     </div>
                 </div>
             </div>

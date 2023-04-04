@@ -66,7 +66,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
             onClose={() => setOpenDrawer(false)}
         >
             <MobileLeft setOpenDrawer={setOpenDrawer} />
-            <div className="flex w-full h-1 shadow-sm bg-gradient-to-r from-tricolorgreen to-yellow-300" />
+            <div className="flex w-full h-[3px] shadow-sm bg-gradient-to-r from-tricolorgreen to-yellow-300" />
             <Box sx={{ width: 250, paddingTop: 0 }}>
                 <List>
                     {list.map((listItem, index) =>
