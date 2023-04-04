@@ -10,7 +10,7 @@ interface PlanTabContextStateType {
     openFullTab: boolean;
     closed: boolean;
     openReview: false;
-    placeData: placeDataType;
+    placeData: any;
     openAlternatives: boolean;
     currentFolderView: number;
     currentFolder: number;

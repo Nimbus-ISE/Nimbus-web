@@ -6,21 +6,23 @@ import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData } = getPlanTabState();
-    const [detail, setDetail]: any = useState();
-    const dispatch: any = getPlanTabDispatch();
-    const fetchDetail = async () => {
-        const response = await fetch(
-            `/api/getLocationData?loc_id=${placeData.loc_id}`
-        );
-        const result = await response.json();
-        return result;
-    };
 
-    useEffect(() => {
-        fetchDetail().then((data) => {
-            setDetail(data[0]);
-        });
-    }, []);
+    const dispatch: any = getPlanTabDispatch();
+    const data = placeData.place;
+
+    // const fetchDetail = async () => {
+    //     const response = await fetch(
+    //         `/api/getLocationData?loc_id=${placeData.loc_id}`
+    //     );
+    //     const result = await response.json();
+    //     return result;
+    // };
+
+    // useEffect(() => {
+    //     fetchDetail().then((data) => {
+    //         setDetail(data[0]);
+    //     });
+    // }, []);
 
     return (
         <>
@@ -45,14 +47,14 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             >
                 {!isBigScreen && (
                     <img
-                        src={detail?.url}
+                        src={data?.url}
                         className="rounded-xl border-2 bg-blue-100 w-[90%]  translate-x-[5.5vw]  "
                     />
                 )}
                 <div className="grid grid-cols-12 p-6 gap-6 ">
                     {isBigScreen && (
                         <img
-                            src={detail?.url}
+                            src={data?.url}
                             className="rounded-xl border-2 bg-blue-100 col-span-7 "
                         />
                     )}
@@ -65,7 +67,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                     : "text-2xl font-extrabold w-[80vw]"
                             }
                         >
-                            {detail?.loc_name}
+                            {data?.loc_name}
                         </div>
                         <div className="text-xs">{props.address}</div>
 
@@ -78,12 +80,12 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                     : "text-[0.8rem] w-[80vw]"
                             }
                         >
-                            {detail?.description
-                                ? detail?.description
+                            {data?.description
+                                ? data?.description
                                 : "No description provided"}
                         </div>
                         <div className="text-[0.8rem] col-span-12">
-                            {"Price Level: " + detail?.price_level}
+                            {"Price Level: " + data?.price_level}
                         </div>
                     </div>
 

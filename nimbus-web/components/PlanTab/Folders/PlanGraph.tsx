@@ -34,7 +34,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 dispatch({
                                     type: "TOGGLE_PLACE_DETAILS",
                                     payload: {
-                                        loc_id: place.loc_id,
+                                        place: place,
                                     },
                                 });
                             }}
