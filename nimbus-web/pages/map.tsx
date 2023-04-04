@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Head from "next/head";
-import useMap from "@/hooks/useMap";
+
 import useMediaQuery from "@/hooks/useMediaQuery";
 import {
     getPlanTabDispatch,
@@ -12,15 +12,65 @@ import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
 
 export default function map() {
     const dispatch: any = getPlanTabDispatch();
-
     const screenSize = useMediaQuery("(min-width:1000px)");
     const { isBigScreen } = getPlanTabState();
+
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
     }, [screenSize]);
+
+    useEffect(() => {
+        const fetchTrip = async () => {
+            const res = await fetch(`http://localhost:3000/api/getTrip`);
+            const plan = await res.json();
+            return plan;
+        };
+        const fetchLocationDetails = async (loc_ids: string) => {
+            const response = await fetch(
+                `/api/getLocationData?loc_ids=${loc_ids}`
+            );
+            const data = await response.json();
+            return data;
+        };
+
+        (async () => {
+            const loc_ids: any = [];
+            const trip = await fetchTrip();
+
+            const tempPinState: any[] = [];
+            trip.result.forEach((day: any) => {
+                const tempPin: any = [];
+                const tempLocId: any = [];
+                day.forEach((loc: any) => {
+                    tempPin.push("#000");
+                    tempLocId.push(loc.loc_id);
+                });
+                if (tempPinState.length < trip.result.length) {
+                    tempPinState.push(tempPin);
+                }
+                if (loc_ids.length < trip.result.length) {
+                    fetchLocationDetails(`[${[tempLocId].toString()}]`).then(
+                        (result) => {
+                            loc_ids.push(result);
+                            dispatch({
+                                type: "SET_FULL_PLAN",
+                                payload: loc_ids,
+                            });
+                        }
+                    );
+                }
+            });
+
+            // loc_ids.forEach((day: any) => {
+            //     fetchLocationDetails(day.toString()).then((result: any) => {
+            //         console.log(result);
+            //     });
+            // });
+        })();
+    }, []);
 
     return (
         <>
@@ -38,57 +88,6 @@ export default function map() {
                     {!isBigScreen && <SmallScreenPage />}
 
                     {isBigScreen && <BigScreenPage />}
-
-                    {/* {!openFullTab && (
-                        <Map
-                            ref={mapRef}
-                            initialViewState={{
-                                longitude: 100.5018,
-                                latitude: 13.7563,
-                                zoom: 10,
-                            }}
-                            style={{
-                                gridColumnStart: 5,
-                                gridColumnEnd: "span 12",
-                            }}
-                            mapboxAccessToken={
-                                "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
-                            }
-                            mapStyle="mapbox://styles/mapbox/streets-v12"
-                        >
-                            {Object.keys(points).map(
-                                (key: string, index: number) => {
-                                    return (
-                                        <Marker
-                                            longitude={
-                                                points[key].coordinates.lng
-                                            }
-                                            latitude={
-                                                points[key].coordinates.lat
-                                            }
-                                            anchor="bottom"
-                                            onClick={(e) => {
-                                                togglePinState(index);
-                                                onSelect(
-                                                    points[key].coordinates.lng,
-                                                    points[key].coordinates.lat
-                                                );
-                                                e.originalEvent.stopPropagation();
-                                            }}
-                                        >
-                                            <Pin fill={pinState[index]} />
-                                        </Marker>
-                                    );
-                                },
-                                []
-                            )}
-
-                            <ScaleControl />
-                            <Source id="my-data" type="geojson" data={geojson}>
-                                <Layer {...layerStyle} />
-                            </Source>
-                        </Map>
-                    )} */}
                 </div>
             </div>
         </>

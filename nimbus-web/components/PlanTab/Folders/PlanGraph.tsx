@@ -1,29 +1,30 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
-import useMap from "@/hooks/useMap";
+
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab, isClosingFullFolder, currentFolder, isBigScreen } =
-        getPlanTabState();
+    const {
+        openFullTab,
+        isClosingFullFolder,
+        isBigScreen,
+        fullPlan,
+        currentFolder,
+    } = getPlanTabState();
+    console.log(fullPlan);
+    console.log(props.places);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
                 Day {props.dayNumber}
             </div>
-            {props.places?.map((place: PlaceType, index: any) => (
+            {props.places?.map((place: any, index: any) => (
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div
-                        className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] hover:h-32 "
-
-                        // onMouseLeave={() => {
-                        //     togglePinState(currentFolder, 999);
-                        // }}
-                    >
+                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] hover:h-32 ">
                         <img
-                            src={place.imgLink}
+                            src={place.url}
                             className={
                                 !isBigScreen
                                     ? "h-[30vw] w-[30vw] rounded-full hover:scale-110 duration-300 cursor-pointer shadow bg-fuchsia-500"
@@ -46,7 +47,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             }
                         >
                             <div className="flex gap-2">
-                                {place?.name?.length < 20 && (
+                                {place?.loc_name?.length < 20 && (
                                     <div
                                         className={
                                             !isBigScreen
@@ -54,10 +55,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                 : "text-xl font-bold ml-4"
                                         }
                                     >
-                                        {place.name}
+                                        {place.loc_name}
                                     </div>
                                 )}
-                                {place?.name?.length >= 20 && (
+                                {place?.loc_name?.length >= 20 && (
                                     <div
                                         className={
                                             !isBigScreen
@@ -65,7 +66,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                 : "text-xl font-bold ml-4 text-left"
                                         }
                                     >
-                                        {place.name}
+                                        {place.loc_name}
                                     </div>
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
@@ -86,12 +87,12 @@ const PlanGraph = (props: PlanGraphProps) => {
                             </div>
 
                             <div className="text-[12px] text-left ml-4">
-                                opening hours:{" "}
+                                {/* opening hours:{" "}
                                 {place["opening hours"][0] + " am "}-
                                 {" " + place["opening hours"][1] + " pm"}
                                 <br />
                                 Estimate Time of Activty:{" "}
-                                {`${Number(place.durationH).toFixed(1)} hrs`}
+                                {`${Number(place.durationH).toFixed(1)} hrs`} */}
                             </div>
                         </div>
                     </div>
