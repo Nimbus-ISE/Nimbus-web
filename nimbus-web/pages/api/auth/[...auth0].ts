@@ -35,20 +35,19 @@ export const afterRefetch = (
 };
 
 const getLoginState = (req: NextApiRequest, loginOptions: LoginOptions) => {
-    const { prompt, fromPath } = req.query;
+    const { prompt, redirect } = req.query;
     console.log("getLoginState", loginOptions);
     if (
         typeof prompt === "string" &&
-        typeof fromPath === "string" &&
+        typeof redirect === "string" &&
         loginOptions.authorizationParams
     ) {
-        console.log("prompt param changed to ", prompt, fromPath);
+        console.log("prompt param changed to ", prompt, redirect);
         loginOptions.authorizationParams.prompt = prompt;
-        if (fromPath) {
-            const queryString = stringify({ prompt, fromPath });
-            loginOptions.returnTo = `${req.url}?${queryString}`;
-        } else {
+        if (redirect) {
             loginOptions.returnTo = "/";
+        } else {
+            loginOptions.returnTo = req.headers.referer;
         }
     } else {
         console.log("prompt param unchanged");

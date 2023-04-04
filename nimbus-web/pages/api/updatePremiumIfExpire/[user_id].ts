@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import sql from "@/postgres";
 import { withApiAuthRequired } from "@auth0/nextjs-auth0";
 import getManagementToken from "@/utils/api/getManagementToken";
 import { createClient } from "redis";
@@ -33,8 +34,16 @@ export default withApiAuthRequired(async function handler(
                         premium_type: "None",
                         premium_expire: Date.now(),
                     });*/
-                    console.log("Premium expired, removed premium", res);
-                    return res.status(200).json({ expired: true });
+                    try {
+                        await sql`UPDATE user_data
+                        SET premium_type = 'None', premium_expire = CURRENT_DATE
+                        WHERE user_id = ${user_id}`;
+                        console.log("Premium expired, removed premium", res);
+                        return res.status(200).json({ expired: true });
+                    } catch (e) {
+                        console.log("DB error");
+                        return res.status(500).send("DB error");
+                    }
                 }
                 console.log("User unchanged");
                 return res.status(200).json({ expired: false });

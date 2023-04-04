@@ -19,7 +19,7 @@ const Upgrade = () => {
                     alert("Upgrade complete!");
                     const url = `/api/auth/login?prompt=${encodeURIComponent(
                         "none"
-                    )}`;
+                    )}&redirect=${encodeURIComponent("true")}`;
                     router.push(url);
                 } else {
                     alert("Unknown error occured");

@@ -30,8 +30,6 @@ const checkPremiumOnNewSession = async (
                 }
                 const url = `/api/auth/login?prompt=${encodeURIComponent(
                     "none"
-                )}&fromPath=${encodeURIComponent(
-                    router.pathname + router.asPath
                 )}`;
                 router.push(url);
             } else {
