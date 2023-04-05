@@ -6,7 +6,6 @@ import {
 } from "@auth0/nextjs-auth0";
 import { getSession, Session } from "@auth0/nextjs-auth0";
 import { NextApiRequest, NextApiResponse } from "next";
-import { stringify } from "querystring";
 
 export async function refetchUserProfile(
     req: NextApiRequest,

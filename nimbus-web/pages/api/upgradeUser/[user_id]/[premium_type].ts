@@ -2,15 +2,15 @@ import sql from "../../../../postgres";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { withApiAuthRequired } from "@auth0/nextjs-auth0";
 import { createClient } from "redis";
-import getManagementToken from "@/utils/api/getManagementToken";
+//import getManagementToken from "@/utils/api/getManagementToken";
 
-const client = createClient({
+/*const client = createClient({
     password: process.env.REDIS_PW,
     socket: {
         host: process.env.REDIS_HOST,
         port: 17356,
     },
-});
+});*/
 
 export default withApiAuthRequired(async function handler(
     req: NextApiRequest,
@@ -29,11 +29,11 @@ export default withApiAuthRequired(async function handler(
         return res.status(400).json({ message: "Invalid premium type" });
     }
 
-    const tokenData = await getManagementToken(client, user_id);
+    /*const tokenData = await getManagementToken(client, user_id);
     if (!tokenData) {
         console.log("No token data");
         return res.status(500).json({ message: "No token data" });
-    }
+    }*/
 
     try {
         await sql`

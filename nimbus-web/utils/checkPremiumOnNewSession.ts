@@ -1,5 +1,8 @@
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 import { NextRouter } from "next/router";
+import checkPremiumExpire from "./checkPremiumExpire";
+import getPremiumExpire from "./getPremiumExpire";
+import getPremiumType from "./getPremiumType";
 
 //verifies the premium status everytime a new session (browser) is detected
 const checkPremiumOnNewSession = async (
@@ -9,35 +12,30 @@ const checkPremiumOnNewSession = async (
     if (!sessionStorage.getItem("session-id") && user) {
         console.log("checkPremiumOnNewSession");
         let uuid = crypto.randomUUID();
-        try {
-            const response = await fetch(
-                `/api/updatePremiumIfExpire/${user.sub}`,
-                {
+        const metadata = {
+            premium_type: getPremiumType(user),
+            premium_expire: getPremiumExpire(user),
+        };
+        if (checkPremiumExpire(metadata)) {
+            try {
+                const response = await fetch(`/api/expirePremium/${user.sub}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                }
-            );
-            if (response.ok) {
-                const data = await response.json();
-                if (data.expired) {
+                });
+                if (response.ok) {
+                    const url = `/api/auth/login?prompt=${encodeURIComponent(
+                        "none"
+                    )}`;
+                    router.push(url);
                     alert("Your premium has expired");
-                    sessionStorage.setItem("session-id", JSON.stringify(uuid));
-                } else {
-                    alert("Ran check: Pass");
-                    sessionStorage.setItem("session-id", JSON.stringify(uuid));
                 }
-                const url = `/api/auth/login?prompt=${encodeURIComponent(
-                    "none"
-                )}`;
-                router.push(url);
-            } else {
-                console.error("Failed to update user session");
+            } catch (error) {
+                console.error("An error occurred win expirePremium", error);
             }
-        } catch (error) {
-            console.error("An error occurred win updatePremiumStatus", error);
         }
+        sessionStorage.setItem("session-id", JSON.stringify(uuid));
     }
 };
 
