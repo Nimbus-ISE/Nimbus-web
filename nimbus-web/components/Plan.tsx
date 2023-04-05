@@ -8,6 +8,7 @@ import useElementSize from "@/hooks/useElementSize";
 import ConfirmForm from "./FormsElements/ConfirmForm";
 
 interface IScrollContext {
+    currentValue: number;
     setCurrentValue: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -47,36 +48,38 @@ const Plan = () => {
     };
     // below are related to page styling and scrolling stuff
     const [currentValue, setCurrentValue] = React.useState<number>(0);
-    const [snapUp, setSnapUp] = React.useState<boolean>(false);
+    //const [snapUp, setSnapUp] = React.useState<boolean>(false);
     const { height } = useViewportHeight();
     const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     const pageSize = useElementSize("input-container");
-    const ref = React.useRef<any>();
-    const scrollTimerRef = React.useRef<any>();
-    const handleOnClick = (index: number) => {
+    //const ref = React.useRef<any>();
+    //const scrollTimerRef = React.useRef<any>();
+    /*const handleOnClick = (index: number) => {
         const scroll = Scroll.animateScroll;
         scroll.scrollTo(index * pageSize.height, {
             duration: 500,
             smooth: true,
             containerId: "form-container",
         });
-    };
-    const scrollCallback = () => {
+    };*/
+    /*const scrollCallback = () => {
         //if current value is between nodes then snap to the direction
         if (!Number.isInteger(ref.current)) {
             handleOnClick(
                 snapUp ? Math.floor(ref.current) : Math.ceil(ref.current)
             );
         }
-    };
+    };*/
     React.useEffect(() => {
         //updates value and sets snap direction according to increment
-        setSnapUp(currentValue < ref.current ? true : false);
-        ref.current = currentValue;
+        //setSnapUp(currentValue < ref.current ? true : false);
+        //ref.current = currentValue;
+        console.log(currentValue);
     }, [currentValue]);
     return (
         <ScrollContext.Provider
             value={{
+                currentValue: currentValue,
                 setCurrentValue: setCurrentValue,
             }}
         >
@@ -95,7 +98,7 @@ const Plan = () => {
                 >
                     <div
                         className="absolute top-0 bottom-0 left-0 right-0 opacity-40
-                bg-gradient-to-r from-tricolorgreen to-yellow-300 z-10"
+                        bg-gradient-to-r from-tricolorgreen to-yellow-300 z-10"
                     />
                     <div
                         id="plan-card"
@@ -103,29 +106,35 @@ const Plan = () => {
                             maxHeight: isLargerThanMedium ? "40rem" : "100%",
                             height: height - (isLargerThanMedium ? 64 : 0),
                         }}
-                        className="grid grid-flow-col gap-24 rounded-xl shadow-lg bg-neutral-100
-                px-5 md:px-10 m-auto max-w-[60rem] md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        className="grid grid-flow-col rounded-xl shadow-lg bg-neutral-100
+                        px-5 m-auto max-w-[60rem] md:w-[90%] min-w-[280px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
-                            <>
-                                <div className="my-auto">
+                            <div
+                                className="flex my-auto"
+                                style={{
+                                    maxHeight: isLargerThanMedium
+                                        ? "40rem"
+                                        : "100%",
+                                    height:
+                                        height - (isLargerThanMedium ? 64 : 0),
+                                }}
+                            >
+                                <div className="w-[10rem] h-[90%] my-auto bg-green-200">
                                     <PageIndicator formArr={formArr} />
                                 </div>
                                 <div
-                                    onScroll={() => {
-                                        //activates when scroll has ended
-                                        clearTimeout(scrollTimerRef.current);
-                                        scrollTimerRef.current = setTimeout(
-                                            scrollCallback,
-                                            50
-                                        );
-                                    }}
                                     id="form-container"
-                                    className="overflow-y-scroll hide-scrollbar w-fit scrollbar"
+                                    className="flex-1 transition duration-500"
+                                    style={{
+                                        transform: `translateY(-${
+                                            currentValue * pageSize.height
+                                        }px)`,
+                                    }}
                                 >
                                     <Form formArr={formArr} />
                                 </div>
-                            </>
+                            </div>
                         ) : (
                             <ConfirmForm />
                         )}

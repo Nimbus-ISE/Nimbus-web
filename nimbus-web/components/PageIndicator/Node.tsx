@@ -1,6 +1,7 @@
 import useElementSize from "@/hooks/useElementSize";
 import React from "react";
 import * as Scroll from "react-scroll";
+import { ScrollContext } from "../Plan";
 
 interface IProps {
     active: boolean;
@@ -11,14 +12,16 @@ interface IProps {
 }
 
 const Node = ({ size, active, index, name, isCurrent }: IProps) => {
+    const { setCurrentValue } = React.useContext(ScrollContext);
     const pageSize = useElementSize("input-container");
     const handleOnClick = (index: number) => {
-        const scroll = Scroll.animateScroll;
+        /*const scroll = Scroll.animateScroll;
         scroll.scrollTo(index * pageSize.height, {
             duration: 1000,
             smooth: true,
             containerId: "form-container",
-        });
+        });*/
+        setCurrentValue(index);
     };
     return (
         <button
@@ -34,7 +37,7 @@ const Node = ({ size, active, index, name, isCurrent }: IProps) => {
             } relative flex border-[4px] bg-white rounded-full 
             transition duration-300 z-[2] text-neutral-600`}
         >
-            <div className="absolute top-0 bottom-0 left-12 my-auto h-fit">
+            <div className="absolute top-0 bottom-0 left-12 my-auto h-fit text-sm">
                 {name}
             </div>
             <div className="m-auto">{index + 1}</div>
