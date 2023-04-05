@@ -19,6 +19,7 @@ interface PlanTabContextStateType {
     initalCoordinates: any;
     openSavePlan: boolean;
     selectedLocationIndex: number;
+    travelTime: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -32,6 +33,12 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 ...state,
                 fullPlan: action.payload,
                 initalCoordinates: intialCoordinates,
+            };
+        }
+        case "SET_TRAVEL_TIME": {
+            return {
+                ...state,
+                travelTime: action.payload,
             };
         }
         case "CHANGE_PLAN": {
@@ -153,6 +160,7 @@ const initialState: PlanTabContextStateType = {
     currentFolder: 0,
     openSavePlan: false,
     selectedLocationIndex: 0,
+    travelTime: [],
 };
 
 const PlanTabContext = createContext(

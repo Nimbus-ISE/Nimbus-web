@@ -8,7 +8,7 @@ import { FolderFullProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
-    const { currentFolderView, fullPlan } = getPlanTabState();
+    const { currentFolderView, fullPlan, travelTime } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
@@ -36,6 +36,9 @@ const FolderFull = (props: FolderFullProps) => {
                                                 clickable={false}
                                                 dayNumber={index + 1}
                                                 places={[...data]}
+                                                travelTimes={[
+                                                    ...travelTime[index],
+                                                ]}
                                             />
                                         </div>
                                     );

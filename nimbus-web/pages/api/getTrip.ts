@@ -12,16 +12,20 @@ export default async function handler(
         );
 
         const result = await response.json();
-        const points: any = [];
+        const travelTimes: any = [];
+        const locations: any = [];
 
         result.forEach((day: any) => {
-            const temp: any = [];
-            day.forEach((point: any) => {
-                temp.push(point.coordinate);
+            const tempTravelTime: any = [];
+            const tempLocations: any = [];
+            day.forEach((point: any, index: any) => {
+                if (index % 2 === 0) tempLocations.push(point.id);
+                else tempTravelTime.push(point);
             });
-            points.push(temp);
+            travelTimes.push(tempTravelTime);
+            locations.push(tempLocations);
         });
-        res.status(200).json({ result, points });
+        res.status(200).json({ locations, travelTimes });
     } catch (err) {
         res.status(500).json("error invalid url");
     }

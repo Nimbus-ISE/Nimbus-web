@@ -9,6 +9,7 @@ export interface PlanGraphProps {
     places: Array<PlaceType>;
     dayNumber: number;
     clickable: boolean;
+    travelTimes: any;
 }
 
 export interface PlaceType {

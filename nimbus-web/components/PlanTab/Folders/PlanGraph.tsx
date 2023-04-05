@@ -4,15 +4,7 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const {
-        openFullTab,
-        isClosingFullFolder,
-        isBigScreen,
-        fullPlan,
-        currentFolder,
-    } = getPlanTabState();
-    console.log(fullPlan);
-    console.log(props.places);
+    const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -97,11 +89,19 @@ const PlanGraph = (props: PlanGraphProps) => {
                         </div>
                     </div>
 
-                    <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
-                    <div className="flex gap-10 items-center">
-                        <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
-                        <div>10 minutes</div>
-                    </div>
+                    {props.travelTimes[index]?.travel_time && (
+                        <>
+                            <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
+                            <div className="flex gap-10 items-center">
+                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
+                                <div>
+                                    {`Travel Time: ${props.travelTimes[
+                                        index
+                                    ]?.travel_time.toFixed(0)} minutes`}
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </>
             ))}
         </div>

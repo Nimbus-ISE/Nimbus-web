@@ -16,6 +16,7 @@ const FolderSmall = () => {
         currentFolderView,
         fullPlan,
         openSavePlan,
+        travelTime,
     } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
@@ -85,6 +86,9 @@ const FolderSmall = () => {
                                                     clickable={true}
                                                     dayNumber={index + 1}
                                                     places={[...day]}
+                                                    travelTimes={[
+                                                        ...travelTime[index],
+                                                    ]}
                                                 />
                                             )}
                                             {openSavePlan && <SavePlanPopUp />}

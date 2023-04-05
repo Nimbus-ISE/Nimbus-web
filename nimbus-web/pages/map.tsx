@@ -40,18 +40,24 @@ export default function map() {
             const loc_ids: any = [];
             const trip = await fetchTrip();
 
+            dispatch({
+                type: "SET_TRAVEL_TIME",
+                payload: trip.travelTimes,
+            });
             const tempPinState: any[] = [];
-            trip.result.forEach((day: any) => {
+            trip.locations.forEach((day: any) => {
                 const tempPin: any = [];
                 const tempLocId: any = [];
+
                 day.forEach((loc: any) => {
                     tempPin.push("#000");
-                    tempLocId.push(loc.loc_id);
+                    tempLocId.push(loc);
                 });
-                if (tempPinState.length < trip.result.length) {
+                if (tempPinState.length < trip.locations.length) {
                     tempPinState.push(tempPin);
                 }
-                if (loc_ids.length < trip.result.length) {
+
+                if (loc_ids.length < trip.locations.length) {
                     fetchLocationDetails(`[${[tempLocId].toString()}]`).then(
                         (result) => {
                             loc_ids.push(result);
