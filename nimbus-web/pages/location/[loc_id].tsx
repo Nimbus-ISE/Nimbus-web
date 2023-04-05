@@ -1,6 +1,6 @@
 import FullDetailCard from "@/components/FullDetailCard/FullDetailCard";
 import getLocation from "@/utils/api/getLocation";
-import { GetServerSidePropsContext } from "next";
+import { GetStaticPropsContext } from "next";
 import React from "react";
 
 interface IProps {
@@ -17,7 +17,14 @@ const location = ({ location }: IProps) => {
 
 export default location;
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getStaticPaths() {
+    return {
+        paths: [],
+        fallback: "blocking", // can also be true or 'blocking'
+    };
+}
+
+export async function getStaticProps(context: GetStaticPropsContext) {
     const { params } = context;
     const loc_id = params?.loc_id;
     const location = await getLocation(loc_id as string);
