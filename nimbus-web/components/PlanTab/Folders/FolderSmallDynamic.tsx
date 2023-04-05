@@ -5,12 +5,20 @@ import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import SavePlanPopUp from "../Popups/SavePlanPopUp";
 
 const FolderSmall = () => {
     const [opendedTab, setOpenedTab] = useState("");
     const [tabsClass, setTabsClass] = useState(classes.tabs);
-    const { openFullTab, isBigScreen, currentFolderView, fullPlan } =
-        getPlanTabState();
+    const {
+        openFullTab,
+        isBigScreen,
+        currentFolderView,
+        fullPlan,
+        openSavePlan,
+        travelTime,
+    } = getPlanTabState();
+
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
 
@@ -74,11 +82,17 @@ const FolderSmall = () => {
                                     </label>
                                     {opendedTab === `tab${index}` && (
                                         <div className={classes.tab}>
-                                            <PlanGraph
-                                                clickable={true}
-                                                dayNumber={index + 1}
-                                                places={[...day]}
-                                            />
+                                            {!openSavePlan && (
+                                                <PlanGraph
+                                                    clickable={true}
+                                                    dayNumber={index + 1}
+                                                    places={[...day]}
+                                                    travelTimes={[
+                                                        ...travelTime[index],
+                                                    ]}
+                                                />
+                                            )}
+                                            {openSavePlan && <SavePlanPopUp />}
                                         </div>
                                     )}
                                 </>

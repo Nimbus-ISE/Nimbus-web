@@ -18,6 +18,7 @@ import PlaceDetail from "../Popups/PlaceDetail";
 import SideBar from "./SideBar";
 import FullScreenPlan from "./FullScreenPlan";
 import useMap from "@/hooks/useMap";
+import SavePlanPopUp from "../Popups/SavePlanPopUp";
 
 const SmallScreenPage = () => {
     const {

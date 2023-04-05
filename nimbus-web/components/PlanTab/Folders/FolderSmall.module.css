@@ -135,12 +135,10 @@
     padding: 1rem;
     background: #fff;
     overflow-y: scroll;
-    height: 100vh;
-
-    scrollbar-width: none;
+    height: 85vh;
 }
 .tab::-webkit-scrollbar {
-    display: none;
+    color: black;
 }
 .tab {
     display: block;
