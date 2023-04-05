@@ -5,10 +5,15 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const loc_id = req.query.loc_id;
+    const loc_ids: any = req.query.loc_ids;
+    console.log(loc_ids);
+
+    const arr: any = JSON.parse(loc_ids);
     try {
-        const location_data = await sql`
-        select * from location_data where loc_id=${loc_id}`;
+        const location_data = await sql`SELECT L.*, I.url
+            FROM location_data L,  image I
+            WHERE L.loc_id = I.loc_id AND L.loc_id IN ${sql([arr])}
+            GROUP BY L.loc_id, I.url`;
 
         res.status(200).json(location_data);
     } catch (e) {

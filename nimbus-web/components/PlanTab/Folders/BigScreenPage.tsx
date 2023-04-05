@@ -18,6 +18,7 @@ import Map, {
 import Pin from "@/components/Pin";
 import polyline from "@mapbox/polyline";
 import useMap from "@/hooks/useMap";
+import SavePlanPopUp from "../Popups/SavePlanPopUp";
 
 const BigScreenPage = () => {
     const {
@@ -28,6 +29,7 @@ const BigScreenPage = () => {
         placeData,
         currentFolder,
         fullPlan,
+        openSavePlan,
     } = getPlanTabState();
     const {
         mapRef,
@@ -40,16 +42,19 @@ const BigScreenPage = () => {
     } = useMap();
 
     useEffect(() => {
-        if (points[currentFolder]) {
+        if (fullPlan[currentFolder]) {
             mapRef.current?.flyTo({
                 center: [
-                    points[currentFolder][0][1],
-                    points[currentFolder][0][0],
+                    fullPlan[currentFolder][0].lng,
+                    fullPlan[currentFolder][0].lat,
                 ],
             });
         }
+        console.log(fullPlan);
+
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState]);
+    }, [currentFolder, points[currentFolder], pinState, fullPlan]);
+    console.log(pinState[currentFolder]);
 
     return (
         <>
@@ -57,8 +62,9 @@ const BigScreenPage = () => {
             {!openFullTab && (
                 <>
                     <SideBar />
+                    {openSavePlan && <SavePlanPopUp />}
 
-                    {/* {!openFullTab && (
+                    {/* {!openFullTab && fullPlan && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
@@ -76,13 +82,13 @@ const BigScreenPage = () => {
                             }
                             mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                         >
-                            {points[0] &&
-                                points[currentFolder].map(
+                            {fullPlan[currentFolder] &&
+                                fullPlan[currentFolder].map(
                                     (point: any, index: any) => {
                                         return (
                                             <Marker
-                                                longitude={point[1]}
-                                                latitude={point[0]}
+                                                longitude={point.lng}
+                                                latitude={point.lat}
                                                 anchor="bottom"
                                                 onClick={(e) => {
                                                     console.log(index);
@@ -92,8 +98,8 @@ const BigScreenPage = () => {
                                                         index
                                                     );
                                                     onSelect(
-                                                        point[1],
-                                                        point[0]
+                                                        point.lng,
+                                                        point.lat
                                                     );
                                                     e.originalEvent.stopPropagation();
                                                 }}
@@ -102,17 +108,19 @@ const BigScreenPage = () => {
                                                     {
                                                         fullPlan[currentFolder][
                                                             index
-                                                        ].name
+                                                        ].loc_name
                                                     }
                                                 </span>
-                                                <Pin
-                                                    fill={
-                                                        pinState[currentFolder][
-                                                            index
-                                                        ]
-                                                    }
-                                                    number={index + 1}
-                                                />
+                                                {pinState[currentFolder] && (
+                                                    <Pin
+                                                        fill={
+                                                            pinState[
+                                                                currentFolder
+                                                            ][index]
+                                                        }
+                                                        number={index + 1}
+                                                    />
+                                                )}
                                             </Marker>
                                         );
                                     },

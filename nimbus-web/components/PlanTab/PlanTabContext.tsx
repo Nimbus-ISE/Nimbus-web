@@ -10,13 +10,16 @@ interface PlanTabContextStateType {
     openFullTab: boolean;
     closed: boolean;
     openReview: false;
-    placeData: placeDataType;
+    placeData: any;
     openAlternatives: boolean;
     currentFolderView: number;
     currentFolder: number;
     isClosingFullFolder: boolean;
     fullPlan: any;
     initalCoordinates: any;
+    openSavePlan: boolean;
+    selectedLocationIndex: number;
+    travelTime: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -32,12 +35,43 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 initalCoordinates: intialCoordinates,
             };
         }
+        case "SET_TRAVEL_TIME": {
+            return {
+                ...state,
+                travelTime: action.payload,
+            };
+        }
+        case "CHANGE_PLAN": {
+            const changePlan = (day: number, oldLocationIndex: number) => {
+                state.fullPlan[day][oldLocationIndex] = {
+                    loc_id: 44,
+                    loc_name: "Joke Sam Yan",
+                    price_level: 1,
+                    description: null,
+                    lat: 13.7346539,
+                    lng: 100.5261501,
+                    province: "Krung Thep Maha Nakhon ",
+                    rating: "4.3",
+                    est_time_stay: 60,
+                    view_count: 0,
+                    partner: false,
+                    address:
+                        "241 245 ซอย จุฬาฯ 11 Wang Mai, Pathum Wan, Bangkok 10330",
+                    url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
+                };
+            };
+            changePlan(action.payload.day, action.payload.oldLocationIndex);
+        }
+        case "SET_SELECTED_LOCATION_INDEX": {
+            return { ...state, selectedLocationIndex: action.payload };
+        }
         case "SET_SCREEN_SIZE": {
             return { ...state, isBigScreen: action.payload };
         }
         case "SET_CURRENT_FOLDER": {
             return { ...state, currentFolder: action.payload };
         }
+
         case "OPEN_FULL_FOLDER":
             return {
                 ...state,
@@ -105,6 +139,12 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return state;
             }
         }
+        case "TOGGLE_SAVE_PLAN": {
+            return { ...state, openSavePlan: !state.openSavePlan };
+        }
+        case "SAVE_PLAN": {
+            return { ...state, openSavePlan: false };
+        }
         default: {
             console.log("error");
             break;
@@ -124,6 +164,9 @@ const initialState: PlanTabContextStateType = {
     fullPlan: [],
     initalCoordinates: [{}],
     currentFolder: 0,
+    openSavePlan: false,
+    selectedLocationIndex: 0,
+    travelTime: [],
 };
 
 const PlanTabContext = createContext(

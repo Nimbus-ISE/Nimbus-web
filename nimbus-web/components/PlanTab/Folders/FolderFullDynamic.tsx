@@ -3,12 +3,12 @@ import classes from "./FolderFull.module.css";
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
-import { testData } from "@/test_data/testData";
+
 import { FolderFullProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
 const FolderFull = (props: FolderFullProps) => {
-    const { currentFolderView, fullPlan } = getPlanTabState();
+    const { currentFolderView, fullPlan, travelTime } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
@@ -36,6 +36,9 @@ const FolderFull = (props: FolderFullProps) => {
                                                 clickable={false}
                                                 dayNumber={index + 1}
                                                 places={[...data]}
+                                                travelTimes={[
+                                                    ...travelTime[index],
+                                                ]}
                                             />
                                         </div>
                                     );
