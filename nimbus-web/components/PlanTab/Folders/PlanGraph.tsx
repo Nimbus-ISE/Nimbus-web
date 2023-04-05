@@ -14,7 +14,7 @@ const PlanGraph = (props: PlanGraphProps) => {
             {props.places?.map((place: any, index: any) => (
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] hover:h-32 ">
+                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
                         <img
                             src={place.url}
                             className={

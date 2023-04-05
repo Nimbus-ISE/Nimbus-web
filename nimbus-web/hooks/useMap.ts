@@ -96,18 +96,18 @@ const useMap = () => {
         //         type: "SET_FULL_PLAN",
         //         payload: trip.result,
         //     });
-        //     const tempPinState: any[] = [];
-        //     trip.result.forEach((day: any) => {
-        //         const tempPin: any = [];
-        //         day.forEach(() => {
-        //             tempPin.push("#000");
-        //         });
-        //         if (tempPinState.length < trip.result.length) {
-        //             tempPinState.push(tempPin);
-        //         }
-        //     });
+        const tempPinState: any[] = [];
+        plan.forEach((day: any) => {
+            const tempPin: any = [];
+            day.forEach(() => {
+                tempPin.push("#000");
+            });
+            if (tempPinState.length < day.length) {
+                tempPinState.push(tempPin);
+            }
+        });
         //     setPoints(trip.points);
-        //     setPinState(tempPinState);
+        setPinState(tempPinState);
         // });
     }, [currentFolder]);
 

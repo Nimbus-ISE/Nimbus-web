@@ -18,6 +18,7 @@ const FolderSmall = () => {
         openSavePlan,
         travelTime,
     } = getPlanTabState();
+
     const dispatch: any = getPlanTabDispatch();
     const displayNum = 3;
 
