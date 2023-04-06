@@ -7,6 +7,9 @@ import LocationInput from "./LocationInput";
 import TagsSelection from "./TagsSelection";
 import TripTypeInput from "./TripTypeInput";
 import { ScrollContext } from "../Plan";
+import ArrowUpward from "@mui/icons-material/ArrowUpward";
+import ArrowDownward from "@mui/icons-material/ArrowDownward";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 interface IProps {
     formArr: Array<IForm>;
@@ -22,11 +25,15 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
 };
 
 const Form = ({ formArr }: IProps) => {
-    const { setCurrentValue } = React.useContext(ScrollContext);
+    const { currentValue, setCurrentValue } = React.useContext(ScrollContext);
     const { height } = useElementSize("plan-card");
+    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const handleOnClick = (index: number, isForward: boolean) => {
-        if (isForward) setCurrentValue(index + 1);
-        else setCurrentValue(index - 1);
+        if (isForward) {
+            setCurrentValue(index + 1);
+        } else {
+            setCurrentValue(index - 1);
+        }
     };
     return (
         <form>
@@ -35,32 +42,46 @@ const Form = ({ formArr }: IProps) => {
                     <div
                         style={{ height: height }}
                         id="input-container"
-                        className="flex flex-col h-full w-full bg-blue-100"
+                        className="flex flex-col overflow-y-scroll w-full"
                     >
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleOnClick(index, false);
-                            }}
-                            className="bg-red-200 p-3 w-full flex-1"
-                        >
-                            Go up
-                        </button>
-                        <div className="text-center text-4xl font-extrabold px-0 py-5">
+                        {index !== 0 ? (
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleOnClick(index, false);
+                                }}
+                                className="flex p-3 w-full flex-1 group rounded-full"
+                            >
+                                <div className="bg-white h-11 w-11 p-2 flex rounded-full m-auto shadow-sm group-hover:-translate-y-3 transition duration-500">
+                                    <ArrowUpward className="h-7 w-7 m-auto text-neutral-400 group-hover:text-tricolorgreen" />
+                                </div>
+                            </button>
+                        ) : (
+                            <div className="flex-1" />
+                        )}
+                        <div className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold px-0 py-5">
                             {item.title}
                         </div>
                         <div className="my-7 text-xs flex justify-center">
-                            {formMapper[item.type]}
+                            {isLargerThanMedium || currentValue === index
+                                ? formMapper[item.type]
+                                : null}
                         </div>
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleOnClick(index, true);
-                            }}
-                            className="bg-red-200 p-3 w-full flex-1"
-                        >
-                            Go down
-                        </button>
+                        {index !== formArr.length - 1 ? (
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleOnClick(index, true);
+                                }}
+                                className="flex p-3 w-full flex-1 group rounded-full"
+                            >
+                                <div className="bg-white h-11 w-11 p-2 flex rounded-full m-auto shadow-sm group-hover:translate-y-3 transition duration-500">
+                                    <ArrowDownward className="h-7 w-7 m-auto text-neutral-400  group-hover:text-tricolorgreen" />
+                                </div>
+                            </button>
+                        ) : (
+                            <div className="flex-1" />
+                        )}
                     </div>
                 );
             })}

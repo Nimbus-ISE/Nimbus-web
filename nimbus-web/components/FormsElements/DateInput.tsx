@@ -24,6 +24,15 @@ const DateInput = () => {
         ]);
     }, [startDate, endDate]);
 
+    const handleKeyDown = (e: any) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            ref.current.blur();
+        }
+    };
+
+    const ref = React.useRef<any>();
+
     return (
         <ThemeProvider theme={nimbusTheme}>
             <div className="flex flex-wrap justify-center mx-auto">
@@ -32,19 +41,24 @@ const DateInput = () => {
                         <DatePicker
                             value={startDate}
                             onChange={(newValue) => {
+                                ref.current.blur();
                                 setStartDate(newValue);
                             }}
                             label="Start date"
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
+                                    onKeyDown={handleKeyDown}
+                                    inputRef={ref}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
                                 />
                             )}
                             inputFormat="DD/MM/YYYY"
                             maxDate={endDate}
+                            closeOnSelect
                             disablePast
+                            autoFocus={false}
                         />
                     </LocalizationProvider>
                 </div>
@@ -59,13 +73,17 @@ const DateInput = () => {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
+                                    onKeyDown={handleKeyDown}
+                                    inputRef={ref}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
                                 />
                             )}
                             inputFormat="DD/MM/YYYY"
                             minDate={startDate}
+                            closeOnSelect
                             disablePast
+                            autoFocus={false}
                         />
                     </LocalizationProvider>
                 </div>
