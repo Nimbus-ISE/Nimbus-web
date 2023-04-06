@@ -39,20 +39,22 @@ const SmallScreenPage = () => {
         currentFolderView,
         currentFolder,
     } = getPlanTabState();
+    console.log(pinState);
     useEffect(() => {
-        if (points[currentFolder]) {
+        if (fullPlan[currentFolder]) {
             mapRef.current?.flyTo({
                 center: [
-                    points[currentFolder][0][1],
-                    points[currentFolder][0][0],
+                    fullPlan[currentFolder][0].lng,
+                    fullPlan[currentFolder][0].lat,
                 ],
             });
         }
+
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState]);
+    }, [currentFolder, points[currentFolder], pinState, fullPlan]);
     return (
         <div>
-            {!openFullTab && (
+            {!openFullTab && fullPlan && (
                 <>
                     <div className="h-[70vh] -z-10">
                         {/* {!openFullTab && (
@@ -73,13 +75,13 @@ const SmallScreenPage = () => {
                                 }
                                 mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                             >
-                                {points[0] &&
-                                    points[currentFolder].map(
+                                {fullPlan[0] &&
+                                    fullPlan[currentFolder].map(
                                         (point: any, index: any) => {
                                             return (
                                                 <Marker
-                                                    longitude={point[1]}
-                                                    latitude={point[0]}
+                                                    longitude={point.lng}
+                                                    latitude={point.lat}
                                                     anchor="bottom"
                                                     onClick={(e) => {
                                                         console.log(index);
@@ -89,8 +91,8 @@ const SmallScreenPage = () => {
                                                             index
                                                         );
                                                         onSelect(
-                                                            point[1],
-                                                            point[0]
+                                                            point.lng,
+                                                            point.lat
                                                         );
                                                         e.originalEvent.stopPropagation();
                                                     }}
@@ -99,7 +101,7 @@ const SmallScreenPage = () => {
                                                         {
                                                             fullPlan[
                                                                 currentFolder
-                                                            ][index].name
+                                                            ][index].loc_name
                                                         }
                                                     </span>
                                                     <Pin
@@ -108,6 +110,7 @@ const SmallScreenPage = () => {
                                                                 currentFolder
                                                             ][index]
                                                         }
+                                                        number={index + 1}
                                                     />
                                                 </Marker>
                                             );

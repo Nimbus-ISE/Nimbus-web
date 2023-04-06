@@ -40,6 +40,7 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
+    console.log(pinState);
 
     useEffect(() => {
         if (fullPlan[currentFolder]) {
@@ -50,11 +51,9 @@ const BigScreenPage = () => {
                 ],
             });
         }
-        console.log(fullPlan);
 
         mapRef.current?.resize();
     }, [currentFolder, points[currentFolder], pinState, fullPlan]);
-    console.log(pinState[currentFolder]);
 
     return (
         <>

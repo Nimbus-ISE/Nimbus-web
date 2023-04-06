@@ -8,7 +8,7 @@ const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isBigScreen, openSavePlan } = getPlanTabState();
     return (
-        <div className={"col-span-12 h-full z-10 lg:col-span-4"}>
+        <div className={" h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic />
             {isBigScreen && (
                 <>
