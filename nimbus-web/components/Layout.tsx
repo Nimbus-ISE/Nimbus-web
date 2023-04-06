@@ -6,9 +6,14 @@ import Footer from "./Footer";
 import checkPremiumOnNewSession from "@/utils/checkPremiumOnNewSession";
 import { useRouter } from "next/router";
 
+const excludePathnameList = ["/plan", "/map"];
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
     const router = useRouter();
+    const includeLayout = () => {
+        return !excludePathnameList.includes(router.pathname);
+    };
     React.useEffect(() => {
         if (user) {
             console.log("check premium status on new session");
@@ -20,7 +25,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <Navbar user={user} isLoading={isLoading} />
             <div className="flex w-full h-16 shadow-md bg-gradient-to-r from-tricolorgreen to-yellow-300" />
             {children}
-            <Footer />
+            {includeLayout() ? <Footer /> : null}
         </div>
     ) : (
         <div className="flex min-h-screen h-full bg-neutral-100">

@@ -3,34 +3,7 @@ import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 import SearchIcon from "@mui/icons-material/Search";
-
-const tags = [
-    "Mall",
-    "Religion",
-    "Nature",
-    "Temple",
-    "Shopping",
-    "Must See Attraction",
-    "Beach",
-    "Local Culture",
-    "Luxury",
-    "Historical Place",
-    "Outdoor",
-    "Wellness & Spa",
-    "Zoo",
-    "Market",
-    "Sports",
-    "Arts",
-    "Theater",
-    "Museum",
-    "Nightlife",
-    "Adventure",
-    "Amusement Park",
-    "Family",
-    "Modern",
-    "Restaurant",
-    "Park",
-];
+import { tags } from "@/misc";
 
 interface IProps {
     callback: (tags: Array<string>) => void;
