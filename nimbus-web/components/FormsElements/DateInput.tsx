@@ -13,7 +13,7 @@ const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
 
 const DateInput = () => {
-    const { setFormDataField } = React.useContext(PlanContext);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
 
@@ -27,7 +27,7 @@ const DateInput = () => {
     const handleKeyDown = (e: any) => {
         if (e.key === "Enter") {
             e.preventDefault();
-            ref.current.blur();
+            ref.current.focus();
         }
     };
 
@@ -35,21 +35,22 @@ const DateInput = () => {
 
     return (
         <ThemeProvider theme={nimbusTheme}>
-            <div className="flex flex-wrap justify-center mx-auto">
+            <div ref={ref} className="flex flex-wrap justify-center mx-auto">
                 <div className="start-date my-2 mx-3">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             value={startDate}
                             onChange={(newValue) => {
-                                ref.current.blur();
                                 setStartDate(newValue);
                             }}
                             label="Start date"
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
+                                    defaultValue={
+                                        formData.date ? formData.date[0] : ""
+                                    }
                                     onKeyDown={handleKeyDown}
-                                    inputRef={ref}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
                                 />
@@ -73,8 +74,10 @@ const DateInput = () => {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
+                                    defaultValue={
+                                        formData.date ? formData.date[1] : ""
+                                    }
                                     onKeyDown={handleKeyDown}
-                                    inputRef={ref}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
                                 />

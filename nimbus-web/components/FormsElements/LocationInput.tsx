@@ -19,12 +19,15 @@ const iconPlaceHolder = (
 );
 
 const LocationInput = () => {
-    const { setFormDataField } = React.useContext(PlanContext);
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
+    const inputRef = React.useRef<any>();
     const handleOnChange = () => {
         if (inputRef.current)
             setFormDataField("location", inputRef.current.value);
     };
+    React.useEffect(() => {
+        if (formData.location) inputRef.current.value = formData.location;
+    }, []);
     return (
         <input
             ref={inputRef}

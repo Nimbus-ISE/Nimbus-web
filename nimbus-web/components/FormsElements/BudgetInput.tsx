@@ -8,7 +8,7 @@ const budgetValid = "budget-input " + budgetClassName;
 const budgetInvalid = "budget-input-invalid " + budgetClassName;
 
 const BudgetInput = () => {
-    const { setFormDataField } = React.useContext(PlanContext);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
     const [value, setValue] = React.useState<number>();
     const [isValid, setIsValid] = React.useState<boolean>(true);
 
@@ -33,6 +33,7 @@ const BudgetInput = () => {
     return (
         <>
             <NumericFormat
+                defaultValue={formData.budget}
                 onValueChange={handleValueChange}
                 autoFocus={false}
                 thousandSeparator={true}
