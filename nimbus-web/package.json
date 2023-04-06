@@ -11,7 +11,7 @@
         "build-storybook": "build-storybook"
     },
     "dependencies": {
-        "@auth0/nextjs-auth0": "^2.1.0",
+        "@auth0/nextjs-auth0": "^2.4.0",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
         "@fortawesome/fontawesome-svg-core": "^6.2.1",
