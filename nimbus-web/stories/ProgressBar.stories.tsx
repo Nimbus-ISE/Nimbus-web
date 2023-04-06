@@ -12,4 +12,4 @@ const Template: ComponentStory<typeof ProgressBar> = (args) => (
 
 export const Primary = Template.bind({});
 
-Primary.args = { percent: 50 };
+Primary.args = { ratio: 0.5 };
