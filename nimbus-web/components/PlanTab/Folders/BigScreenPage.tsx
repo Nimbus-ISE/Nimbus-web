@@ -51,7 +51,7 @@ const BigScreenPage = () => {
         });
 
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState, fullPlan]);
+    }, [currentFolder, fullPlan]);
 
     return (
         <>
