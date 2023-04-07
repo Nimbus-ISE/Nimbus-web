@@ -43,12 +43,12 @@ const BigScreenPage = () => {
     } = useMap();
 
     useEffect(() => {
-        mapRef.current?.flyTo({
-            center: [
-                fullPlan[currentFolder][0].lng,
-                fullPlan[currentFolder][0].lat,
-            ],
-        });
+        // mapRef.current?.flyTo({
+        //     center: [
+        //         fullPlan[currentFolder][0].lng,
+        //         fullPlan[currentFolder][0].lat,
+        //     ],
+        // });
 
         mapRef.current?.resize();
     }, [currentFolder, fullPlan]);
@@ -63,7 +63,6 @@ const BigScreenPage = () => {
 
                     {!openFullTab && fullPlan && pinState[currentFolder] && (
                         <Map
-                            ref={mapRef}
                             initialViewState={{
                                 latitude: 13.7563,
                                 longitude: 100.5018,
