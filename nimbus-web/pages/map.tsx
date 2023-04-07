@@ -27,7 +27,7 @@ export default function map() {
 
     useEffect(() => {
         const fetchTrip = async () => {
-            const res = await fetch(`http://localhost:3000/api/getTrip`);
+            const res = await fetch(`/api/getTrip`);
             const plan = await res.json();
             return plan;
         };
