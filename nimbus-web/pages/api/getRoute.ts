@@ -5,39 +5,29 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const day: number = Number(req.query.day);
+    const trip: any = req.query.trip;
+    const tripArr: any = JSON.parse(`[${trip}]`);
 
     let origin;
     let destination;
     try {
-        const response = await fetch(
-            "http://34.28.125.106:5000/get_sample_trip"
-        );
         let waypoints: string = "";
-        await response.json().then((data) => {
-            origin = `${data[day][0].coordinate[0]},${data[day][0].coordinate[1]}`;
-            destination = `${data[day].at(-1).coordinate[0]},${
-                data[day].at(-1).coordinate[1]
-            }`;
-            data[day].forEach((point: any, index: any) => {
-                if (
-                    index !== 1 &&
-                    index !== 0 &&
-                    index !== data[day].length - 1
-                ) {
-                    waypoints += `via:${point.coordinate[0]},${
-                        point.coordinate[1]
-                    }${index === data[day].length - 2 ? "" : "|"}`;
-                }
-            });
+        origin = tripArr[0];
+        destination = tripArr[tripArr.length - 1];
+
+        tripArr.forEach((point: any, index: any) => {
+            if (index !== -1 && index !== 0 && index !== tripArr.length - 1) {
+                waypoints += `via:${point[0]},${point[1]}
+                ${index === tripArr.length - 2 ? "" : "|"}`;
+            }
         });
-        console.log(waypoints);
+
         const routeResponse = await fetch(
             `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&key=AIzaSyDJSTWjqR3w__4qaPpUPjyNLfDUbokZ8Bc`
         );
         const result = await routeResponse.json();
+
         res.status(200).json(result.routes[0].overview_polyline.points);
-        console.log("run");
     } catch (err) {
         console.log(err);
         res.status(500).json("error invalid url");

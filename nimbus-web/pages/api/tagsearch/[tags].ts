@@ -22,7 +22,7 @@ export default async function handler(
         HAVING COUNT(CASE WHEN B.tag_name IN ${sql(splitted)} THEN 1 END) = ${
             splitted.length
         }`;
-        console.log(location_data);
+
         res.status(200).json(location_data);
     } catch (e) {
         console.log(e);

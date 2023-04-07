@@ -1,7 +1,7 @@
 import React from "react";
 import { getPlanTabState, getPlanTabDispatch } from "../PlanTabContext";
 const SavePlanPopUp = () => {
-    const { isBigScreen } = getPlanTabState();
+    const { isBigScreen, fullPlan } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
