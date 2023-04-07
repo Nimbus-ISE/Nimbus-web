@@ -61,7 +61,7 @@ const BigScreenPage = () => {
                     <SideBar />
                     {openSavePlan && <SavePlanPopUp />}
 
-                    {!openFullTab && fullPlan && pinState[currentFolder] && (
+                    {/* {!openFullTab && fullPlan && pinState[currentFolder] && (
                         <Map
                             initialViewState={{
                                 latitude: 13.7563,
@@ -129,7 +129,7 @@ const BigScreenPage = () => {
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
-                    )}
+                    )} */}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
