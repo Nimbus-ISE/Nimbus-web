@@ -49,7 +49,7 @@ export default function map() {
             });
             const tempPinState: any[] = [];
 
-            trip.locations.forEach((day: any) => {
+            trip.locations.forEach((day: any, index: any) => {
                 const tempPin: any = [];
 
                 day.forEach(() => {
@@ -60,34 +60,39 @@ export default function map() {
                 }
 
                 if (loc_ids.length < trip.locations.length) {
-                    fetchLocationDetails(`[${[day].toString()}]`).then(
-                        async (result) => {
-                            const coordinates: any[] = [];
+                    fetchLocationDetails(
+                        `[${[trip.locations[index]].toString()}]`
+                    ).then(async (result) => {
+                        const coordinates: any[] = [];
 
-                            loc_ids.push(await result);
-                            if (!isMounted) {
-                                dispatch({
-                                    type: "SET_FULL_PLAN",
-                                    payload: loc_ids,
-                                });
-                                setIsMounted(true);
-                            }
+                        loc_ids.push(await result);
+                        console.log(`[${[day].toString()}]`);
 
-                            loc_ids.forEach((day: any) => {
-                                const tempCoordinates: any = [];
-                                day.forEach((loc: any) => {
-                                    tempCoordinates.push(
-                                        `[${loc.lat},${loc.lng}]`
-                                    );
-                                });
-                                coordinates.push(tempCoordinates);
+                        if (!isMounted) {
+                            console.log(loc_ids);
+
+                            dispatch({
+                                type: "SET_FULL_PLAN",
+                                payload: loc_ids,
                             });
+                            setIsMounted(true);
+                        }
+                        console.log(loc_ids);
 
-                            coordinates.forEach((day: any) => {
-                                day.forEach((point: string) => {
-                                    point.replace(/'/g, '"');
-                                });
+                        loc_ids.forEach((day: any) => {
+                            const tempCoordinates: any = [];
+                            day.forEach((loc: any) => {
+                                tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });
+                            coordinates.push(tempCoordinates);
+                        });
+
+                        coordinates.forEach((day: any) => {
+                            day.forEach((point: string) => {
+                                point.replace(/'/g, '"');
+                            });
+                        });
+                        if (coordinates[currentFolder]) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
@@ -103,7 +108,7 @@ export default function map() {
                                 payload: routeArrs,
                             });
                         }
-                    );
+                    });
                 }
             });
 
@@ -114,7 +119,6 @@ export default function map() {
             // });
         })();
     }, [currentFolder]);
-    useEffect(() => {}, [currentFolder]);
 
     return (
         <>
