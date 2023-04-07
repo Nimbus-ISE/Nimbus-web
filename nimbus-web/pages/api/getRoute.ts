@@ -6,8 +6,6 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const trip: any = req.query.trip;
-    console.log(trip);
-
     const tripArr: any = JSON.parse(`[${trip}]`);
 
     let origin;

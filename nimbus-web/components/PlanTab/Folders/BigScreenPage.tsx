@@ -41,17 +41,14 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    console.log(pinState);
 
     useEffect(() => {
-        if (fullPlan[currentFolder]) {
-            mapRef.current?.flyTo({
-                center: [
-                    fullPlan[currentFolder][0].lng,
-                    fullPlan[currentFolder][0].lat,
-                ],
-            });
-        }
+        mapRef.current?.flyTo({
+            center: [
+                fullPlan[currentFolder][0].lng,
+                fullPlan[currentFolder][0].lat,
+            ],
+        });
 
         mapRef.current?.resize();
     }, [currentFolder, points[currentFolder], pinState, fullPlan]);
