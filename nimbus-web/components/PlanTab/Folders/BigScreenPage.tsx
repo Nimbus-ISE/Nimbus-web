@@ -30,6 +30,7 @@ const BigScreenPage = () => {
         currentFolder,
         fullPlan,
         openSavePlan,
+        map_polyline,
     } = getPlanTabState();
     const {
         mapRef,
@@ -42,19 +43,15 @@ const BigScreenPage = () => {
     } = useMap();
 
     useEffect(() => {
-        if (fullPlan[currentFolder]) {
-            mapRef.current?.flyTo({
-                center: [
-                    fullPlan[currentFolder][0].lng,
-                    fullPlan[currentFolder][0].lat,
-                ],
-            });
-        }
-        console.log(fullPlan);
+        mapRef.current?.flyTo({
+            center: [
+                fullPlan[currentFolder][0].lng,
+                fullPlan[currentFolder][0].lat,
+            ],
+        });
 
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState, fullPlan]);
-    console.log(pinState[currentFolder]);
+    }, [currentFolder, fullPlan]);
 
     return (
         <>
@@ -64,13 +61,13 @@ const BigScreenPage = () => {
                     <SideBar />
                     {openSavePlan && <SavePlanPopUp />}
 
-                    {/* {!openFullTab && fullPlan && (
+                    {!openFullTab && fullPlan && pinState[currentFolder] && (
                         <Map
                             ref={mapRef}
                             initialViewState={{
                                 latitude: 13.7563,
                                 longitude: 100.5018,
-                                zoom: 15,
+                                zoom: 14,
                             }}
                             attributionControl={false}
                             style={{
@@ -91,8 +88,6 @@ const BigScreenPage = () => {
                                                 latitude={point.lat}
                                                 anchor="bottom"
                                                 onClick={(e) => {
-                                                    console.log(index);
-
                                                     togglePinState(
                                                         currentFolder,
                                                         index
@@ -111,16 +106,15 @@ const BigScreenPage = () => {
                                                         ].loc_name
                                                     }
                                                 </span>
-                                                {pinState[currentFolder] && (
-                                                    <Pin
-                                                        fill={
-                                                            pinState[
-                                                                currentFolder
-                                                            ][index]
-                                                        }
-                                                        number={index + 1}
-                                                    />
-                                                )}
+
+                                                <Pin
+                                                    fill={
+                                                        pinState[currentFolder][
+                                                            index
+                                                        ]
+                                                    }
+                                                    number={index + 1}
+                                                />
                                             </Marker>
                                         );
                                     },
@@ -136,7 +130,7 @@ const BigScreenPage = () => {
                                 <Layer {...layerStyle} />
                             </Source>
                         </Map>
-                    )} */}
+                    )}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (

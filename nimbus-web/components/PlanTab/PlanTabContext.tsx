@@ -20,6 +20,7 @@ interface PlanTabContextStateType {
     openSavePlan: boolean;
     selectedLocationIndex: number;
     travelTime: any;
+    map_polyline: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -145,6 +146,9 @@ function reducer(state: PlanTabContextStateType, action: any) {
         case "SAVE_PLAN": {
             return { ...state, openSavePlan: false };
         }
+        case "SET_ROUTE": {
+            return { ...state, map_polyline: action.payload };
+        }
         default: {
             console.log("error");
             break;
@@ -167,6 +171,7 @@ const initialState: PlanTabContextStateType = {
     openSavePlan: false,
     selectedLocationIndex: 0,
     travelTime: [],
+    map_polyline: [],
 };
 
 const PlanTabContext = createContext(

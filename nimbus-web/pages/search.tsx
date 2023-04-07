@@ -35,7 +35,7 @@ const search = () => {
             setLoading(true);
             const res = await fetch(`/api/tagsearch/${tagString}`);
             const locationList = await res.json();
-            console.log(locationList);
+            // console.log(locationList);
             setLocationList(locationList);
         } finally {
             setLoading(false);
