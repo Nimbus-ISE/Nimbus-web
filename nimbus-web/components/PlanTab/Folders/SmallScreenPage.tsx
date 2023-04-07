@@ -39,7 +39,7 @@ const SmallScreenPage = () => {
         currentFolderView,
         currentFolder,
     } = getPlanTabState();
-    console.log(pinState);
+
     useEffect(() => {
         if (fullPlan[currentFolder]) {
             mapRef.current?.flyTo({

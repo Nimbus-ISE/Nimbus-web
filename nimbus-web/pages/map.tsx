@@ -9,11 +9,14 @@ import {
 } from "@/components/PlanTab/PlanTabContext";
 import BigScreenPage from "@/components/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
+import { useEventCallback } from "@mui/material";
+import polyline from "@mapbox/polyline";
 
 export default function map() {
     const dispatch: any = getPlanTabDispatch();
     const screenSize = useMediaQuery("(min-width:1000px)");
-    const { isBigScreen } = getPlanTabState();
+    const { isBigScreen, currentFolder } = getPlanTabState();
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -45,25 +48,59 @@ export default function map() {
                 payload: trip.travelTimes,
             });
             const tempPinState: any[] = [];
+
             trip.locations.forEach((day: any) => {
                 const tempPin: any = [];
-                const tempLocId: any = [];
 
-                day.forEach((loc: any) => {
+                day.forEach(() => {
                     tempPin.push("#000");
-                    tempLocId.push(loc);
                 });
                 if (tempPinState.length < trip.locations.length) {
                     tempPinState.push(tempPin);
                 }
 
                 if (loc_ids.length < trip.locations.length) {
-                    fetchLocationDetails(`[${[tempLocId].toString()}]`).then(
-                        (result) => {
-                            loc_ids.push(result);
+                    fetchLocationDetails(`[${[day].toString()}]`).then(
+                        async (result) => {
+                            const coordinates: any[] = [];
+
+                            loc_ids.push(await result);
+                            if (!isMounted) {
+                                dispatch({
+                                    type: "SET_FULL_PLAN",
+                                    payload: loc_ids,
+                                });
+                                setIsMounted(true);
+                            }
+
+                            loc_ids.forEach((day: any) => {
+                                const tempCoordinates: any = [];
+                                day.forEach((loc: any) => {
+                                    tempCoordinates.push(
+                                        `[${loc.lat},${loc.lng}]`
+                                    );
+                                });
+                                coordinates.push(tempCoordinates);
+                            });
+
+                            coordinates.forEach((day: any) => {
+                                day.forEach((point: string) => {
+                                    point.replace(/'/g, '"');
+                                });
+                            });
+                            const response = await fetch(
+                                `/api/getRoute?trip=${coordinates[currentFolder]}`
+                            );
+                            const map_polyline = await response.json();
+                            const decoded = polyline.decode(map_polyline);
+                            const routeArrs: any = [];
+                            decoded.forEach((arr) => {
+                                routeArrs.push(arr.reverse());
+                            });
+
                             dispatch({
-                                type: "SET_FULL_PLAN",
-                                payload: loc_ids,
+                                type: "SET_ROUTE",
+                                payload: routeArrs,
                             });
                         }
                     );
@@ -76,7 +113,8 @@ export default function map() {
             //     });
             // });
         })();
-    }, []);
+    }, [currentFolder]);
+    useEffect(() => {}, [currentFolder]);
 
     return (
         <>
