@@ -26,7 +26,7 @@
     padding: 1rem;
     background: #fff;
     overflow-y: scroll;
-    height: 14rem;
+    height: fit-content;
     scrollbar-width: none;
 }
 .mobileTabs input[type="radio"] {
@@ -137,9 +137,9 @@
     overflow-y: scroll;
     height: 85vh;
 }
-.tab::-webkit-scrollbar {
+/* .tab::-webkit-scrollbar {
     color: black;
-}
+} */
 .tab {
     display: block;
     border-top-right-radius: 12px;

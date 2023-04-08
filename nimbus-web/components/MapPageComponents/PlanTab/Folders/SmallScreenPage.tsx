@@ -12,7 +12,7 @@ const SmallScreenPage = () => {
         getPlanTabState();
 
     return (
-        <div>
+        <>
             {!openFullTab && fullPlan && (
                 <>
                     <div className="h-[70vh] -z-10">
@@ -32,9 +32,9 @@ const SmallScreenPage = () => {
                             )}
                         </div>
                     </div>
-                    <div className="-translate-y-16">
+                    <>
                         <SideBar />
-                    </div>
+                    </>
                 </>
             )}
             {openFullTab && (
@@ -47,7 +47,7 @@ const SmallScreenPage = () => {
                     <Alternative />
                 </div>
             )}
-        </div>
+        </>
     );
 };
 

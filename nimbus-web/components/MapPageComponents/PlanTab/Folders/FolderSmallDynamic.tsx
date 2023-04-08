@@ -41,7 +41,7 @@ const FolderSmall = () => {
     }, [openFullTab, currentFolderView]);
 
     return (
-        <div className=" ">
+        <>
             <div
                 className={
                     tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
@@ -142,7 +142,7 @@ const FolderSmall = () => {
                     )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 export default FolderSmall;

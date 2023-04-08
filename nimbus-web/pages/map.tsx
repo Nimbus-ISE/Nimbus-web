@@ -126,12 +126,12 @@ export default function map() {
             <Head>
                 <title>Nimbus</title>
             </Head>
-            <div className="h-[90vh] w-[100vw] overflow-hidden">
+            <div className="h-[100vh] w-[100vw] overflow-hidden">
                 <div
                     className={
                         isBigScreen
                             ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
-                            : "  h-[92vh] z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
+                            : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                     }
                 >
                     {!isBigScreen && <SmallScreenPage />}

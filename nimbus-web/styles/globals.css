@@ -238,6 +238,11 @@ a {
 @media (prefers-color-scheme: dark) {
     html {
         color-scheme: dark;
+        overflow: scroll;
+        scrollbar-width: none;
+    }
+    body::-webkit-scrollbar {
+        display: none;
     }
 }
 .shadow {

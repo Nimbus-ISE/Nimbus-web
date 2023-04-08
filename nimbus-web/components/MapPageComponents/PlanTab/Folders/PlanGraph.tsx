@@ -1,6 +1,7 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import backToTopArrow from "../../../../public/backToTopArrow.svg";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
@@ -104,6 +105,17 @@ const PlanGraph = (props: PlanGraphProps) => {
                     )}
                 </>
             ))}
+            <button
+                onClick={() => {
+                    document.body.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+            >
+                <img
+                    src={"/backToTopArrow.svg"}
+                    width={150}
+                    className="mt-10 ml-[25vw]"
+                />
+            </button>
         </div>
     );
 };
