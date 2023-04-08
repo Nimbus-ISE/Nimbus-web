@@ -20,7 +20,11 @@ RealDataExample.args = {
             "Lively mall & gathering place for university students offering various shops, eateries & services.",
         province: "Krung Thep Maha Nakhon ",
         location_rating: "4.2",
-        url: "https://pmcu.co.th/wp-content/uploads/2022/08/220818-banner-csd-1024x480.jpg",
+        url: [
+            "https://pmcu.co.th/wp-content/uploads/2022/08/220818-banner-csd-1024x480.jpg",
+            "https://property.cbre.co.th/stocks/property/h0x532/5d/ji/fcyu5djib7/chamchuri.jpg",
+            "https://pmcu.co.th/wp-content/uploads/2021/01/91583755.jpg",
+        ],
         reviews: [
             {
                 author: "Chattrarat Ponghiransmith",
