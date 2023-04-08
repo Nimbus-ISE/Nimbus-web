@@ -98,7 +98,7 @@ const useMap = () => {
         const tempPinState: any[] = [];
         plan.forEach((day: any) => {
             const tempPin: any = [];
-            day.forEach(() => {
+            day.location_data.forEach(() => {
                 tempPin.push("#000");
             });
             if (tempPinState.length < day.length) {

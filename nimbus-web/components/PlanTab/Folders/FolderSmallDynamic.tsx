@@ -86,7 +86,9 @@ const FolderSmall = () => {
                                                 <PlanGraph
                                                     clickable={true}
                                                     dayNumber={index + 1}
-                                                    places={[...day]}
+                                                    places={[
+                                                        ...day.location_data,
+                                                    ]}
                                                     travelTimes={[
                                                         ...travelTime[index],
                                                     ]}

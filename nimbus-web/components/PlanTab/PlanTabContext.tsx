@@ -27,9 +27,9 @@ function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET_FULL_PLAN": {
             const intialCoordinates: any = [];
-            action.payload.forEach((day: any) => {
-                intialCoordinates.push(day[0].coordinate);
-            });
+            // action.payload.forEach((day: any) => {
+            //     intialCoordinates.push(day[0].coordinate);
+            // });
             return {
                 ...state,
                 fullPlan: action.payload,
