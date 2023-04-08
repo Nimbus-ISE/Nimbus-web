@@ -5,7 +5,7 @@ import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
-import SavePlanPopUp from "../Popups/SavePlanPopUp";
+import SavePlanPopUp from "../../Popups/SavePlanPopUp";
 
 const FolderSmall = () => {
     const [opendedTab, setOpenedTab] = useState("");

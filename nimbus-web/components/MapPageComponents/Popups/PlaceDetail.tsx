@@ -1,7 +1,7 @@
 import Review from "./Review";
 import React, { useEffect, useState } from "react";
-import { PlaceDetailProps } from "../PlanTabTypes";
-import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import { PlaceDetailProps } from "../PlanTab/PlanTabTypes";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {

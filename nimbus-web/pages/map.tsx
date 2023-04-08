@@ -6,9 +6,9 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import {
     getPlanTabDispatch,
     getPlanTabState,
-} from "@/components/PlanTab/PlanTabContext";
-import BigScreenPage from "@/components/PlanTab/Folders/BigScreenPage";
-import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
+} from "@/components/MapPageComponents/PlanTab/PlanTabContext";
+import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
+import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
 import { useEventCallback } from "@mui/material";
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";

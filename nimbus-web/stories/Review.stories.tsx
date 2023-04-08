@@ -1,4 +1,4 @@
-import Review from "@/components/PlanTab/Popups/Review";
+import Review from "@/components/MapPageComponents/Popups/Review";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {

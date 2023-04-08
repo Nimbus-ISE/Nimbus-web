@@ -1,7 +1,7 @@
 import React from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { AlternativeItemProps } from "../PlanTabTypes";
-import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import { AlternativeItemProps } from "../PlanTab/PlanTabTypes";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Star from "@/components/Star";
 
 const AlternativeItem = (props: any) => {

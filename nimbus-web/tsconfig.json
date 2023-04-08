@@ -24,8 +24,8 @@
         "**/*.ts",
         "**/*.tsx",
         "test_data/testData.ts",
-        "components/PlanTab/PlanTabContext.tsx",
-        "components/PlanTab/PlanTabContext.tss"
+        "components/MapPageComponents/PlanTab/PlanTabContext.tsx",
+        "components/MapPageComponents/PlanTab/PlanTabContext.tss"
     ],
     "exclude": ["node_modules"]
 }

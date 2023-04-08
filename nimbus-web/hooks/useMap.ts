@@ -7,7 +7,7 @@ import React from "react";
 import {
     getPlanTabDispatch,
     getPlanTabState,
-} from "@/components/PlanTab/PlanTabContext";
+} from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 
 interface reviewDataType {
     placeTitle: string;

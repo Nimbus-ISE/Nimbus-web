@@ -4,7 +4,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import StarIcon from "@mui/icons-material/Star";
 import { Box, Button, Pagination, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
-import Review from "../PlanTab/Popups/Review";
+import Review from "../MapPageComponents/Popups/Review";
 
 interface FullDetailCardProps {
     location: {
