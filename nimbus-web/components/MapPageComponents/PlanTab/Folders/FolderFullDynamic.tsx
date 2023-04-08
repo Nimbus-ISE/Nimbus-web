@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import classes from "./FolderFull.module.css";
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
@@ -35,7 +34,7 @@ const FolderFull = (props: FolderFullProps) => {
                                             <PlanGraph
                                                 clickable={false}
                                                 dayNumber={index + 1}
-                                                places={[...data]}
+                                                places={[...data.location_data]}
                                                 travelTimes={[
                                                     ...travelTime[index],
                                                 ]}

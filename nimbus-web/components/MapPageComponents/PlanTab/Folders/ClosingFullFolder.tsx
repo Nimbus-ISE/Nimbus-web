@@ -33,7 +33,7 @@ const ClosingFullFolder = () => {
                                             <PlanGraph
                                                 clickable={false}
                                                 dayNumber={index + 1}
-                                                places={[...data]}
+                                                places={[...data.location_data]}
                                                 travelTimes={[
                                                     ...travelTime[index],
                                                 ]}
