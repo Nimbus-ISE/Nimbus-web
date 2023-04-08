@@ -16,7 +16,7 @@ const SmallScreenPage = () => {
             {!openFullTab && fullPlan && (
                 <>
                     <div className="h-[70vh] -z-10">
-                        <TripMap />
+                        {/* <TripMap /> */}
 
                         <div>
                             {openReview && (

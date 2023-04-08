@@ -27,7 +27,7 @@ const BigScreenPage = () => {
                     <SideBar />
                     {openSavePlan && <SavePlanPopUp />}
 
-                    <TripMap />
+                    {/* <TripMap /> */}
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (

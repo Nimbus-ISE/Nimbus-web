@@ -4,7 +4,6 @@ import { getPlanTabState } from "../PlanTab/PlanTabContext";
 import Pin from "@/components/Pin";
 import Map, {
     Marker,
-    Popup,
     ScaleControl,
     Layer,
     Source,
@@ -24,7 +23,6 @@ const TripMap = () => {
         pinState,
     } = useMapLogic();
     const { mainMap }: any = useMap();
-
     React.useEffect(() => {
         if (fullPlan[currentFolder] && mainMap?.flyTo) {
             mainMap.flyTo({
