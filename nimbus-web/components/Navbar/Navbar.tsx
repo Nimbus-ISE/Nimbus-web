@@ -23,6 +23,10 @@ const leftList = [
         name: "Plan",
         route: "/plan",
     },
+    {
+        name: "Discover",
+        route: "/discover",
+    },
 ];
 
 const rightListLogin = [
