@@ -1,17 +1,12 @@
 import sql from "@/postgres";
 
-interface ILocationItemData {
+interface ILocationItemData extends IReview {
     loc_id: number;
     loc_name: string;
     description: string;
     province: string;
     location_rating: string;
     url: string;
-
-    author: string;
-    review_text: string;
-    review_rating: string;
-    review_date: Date;
 }
 
 const getLocation = async (loc_id: string) => {
@@ -20,10 +15,10 @@ const getLocation = async (loc_id: string) => {
             const location_data = await sql`
             SELECT L.loc_id, L.loc_name, L.description, L.province, 
             L.rating AS location_rating, R.review_text, 
-            R.author, R.rating AS review_rating, R.review_date, I.url
+            R.author, R.rating AS review_rating, R.review_date, R.url AS review_url, I.url
             FROM location_data L, review R, image I
             WHERE L.loc_id = R.loc_id AND R.loc_id = I.loc_id AND L.loc_id IN (${loc_id})
-            GROUP BY L.loc_id, R.review_text, R.author, R.review_date, R.rating, I.url`;
+            GROUP BY L.loc_id, R.review_text, R.author, R.review_date, R.rating, R.url, I.url`;
             const generalLocationInfo = {
                 loc_id: location_data[0].loc_id,
                 loc_name: location_data[0].loc_name,
@@ -39,6 +34,7 @@ const getLocation = async (loc_id: string) => {
                     review_date: Number(location.review_date),
                     review_text: location.review_text,
                     review_rating: location.review_rating,
+                    review_url: location.review_url,
                 };
                 return review;
             });
