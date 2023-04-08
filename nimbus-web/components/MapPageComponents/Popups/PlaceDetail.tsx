@@ -80,9 +80,19 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                     : "text-[0.8rem] w-[80vw]"
                             }
                         >
+                            <div className="text-[0.8rem] font-bold">
+                                Description
+                            </div>
                             {data?.description
                                 ? data?.description
                                 : "No description provided"}
+
+                            <div className="text-[0.8rem] font-bold mt-2">
+                                Address
+                            </div>
+                            {data?.address && data?.province
+                                ? data?.address + data?.province
+                                : "No address provided"}
                         </div>
                         <div className="text-[0.8rem] col-span-12">
                             {"Price Level: " + data?.price_level}
