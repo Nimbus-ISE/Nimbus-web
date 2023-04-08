@@ -72,8 +72,6 @@ export default function map() {
                         const sorted_loc_ids = sortObject(loc_ids);
 
                         if (!isMounted) {
-                            // console.log(sortObject(loc_ids));
-
                             dispatch({
                                 type: "SET_FULL_PLAN",
                                 payload: sorted_loc_ids,

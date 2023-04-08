@@ -41,9 +41,6 @@ const BigScreenPage = () => {
         layerStyle,
         pinState,
     } = useMap();
-    useEffect(() => {
-        console.log(fullPlan);
-    }, [fullPlan]);
 
     return (
         <>
@@ -58,8 +55,12 @@ const BigScreenPage = () => {
                         pinState[currentFolder] && (
                             <Map
                                 initialViewState={{
-                                    latitude: fullPlan[currentFolder][0].lat,
-                                    longitude: fullPlan[currentFolder][0].lngc,
+                                    latitude:
+                                        fullPlan[currentFolder].location_data
+                                            .lat || "13.7563",
+                                    longitude:
+                                        fullPlan[currentFolder].location_data
+                                            .lng || "100.5018",
                                     zoom: 14,
                                 }}
                                 attributionControl={false}
@@ -73,7 +74,7 @@ const BigScreenPage = () => {
                                 mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                             >
                                 {fullPlan[currentFolder] &&
-                                    fullPlan[currentFolder].map(
+                                    fullPlan[currentFolder].location_data.map(
                                         (point: any, index: any) => {
                                             return (
                                                 <Marker
@@ -96,7 +97,9 @@ const BigScreenPage = () => {
                                                         {
                                                             fullPlan[
                                                                 currentFolder
-                                                            ][index].loc_name
+                                                            ].location_data[
+                                                                index
+                                                            ].loc_name
                                                         }
                                                     </span>
 

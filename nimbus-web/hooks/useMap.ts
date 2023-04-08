@@ -27,8 +27,6 @@ const useMap = () => {
     const [fullPlan, setFullPlan] = useState({} as any);
     const { currentFolder, fullPlan: plan, map_polyline } = getPlanTabState();
 
-    console.log(plan);
-
     const toggleOpenReview = (reviewData?: reviewDataType) => {
         if (reviewData?.placeTitle) {
             setOpenReview(true);
@@ -58,7 +56,7 @@ const useMap = () => {
 
     const [points, setPoints] = useState([] as any);
 
-    const mapRef = React.useRef<MapRef>();
+    const mapRef = React.useRef<mapboxgl.Map | null>(null);
     const [route, setRoute] = useState([] as any);
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
@@ -98,14 +96,17 @@ const useMap = () => {
         const tempPinState: any[] = [];
         plan.forEach((day: any) => {
             const tempPin: any = [];
+
             day.location_data.forEach(() => {
                 tempPin.push("#000");
             });
-            if (tempPinState.length < day.length) {
+            if (tempPinState.length < day.location_data.length) {
                 tempPinState.push(tempPin);
             }
         });
         //     setPoints(trip.points);
+        console.log(tempPinState);
+
         setPinState(tempPinState);
         // });
     }, [currentFolder, plan]);
