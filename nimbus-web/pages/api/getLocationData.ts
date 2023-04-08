@@ -6,7 +6,9 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const loc_ids: any = req.query.loc_ids;
-    console.log(loc_ids);
+    const day: any = req.query.day;
+
+    console.log(day + ": " + loc_ids);
 
     // console.log(loc_ids);
 
@@ -20,7 +22,7 @@ export default async function handler(
             WHERE L.loc_id = I.loc_id AND L.loc_id IN ${sql([arr])}
             GROUP BY L.loc_id, I.url`;
 
-        res.status(200).json(location_data);
+        res.status(200).json({ day: day, location_data });
     } catch (e) {
         res.status(500).json("Error occured");
     }

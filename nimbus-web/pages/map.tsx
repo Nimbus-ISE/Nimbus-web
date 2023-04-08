@@ -6,11 +6,12 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import {
     getPlanTabDispatch,
     getPlanTabState,
-} from "@/components/PlanTab/PlanTabContext";
-import BigScreenPage from "@/components/PlanTab/Folders/BigScreenPage";
-import SmallScreenPage from "@/components/PlanTab/Folders/SmallScreenPage";
+} from "@/components/MapPageComponents/PlanTab/PlanTabContext";
+import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
+import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
 import { useEventCallback } from "@mui/material";
 import polyline from "@mapbox/polyline";
+import sortObject from "@/utils/sortObject";
 
 export default function map() {
     const dispatch: any = getPlanTabDispatch();
@@ -31,9 +32,9 @@ export default function map() {
             const plan = await res.json();
             return plan;
         };
-        const fetchLocationDetails = async (loc_ids: string) => {
+        const fetchLocationDetails = async (loc_ids: string, day: any) => {
             const response = await fetch(
-                `/api/getLocationData?loc_ids=${loc_ids}`
+                `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
             );
             const data = await response.json();
             return data;
@@ -61,27 +62,27 @@ export default function map() {
 
                 if (loc_ids.length < trip.locations.length) {
                     fetchLocationDetails(
-                        `[${[trip.locations[index]].toString()}]`
+                        `[${[trip.locations[index]].toString()}]`,
+                        index
                     ).then(async (result) => {
                         const coordinates: any[] = [];
 
                         loc_ids.push(await result);
-                        console.log(`[${[day].toString()}]`);
+                        // console.log(`[${[day].toString()}]`);
+                        const sorted_loc_ids = sortObject(loc_ids);
 
                         if (!isMounted) {
-                            console.log(loc_ids);
-
                             dispatch({
                                 type: "SET_FULL_PLAN",
-                                payload: loc_ids,
+                                payload: sorted_loc_ids,
                             });
                             setIsMounted(true);
                         }
-                        console.log(loc_ids);
+                        // console.log(loc_ids);
 
-                        loc_ids.forEach((day: any) => {
+                        sorted_loc_ids.forEach((day: any, index: any) => {
                             const tempCoordinates: any = [];
-                            day.forEach((loc: any) => {
+                            day.location_data.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });
                             coordinates.push(tempCoordinates);

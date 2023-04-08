@@ -7,7 +7,7 @@ import React from "react";
 import {
     getPlanTabDispatch,
     getPlanTabState,
-} from "@/components/PlanTab/PlanTabContext";
+} from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 
 interface reviewDataType {
     placeTitle: string;
@@ -26,8 +26,6 @@ const useMap = () => {
     const [openAlternatives, setOpenAlternative] = useState(false);
     const [fullPlan, setFullPlan] = useState({} as any);
     const { currentFolder, fullPlan: plan, map_polyline } = getPlanTabState();
-
-    console.log(plan);
 
     const toggleOpenReview = (reviewData?: reviewDataType) => {
         if (reviewData?.placeTitle) {
@@ -58,7 +56,7 @@ const useMap = () => {
 
     const [points, setPoints] = useState([] as any);
 
-    const mapRef = React.useRef<MapRef>();
+    const mapRef = React.useRef<mapboxgl.Map | null>(null);
     const [route, setRoute] = useState([] as any);
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
@@ -98,14 +96,17 @@ const useMap = () => {
         const tempPinState: any[] = [];
         plan.forEach((day: any) => {
             const tempPin: any = [];
-            day.forEach(() => {
+
+            day.location_data.forEach(() => {
                 tempPin.push("#000");
             });
-            if (tempPinState.length < day.length) {
+            if (tempPinState.length < day.location_data.length) {
                 tempPinState.push(tempPin);
             }
         });
         //     setPoints(trip.points);
+        console.log(tempPinState);
+
         setPinState(tempPinState);
         // });
     }, [currentFolder, plan]);

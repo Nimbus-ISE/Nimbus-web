@@ -1,7 +1,7 @@
 import React from "react";
 import Stars from "../Stars";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Review from "../PlanTab/Popups/Review";
+import Review from "../MapPageComponents/Popups/Review";
 
 interface IProps {
     obj: any;

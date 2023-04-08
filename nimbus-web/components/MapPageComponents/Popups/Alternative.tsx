@@ -1,6 +1,6 @@
 import React from "react";
 import AlternativeItem from "./AlternativeItem";
-import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 
 const Alternative = () => {
     const { isBigScreen }: any = getPlanTabState();
