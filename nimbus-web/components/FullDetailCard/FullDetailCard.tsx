@@ -31,7 +31,7 @@ interface DotPaginationProps {
 }
 
 const lightSx = {
-    fontWeight: 200,
+    fontWeight: 400,
     fontFamily: "Montserrat",
 };
 const baseSx = {
@@ -88,7 +88,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
 
     return (
         <>
-            <div className="text-black">
+            <div className="text-black max-w-screen-lg mx-auto">
                 <Stack spacing={3}>
                     <Stack
                         direction="row"
@@ -96,22 +96,18 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                         alignItems="center"
                     >
                         <Stack width="60%">
-                            <Box
-                                component="img"
-                                className="shadow-md"
-                                sx={{
-                                    borderRadius: "8px 8px 0px 0px",
-                                    width: "100%",
-                                    height: "280px",
-                                }}
+                            <img
+                                className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
                                 src={imageList}
+                                alt={loc_name}
                             />
                             <Box
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="space-between"
+                                className="shadow-md"
                                 sx={{
-                                    backgroundColor: "#D9D9D9",
+                                    backgroundColor: "#e9e9e9",
                                     borderRadius: "0px 0px 8px 8px",
                                     width: "100%",
                                     height: "35px",
@@ -149,7 +145,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                                 </IconButton>
                             </Box>
                         </Stack>
-                        <Stack width="40%" pl={3}>
+                        <Stack width="40%" pl={4}>
                             <div className="text-right text-neutral-400">
                                 <Typography sx={baseSx} variant="body2">
                                     {Number(lat).toFixed(4)},{" "}
@@ -201,10 +197,16 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                             </div>
                             <Button
                                 sx={{
-                                    backgroundColor: "#45D8D0",
                                     borderRadius: "18px",
+                                    paddingY: "0.5rem",
                                     marginY: "1rem",
+                                    "&:hover": {
+                                        color: "black",
+                                        backgroundColor: "#328899",
+                                        borderColor: "gray",
+                                    },
                                 }}
+                                className="bg-tricolorgreen shadow-sm"
                                 onClick={handleSelectDestination}
                             >
                                 <Typography
@@ -219,7 +221,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                             </Button>
                         </Stack>
                     </Stack>
-                    <Typography sx={baseSx}>{description}</Typography>
+                    <Typography sx={lightSx}>{description}</Typography>
                 </Stack>
                 <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
                     USER REVIEWS

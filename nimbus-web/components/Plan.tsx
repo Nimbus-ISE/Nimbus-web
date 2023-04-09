@@ -117,7 +117,7 @@ const Plan = () => {
                     style={{ height: height }}
                     className="relative flex bg-cover bg-center text-black overflow-hidden"
                 >
-                    <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0 m-auto backdrop-blur-md z-[2]"></div>
+                    <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0 m-auto backdrop-blur-md z-[2]" />
                     <img
                         src="/images/bg.webp"
                         className="absolute object-cover object-bottom w-full h-full aspect-video z-[1]"
@@ -134,19 +134,19 @@ const Plan = () => {
                     <div
                         id="plan-card"
                         style={{
-                            maxHeight: isLargerThanMedium ? "40rem" : "100%",
+                            //maxHeight: isLargerThanMedium ? "40rem" : "100%",
                             height: height - (isLargerThanMedium ? 64 : 0),
                         }}
-                        className="grid grid-flow-col rounded-xl shadow-lg bg-neutral-100
-                        pl-5 m-auto max-w-[60rem] md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100
+                        pl-5 m-auto max-w-[60rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
                             <div
                                 className="flex my-auto"
                                 style={{
-                                    maxHeight: isLargerThanMedium
+                                    /*maxHeight: isLargerThanMedium
                                         ? "40rem"
-                                        : "100%",
+                                        : "100%",*/
                                     height:
                                         height - (isLargerThanMedium ? 64 : 0),
                                 }}
