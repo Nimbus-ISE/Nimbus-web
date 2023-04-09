@@ -36,8 +36,8 @@ const AlternativeItem = (props: any) => {
             <button
                 className={
                     isBigScreen
-                        ? "bg-sky-300 h-[17.5vw] w-[17.5vw] rounded-full hover:scale-110 duration-300"
-                        : "bg-sky-300 h-[25vw] w-[25vw] rounded-full hover:scale-110 duration-300 "
+                        ? " h-[17vw] w-[17vw] rounded-full hover:scale-105 duration-300"
+                        : " h-[25vw] w-[25vw] rounded-full "
                 }
                 onClick={() => {
                     changePlan(currentFolder, selectedLocationIndex);
@@ -52,8 +52,25 @@ const AlternativeItem = (props: any) => {
                         type: "TOGGLE_ALTERNATIVES",
                     });
                 }}
-            ></button>
-            <div className="text-2xl font-extrabold">{props.title}</div>
+            >
+                <img
+                    src={props.url}
+                    className={
+                        isBigScreen
+                            ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-110 duration-300"
+                            : " h-[25vw] w-[25vw] rounded-full hover:scale-110 duration-300 "
+                    }
+                />
+            </button>
+            <div
+                className={
+                    isBigScreen
+                        ? "text-xl font-bold mt-8 text-center"
+                        : "text-lg font-bold mt-4 text-center"
+                }
+            >
+                {props.loc_name}
+            </div>
             <div className="bg-yellow-300 w-40 h-4">Stars</div>
             <div className="text-xs w-44 mt-2">{props.description}</div>
             <div className="cursor-pointer">
