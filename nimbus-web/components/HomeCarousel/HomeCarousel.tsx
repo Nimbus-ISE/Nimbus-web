@@ -82,7 +82,7 @@ const HomeCarousel = () => {
                 } relative m-auto text-center z-10 transition duration-1000`}
             >
                 <div
-                    className={`text-3xl sm:text-5xl md:text-6xl
+                    className={`text-4xl sm:text-5xl md:text-6xl
                     lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit`}
                 >
                     <h1 className="mb-2">LET US DESIGN</h1>
@@ -92,13 +92,11 @@ const HomeCarousel = () => {
                     id="carousel-paragraph"
                     className={`absolute text-white text-justify text-xs md:text-sm drop-shadow-sm p-3`}
                 >
-                    Introducing our innovative web application, tailored to
-                    craft personalized trip plans for unforgettable adventures
-                    in Thailand. By simply inputting your preferences, such as
-                    travel duration, interests, and budget, our novel algorithm
-                    will design a bespoke itinerary that caters to your unique
-                    desires. Our extensive database features a diverse range of
-                    attractions, accommodations, and activities, ensuring a
+                    Introducing our web app that creates customized travel plans
+                    for Thailand. Input your preferences, like duration,
+                    interests, and budget, and our algorithm designs a unique
+                    itinerary. Our extensive database includes diverse
+                    attractions, accommodations, and activities for a
                     well-rounded experience in the Land of Smiles.
                 </p>
             </div>
