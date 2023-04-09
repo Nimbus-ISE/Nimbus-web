@@ -9,6 +9,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
 
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
+    console.log(placeData);
 
     // const fetchDetail = async () => {
     //     const response = await fetch(

@@ -46,11 +46,7 @@ const Alternative = () => {
                             }
                         >
                             {alternatives.map((location: any) => (
-                                <AlternativeItem
-                                    loc_name={location.loc_name}
-                                    description={location.discription}
-                                    url={location.url}
-                                />
+                                <AlternativeItem location={location} />
                             ))}
                         </div>
                     </div>
