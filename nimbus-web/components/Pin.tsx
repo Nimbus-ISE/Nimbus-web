@@ -21,7 +21,7 @@ function Pin({ size = 30, fill = "#000", number = "" }) {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            className="feather feather-map-pin"
+            className="feather feather-map-pin cursor-pointer"
         >
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
 

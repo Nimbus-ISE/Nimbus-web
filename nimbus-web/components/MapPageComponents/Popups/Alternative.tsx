@@ -5,21 +5,24 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 const Alternative = () => {
     const { isBigScreen, alternatives }: any = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
-    console.log(alternatives);
+
     return (
         <>
-            <div
-                className={
-                    isBigScreen
-                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[17.5vh] left-[62vw] z-50 cursor-pointer"
-                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer "
-                }
-                onMouseDown={() => {
-                    dispatch({ type: "TOGGLE_ALTERNATIVES" });
-                }}
-            >
-                <div className="ml-4">x</div>
-            </div>
+            {isBigScreen && (
+                <div
+                    className={
+                        "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[17.5vh] left-[62vw] z-50 cursor-pointer"
+                    }
+                    onMouseDown={() => {
+                        dispatch({
+                            type: "TOGGLE_ALTERNATIVES",
+                            payload: false,
+                        });
+                    }}
+                >
+                    <div className="ml-4">x</div>
+                </div>
+            )}
             <div
                 className={
                     isBigScreen
@@ -31,7 +34,7 @@ const Alternative = () => {
                     className={
                         isBigScreen
                             ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2"
-                            : "rounded-xl bg-white h-[40vh] w-[60vw] p-4"
+                            : "rounded-xl bg-white h-[45vh] w-[60vw] p-4 mb-14"
                     }
                 >
                     <div className="flex flex-col place-items-center ">

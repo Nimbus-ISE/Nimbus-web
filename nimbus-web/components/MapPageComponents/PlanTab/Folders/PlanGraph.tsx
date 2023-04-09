@@ -15,17 +15,7 @@ const PlanGraph = (props: PlanGraphProps) => {
             {props.places?.map((place: any, index: any) => (
                 <>
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div
-                        className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] "
-                        onMouseDown={() => {
-                            dispatch({
-                                type: "TOGGLE_PLACE_DETAILS",
-                                payload: {
-                                    place: place,
-                                },
-                            });
-                        }}
-                    >
+                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
                         <img
                             src={place.url}
                             className={
@@ -33,6 +23,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     ? "h-[30vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
                                     : "h-28 w-28 rounded-full shadow"
                             }
+                            onMouseDown={() => {
+                                dispatch({
+                                    type: "TOGGLE_PLACE_DETAILS",
+                                    payload: {
+                                        place: place,
+                                    },
+                                });
+                            }}
                         />
                         <div
                             className={
@@ -69,6 +67,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         onClick={() => {
                                             dispatch({
                                                 type: "TOGGLE_ALTERNATIVES",
+                                                payload: true,
                                             });
                                             dispatch({
                                                 type: "SET_SELECTED_LOCATION_INDEX",

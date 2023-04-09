@@ -50,7 +50,13 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     action.payload.location;
             };
             changePlan(action.payload.day, action.payload.oldLocationIndex);
-            return { ...state, changed: !state.changed };
+            console.log("ligma");
+
+            return {
+                ...state,
+
+                changed: !state.changed,
+            };
         }
         case "SET_SELECTED_LOCATION_INDEX": {
             return { ...state, selectedLocationIndex: action.payload };
@@ -90,7 +96,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return {
                 ...state,
 
-                openAlternatives: !state.openAlternatives,
+                openAlternatives: action.payload,
             };
 
         case "TOGGLE_PLACE_DETAILS":

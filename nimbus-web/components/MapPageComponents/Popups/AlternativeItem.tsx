@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { AlternativeItemProps } from "../PlanTab/PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
 
 const AlternativeItem = (props: any) => {
-    console.log(props.location);
-
-    const { isBigScreen, currentFolder, selectedLocationIndex }: any =
-        getPlanTabState();
+    const {
+        isBigScreen,
+        currentFolder,
+        selectedLocationIndex,
+        openReview,
+    }: any = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
@@ -16,28 +18,15 @@ const AlternativeItem = (props: any) => {
             className={
                 isBigScreen
                     ? "flex flex-col m-4 place-items-center gap-2"
-                    : "flex flex-col  place-items-center gap-2"
+                    : "flex flex-col  place-items-center gap-2 z-50"
             }
         >
             <button
                 className={
                     isBigScreen
                         ? " h-[17vw] w-[17vw] rounded-full hover:scale-105 duration-300"
-                        : " h-[25vw] w-[25vw] rounded-full "
+                        : " h-[25vw] w-[25vw] rounded-fullhover:scale-105 duration-300 "
                 }
-                onClick={() => {
-                    dispatch({
-                        type: "CHANGE_PLAN",
-                        payload: {
-                            day: currentFolder,
-                            oldLocationIndex: selectedLocationIndex,
-                            location: props.location,
-                        },
-                    });
-                    dispatch({
-                        type: "TOGGLE_ALTERNATIVES",
-                    });
-                }}
             >
                 <img
                     src={props.location.url}
@@ -46,6 +35,20 @@ const AlternativeItem = (props: any) => {
                             ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-110 duration-300"
                             : " h-[25vw] w-[25vw] rounded-full hover:scale-110 duration-300 "
                     }
+                    onMouseDown={() => {
+                        dispatch({
+                            type: "CHANGE_PLAN",
+                            payload: {
+                                day: currentFolder,
+                                oldLocationIndex: selectedLocationIndex,
+                                location: props.location,
+                            },
+                        });
+                        dispatch({
+                            type: "TOGGLE_ALTERNATIVES",
+                            payload: false,
+                        });
+                    }}
                 />
             </button>
             <div
@@ -62,8 +65,9 @@ const AlternativeItem = (props: any) => {
                 {props.location.description}
             </div>
             <button
-                className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300"
-                onClick={() => {
+                className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300 z-10"
+                onMouseDown={() => {
+                    console.log(props.location);
                     dispatch({
                         type: "TOGGLE_PLACE_DETAILS",
                         payload: { place: props.location },
