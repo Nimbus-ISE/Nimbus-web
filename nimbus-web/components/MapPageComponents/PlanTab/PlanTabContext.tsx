@@ -22,6 +22,7 @@ interface PlanTabContextStateType {
     travelTime: any;
     map_polyline: any;
     alternatives: any;
+    changed: boolean;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -45,7 +46,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
         }
         case "CHANGE_PLAN": {
             const changePlan = (day: number, oldLocationIndex: number) => {
-                state.fullPlan[day][oldLocationIndex] = {
+                state.fullPlan[day].location_data[oldLocationIndex] = {
                     loc_id: 44,
                     loc_name: "Joke Sam Yan",
                     price_level: 1,
@@ -63,6 +64,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 };
             };
             changePlan(action.payload.day, action.payload.oldLocationIndex);
+            return { ...state, changed: !state.changed };
         }
         case "SET_SELECTED_LOCATION_INDEX": {
             return { ...state, selectedLocationIndex: action.payload };
@@ -221,6 +223,7 @@ const initialState: PlanTabContextStateType = {
             url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
         },
     ],
+    changed: false,
 };
 
 const PlanTabContext = createContext(
