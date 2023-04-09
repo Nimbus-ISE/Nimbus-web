@@ -1,7 +1,7 @@
 import React from "react";
 import { getPlanTabState, getPlanTabDispatch } from "../PlanTab/PlanTabContext";
 const SavePlanPopUp = () => {
-    const { isBigScreen, fullPlan } = getPlanTabState();
+    const { isBigScreen } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
@@ -20,7 +20,7 @@ const SavePlanPopUp = () => {
                 className={
                     isBigScreen
                         ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[50vw] text-center text-xl flex flex-col items-center "
-                        : "bg-white w-96 p-2 rounded-lg absolute top-[10vh]  text-center text-xl flex flex-col items-center z-100"
+                        : "bg-white w-96 p-2 rounded-lg mt-20 pb-8 text-center text-xl flex flex-col items-center z-100"
                 }
             >
                 <div className="font-bold">Save Plan?</div>

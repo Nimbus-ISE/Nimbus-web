@@ -41,7 +41,7 @@ const FolderSmall = () => {
     }, [openFullTab, currentFolderView]);
 
     return (
-        <div className=" ">
+        <>
             <div
                 className={
                     tabsClass === classes.fullMobileTabs ? classes.slideIn : ""
@@ -82,7 +82,7 @@ const FolderSmall = () => {
                                     </label>
                                     {opendedTab === `tab${index}` && (
                                         <div className={classes.tab}>
-                                            {!openSavePlan && (
+                                            {isBigScreen && (
                                                 <PlanGraph
                                                     clickable={true}
                                                     dayNumber={index + 1}
@@ -94,6 +94,19 @@ const FolderSmall = () => {
                                                     ]}
                                                 />
                                             )}
+                                            {!isBigScreen && !openSavePlan && (
+                                                <PlanGraph
+                                                    clickable={true}
+                                                    dayNumber={index + 1}
+                                                    places={[
+                                                        ...day.location_data,
+                                                    ]}
+                                                    travelTimes={[
+                                                        ...travelTime[index],
+                                                    ]}
+                                                />
+                                            )}
+
                                             {openSavePlan && <SavePlanPopUp />}
                                         </div>
                                     )}
@@ -138,11 +151,15 @@ const FolderSmall = () => {
                                     <polygon points="0,50 100,0 100,100" />
                                 </svg>
                             </label>
+                            <svg height="500" width="500">
+                                <polygon points="250,60 100,400 400,400" />
+                                Sorry, your browser does not support inline SVG.
+                            </svg>
                         </>
                     )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 export default FolderSmall;

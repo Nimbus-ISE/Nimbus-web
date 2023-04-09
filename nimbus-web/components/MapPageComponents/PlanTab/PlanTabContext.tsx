@@ -21,6 +21,8 @@ interface PlanTabContextStateType {
     selectedLocationIndex: number;
     travelTime: any;
     map_polyline: any;
+    alternatives: any;
+    changed: boolean;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -44,7 +46,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
         }
         case "CHANGE_PLAN": {
             const changePlan = (day: number, oldLocationIndex: number) => {
-                state.fullPlan[day][oldLocationIndex] = {
+                state.fullPlan[day].location_data[oldLocationIndex] = {
                     loc_id: 44,
                     loc_name: "Joke Sam Yan",
                     price_level: 1,
@@ -62,6 +64,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 };
             };
             changePlan(action.payload.day, action.payload.oldLocationIndex);
+            return { ...state, changed: !state.changed };
         }
         case "SET_SELECTED_LOCATION_INDEX": {
             return { ...state, selectedLocationIndex: action.payload };
@@ -151,6 +154,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
         }
         default: {
             console.log("error");
+            return state;
             break;
         }
     }
@@ -172,6 +176,54 @@ const initialState: PlanTabContextStateType = {
     selectedLocationIndex: 0,
     travelTime: [],
     map_polyline: [],
+    alternatives: [
+        {
+            loc_id: 44,
+            loc_name: "Joke Sam Yan",
+            price_level: 1,
+            description: null,
+            lat: 13.7346539,
+            lng: 100.5261501,
+            province: "Krung Thep Maha Nakhon ",
+            rating: "4.3",
+            est_time_stay: 60,
+            view_count: 0,
+            partner: false,
+            address: "241 245 ซอย จุฬาฯ 11 Wang Mai, Pathum Wan, Bangkok 10330",
+            url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
+        },
+        {
+            loc_id: 244,
+            loc_name: "Joke Sam Yan 2: Jokin' Time",
+            price_level: 1,
+            description: null,
+            lat: 13.7346539,
+            lng: 100.5261501,
+            province: "Krung Thep Maha Nakhon ",
+            rating: "4.3",
+            est_time_stay: 60,
+            view_count: 0,
+            partner: false,
+            address: "241 245 ซอย จุฬาฯ 11 Wang Mai, Pathum Wan, Bangkok 10330",
+            url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
+        },
+        {
+            loc_id: 344,
+            loc_name: "Joke Sam Yan 3: The Jokenning",
+            price_level: 1,
+            description: null,
+            lat: 13.7346539,
+            lng: 100.5261501,
+            province: "Krung Thep Maha Nakhon ",
+            rating: "4.3",
+            est_time_stay: 60,
+            view_count: 0,
+            partner: false,
+            address: "241 245 ซอย จุฬาฯ 11 Wang Mai, Pathum Wan, Bangkok 10330",
+            url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
+        },
+    ],
+    changed: false,
 };
 
 const PlanTabContext = createContext(

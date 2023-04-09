@@ -3,14 +3,15 @@ import AlternativeItem from "./AlternativeItem";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 
 const Alternative = () => {
-    const { isBigScreen }: any = getPlanTabState();
+    const { isBigScreen, alternatives }: any = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
+    console.log(alternatives);
     return (
         <>
             <div
                 className={
                     isBigScreen
-                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[20vh] left-[61vw] z-50 cursor-pointer"
+                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[17.5vh] left-[62vw] z-50 cursor-pointer"
                         : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center -top-4 left-[90vw]  z-50 cursor-pointer "
                 }
                 onMouseDown={() => {
@@ -22,11 +23,17 @@ const Alternative = () => {
             <div
                 className={
                     isBigScreen
-                        ? "absolute top-[50vh] left-1/3  -translate-x-1/2 -translate-y-1/2  overflow-y-scroll scrollbar-hide  animate-fade-in "
+                        ? "absolute top-[50vh] left-1/3  -translate-x-1/2 -translate-y-[30vh]  overflow-y-scroll scrollbar-hide  animate-fade-in "
                         : " absolute  top-[40vh] left-1/2  -translate-x-1/2 -translate-y-1/2 overflow-y-scroll  scrollbar-hide  animate-fade-in"
                 }
             >
-                <div className="rounded-xl bg-white h-[60%] w-[60vw] p-2">
+                <div
+                    className={
+                        isBigScreen
+                            ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2"
+                            : "rounded-xl bg-white h-[40vh] w-[60vw] p-4"
+                    }
+                >
                     <div className="flex flex-col place-items-center ">
                         <div className="text-2xl text-center font-extrabold text-[#a6a6a6]">
                             Alternatives
@@ -34,22 +41,17 @@ const Alternative = () => {
                         <div
                             className={
                                 isBigScreen
-                                    ? "flex gap-[0.5rem] place-items-center "
-                                    : "flex flex-col gap-[5vw] place-items-center overflow-y-scroll h-[35vh] scrollbar-hide"
+                                    ? "flex gap-[0.5rem] place-items-center mt-6 "
+                                    : "flex flex-col gap-[5vw] place-items-center overflow-y-scroll h-[35vh] scrollbar-hide mt-6"
                             }
                         >
-                            <AlternativeItem
-                                title="title"
-                                description="lorem ipsum"
-                            />
-                            <AlternativeItem
-                                title="title"
-                                description="lorem ipsum"
-                            />
-                            <AlternativeItem
-                                title="title"
-                                description="lorem ipsum"
-                            />
+                            {alternatives.map((location: any) => (
+                                <AlternativeItem
+                                    loc_name={location.loc_name}
+                                    description={location.discription}
+                                    url={location.url}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
