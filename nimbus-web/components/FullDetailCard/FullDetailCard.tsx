@@ -14,8 +14,8 @@ interface FullDetailCardProps {
         loc_id: number;
         loc_name: string;
         address: string;
-        lat: string;
-        lng: string;
+        lat: number;
+        lng: number;
         description: string;
         province: string;
         location_rating: string;
