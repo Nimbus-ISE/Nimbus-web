@@ -9,7 +9,7 @@ import {
 } from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
-import { useEventCallback } from "@mui/material";
+
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 
@@ -24,6 +24,11 @@ export default function map() {
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
+        console.log(isBigScreen);
+        // if (isMounted) {
+        //     if (isBigScreen) blockScroll();
+        //     else allowScroll();
+        // }
     }, [screenSize]);
 
     useEffect(() => {

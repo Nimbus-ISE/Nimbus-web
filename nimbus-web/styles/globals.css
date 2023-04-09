@@ -241,6 +241,9 @@ a {
         overflow: scroll;
         scrollbar-width: none;
     }
+    /* body {
+        overflow: hidden;
+    } */
     body::-webkit-scrollbar {
         display: none;
     }

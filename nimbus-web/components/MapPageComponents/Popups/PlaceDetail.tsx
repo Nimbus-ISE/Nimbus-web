@@ -91,7 +91,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 Address
                             </div>
                             {data?.address && data?.province
-                                ? data?.address + data?.province
+                                ? data?.address + " " + data?.province
                                 : "No address provided"}
                         </div>
                         <div className="text-[0.8rem] col-span-12">

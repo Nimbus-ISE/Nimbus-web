@@ -151,6 +151,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
         }
         default: {
             console.log("error");
+            return state;
             break;
         }
     }
