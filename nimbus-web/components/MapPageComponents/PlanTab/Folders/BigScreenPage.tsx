@@ -27,7 +27,7 @@ const BigScreenPage = () => {
                     <SideBar />
                     {openSavePlan && <SavePlanPopUp />}
 
-                    {/* <TripMap /> */}
+                    <TripMap />
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
@@ -42,7 +42,7 @@ const BigScreenPage = () => {
                             </div>
                         )}
 
-                        {!openReview && openAlternatives && isBigScreen && (
+                        {!openReview && openAlternatives && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
                                 <Alternative />
                             </div>

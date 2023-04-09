@@ -23,6 +23,7 @@ const TripMap = () => {
         pinState,
     } = useMapLogic();
     const { mainMap }: any = useMap();
+
     React.useEffect(() => {
         if (fullPlan[currentFolder] && mainMap?.flyTo) {
             mainMap.flyTo({

@@ -9,21 +9,27 @@ import {
 } from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
-import { useEventCallback } from "@mui/material";
+
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 
 export default function map() {
     const dispatch: any = getPlanTabDispatch();
     const screenSize = useMediaQuery("(min-width:1000px)");
-    const { isBigScreen, currentFolder } = getPlanTabState();
+    const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
     const [isMounted, setIsMounted] = useState(false);
+    const [initialized, setInitalized] = useState(false);
 
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
+        console.log(isBigScreen);
+        // if (isMounted) {
+        //     if (isBigScreen) blockScroll();
+        //     else allowScroll();
+        // }
     }, [screenSize]);
 
     useEffect(() => {
@@ -71,7 +77,7 @@ export default function map() {
                         // console.log(`[${[day].toString()}]`);
                         const sorted_loc_ids = sortObject(loc_ids);
 
-                        if (!isMounted) {
+                        if (!isMounted && !initialized) {
                             dispatch({
                                 type: "SET_FULL_PLAN",
                                 payload: sorted_loc_ids,
@@ -79,8 +85,9 @@ export default function map() {
                             setIsMounted(true);
                         }
                         // console.log(loc_ids);
+                        const plan = initialized ? fullPlan : sorted_loc_ids;
 
-                        sorted_loc_ids.forEach((day: any, index: any) => {
+                        plan.forEach((day: any, index: any) => {
                             const tempCoordinates: any = [];
                             day.location_data.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
@@ -98,6 +105,7 @@ export default function map() {
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
                             const map_polyline = await response.json();
+
                             const decoded = polyline.decode(map_polyline);
                             const routeArrs: any = [];
                             decoded.forEach((arr) => {
@@ -119,19 +127,57 @@ export default function map() {
             //     });
             // });
         })();
-    }, [currentFolder]);
+        setInitalized(true);
+    }, [currentFolder, changed]);
+    // useEffect(() => {
+    //     if (initialized) {
+    //         (async () => {
+    //             if (fullPlan[currentFolder]) {
+    //                 console.log(fullPlan[currentFolder]);
+
+    //                 const coordinates: any = [];
+    //                 fullPlan[currentFolder].location_data.forEach(
+    //                     (location: any) => {
+    //                         coordinates.push(
+    //                             `[${location.lat},${location.lng}]`
+    //                         );
+    //                     }
+    //                 );
+    //                 coordinates.forEach((location: any) => {
+    //                     location.replace(/'/g, '"');
+    //                 });
+
+    //                 const response = await fetch(
+    //                     `/api/getRoute?trip=${coordinates[currentFolder]}`
+    //                 );
+    //                 const map_polyline = await response.json();
+    //                 const decoded = polyline.decode(map_polyline);
+    //                 const routeArrs: any = [];
+    //                 decoded.forEach((arr) => {
+    //                     routeArrs.push(arr.reverse());
+    //                 });
+
+    //                 dispatch({
+    //                     type: "SET_ROUTE",
+    //                     payload: routeArrs,
+    //                 });
+    //             }
+    //             console.log("hi");
+    //         })();
+    //     }
+    // }, [fullPlan]);
 
     return (
         <>
             <Head>
                 <title>Nimbus</title>
             </Head>
-            <div className="h-[90vh] w-[100vw] overflow-hidden">
+            <div className="h-[100vh] w-[100vw] overflow-hidden">
                 <div
                     className={
                         isBigScreen
                             ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
-                            : "  h-[92vh] z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
+                            : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                     }
                 >
                     {!isBigScreen && <SmallScreenPage />}
