@@ -82,7 +82,7 @@ const HomeCarousel = () => {
                 } relative m-auto text-center z-10 transition duration-1000`}
             >
                 <div
-                    className={`text-3xl sm:text-5xl md:text-6xl
+                    className={`text-4xl sm:text-5xl md:text-6xl
                     lg:text-7xl font-extrabold text-white drop-shadow-lg w-fit`}
                 >
                     <h1 className="mb-2">LET US DESIGN</h1>

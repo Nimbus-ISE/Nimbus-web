@@ -26,7 +26,7 @@ const TagsSelect = ({ callback }: IProps) => {
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex flex-wrap justify-center border-[0.75px] p-5 rounded-xl border-teal-400">
+                <div className="flex flex-wrap justify-center border-[0.75px] p-5 rounded-xl border-neutral-400">
                     {tags.map((data) => {
                         return (
                             <Chip

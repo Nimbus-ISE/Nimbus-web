@@ -32,7 +32,7 @@ export default function Home({ trendingList }: IProps) {
                     </div>
                 ) : null}
                 <HomeCarousel />
-                <div className="mt-7">
+                <div className="my-7">
                     <Slider
                         title="TRENDING NOW"
                         locationList={trendingList}

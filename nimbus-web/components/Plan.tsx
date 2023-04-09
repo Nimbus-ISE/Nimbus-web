@@ -115,8 +115,13 @@ const Plan = () => {
             >
                 <div
                     style={{ height: height }}
-                    className="relative flex bg-[url('/images/bg.webp')] bg-no-repeat bg-cover bg-center text-black overflow-hidden"
+                    className="relative flex bg-cover bg-center text-black overflow-hidden"
                 >
+                    <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0 m-auto backdrop-blur-md z-[2]"></div>
+                    <img
+                        src="/images/bg.webp"
+                        className="absolute object-cover object-bottom w-full h-full aspect-video z-[1]"
+                    />
                     {isLoading ? (
                         <div className="absolute z-50 top-0 bottom-0 left-0 right-0 m-auto flex min-h-screen h-full w-full bg-neutral-100">
                             <Loading />
