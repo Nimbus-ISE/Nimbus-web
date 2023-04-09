@@ -27,44 +27,20 @@ function valueMapper(value: number) {
 }
 
 const BudgetInput = (props: any) => {
-    const { formData, setFormDataField } = React.useContext(PlanContext);
+    // const { formData, setFormDataField } = React.useContext(PlanContext);
     const [value, setValue] = React.useState<number>(0);
-    const [isValid, setIsValid] = React.useState<boolean>(true);
 
-    React.useEffect(() => {
-        setFormDataField("budget", value);
-    }, [value]);
-
-    const handleValueChange = (event: any) => {
-        const num = event.value;
-        const regex = /^([1-9][0-9]{2}|[1-9][0-9]{3,5}|1000000)$/;
-        console.log(num, num.toString().match(regex));
-        setIsValid(num.toString().match(regex));
-        setValue(num);
-    };
+    // React.useEffect(() => {
+    //     setFormDataField("budget", value);
+    // }, [value]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
         console.log(event.target.value);
         setValue(event.target.value);
     };
 
-    const handleKeyDown = (e: any) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-        }
-    };
-
     return (
         <>
-            <NumericFormat
-                defaultValue={formData.budget}
-                onValueChange={handleValueChange}
-                onKeyDown={handleKeyDown}
-            />
-            <span className={isValid ? "help-block" : "help-block-invalid"}>
-                Please enter a budget between 100 and 1,000,000 Baht.
-            </span>
-
             <ThemeProvider theme={nimbusTheme}>
                 <div className="flex justify-center mx-auto items-center h-11/12 w-40 ">
                     <Slider
@@ -72,7 +48,8 @@ const BudgetInput = (props: any) => {
                         slots={{
                             valueLabel: ValueLabelComponent,
                         }}
-                        defaultValue={formData.budget}
+                        // defaultValue={formData.budget}
+                        defaultValue={value}
                         valueLabelDisplay="on"
                         step={1}
                         min={0}
