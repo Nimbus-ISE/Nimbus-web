@@ -4,10 +4,12 @@ import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 import { PlanContext } from "../Plan";
 import { tags } from "@/misc";
+import search from "@/pages/search";
+import router from "next/router";
 
 const TagsSelection = () => {
-    const { setFormDataField, setIsConfirmActive } =
-        React.useContext(PlanContext);
+    // const { setFormDataField, setIsConfirmActive } =
+    //     React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -21,14 +23,17 @@ const TagsSelection = () => {
         console.log(newSelectTag);
         setSelectTag(newSelectTag);
     };
-    React.useEffect(() => {
-        setFormDataField("tags", selectTag);
-    }, [selectTag]);
+    // React.useEffect(() => {
+    //     setFormDataField("tags", selectTag);
+    // }, [selectTag]);
+
+    const ref = React.useRef<any>();
+
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex flex-wrap justify-center">
-                    {tags.map((data) => {
+                <div ref={ref} className="flex flex-wrap justify-center">
+                    {tags.sort().map((data) => {
                         return (
                             <Chip
                                 key={data}
@@ -37,14 +42,14 @@ const TagsSelection = () => {
                                 // className="shadow-md"
                                 color={
                                     selectTag.indexOf(data) > -1
-                                        ? "primary"
+                                        ? "success"
                                         : "secondary"
                                 }
                                 sx={TagsStyles}
                                 variant={
                                     selectTag.indexOf(data) > -1
-                                        ? "outlined"
-                                        : "filled"
+                                        ? "filled"
+                                        : "outlined"
                                 }
                                 className="shadow-md"
                             />
@@ -53,9 +58,9 @@ const TagsSelection = () => {
                 </div>
                 <div className="flex mx-auto w-full">
                     <Button
-                        onClick={() => {
-                            setIsConfirmActive(true);
-                        }}
+                        // onClick={() => {
+                        //     setIsConfirmActive(true);
+                        // }}
                         variant="outlined"
                         sx={{
                             borderRadius: "999px",
@@ -71,6 +76,10 @@ const TagsSelection = () => {
                                 borderColor: "gray",
                             },
                         }}
+                        // for testing
+                        // onClick={() => {
+                        //     router.push("/search");
+                        // }}
                     >
                         <div className="m-auto font-montserrat">Continue</div>
                     </Button>
@@ -81,3 +90,5 @@ const TagsSelection = () => {
 };
 
 export default TagsSelection;
+
+// React.findDOMNode(this.theRef).focus();
