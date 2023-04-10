@@ -63,9 +63,7 @@ const Form = ({ formArr }: IProps) => {
                             {item.title}
                         </div>
                         <div className="my-7 text-xs flex justify-center">
-                            {isLargerThanMedium || currentValue === index
-                                ? formMapper[item.type]
-                                : null}
+                            {formMapper[item.type]}
                         </div>
                         {index !== formArr.length - 1 ? (
                             <button
