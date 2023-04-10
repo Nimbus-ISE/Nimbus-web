@@ -14,7 +14,7 @@ const checkPremiumOnNewSession = async (
         let uuid = crypto.randomUUID();
         const metadata = {
             premium_type: getPremiumType(user),
-            premium_expire: getPremiumExpire(user),
+            premium_expire: getPremiumExpire(user, "number"),
         };
         if (checkPremiumExpire(metadata)) {
             try {

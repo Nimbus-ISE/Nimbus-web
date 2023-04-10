@@ -44,7 +44,7 @@ const HotspotCard = ({
                 transition && current === index
                     ? "-translate-x-[80%] opacity-0"
                     : "translate-x-0"
-            } ${current === index ? "md:hover:scale-[102%]" : ""}
+            } ${current === index ? "md:hover:translate-y-3" : ""}
             absolute flex bg-gradient-to-l to-tricolorgreen from-green-300 transform-gpu
              md:from-green-300 md:to-green-300 h-full w-[18rem] shadow-md duration-[700ms]
             ease-in-out cursor-pointer`}

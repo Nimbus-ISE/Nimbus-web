@@ -19,6 +19,7 @@ import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
@@ -41,6 +42,7 @@ const iconMapping: { [key: string]: React.ReactNode } = {
     Login: <LoginOutlinedIcon />,
     Profile: <AccountBoxOutlinedIcon />,
     Signout: <LogoutOutlinedIcon />,
+    Discover: <TravelExploreIcon />,
 };
 
 const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {

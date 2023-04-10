@@ -59,7 +59,7 @@ const Form = ({ formArr }: IProps) => {
                         ) : (
                             <div className="flex-1" />
                         )}
-                        <div className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold px-0 py-5">
+                        <div className="text-center text-2xl sm:text-3xl md:text-4xl text-neutral-800 font-extrabold px-0 py-5">
                             {item.title}
                         </div>
                         <div className="my-7 text-xs flex justify-center">

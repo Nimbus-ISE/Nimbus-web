@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import FilterDramaRounded from "@mui/icons-material/FilterDramaRounded";
 
 const NavbarLogo = () => {
     const router = useRouter();
@@ -9,13 +9,7 @@ const NavbarLogo = () => {
             onClick={() => router.push("/")}
             className="flex select-none m-auto"
         >
-            <Image
-                className="w-[40px] h-[30px]"
-                src={"/images/logo.png"}
-                alt="Logo"
-                width={40}
-                height={30}
-            />
+            <FilterDramaRounded className="text-tricolorgreen my-auto drop-shadow-sm" />
             <div className="text-xl font-bold mx-1">NIMBUS</div>
         </button>
     );

@@ -5,23 +5,22 @@ import StarIcon from "@mui/icons-material/Star";
 import CircleIcon from "@mui/icons-material/Circle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import {
-    Box,
-    Button,
-    IconButton,
-    Stack,
-    Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
 import Review from "../MapPageComponents/Popups/Review";
+import styles from "./Button.module.css";
 
 interface FullDetailCardProps {
     location: {
         loc_id: number;
         loc_name: string;
+        address: string;
+        lat: number;
+        lng: number;
         description: string;
         province: string;
         location_rating: string;
+        tags: string;
         url: string[];
         reviews: Array<IReview>;
     };
@@ -31,6 +30,19 @@ interface DotPaginationProps {
     show: boolean;
     index: number;
 }
+
+const lightSx = {
+    fontWeight: 400,
+    fontFamily: "Montserrat",
+};
+const baseSx = {
+    fontWeight: 500,
+    fontFamily: "Montserrat",
+};
+const boldSx = {
+    fontWeight: 800,
+    fontFamily: "Montserrat",
+};
 
 const DotPagination = ({ show, index }: DotPaginationProps) => {
     return (
@@ -48,10 +60,14 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
     const {
         loc_id,
         loc_name,
+        address,
+        lat,
+        lng,
         description,
         province,
         location_rating,
         url,
+        tags,
         reviews,
     } = location;
     const [imageList, setImageList] = useState(url[0]);
@@ -73,7 +89,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
 
     return (
         <>
-            <div className="text-black">
+            <div className="text-black max-w-screen-lg mx-auto">
                 <Stack spacing={3}>
                     <Stack
                         direction="row"
@@ -81,22 +97,18 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                         alignItems="center"
                     >
                         <Stack width="60%">
-                            <Box
-                                component="img"
-                                className="shadow-md"
-                                sx={{
-                                    borderRadius: "8px 8px 0px 0px",
-                                    width: "100%",
-                                    height: "280px",
-                                }}
+                            <img
+                                className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
                                 src={imageList}
+                                alt={loc_name}
                             />
                             <Box
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="space-between"
+                                className="shadow-md"
                                 sx={{
-                                    backgroundColor: "#D9D9D9",
+                                    backgroundColor: "#e9e9e9",
                                     borderRadius: "0px 0px 8px 8px",
                                     width: "100%",
                                     height: "35px",
@@ -134,14 +146,18 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                                 </IconButton>
                             </Box>
                         </Stack>
-                        <Stack width="40%" pl={3}>
-                            <Typography
-                                sx={{
-                                    fontWeight: 600,
-                                }}
-                                variant="h4"
-                            >
+                        <Stack width="40%" pl={4}>
+                            <div className="text-right text-neutral-400">
+                                <Typography sx={baseSx} variant="body2">
+                                    {Number(lat).toFixed(4)},{" "}
+                                    {Number(lng).toFixed(4)}
+                                </Typography>
+                            </div>
+                            <Typography sx={boldSx} variant="h4">
                                 {loc_name}
+                            </Typography>
+                            <Typography sx={baseSx} variant="h6">
+                                {province}
                             </Typography>
                             <Stack
                                 direction="row"
@@ -151,8 +167,11 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                             >
                                 <LocationOnIcon fontSize="large" />
                                 <Stack spacing={1}>
-                                    <Typography variant="body1">
-                                        {province}
+                                    <Typography
+                                        sx={{ ...baseSx, marginY: "auto" }}
+                                        variant="body1"
+                                    >
+                                        {address}
                                     </Typography>
                                     {/*<Typography
                                     variant="body2"
@@ -162,52 +181,32 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
 						</Typography>*/}
                                 </Stack>
                             </Stack>
-                            {/*<Stack
-                            direction="row"
-                            pl={1}
-                            pb={3}
-                            spacing={1}
-                            alignItems="center"
-                            justifyContent="flex-start"
-                        >
-                            <LocalOfferIcon
-                                fontSize="medium"
-                                sx={{ color: "#D9D9D9" }}
-                            />
-                            <Typography
-                                variant="body2"
-                                sx={{ color: "#D9D9D9" }}
-                            >
-                                {data.tag}
-						</Typography>
-                        </Stack>*/}
+                            <div className="flex gap-2 pb-5 pl-1 text-neutral-500">
+                                <LocalOfferIcon className="w-8 h-8" />
+                                <Typography
+                                    variant="body2"
+                                    sx={{ ...baseSx, marginY: "auto" }}
+                                >
+                                    {tags}
+                                </Typography>
+                            </div>
                             <div className="mx-auto">
                                 <Stars
                                     size={20}
                                     rating={Number(location_rating)}
                                 />
                             </div>
-                            <Button
-                                sx={{
-                                    backgroundColor: "#45D8D0",
-                                    borderRadius: "18px",
-                                    marginY: "2rem",
-                                }}
+                            <button
                                 onClick={handleSelectDestination}
+                                className={styles.button}
                             >
-                                <Typography
-                                    variant="body2"
-                                    sx={{
-                                        color: "#FFFFFF",
-                                        fontWeight: "bold",
-                                    }}
-                                >
+                                <div className="font-bold text-white text-lg">
                                     SELECT AS DESTINATION
-                                </Typography>
-                            </Button>
+                                </div>
+                            </button>
                         </Stack>
                     </Stack>
-                    <Typography>{description}</Typography>
+                    <Typography sx={lightSx}>{description}</Typography>
                 </Stack>
                 <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
                     USER REVIEWS
