@@ -26,6 +26,29 @@ function valueMapper(value: number) {
     ));
 }
 
+const marks = [
+    {
+        value: 0,
+        label: "0",
+    },
+    {
+        value: 1,
+        label: "100",
+    },
+    {
+        value: 2,
+        label: "500",
+    },
+    {
+        value: 3,
+        label: "1000",
+    },
+    {
+        value: 4,
+        label: ">1000",
+    },
+];
+
 const BudgetInput = (props: any) => {
     // const { formData, setFormDataField } = React.useContext(PlanContext);
     const [value, setValue] = React.useState<number>(0);
@@ -42,20 +65,20 @@ const BudgetInput = (props: any) => {
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex justify-center mx-auto items-center h-11/12 w-40 ">
+                <div className="flex mx-auto items-center h-full w-60">
                     <Slider
                         onChange={handleChange}
                         slots={{
                             valueLabel: ValueLabelComponent,
                         }}
                         // defaultValue={formData.budget}
-                        defaultValue={value}
+                        value={value}
                         valueLabelDisplay="on"
                         step={1}
                         min={0}
                         max={4}
                         color="secondary"
-                        marks
+                        marks={marks}
                         valueLabelFormat={(value) => {
                             return (
                                 <div style={{ textAlign: "center" }}>
@@ -68,8 +91,8 @@ const BudgetInput = (props: any) => {
                                         : value === 3
                                         ? "below 1000 THB"
                                         : "above 1000 THB"}
-                                    <br />
-                                    {valueMapper(value)}
+                                    {/* <br />
+                                    {valueMapper(value)} */}
                                 </div>
                             );
                         }}

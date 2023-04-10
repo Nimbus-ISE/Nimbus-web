@@ -135,10 +135,10 @@ export const BudgetStyles = {
     shrink: "false",
 };
 
-export const distanceStyles = {
+export const ButtonChipStyles = {
     margin: "10px",
     borderRadius: "12px",
-    width: "180px",
-    height: "200px",
+    width: "8rem",
+    height: "5rem",
     fontSize: "16px",
 };
