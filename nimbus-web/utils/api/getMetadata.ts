@@ -1,7 +1,11 @@
-const getMetadata = async (
-    tokenData: { [key: string]: string },
-    user_id: string
-) => {
+import getManagementToken from "./getManagementToken";
+
+const getMetadata = async (user_id: string) => {
+    const tokenData = await getManagementToken();
+    if (!tokenData) {
+        console.log("No token data found");
+        throw new Error("No token data found");
+    }
     try {
         const getResponse = await fetch(
             `${process.env.AUTH0_ISSUER_BASE_URL}/api/v2/users/${user_id}?fields=app_metadata&include_fields=true`,

@@ -55,6 +55,7 @@
         "@storybook/react": "^6.5.15",
         "@storybook/testing-library": "^0.0.13",
         "@types/mapbox__polyline": "^1.0.2",
+        "@types/redis": "^4.0.11",
         "autoprefixer": "^10.4.13",
         "babel-loader": "^8.3.0",
         "concurrently": "^7.6.0",
