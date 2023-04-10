@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import CycloneIcon from "@mui/icons-material/Cyclone";
-import { FilterDramaRounded } from "@mui/icons-material";
+import FilterDramaRounded from "@mui/icons-material/FilterDramaRounded";
 
 const NavbarLogo = () => {
     const router = useRouter();

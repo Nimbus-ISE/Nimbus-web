@@ -8,6 +8,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
 import Review from "../MapPageComponents/Popups/Review";
+import styles from "./Button.module.css";
 
 interface FullDetailCardProps {
     location: {
@@ -195,30 +196,14 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                                     rating={Number(location_rating)}
                                 />
                             </div>
-                            <Button
-                                sx={{
-                                    borderRadius: "18px",
-                                    paddingY: "0.5rem",
-                                    marginY: "1rem",
-                                    "&:hover": {
-                                        color: "black",
-                                        backgroundColor: "#328899",
-                                        borderColor: "gray",
-                                    },
-                                }}
-                                className="bg-tricolorgreen shadow-sm"
+                            <button
                                 onClick={handleSelectDestination}
+                                className={styles.button}
                             >
-                                <Typography
-                                    variant="body2"
-                                    sx={{
-                                        color: "#FFFFFF",
-                                        fontWeight: "bold",
-                                    }}
-                                >
+                                <div className="font-bold text-white text-lg">
                                     SELECT AS DESTINATION
-                                </Typography>
-                            </Button>
+                                </div>
+                            </button>
                         </Stack>
                     </Stack>
                     <Typography sx={lightSx}>{description}</Typography>
