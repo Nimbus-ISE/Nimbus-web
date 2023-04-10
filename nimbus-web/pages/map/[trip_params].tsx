@@ -12,8 +12,9 @@ import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/Smal
 
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
+import { GetServerSidePropsContext } from "next";
 
-export default function map() {
+export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
     const screenSize = useMediaQuery("(min-width:1000px)");
     const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
@@ -34,7 +35,7 @@ export default function map() {
 
     useEffect(() => {
         const fetchTrip = async () => {
-            const res = await fetch(`/api/getTrip`);
+            const res = await fetch(`/api/getTrip/${trip_params}`);
             const plan = await res.json();
             return plan;
         };
@@ -187,4 +188,14 @@ export default function map() {
             </div>
         </>
     );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { params } = context;
+    const trip_params = params?.trip_params;
+    return {
+        props: {
+            trip_params: typeof trip_params === "string" ? trip_params : "",
+        },
+    };
 }

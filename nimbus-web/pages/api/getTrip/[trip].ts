@@ -6,9 +6,19 @@ export default async function handler(
 ) {
     let origin;
     let destination;
+    const { trip } = req.query;
     try {
+        const payload = JSON.parse(decodeURIComponent(trip as string));
         const response = await fetch(
-            "http://34.28.125.106:5000/get_sample_trip"
+            "http://34.28.125.106:5000/get_trip_mcts",
+            {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Api-Key": "thisisforpip",
+                },
+            }
         );
 
         const result = await response.json();
@@ -19,7 +29,7 @@ export default async function handler(
             const tempTravelTime: any = [];
             const tempLocations: any = [];
             day.forEach((point: any, index: any) => {
-                if (index % 2 === 0) tempLocations.push(point.id);
+                if (index % 2 === 0) tempLocations.push(point.loc_id);
                 else tempTravelTime.push(point);
             });
             travelTimes.push(tempTravelTime);
