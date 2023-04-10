@@ -3,11 +3,10 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import ErrorMessage from "@/components/ErrorMessage";
 import Loading from "@/components/Loading";
 import { useRouter } from "next/router";
-import checkPremiumOnNewSession from "@/utils/checkPremiumOnNewSession";
 import getPremiumType from "@/utils/getPremiumType";
 
 const Upgrade = () => {
-    const { user, isLoading } = useUser();
+    const { user } = useUser();
     const router = useRouter();
     const handleUpgrade = async (upgradeType: string) => {
         if (user && getPremiumType(user) === "None") {

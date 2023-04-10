@@ -11,16 +11,16 @@ export default withApiAuthRequired(async function handler(
     if (req.method === "PUT" && typeof user_id === "string") {
         try {
             await sql`UPDATE user_data
-                SET premium_type = 'None', premium_expire = CURRENT_DATE
-                WHERE user_id = ${user_id}`;
-            console.log("Premium expired, removed premium", res);
+                    SET premium_type = 'None', premium_expire = CURRENT_DATE
+                    WHERE user_id = ${user_id}`;
+            console.log("Premium expired, removed premium");
             return res.status(200).json({ expired: true });
         } catch (e) {
             console.log("DB error");
             return res.status(500).send("DB error");
         }
     } else {
-        console.log("No token data found");
-        return res.status(500).send("No token data found");
+        console.log("Invalid method or user_id type");
+        return res.status(500).send("Invalid method or user_id type");
     }
 });
