@@ -19,11 +19,9 @@ const checkPremium = async (
                 },
             });
             if (response.ok) {
-                const url = `/api/auth/login?prompt=${encodeURIComponent(
-                    "none"
-                )}`;
-                router.push(url);
                 alert("Your premium has expired");
+                if (sessionStorage.getItem("session-id"))
+                    sessionStorage.removeItem("session-id");
             }
         } catch (error) {
             console.error("An error occurred with expirePremium", error);

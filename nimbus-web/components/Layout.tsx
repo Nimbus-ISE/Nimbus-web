@@ -24,12 +24,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     React.useEffect(() => {
         if (user) {
             console.log("check premium status on new session");
-            updateOnNewSession(user, router);
+            /*updateOnNewSession(user, router);
             const metadata = {
                 premium_type: getPremiumType(user),
                 premium_expire: getPremiumExpire(user, "number"),
             };
-            checkPremium(metadata, user, router);
+            checkPremium(metadata, user, router);*/
         }
     }, [user, router]);
     return !isLoading ? (
