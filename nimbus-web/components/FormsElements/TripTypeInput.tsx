@@ -10,7 +10,7 @@ import { PlanContext } from "../Plan";
 const choices = ["Chill", "Balanced", "Travel"];
 
 const TripTypeInput = () => {
-    const { setFormDataField } = React.useContext(PlanContext);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
     const [tripType, setTripType] = React.useState<number>(0);
 
     React.useEffect(() => {

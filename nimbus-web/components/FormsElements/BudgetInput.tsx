@@ -50,17 +50,17 @@ const marks = [
 ];
 
 const BudgetInput = (props: any) => {
-    // const { formData, setFormDataField } = React.useContext(PlanContext);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
     const [value, setValue] = React.useState<number>(0);
-
-    // React.useEffect(() => {
-    //     setFormDataField("budget", value);
-    // }, [value]);
 
     const handleChange = (event: any, newValue: number | number[]) => {
         console.log(event.target.value);
         setValue(event.target.value);
     };
+
+    React.useEffect(() => {
+        setFormDataField("budget", value);
+    }, [value]);
 
     return (
         <>
