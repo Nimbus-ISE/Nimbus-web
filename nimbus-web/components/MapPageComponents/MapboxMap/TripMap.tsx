@@ -1,6 +1,6 @@
 import React from "react";
 import useMapLogic from "@/hooks/useMap";
-import { getPlanTabState } from "../PlanTab/PlanTabContext";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Pin from "@/components/Pin";
 import Map, {
     Marker,
@@ -23,6 +23,7 @@ const TripMap = () => {
         pinState,
     } = useMapLogic();
     const { mainMap }: any = useMap();
+    const dispatch: any = getPlanTabDispatch();
 
     React.useEffect(() => {
         if (fullPlan[currentFolder] && mainMap?.flyTo) {
@@ -72,11 +73,16 @@ const TripMap = () => {
                                             latitude={point.lat}
                                             anchor="bottom"
                                             onClick={(e) => {
-                                                togglePinState(
-                                                    currentFolder,
-                                                    index
-                                                );
                                                 onSelect(point.lng, point.lat);
+
+                                                dispatch({
+                                                    type: "TOGGLE_PLACE_DETAILS",
+                                                    payload: {
+                                                        place: fullPlan[
+                                                            currentFolder
+                                                        ].location_data[index],
+                                                    },
+                                                });
                                                 e.originalEvent.stopPropagation();
                                             }}
                                         >

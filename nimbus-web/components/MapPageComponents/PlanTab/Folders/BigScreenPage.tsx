@@ -1,5 +1,5 @@
 import React from "react";
-import { getPlanTabState } from "../PlanTabContext";
+import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import FullScreenPlan from "./FullScreenPlan";
 import Alternative from "../../Popups/Alternative";
 import PlaceDetail from "../../Popups/PlaceDetail";
@@ -13,11 +13,10 @@ const BigScreenPage = () => {
         openFullTab,
         openAlternatives,
         openReview,
-        isBigScreen,
         placeData,
-
         openSavePlan,
     } = getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
 
     return (
         <>
@@ -31,7 +30,12 @@ const BigScreenPage = () => {
 
                     <div className="col-span-8 w-full h-[100%]">
                         {openReview && (
-                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 ">
+                            <div
+                                className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 "
+                                onMouseDown={() => {
+                                    dispatch({ type: "TOGGLE_PLACE_DETAILS" });
+                                }}
+                            >
                                 <PlaceDetail
                                     placeTitle={placeData.placeTitle}
                                     address={placeData.address}
