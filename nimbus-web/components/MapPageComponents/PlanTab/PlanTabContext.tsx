@@ -120,6 +120,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     currentFolderView: state.currentFolderView + 1,
+                    currentFolder: state.currentFolder + 1,
                 };
             } else {
                 return state;
@@ -130,6 +131,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     currentFolderView: state.currentFolderView - 1,
+                    currentFolder: state.currentFolder - 1,
                 };
             } else {
                 return state;

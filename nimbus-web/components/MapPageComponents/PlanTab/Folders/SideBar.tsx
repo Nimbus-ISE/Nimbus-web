@@ -7,13 +7,14 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isBigScreen, openSavePlan } = getPlanTabState();
+
     return (
         <div className={" h-full z-10 lg:col-span-4"}>
             <FolderSmallDynamic />
             {isBigScreen && (
                 <>
                     <button
-                        className="bg-black w-8 h-8 absolute rounded top-[5vh] left-[28.5vw] text-white"
+                        className="bg-black w-8 h-8 absolute rounded top-[9vh] left-[28.5vw] text-white"
                         onClick={() => {
                             dispatch({ type: "TOGGLE_SAVE_PLAN" });
                         }}

@@ -1,11 +1,11 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
-import backToTopArrow from "../../../../public/backToTopArrow.svg";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
+    console.log(props.travelTimes[0].travel_dur);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -20,8 +20,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place.url}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
-                                    : "h-28 w-28 rounded-full shadow"
+                                    ? "h-[20vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
+                                    : "h-24 w-24 rounded-full shadow ml-2"
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -43,9 +43,9 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 {place?.loc_name?.length < 20 && (
                                     <div
                                         className={
-                                            !isBigScreen
-                                                ? "text-[1rem] font-bold ml-4 "
-                                                : "text-xl font-bold ml-4"
+                                            isBigScreen
+                                                ? "text-base font-bold ml-4 "
+                                                : "text-xl  ml-4"
                                         }
                                     >
                                         {place.loc_name}
@@ -54,9 +54,9 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 {place?.loc_name?.length >= 20 && (
                                     <div
                                         className={
-                                            !isBigScreen
-                                                ? "text-[1rem] font-bold ml-4 text-left"
-                                                : "text-xl font-bold ml-4 text-left"
+                                            isBigScreen
+                                                ? "text-base  font-bold ml-4 text-left"
+                                                : "text-xl ml-4 text-left"
                                         }
                                     >
                                         {place.loc_name}
@@ -91,15 +91,29 @@ const PlanGraph = (props: PlanGraphProps) => {
                         </div>
                     </div>
 
-                    {props.travelTimes[index]?.travel_time && (
+                    {props.travelTimes[index] && (
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
                                 <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
                                 <div>
-                                    {`Travel Time: ${props.travelTimes[
-                                        index
-                                    ]?.travel_time.toFixed(0)} minutes`}
+                                    {props.travelTimes[index]?.travel_dur !== 0
+                                        ? `Travel Time: ${
+                                              props.travelTimes[index]
+                                                  ?.travel_dur > 60
+                                                  ? (
+                                                        props.travelTimes[index]
+                                                            ?.travel_dur / 60
+                                                    ).toFixed(1)
+                                                  : props.travelTimes[index]
+                                                        ?.travel_dur
+                                          } ${
+                                              props.travelTimes[index]
+                                                  ?.travel_dur > 60
+                                                  ? "minutes "
+                                                  : "second"
+                                          }`
+                                        : "Within walking distance"}
                                 </div>
                             </div>
                         </>

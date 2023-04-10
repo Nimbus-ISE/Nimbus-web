@@ -19,6 +19,7 @@ export default function map() {
     const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
     const [isMounted, setIsMounted] = useState(false);
     const [initialized, setInitalized] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         dispatch({
@@ -49,13 +50,18 @@ export default function map() {
         (async () => {
             const loc_ids: any = [];
             const trip = await fetchTrip();
+            console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
                 payload: trip.travelTimes,
             });
             const tempPinState: any[] = [];
-
+            console.log(trip);
+            if (trip === "error invalid url") {
+                setError(true);
+                return;
+            }
             trip.locations.forEach((day: any, index: any) => {
                 const tempPin: any = [];
 
@@ -76,6 +82,7 @@ export default function map() {
                         loc_ids.push(await result);
                         // console.log(`[${[day].toString()}]`);
                         const sorted_loc_ids = sortObject(loc_ids);
+                        console.log(sorted_loc_ids);
 
                         if (!isMounted && !initialized) {
                             dispatch({
@@ -172,19 +179,22 @@ export default function map() {
             <Head>
                 <title>Nimbus</title>
             </Head>
-            <div className="h-[100vh] w-[100vw] overflow-hidden">
-                <div
-                    className={
-                        isBigScreen
-                            ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
-                            : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
-                    }
-                >
-                    {!isBigScreen && <SmallScreenPage />}
+            {!error && (
+                <div className="h-[90vh] w-[100vw] overflow-hidden">
+                    <div
+                        className={
+                            isBigScreen
+                                ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
+                                : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
+                        }
+                    >
+                        {!isBigScreen && <SmallScreenPage />}
 
-                    {isBigScreen && <BigScreenPage />}
+                        {isBigScreen && <BigScreenPage />}
+                    </div>
                 </div>
-            </div>
+            )}
+            {error && <div>Ligma</div>}
         </>
     );
 }
