@@ -46,25 +46,17 @@ function reducer(state: PlanTabContextStateType, action: any) {
         }
         case "CHANGE_PLAN": {
             const changePlan = (day: number, oldLocationIndex: number) => {
-                state.fullPlan[day].location_data[oldLocationIndex] = {
-                    loc_id: 44,
-                    loc_name: "Joke Sam Yan",
-                    price_level: 1,
-                    description: null,
-                    lat: 13.7346539,
-                    lng: 100.5261501,
-                    province: "Krung Thep Maha Nakhon ",
-                    rating: "4.3",
-                    est_time_stay: 60,
-                    view_count: 0,
-                    partner: false,
-                    address:
-                        "241 245 ซอย จุฬาฯ 11 Wang Mai, Pathum Wan, Bangkok 10330",
-                    url: "https://media.timeout.com/images/105671563/750/422/image.jpg",
-                };
+                state.fullPlan[day].location_data[oldLocationIndex] =
+                    action.payload.location;
             };
             changePlan(action.payload.day, action.payload.oldLocationIndex);
-            return { ...state, changed: !state.changed };
+            console.log("ligma");
+
+            return {
+                ...state,
+
+                changed: !state.changed,
+            };
         }
         case "SET_SELECTED_LOCATION_INDEX": {
             return { ...state, selectedLocationIndex: action.payload };
@@ -104,7 +96,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return {
                 ...state,
 
-                openAlternatives: !state.openAlternatives,
+                openAlternatives: action.payload,
             };
 
         case "TOGGLE_PLACE_DETAILS":
@@ -128,6 +120,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     currentFolderView: state.currentFolderView + 1,
+                    currentFolder: state.currentFolder + 1,
                 };
             } else {
                 return state;
@@ -138,6 +131,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     currentFolderView: state.currentFolderView - 1,
+                    currentFolder: state.currentFolder - 1,
                 };
             } else {
                 return state;

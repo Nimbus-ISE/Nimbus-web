@@ -151,10 +151,10 @@ const FolderSmall = () => {
                                     <polygon points="0,50 100,0 100,100" />
                                 </svg>
                             </label>
-                            <svg height="500" width="500">
+                            {/* <svg height="500" width="500">
                                 <polygon points="250,60 100,400 400,400" />
                                 Sorry, your browser does not support inline SVG.
-                            </svg>
+                            </svg> */}
                         </>
                     )}
                 </div>

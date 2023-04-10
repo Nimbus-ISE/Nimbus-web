@@ -1,5 +1,5 @@
-import React from "react";
-import { getPlanTabState } from "../PlanTabContext";
+import React, { useEffect } from "react";
+import { getPlanTabState, getPlanTabDispatch } from "../PlanTabContext";
 
 import Alternative from "../../Popups/Alternative";
 import PlaceDetail from "../../Popups/PlaceDetail";
@@ -10,17 +10,18 @@ import TripMap from "../../MapboxMap/TripMap";
 const SmallScreenPage = () => {
     const { openFullTab, openAlternatives, openReview, placeData, fullPlan } =
         getPlanTabState();
+    const dispatch: any = getPlanTabDispatch();
 
     return (
         <>
             {!openFullTab && fullPlan && (
                 <>
-                    <div className="h-[65vh] -z-10">
+                    <div className="h-[65vh]">
                         <TripMap />
 
                         <div>
                             {openReview && (
-                                <div className=" bg-[#3e4560] bg-opacity-50 top-32 fixed ">
+                                <div className="">
                                     <PlaceDetail
                                         placeTitle={placeData.placeTitle}
                                         address={placeData.address}
@@ -43,7 +44,14 @@ const SmallScreenPage = () => {
                 </div>
             )}
             {!openReview && openAlternatives && (
-                <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 ">
+                <div
+                    onMouseDown={() => {
+                        dispatch({
+                            type: "TOGGLE_ALTERNATIVES",
+                            payload: false,
+                        });
+                    }}
+                >
                     <Alternative />
                 </div>
             )}
