@@ -86,7 +86,8 @@ export const nimbusTheme = createTheme({
 });
 
 export const datePickerStyles = {
-    width: 175,
+    width: 160,
+    cursor: "pointer",
     boxShadow:
         "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // tailwind shadow-md
     "& fieldset": {
@@ -99,6 +100,7 @@ export const datePickerStyles = {
     },
     "& .MuiOutlinedInput-root": {
         color: "#9ca3af",
+        cursor: "pointer",
     },
     "& .MuiOutlinedInput-root:hover": {
         "& > fieldset": {
