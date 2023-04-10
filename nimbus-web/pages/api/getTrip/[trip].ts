@@ -31,7 +31,7 @@ export default async function handler(
         // );
 
         const result = await response.json();
-
+        console.log(typeof result);
         const travelTimes: any = [];
         const locations: any = [];
 
