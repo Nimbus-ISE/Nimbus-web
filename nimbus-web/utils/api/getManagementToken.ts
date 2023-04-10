@@ -1,6 +1,6 @@
-import { RedisClientType } from "@redis/client";
+import client from "@/redis";
 
-const getManagementToken = async (client: any, user_id: string) => {
+const getManagementToken = async () => {
     client.on("error", (err: any) => console.log("Redis Client Error", err));
     await client.connect().catch((error: any) => console.log(error));
     const tokenCache = await client.get("management-access-token");

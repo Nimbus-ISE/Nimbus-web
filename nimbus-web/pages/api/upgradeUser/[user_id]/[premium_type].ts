@@ -1,7 +1,7 @@
 import sql from "../../../../postgres";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { createClient } from "redis";
+//import { createClient } from "redis";
 //import getManagementToken from "@/utils/api/getManagementToken";
 
 /*const client = createClient({

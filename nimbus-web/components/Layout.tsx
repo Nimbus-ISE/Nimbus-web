@@ -3,8 +3,11 @@ import React from "react";
 import Navbar from "./Navbar/Navbar";
 import Loading from "./Loading";
 import Footer from "./Footer";
-import checkPremiumOnNewSession from "@/utils/checkPremiumOnNewSession";
+import updateOnNewSession from "@/utils/updateOnNewSession";
 import { useRouter } from "next/router";
+import getPremiumExpire from "@/utils/getPremiumExpire";
+import getPremiumType from "@/utils/getPremiumType";
+import checkPremium from "@/utils/checkPremium";
 
 const excludePathnameList = ["/plan", "/map"];
 
@@ -12,12 +15,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const { user, isLoading } = useUser();
     const router = useRouter();
     const includeLayout = () => {
-        return !excludePathnameList.includes(router.pathname);
+        return (
+            excludePathnameList.findIndex((path) =>
+                router.pathname.includes(path)
+            ) === -1
+        );
     };
     React.useEffect(() => {
         if (user) {
             console.log("check premium status on new session");
-            checkPremiumOnNewSession(user, router);
+            /*updateOnNewSession(user, router);
+            const metadata = {
+                premium_type: getPremiumType(user),
+                premium_expire: getPremiumExpire(user, "number"),
+            };
+            checkPremium(metadata, user, router);*/
         }
     }, [user, router]);
     return !isLoading ? (

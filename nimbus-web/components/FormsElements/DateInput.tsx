@@ -11,7 +11,7 @@ import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { PlanContext } from "../Plan";
 import { InputAdornment } from "@mui/material";
-import { log } from "console";
+import convertDateToUTCPlus7 from "@/utils/convertUTC7ISOString";
 
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
@@ -22,10 +22,14 @@ const DateInput = () => {
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
 
     React.useEffect(() => {
-        setFormDataField("date", [
-            startDate?.toDate().toDateString(),
-            endDate?.toDate().toDateString(),
-        ]);
+        if (startDate && endDate) {
+            setFormDataField("date", [
+                convertDateToUTCPlus7(
+                    startDate.toDate().toISOString() as string
+                ),
+                convertDateToUTCPlus7(endDate.toDate().toISOString() as string),
+            ]);
+        }
     }, [startDate, endDate]);
 
     const handleKeyDown = (e: any) => {

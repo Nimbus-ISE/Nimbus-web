@@ -4,34 +4,24 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    let origin;
+    let destination;
+    const { trip } = req.query;
     try {
-        const data = {
-            start_date: "2023-02-20T00:00:00",
-            end_date: "2023-02-23T00:00:00",
-            tags: "zoo,road",
-            budget: 3,
-        };
-
+        const payload = JSON.parse(decodeURIComponent(trip as string));
         const response = await fetch(
             "http://34.28.125.106:5000/get_trip_mcts",
             {
                 method: "POST",
-                body: JSON.stringify(data),
+                body: JSON.stringify(payload),
                 headers: {
                     "Content-Type": "application/json",
                     "Api-Key": "thisisforpip",
                 },
             }
         );
-        // .then((response) => response.json())
-        // .then((data) => console.log(data))
-        // .catch((error) => console.error(error));
-        // const response = await fetch(
-        //     "http://34.28.125.106:5000/get_sample_trip"
-        // );
 
         const result = await response.json();
-        console.log(typeof result);
         const travelTimes: any = [];
         const locations: any = [];
 

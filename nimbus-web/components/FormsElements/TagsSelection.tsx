@@ -11,7 +11,7 @@ const TagsSelection = () => {
     const { formData, setFormDataField, setIsConfirmActive } =
         React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
-    const [payload, setPayload] = React.useState<any>();
+    const [payload, setPayload] = React.useState<string>("");
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
         if (newSelectTag.indexOf(tag) > -1) {
@@ -31,18 +31,20 @@ const TagsSelection = () => {
 
     const ref = React.useRef<any>();
 
-    const inputs = PlanContext ? useContext(PlanContext) : null;
     React.useEffect(() => {
-        const data = {
-            location: inputs?.formData.location,
-            start_date: inputs?.formData.date ? inputs.formData.date[0] : null,
-            end_date: inputs?.formData.date ? inputs.formData.date[1] : null,
-            trip_type: inputs?.formData.tripType,
-            budget: inputs?.formData.budget,
-            distance: inputs?.formData.tripDistance,
-            tags: inputs?.formData.tags,
-        };
-        setPayload(data);
+        if (formData) {
+            const data = {
+                //location: formData.location,
+                start_date: formData.date ? formData.date[0] : null,
+                end_date: formData.date ? formData.date[1] : null,
+                //trip_type: formData.tripType,
+                budget: formData.budget,
+                //distance: formData.tripDistance,
+                tags: formData.tags ? formData.tags.join() : null,
+            };
+            console.log(data);
+            setPayload(JSON.stringify(data));
+        }
     }, [formData]);
 
     // const data = formData;
@@ -76,22 +78,9 @@ const TagsSelection = () => {
                 </div>
                 <div className="flex mx-auto w-full">
                     <Button
-                        onClick={() => {
+                        onClick={async () => {
                             // setIsConfirmActive(true);
-
-                            fetch("http://34.28.125.106:5000/get_trip_mcts", {
-                                method: "POST",
-                                body: JSON.stringify(payload),
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "Api-Key": "thisisforpip",
-                                },
-                            })
-                                .then((response) => response.json())
-                                .then((data) => console.log(data))
-                                .catch((error) => console.error(error));
-
-                            console.log(payload);
+                            router.push(`/map/${encodeURIComponent(payload)}`);
                         }}
                         variant="outlined"
                         sx={{

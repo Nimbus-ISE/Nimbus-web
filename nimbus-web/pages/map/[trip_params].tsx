@@ -12,10 +12,13 @@ import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/Smal
 
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
+import { GetServerSidePropsContext } from "next";
+import useViewportHeight from "@/hooks/useViewportHeight";
 
-export default function map() {
+export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
     const screenSize = useMediaQuery("(min-width:1000px)");
+    const { height } = useViewportHeight();
     const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
     const [isMounted, setIsMounted] = useState(false);
     const [initialized, setInitalized] = useState(false);
@@ -35,7 +38,7 @@ export default function map() {
 
     useEffect(() => {
         const fetchTrip = async () => {
-            const res = await fetch(`/api/getTrip`);
+            const res = await fetch(`/api/getTrip/${trip_params}`);
             const plan = await res.json();
             return plan;
         };
@@ -180,11 +183,19 @@ export default function map() {
                 <title>Nimbus</title>
             </Head>
             {!error && (
-                <div className="h-[90vh] w-[100vw] overflow-hidden">
+                <div
+                    style={{
+                        height: height,
+                    }}
+                    className="w-[100vw] overflow-hidden"
+                >
                     <div
+                        style={{
+                            height: isBigScreen ? height : undefined,
+                        }}
                         className={
                             isBigScreen
-                                ? "grid place-items-center h-[90vh] z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
+                                ? "grid place-items-center z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
                                 : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                         }
                     >
@@ -197,4 +208,14 @@ export default function map() {
             {error && <div>Ligma</div>}
         </>
     );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const { params } = context;
+    const trip_params = params?.trip_params;
+    return {
+        props: {
+            trip_params: typeof trip_params === "string" ? trip_params : "",
+        },
+    };
 }
