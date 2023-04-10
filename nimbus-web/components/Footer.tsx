@@ -1,4 +1,4 @@
-import { FilterDrama } from "@mui/icons-material";
+import FilterDramaRounded from "@mui/icons-material/FilterDramaRounded";
 import React from "react";
 
 const Footer = () => {
@@ -15,7 +15,7 @@ const Footer = () => {
                 <div className="flex w-full">
                     <div className="flex flex-col justify-evenly p-5 w-[40%]">
                         <div className="flex text-3xl font-bold mb-5">
-                            <FilterDrama className="my-auto" />
+                            <FilterDramaRounded className="my-auto" />
                             <div className="mx-2">NIMBUS</div>
                         </div>
                         <div>
