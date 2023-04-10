@@ -92,7 +92,7 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
                         !isLargerThanMedium
                             ? "overflow-x-scroll overflow-y-hidden hide-scrollbar"
                             : null
-                    } w-full p-5 flex transform-gpu duration-500`}
+                    } w-full pt-5 md:pb-5 pb-10 flex transform-gpu duration-500`}
                 >
                     {locationList.map((location: any, index) => {
                         return (

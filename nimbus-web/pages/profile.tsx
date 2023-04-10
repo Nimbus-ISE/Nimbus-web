@@ -12,8 +12,7 @@ function Profile() {
     const [date, setDate] = React.useState<string>();
     React.useEffect(() => {
         if (user) {
-            const expireDate = getPremiumExpire(user) as any;
-            setDate(new Date(expireDate).toString());
+            setDate(getPremiumExpire(user).toString());
         }
     }, [user]);
     return (

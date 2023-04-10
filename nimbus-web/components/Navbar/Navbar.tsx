@@ -23,6 +23,10 @@ const leftList = [
         name: "Plan",
         route: "/plan",
     },
+    {
+        name: "Discover",
+        route: "/discover",
+    },
 ];
 
 const rightListLogin = [
@@ -45,6 +49,7 @@ const rightListLogout = [
 
 const Navbar = ({ user, isLoading }: IProps) => {
     const router = useRouter();
+    const isLogoVisible = useMediaQuery("(min-width: 950px)");
     const isLargerThanMedium = useMediaQuery("(min-width: 800px)");
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     const calculateMobileList = () => {
@@ -87,7 +92,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                 {isLargerThanMedium ? (
                     <div className="flex justify-between w-full">
                         <div className="flex pl-3 text-md">
-                            <NavbarLogo />
+                            {isLogoVisible ? <NavbarLogo /> : null}
                             <div className="grid grid-flow-col gap-1 ml-3">
                                 {leftList.map((navItem) => (
                                     <RouteButton

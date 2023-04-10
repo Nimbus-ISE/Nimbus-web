@@ -14,5 +14,6 @@ declare interface IReview {
     author: string;
     review_rating: string;
     review_text: string;
-    review_date: number;
+    review_date: number | Date;
+    review_url?: string;
 }
