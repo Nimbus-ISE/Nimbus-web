@@ -1,11 +1,7 @@
 import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { ThemeProvider } from "@mui/material";
-import { nimbusTheme, distanceStyles } from "../../styles/NimbusMuiTheme";
+import { nimbusTheme, ButtonChipStyles } from "../../styles/NimbusMuiTheme";
 import DirectionsWalkRoundedIcon from "@mui/icons-material/DirectionsWalkRounded";
 import TimeToLeaveRoundedIcon from "@mui/icons-material/TimeToLeaveRounded";
 import DirectionsRailwayRoundedIcon from "@mui/icons-material/DirectionsRailwayRounded";
@@ -15,15 +11,11 @@ const choices = ["Close", "Medium", "Far"];
 
 const DistanceInput = () => {
     const { setFormDataField } = React.useContext(PlanContext);
-    const [tripDistance, setTripDistance] = React.useState<string>("");
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setTripDistance(event.target.value);
-    };
+    const [tripDistance, setTripDistance] = React.useState<number>(0);
 
     const handleClick = (choice: string) => () => {
-        console.log(choice);
-        setTripDistance(choice);
+        setTripDistance(choices.indexOf(choice));
+        console.log(choice, tripDistance);
     };
     React.useEffect(() => {
         setFormDataField("tripDistance", tripDistance);
@@ -32,7 +24,7 @@ const DistanceInput = () => {
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
-                <div className="grid grid-cols-3">
+                <div className="flex flex-initial flex-wrap justify-center">
                     {choices.map((data) => {
                         return (
                             <Chip
@@ -50,9 +42,11 @@ const DistanceInput = () => {
                                 className={"shadow-md distance-" + data}
                                 onClick={handleClick(data)}
                                 color={
-                                    data === tripDistance ? "success" : "info"
+                                    data === choices[tripDistance]
+                                        ? "success"
+                                        : "info"
                                 }
-                                sx={distanceStyles}
+                                sx={ButtonChipStyles}
                                 variant="filled"
                             />
                         );
