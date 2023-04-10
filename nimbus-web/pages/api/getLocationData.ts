@@ -7,9 +7,6 @@ export default async function handler(
 ) {
     const loc_ids: any = req.query.loc_ids;
     const day: any = req.query.day;
-
-    // console.log(loc_ids);
-
     const arr: any = JSON.parse(loc_ids);
     try {
         if (!arr) {
