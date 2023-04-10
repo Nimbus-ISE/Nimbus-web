@@ -11,6 +11,7 @@ import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { PlanContext } from "../Plan";
 import { InputAdornment } from "@mui/material";
+import { log } from "console";
 
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
@@ -45,6 +46,7 @@ const DateInput = () => {
                             value={startDate}
                             onChange={(newValue) => {
                                 setStartDate(newValue);
+                                console.log(startDate);
                             }}
                             label={startDate ? "" : "Start Date"}
                             renderInput={(params) => (
