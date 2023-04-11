@@ -20,7 +20,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place.url}
                             className={
                                 !isBigScreen
-                                    ? "h-[20vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
+                                    ? "h-[30vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
                                     : "h-24 w-24 rounded-full shadow ml-2"
                             }
                             onMouseDown={() => {

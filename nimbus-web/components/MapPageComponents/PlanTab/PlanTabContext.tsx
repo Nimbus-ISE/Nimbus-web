@@ -23,6 +23,7 @@ interface PlanTabContextStateType {
     map_polyline: any;
     alternatives: any;
     changed: boolean;
+    currentAlternativeView: number;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -96,7 +97,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return {
                 ...state,
 
-                openAlternatives: action.payload,
+                openAlternatives: !state.openAlternatives,
             };
 
         case "TOGGLE_PLACE_DETAILS":
@@ -112,9 +113,9 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     openReview: false,
                 };
             }
-        case "TOGGLE_ALTERNATIVES": {
-            return { ...state, openAlternatives: !state.openAlternatives };
-        }
+        // case "TOGGLE_ALTERNATIVES": {
+        //     return { ...state, openAlternatives: !state.openAlternatives };
+        // }
         case "INCREMENT_FOLDER": {
             if (state.currentFolderView < 2) {
                 return {
@@ -132,6 +133,27 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     ...state,
                     currentFolderView: state.currentFolderView - 1,
                     currentFolder: state.currentFolder - 1,
+                };
+            } else {
+                return state;
+            }
+        }
+        case "INCREMENT_ALTERNATIVE": {
+            if (state.currentAlternativeView < 2) {
+                return {
+                    ...state,
+
+                    currentAlternativeView: state.currentAlternativeView + 1,
+                };
+            } else {
+                return state;
+            }
+        }
+        case "DECREMENT_ALTERNATIVE": {
+            if (state.currentAlternativeView > 0) {
+                return {
+                    ...state,
+                    currentAlternativeView: state.currentAlternativeView - 1,
                 };
             } else {
                 return state;
@@ -170,6 +192,7 @@ const initialState: PlanTabContextStateType = {
     selectedLocationIndex: 0,
     travelTime: [],
     map_polyline: [],
+    currentAlternativeView: 0,
     alternatives: [
         {
             loc_id: 44,

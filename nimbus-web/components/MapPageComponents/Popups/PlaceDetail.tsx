@@ -17,7 +17,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 className={
                     isBigScreen
                         ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[57%] z-50 cursor-pointer"
-                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[4.5rem] left-[90vw]  z-50 cursor-pointer  "
+                        : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[15vh] left-[89vw]  z-50 cursor-pointer  "
                 }
                 onMouseDown={() => {
                     dispatch({ type: "TOGGLE_PLACE_DETAILS" });
@@ -29,7 +29,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 className={
                     isBigScreen
                         ? "bg-white rounded-xl h-[70%] w-[50%] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
-                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[10vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
+                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[17vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
                 }
             >
                 {!isBigScreen && (

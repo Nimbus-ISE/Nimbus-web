@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { AlternativeItemProps } from "../PlanTab/PlanTabTypes";
+import React from "react";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
 
@@ -18,14 +16,14 @@ const AlternativeItem = (props: any) => {
             className={
                 isBigScreen
                     ? "flex flex-col m-4 place-items-center gap-2"
-                    : "flex flex-col  place-items-center gap-2 z-50"
+                    : "flex flex-col place-items-center gap-2 z-50 mt-4"
             }
         >
             <button
                 className={
                     isBigScreen
                         ? " h-[17vw] w-[17vw] rounded-full hover:scale-105 duration-300"
-                        : " h-[25vw] w-[25vw] rounded-fullhover:scale-105 duration-300 "
+                        : " h-[35vw] w-[35vw] rounded-fullhover:scale-105 duration-300 "
                 }
             >
                 <img
@@ -33,7 +31,7 @@ const AlternativeItem = (props: any) => {
                     className={
                         isBigScreen
                             ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-110 duration-300"
-                            : " h-[25vw] w-[25vw] rounded-full hover:scale-110 duration-300 "
+                            : " h-[35vw] w-[35vw] rounded-full hover:scale-110 duration-300 "
                     }
                     onMouseDown={() => {
                         dispatch({
