@@ -21,12 +21,10 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
     const [calculatedOffset, setCalculatedOffset] = React.useState<number>(0);
     const [disable, setDisable] = React.useState<boolean>(false);
     const { width } = useElementSize(title);
-    const widthCal =
-        -locationList.length * (16 + width) - 60 + window.innerWidth;
+    const containerSize = useElementSize(`slider-container-${title}`);
+    const widthCal = -locationList.length * (16 + width) + containerSize.width;
     const calculateOffset = (isForward: boolean) => {
-        const offset = isForward
-            ? -window.innerWidth / 1.2
-            : window.innerWidth / 1.2;
+        const offset = isForward ? -width * 2 : width * 2;
         if (widthCal > 0) {
             setDisable(true);
         } else if (calculatedOffset + offset > 0) {
@@ -38,7 +36,10 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
         }
     };
     return (
-        <div className="h-full w-full overflow-hidden text-black pt-5 pb-6 drop-shadow-sm">
+        <div
+            id={`slider-container-${title}`}
+            className="h-full w-full md:w-[80%] mx-auto overflow-hidden text-black pt-5 pb-6 drop-shadow-sm"
+        >
             <div className="px-5 font-montserrat font-bold text-3xl text-left">
                 {title}
             </div>
