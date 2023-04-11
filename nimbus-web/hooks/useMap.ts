@@ -97,10 +97,10 @@ const useMap = () => {
         plan.forEach((day: any) => {
             const tempPin: any = [];
 
-            day.location_data.forEach(() => {
+            day.location_data?.forEach(() => {
                 tempPin.push("#000");
             });
-            if (tempPinState.length < day.location_data.length) {
+            if (tempPinState.length < day.location_data?.length) {
                 tempPinState.push(tempPin);
             }
         });

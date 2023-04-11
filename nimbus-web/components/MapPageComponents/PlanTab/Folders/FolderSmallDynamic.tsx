@@ -82,30 +82,37 @@ const FolderSmall = () => {
                                     </label>
                                     {opendedTab === `tab${index}` && (
                                         <div className={classes.tab}>
-                                            {isBigScreen && (
-                                                <PlanGraph
-                                                    clickable={true}
-                                                    dayNumber={index + 1}
-                                                    places={[
-                                                        ...day.location_data,
-                                                    ]}
-                                                    travelTimes={[
-                                                        ...travelTime[index],
-                                                    ]}
-                                                />
-                                            )}
-                                            {!isBigScreen && !openSavePlan && (
-                                                <PlanGraph
-                                                    clickable={true}
-                                                    dayNumber={index + 1}
-                                                    places={[
-                                                        ...day.location_data,
-                                                    ]}
-                                                    travelTimes={[
-                                                        ...travelTime[index],
-                                                    ]}
-                                                />
-                                            )}
+                                            {isBigScreen &&
+                                                day.location_data && (
+                                                    <PlanGraph
+                                                        clickable={true}
+                                                        dayNumber={index + 1}
+                                                        places={[
+                                                            ...day.location_data,
+                                                        ]}
+                                                        travelTimes={[
+                                                            ...travelTime[
+                                                                index
+                                                            ],
+                                                        ]}
+                                                    />
+                                                )}
+                                            {!isBigScreen &&
+                                                !openSavePlan &&
+                                                day.location_data && (
+                                                    <PlanGraph
+                                                        clickable={true}
+                                                        dayNumber={index + 1}
+                                                        places={[
+                                                            ...day.location_data,
+                                                        ]}
+                                                        travelTimes={[
+                                                            ...travelTime[
+                                                                index
+                                                            ],
+                                                        ]}
+                                                    />
+                                                )}
 
                                             {openSavePlan && <SavePlanPopUp />}
                                         </div>

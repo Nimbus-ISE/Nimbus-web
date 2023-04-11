@@ -14,6 +14,7 @@ import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 import { GetServerSidePropsContext } from "next";
 import useViewportHeight from "@/hooks/useViewportHeight";
+import Loading from "@/components/Loading";
 
 export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
@@ -23,13 +24,14 @@ export default function map({ trip_params }: any) {
     const [isMounted, setIsMounted] = useState(false);
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-        console.log(isBigScreen);
+
         // if (isMounted) {
         //     if (isBigScreen) blockScroll();
         //     else allowScroll();
@@ -53,14 +55,13 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip = await fetchTrip();
-            console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
                 payload: trip.travelTimes,
             });
             const tempPinState: any[] = [];
-            console.log(trip);
+
             if (trip === "error invalid url") {
                 setError(true);
                 return;
@@ -85,7 +86,6 @@ export default function map({ trip_params }: any) {
                         loc_ids.push(await result);
                         // console.log(`[${[day].toString()}]`);
                         const sorted_loc_ids = sortObject(loc_ids);
-                        console.log(sorted_loc_ids);
 
                         if (!isMounted && !initialized) {
                             dispatch({
@@ -99,7 +99,8 @@ export default function map({ trip_params }: any) {
 
                         plan.forEach((day: any, index: any) => {
                             const tempCoordinates: any = [];
-                            day.location_data.forEach((loc: any) => {
+                            console.log(day);
+                            day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });
                             coordinates.push(tempCoordinates);
@@ -136,7 +137,10 @@ export default function map({ trip_params }: any) {
             //         console.log(result);
             //     });
             // });
-        })();
+        })().then(() => {
+            setIsLoading(false);
+        });
+
         setInitalized(true);
     }, [currentFolder, changed]);
     // useEffect(() => {
@@ -182,7 +186,17 @@ export default function map({ trip_params }: any) {
             <Head>
                 <title>Nimbus</title>
             </Head>
-            {!error && (
+            {isLoading && (
+                <div
+                    className="flex w-full bg-white text-black"
+                    style={{
+                        height: height,
+                    }}
+                >
+                    <Loading />
+                </div>
+            )}
+            {!error && !isLoading && (
                 <div
                     style={{
                         height: height,

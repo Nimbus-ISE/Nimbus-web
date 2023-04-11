@@ -4,8 +4,6 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    let origin;
-    let destination;
     const { trip } = req.query;
     try {
         const payload = JSON.parse(decodeURIComponent(trip as string));
@@ -22,6 +20,7 @@ export default async function handler(
         );
 
         const result = await response.json();
+
         const travelTimes: any = [];
         const locations: any = [];
 
