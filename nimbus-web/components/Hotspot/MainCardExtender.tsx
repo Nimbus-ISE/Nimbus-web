@@ -30,11 +30,11 @@ const MainCardExtender = ({ obj, expand, index }: IProps) => {
                         : "opacity-0"
                 } absolute flex w-[130%] top-0 bottom-0 left-0 right-0 h-full transition duration-500 p-5 my-auto`}
             >
-                <div className="m-auto">
-                    <h1 className="font-extrabold text-3xl text-black">
+                <div className="m-auto text-neutral-800">
+                    <h1 className="font-extrabold text-4xl drop-shadow-sm">
                         {obj.loc_name}
                     </h1>
-                    <div className="flex font-bold text-base text-neutral-800 py-1">
+                    <div className="flex font-bold text-base py-1">
                         <LocationOnIcon />
                         Krung Thep Maha Nakhon
                     </div>
@@ -49,7 +49,7 @@ const MainCardExtender = ({ obj, expand, index }: IProps) => {
                             textTransform: "none",
                         }}
                     >
-                        <div className="text-sm">View more</div>
+                        <div className="text-sm font-montserrat">View more</div>
                     </Button>
                     <div className="mt-5">
                         <Review review={obj.reviews[0]} />
