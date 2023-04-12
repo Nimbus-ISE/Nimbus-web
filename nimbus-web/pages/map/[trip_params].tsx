@@ -55,6 +55,7 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip = await fetchTrip();
+            console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
@@ -84,22 +85,41 @@ export default function map({ trip_params }: any) {
                         const coordinates: any[] = [];
 
                         loc_ids.push(await result);
+
                         // console.log(`[${[day].toString()}]`);
-                        const sorted_loc_ids = sortObject(loc_ids);
+                        const sorted_days = sortObject(loc_ids);
+
+                        const correctlyOrdered: any = [];
+                        sorted_days.forEach((day: any, index: any) => {
+                            const ordered_loc_ids: any = [];
+                            day.location_data?.forEach((point: any) => {
+                                const indexOfData = trip.locations[
+                                    index
+                                ].indexOf(point.loc_id);
+                                if (indexOfData >= 0)
+                                    ordered_loc_ids[indexOfData] = point;
+                            });
+                            correctlyOrdered.push({
+                                day: index.toString(),
+                                location_data: ordered_loc_ids,
+                            });
+                        });
+
+                        console.log(correctlyOrdered);
 
                         if (!isMounted && !initialized) {
                             dispatch({
                                 type: "SET_FULL_PLAN",
-                                payload: sorted_loc_ids,
+                                payload: correctlyOrdered,
                             });
                             setIsMounted(true);
                         }
                         // console.log(loc_ids);
-                        const plan = initialized ? fullPlan : sorted_loc_ids;
+                        const plan = initialized ? fullPlan : correctlyOrdered;
 
                         plan.forEach((day: any, index: any) => {
                             const tempCoordinates: any = [];
-                            console.log(day);
+                            // console.log(day);
                             day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });

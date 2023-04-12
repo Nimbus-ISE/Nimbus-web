@@ -105,7 +105,6 @@ const useMap = () => {
             }
         });
         //     setPoints(trip.points);
-        console.log(tempPinState);
 
         setPinState(tempPinState);
         // });
