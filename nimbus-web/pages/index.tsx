@@ -25,7 +25,7 @@ export default function Home({ trendingList }: IProps) {
             <div className="relative flex flex-col min-h-screen h-full w-screen overflow-x-hidden bg-neutral-100 text-black">
                 {!isLargerThanMedium ? (
                     <div className="absolute flex top-5 left-0 right-0 w-full z-20">
-                        <div className="flex flex-wrap gap-1 w-fit mx-auto px-2">
+                        <div className="flex flex-wrap gap-2 w-fit mx-auto px-2">
                             <SearchBar />
                             <TagsButton />
                         </div>

@@ -47,13 +47,13 @@ const SearchBar = () => {
             onBlur={() => {
                 setListIsShowing(false);
             }}
-            className="relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm rounded-full z-10"
+            className="relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm z-10"
         >
             <input
                 ref={inputRef}
                 onChange={handleOnChange}
                 placeholder="Search Location"
-                className="bg-neutral-100 md:border-[1px] md:shadow-sm rounded-full 
+                className="bg-neutral-100 md:border-[1px] md:shadow-sm rounded-lg 
                 w-full h-full my-auto px-8 shadow-md"
             />
             <svg

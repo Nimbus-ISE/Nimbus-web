@@ -91,7 +91,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
             >
                 {isLargerThanMedium ? (
                     <div className="flex justify-between w-full">
-                        <div className="flex pl-3 text-md">
+                        <div className="flex pl-3 text-md mr-5">
                             {isLogoVisible ? <NavbarLogo /> : null}
                             <div className="grid grid-flow-col gap-1 ml-3">
                                 {leftList.map((navItem) => (
@@ -102,7 +102,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
                                 ))}
                             </div>
                         </div>
-                        <div className="grid grid-flow-col gap-1">
+                        <div className="grid grid-flow-col gap-4">
                             <SearchBar />
                             <TagsButton />
                         </div>
