@@ -14,6 +14,7 @@ import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 import { GetServerSidePropsContext } from "next";
 import useViewportHeight from "@/hooks/useViewportHeight";
+import Loading from "@/components/Loading";
 
 export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
@@ -23,13 +24,14 @@ export default function map({ trip_params }: any) {
     const [isMounted, setIsMounted] = useState(false);
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-        console.log(isBigScreen);
+
         // if (isMounted) {
         //     if (isBigScreen) blockScroll();
         //     else allowScroll();
@@ -60,7 +62,7 @@ export default function map({ trip_params }: any) {
                 payload: trip.travelTimes,
             });
             const tempPinState: any[] = [];
-            console.log(trip);
+
             if (trip === "error invalid url") {
                 setError(true);
                 return;
@@ -83,23 +85,42 @@ export default function map({ trip_params }: any) {
                         const coordinates: any[] = [];
 
                         loc_ids.push(await result);
+
                         // console.log(`[${[day].toString()}]`);
-                        const sorted_loc_ids = sortObject(loc_ids);
-                        console.log(sorted_loc_ids);
+                        const sorted_days = sortObject(loc_ids);
+
+                        const correctlyOrdered: any = [];
+                        sorted_days.forEach((day: any, index: any) => {
+                            const ordered_loc_ids: any = [];
+                            day.location_data?.forEach((point: any) => {
+                                const indexOfData = trip.locations[
+                                    index
+                                ].indexOf(point.loc_id);
+                                if (indexOfData >= 0)
+                                    ordered_loc_ids[indexOfData] = point;
+                            });
+                            correctlyOrdered.push({
+                                day: index.toString(),
+                                location_data: ordered_loc_ids,
+                            });
+                        });
+
+                        console.log(correctlyOrdered);
 
                         if (!isMounted && !initialized) {
                             dispatch({
                                 type: "SET_FULL_PLAN",
-                                payload: sorted_loc_ids,
+                                payload: correctlyOrdered,
                             });
                             setIsMounted(true);
                         }
                         // console.log(loc_ids);
-                        const plan = initialized ? fullPlan : sorted_loc_ids;
+                        const plan = initialized ? fullPlan : correctlyOrdered;
 
                         plan.forEach((day: any, index: any) => {
                             const tempCoordinates: any = [];
-                            day.location_data.forEach((loc: any) => {
+                            // console.log(day);
+                            day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });
                             coordinates.push(tempCoordinates);
@@ -136,7 +157,10 @@ export default function map({ trip_params }: any) {
             //         console.log(result);
             //     });
             // });
-        })();
+        })().then(() => {
+            setIsLoading(false);
+        });
+
         setInitalized(true);
     }, [currentFolder, changed]);
     // useEffect(() => {
@@ -182,7 +206,17 @@ export default function map({ trip_params }: any) {
             <Head>
                 <title>Nimbus</title>
             </Head>
-            {!error && (
+            {isLoading && (
+                <div
+                    className="flex w-full bg-white text-black"
+                    style={{
+                        height: height,
+                    }}
+                >
+                    <Loading />
+                </div>
+            )}
+            {!error && !isLoading && (
                 <div
                     style={{
                         height: height,
