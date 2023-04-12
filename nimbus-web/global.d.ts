@@ -3,6 +3,7 @@ declare module "react-scroll";
 declare interface IForm {
     type: string;
     title: string;
+    description: string;
 }
 declare interface IKeyString {
     [key: string]: any;
