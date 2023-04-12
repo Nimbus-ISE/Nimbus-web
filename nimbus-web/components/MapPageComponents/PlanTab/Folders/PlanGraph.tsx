@@ -17,10 +17,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
                     <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
                         <img
-                            src={place.url}
+                            src={place?.url}
                             className={
                                 !isBigScreen
-                                    ? "h-[20vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
+                                    ? "h-[30vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
                                     : "h-24 w-24 rounded-full shadow ml-2"
                             }
                             onMouseDown={() => {

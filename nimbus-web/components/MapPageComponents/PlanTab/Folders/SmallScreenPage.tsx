@@ -21,7 +21,15 @@ const SmallScreenPage = () => {
 
                         <div>
                             {openReview && (
-                                <div className="">
+                                <div
+                                    className="bg-[#3e4560] bg-opacity-50 opacity-100 z-10  w-full h-[74vh] fixed top-0 "
+                                    onMouseDown={() => {
+                                        dispatch({
+                                            type: "TOGGLE_PLACE_DETAILS",
+                                            payload: false,
+                                        });
+                                    }}
+                                >
                                     <PlaceDetail
                                         placeTitle={placeData.placeTitle}
                                         address={placeData.address}
@@ -44,16 +52,18 @@ const SmallScreenPage = () => {
                 </div>
             )}
             {!openReview && openAlternatives && (
-                <div
-                    onMouseDown={() => {
-                        dispatch({
-                            type: "TOGGLE_ALTERNATIVES",
-                            payload: false,
-                        });
-                    }}
-                >
+                <>
                     <Alternative />
-                </div>
+                    <div
+                        className="bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[74vh] fixed top-0  "
+                        onMouseDown={() => {
+                            dispatch({
+                                type: "TOGGLE_ALTERNATIVES",
+                                payload: false,
+                            });
+                        }}
+                    ></div>
+                </>
             )}
         </>
     );
