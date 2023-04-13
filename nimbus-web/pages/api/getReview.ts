@@ -26,7 +26,7 @@ export default async function handler(
             `;
 
     try {
-        const review_data: Review = await query;
+        const review_data: Array<Review> = await query;
 
         res.status(200).json(review_data);
         // res.status(200).json(location_data);

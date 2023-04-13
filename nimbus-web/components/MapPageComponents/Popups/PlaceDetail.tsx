@@ -6,7 +6,7 @@ import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData } = getPlanTabState();
-    const [reviewData, setReviewData]: any = useState([]);
+    const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
 
