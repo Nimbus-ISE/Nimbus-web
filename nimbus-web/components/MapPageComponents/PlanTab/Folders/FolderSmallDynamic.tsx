@@ -65,6 +65,10 @@ const FolderSmall = () => {
                                                 type: "SET_CURRENT_FOLDER",
                                                 payload: index,
                                             });
+                                            dispatch({
+                                                type: "SET_ROUTE",
+                                                payload: "",
+                                            });
                                         }}
                                     />
                                     <label

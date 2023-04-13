@@ -40,3 +40,22 @@ export interface AlternativeItemProps {
     title: string;
     description: string;
 }
+
+export interface Location {
+    type: "locations";
+    loc_id: number;
+    arrival_time: string;
+    leave_time: string;
+}
+
+export interface TravelDuration {
+    type: "travel_dur";
+    travel_dur: number;
+    travel_type: "walk";
+}
+
+type LocationOrTravelDuration = Location | TravelDuration;
+
+export type Schedule = LocationOrTravelDuration[];
+
+export type Plan = [Schedule];

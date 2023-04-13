@@ -51,7 +51,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     action.payload.location;
             };
             changePlan(action.payload.day, action.payload.oldLocationIndex);
-            console.log("ligma");
 
             return {
                 ...state,

@@ -18,7 +18,6 @@ const Review = ({ review }: IProps) => {
                     ${isBigScreen ? "p-4" : "p-3"}`}
             >
                 {isBigScreen && (
-                    // <div className="rounded-full bg-slate-500 w-[7vw] h-[7vw]"></div>
                     <Image
                         src={review.review_url || "/images/guest.jpg"}
                         alt="pfp"

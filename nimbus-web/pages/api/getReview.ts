@@ -5,7 +5,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const loc_id: any = req.query.loc_id;
+    const loc_id: unknown = req.query.loc_id;
 
     let query: any = sql`
             SELECT  R.review_text,

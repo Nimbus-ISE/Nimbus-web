@@ -1,3 +1,8 @@
+import {
+    Plan,
+    TravelDuration,
+    Location,
+} from "@/components/MapPageComponents/PlanTab/PlanTabTypes";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -11,29 +16,26 @@ export default async function handler(
             travel_method: "drive,walk",
             ...JSON.parse(decodeURIComponent(trip as string)),
         };
-        console.log(payload);
 
-        const response = await fetch("http://35.188.9.187:5000/get_trip_mcts", {
-            method: "POST",
-            body: JSON.stringify(payload),
-            headers: {
-                "Content-Type": "application/json",
-                "Api-Key": "thisisforpip",
-            },
-        });
-        // const response = await fetch(
-        //     "http://35.188.9.187:5000/get_sample_trip"
-        // );
+        const response = await fetch(
+            "http://34.173.38.122:5000/get_trip_mcts",
+            {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Api-Key": "thisisforpip",
+                },
+            }
+        );
 
-        const result = await response.json();
-        console.log(result);
-
-        const travelTimes: any = [];
-        const locations: any = [];
+        const result: Plan = await response.json();
+        const travelTimes: Array<Array<TravelDuration>> = [];
+        const locations: Array<Array<Location>> = [];
 
         result.forEach((day: any) => {
-            const tempTravelTime: any = [];
-            const tempLocations: any = [];
+            const tempTravelTime: Array<TravelDuration> = [];
+            const tempLocations: Array<Location> = [];
             day.forEach((point: any, index: any) => {
                 if (index % 2 === 0) tempLocations.push(point.loc_id);
                 else tempTravelTime.push(point);
