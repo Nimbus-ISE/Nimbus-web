@@ -26,7 +26,7 @@ const NavbarRight = ({ isLoading, user }: IProps) => {
                 color="primary"
                 sx={{
                     height: "2rem",
-                    borderRadius: "999px",
+                    borderRadius: "0.5rem",
                     borderColor: "black",
                     color: "black",
                     marginY: "auto",

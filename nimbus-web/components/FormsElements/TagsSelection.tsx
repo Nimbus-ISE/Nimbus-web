@@ -37,9 +37,9 @@ const TagsSelection = () => {
                 //location: formData.location,
                 start_date: formData.date ? formData.date[0] : null,
                 end_date: formData.date ? formData.date[1] : null,
-                //trip_type: formData.tripType,
+                trip_pace: formData.tripType,
                 budget: formData.budget,
-                //distance: formData.tripDistance,
+                travel_method: formData.travelMethod,
                 tags: formData.tags ? formData.tags.join() : null,
             };
             console.log(data);

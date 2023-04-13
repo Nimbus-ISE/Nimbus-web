@@ -65,7 +65,7 @@ const BudgetInput = (props: any) => {
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex mx-auto items-center h-full w-60">
+                <div className="flex mx-auto items-center h-full max-w-[15rem] w-full">
                     <Slider
                         onChange={handleChange}
                         slots={{
