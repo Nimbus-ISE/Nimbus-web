@@ -2,7 +2,7 @@ import useElementSize from "@/hooks/useElementSize";
 import React, { ReactElement } from "react";
 import BudgetInput from "./BudgetInput";
 import DateForm from "./DateInput";
-import DistanceInput from "./DistanceInput";
+import TravelMethodInput from "./TravelMethodInput";
 import LocationInput from "./LocationInput";
 import TagsSelection from "./TagsSelection";
 import TripTypeInput from "./TripTypeInput";
@@ -20,7 +20,7 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
     Dates: <DateForm />,
     Style: <TripTypeInput />,
     Budget: <BudgetInput />,
-    Transport: <DistanceInput />,
+    Transport: <TravelMethodInput />,
     Tags: <TagsSelection />,
 };
 
