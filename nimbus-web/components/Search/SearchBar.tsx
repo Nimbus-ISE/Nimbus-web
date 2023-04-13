@@ -1,14 +1,36 @@
+import useElementSize from "@/hooks/useElementSize";
 import { useRouter } from "next/router";
 import React from "react";
 
-const SearchBar = () => {
+interface IProps {
+    valueCallback?: (value: string, id: number) => void;
+    className?: string;
+    inputClassName?: string;
+    disableNavigate?: boolean;
+}
+
+const SearchBar = ({
+    className,
+    inputClassName,
+    valueCallback,
+    disableNavigate,
+}: IProps) => {
     const router = useRouter();
     const [items, setItems] = React.useState<Array<any>>([]);
     const [listIsShowing, setListIsShowing] = React.useState<boolean>(false);
     const inputRef = React.useRef<HTMLInputElement>(null);
     const timeoutRef = React.useRef<number | null>(null);
-
+    const containerSize = useElementSize(`searchbar-container-${className}`);
     const handleOnChange = () => {
+        //sends value out if user manually typed without autocomplete
+        if (
+            valueCallback &&
+            items.length !== 0 &&
+            inputRef.current &&
+            inputRef.current.value.toLowerCase() ===
+                items[0].loc_name.toLowerCase()
+        )
+            valueCallback(items[0].loc_name, items[0].loc_id);
         // Clear any previous timeout
         if (inputRef.current?.value.length === 0) {
             setListIsShowing(false);
@@ -22,11 +44,12 @@ const SearchBar = () => {
         // Set a new timeout to trigger the query function after 300ms
         timeoutRef.current = window.setTimeout(searchQuery, 300);
     };
-    const handleNavigate = (loc_id: number, loc_name: string) => {
+    const handleAutocomplete = (loc_id: number, loc_name: string) => {
         console.log("going to loc_id", loc_id);
         if (inputRef.current) inputRef.current.value = loc_name;
+        searchQuery();
         setListIsShowing(false);
-        router.push(`/location/${loc_id}`);
+        if (disableNavigate) router.push(`/location/${loc_id}`);
     };
     const searchQuery = async () => {
         if (inputRef.current && inputRef.current.value.length !== 0) {
@@ -40,21 +63,29 @@ const SearchBar = () => {
     };
     return (
         <div
-            id="searchbar-container"
+            id={`searchbar-container-${className}`}
             onFocus={() => {
                 setListIsShowing(true);
             }}
             onBlur={() => {
                 setListIsShowing(false);
             }}
-            className="relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm z-10"
+            className={
+                className
+                    ? className
+                    : `relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm z-10`
+            }
         >
             <input
                 ref={inputRef}
-                onChange={handleOnChange}
+                onChange={() => handleOnChange()}
                 placeholder="Search Location"
-                className="bg-neutral-100 md:border-[1px] md:shadow-sm rounded-lg 
-                w-full h-full my-auto px-8 shadow-md"
+                className={
+                    inputClassName
+                        ? inputClassName
+                        : `bg-neutral-100 md:border-[1px] md:shadow-sm rounded-lg 
+                w-full h-full my-auto px-8 shadow-md`
+                }
             />
             <svg
                 className="absolute left-2 top-0 bottom-0 w-4 h-4 m-auto fill-neutral-500"
@@ -65,7 +96,8 @@ const SearchBar = () => {
                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
             </svg>
             <button
-                onClick={() => {
+                onClick={(e) => {
+                    e.preventDefault();
                     if (inputRef.current) {
                         inputRef.current.value = "";
                         setItems([]);
@@ -82,14 +114,35 @@ const SearchBar = () => {
                 </svg>
             </button>
             {listIsShowing && items.length !== 0 ? (
-                <div className="absolute flex flex-col w-full left-0 top-[1rem] pt-4 bg-neutral-100 -z-[5] rounded-xl shadow-md">
+                <div
+                    style={{
+                        paddingTop: `${containerSize.height / 2}px`,
+                        top: `${containerSize.height / 2}px`,
+                    }}
+                    className="absolute flex flex-col w-full left-0 bg-neutral-100 -z-[5] rounded-xl shadow-md"
+                >
                     {items.map((item) => {
                         return (
                             <button
-                                className="relative flex text-left p-2 hover:bg-neutral-200 rounded-xl transition duration-[200ms] pl-8"
-                                onMouseDown={() =>
-                                    handleNavigate(item.loc_id, item.loc_name)
-                                }
+                                key={item}
+                                style={{
+                                    paddingTop: `${containerSize.height / 4}px`,
+                                    paddingBottom: `${
+                                        containerSize.height / 4
+                                    }px`,
+                                }}
+                                className="relative flex text-left px-2 hover:bg-neutral-200 rounded-xl transition duration-[200ms] pl-8"
+                                onMouseDown={() => {
+                                    handleAutocomplete(
+                                        item.loc_id,
+                                        item.loc_name
+                                    );
+                                    if (valueCallback)
+                                        valueCallback(
+                                            item.loc_name,
+                                            item.loc_id
+                                        );
+                                }}
                             >
                                 <svg
                                     className="absolute left-2 top-0 bottom-0 w-4 h-4 m-auto fill-neutral-500"
