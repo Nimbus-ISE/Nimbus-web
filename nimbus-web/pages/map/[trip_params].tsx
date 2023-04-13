@@ -25,7 +25,7 @@ export default function map({ trip_params }: any) {
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    ``;
+
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
