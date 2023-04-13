@@ -25,6 +25,7 @@ export default function map({ trip_params }: any) {
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingPolyline, setIsLoadingPolyline] = useState(true);
 
     useEffect(() => {
         dispatch({
@@ -55,7 +56,8 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip = await fetchTrip();
-            console.log(trip);
+
+            setIsLoadingPolyline(true);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
@@ -83,6 +85,7 @@ export default function map({ trip_params }: any) {
                         index
                     ).then(async (result) => {
                         const coordinates: any[] = [];
+                        let map_polyline = "";
 
                         loc_ids.push(await result);
 
@@ -104,8 +107,6 @@ export default function map({ trip_params }: any) {
                                 location_data: ordered_loc_ids,
                             });
                         });
-
-                        console.log(correctlyOrdered);
 
                         if (!isMounted && !initialized) {
                             dispatch({
@@ -135,8 +136,9 @@ export default function map({ trip_params }: any) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
-                            const map_polyline = await response.json();
+                            map_polyline = await response.json();
 
+                            setIsLoadingPolyline(false);
                             const decoded = polyline.decode(map_polyline);
                             const routeArrs: any = [];
                             decoded.forEach((arr) => {

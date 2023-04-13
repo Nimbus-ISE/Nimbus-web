@@ -6,11 +6,32 @@ import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData } = getPlanTabState();
-
+    const [reviewData, setReviewData]: any = useState([]);
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
-    console.log(data);
 
+    const fetchReview = async (loc_id: any) => {
+        const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
+        const plan = await res.json();
+        return plan;
+    };
+    useEffect(() => {
+        (async () => {
+            fetchReview(data.loc_id).then((result: any) => {
+                setReviewData(result);
+            });
+        })();
+    }, [placeData]);
+    // reviewData.forEach((n: any) => {
+    //     console.log(n);
+    // });
+
+    // useEffect(() => {
+    //     if (reviewData.length === 0) {
+    //         setReviewData(reviewData);
+    //     }
+    //     console.log(reviewData);
+    // }, [reviewData]);
     return (
         <>
             <div
@@ -86,33 +107,17 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                     </div>
 
-                    <Review
-                        review={{
-                            author: "John Taobin",
-                            review_date: 1,
-                            review_rating: "4.4",
-                            review_text:
-                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
-                        }}
-                    />
-                    <Review
-                        review={{
-                            author: "John Taobin",
-                            review_date: 1,
-                            review_rating: "4.4",
-                            review_text:
-                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
-                        }}
-                    />
-                    <Review
-                        review={{
-                            author: "John Taobin",
-                            review_date: 1,
-                            review_rating: "4.4",
-                            review_text:
-                                "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam cupiditate nesciunt, nostrum hic nulla, porro delectus harum veritatis odio placeat veniam inventore quibusdam. Harum optio quos facilis, deserunt porro accusamus?",
-                        }}
-                    />
+                    {reviewData.map((review: any) => {
+                        return (
+                            <>
+                                <Review
+                                    review={{
+                                        ...review,
+                                    }}
+                                />
+                            </>
+                        );
+                    })}
                 </div>
             </div>
         </>

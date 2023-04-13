@@ -26,11 +26,15 @@ const TripMap = () => {
     const dispatch: any = getPlanTabDispatch();
 
     React.useEffect(() => {
-        if (fullPlan[currentFolder] && mainMap?.flyTo) {
+        if (
+            fullPlan[currentFolder] &&
+            mainMap?.flyTo &&
+            fullPlan[currentFolder]?.location_data[0]?.lng
+        ) {
             mainMap.flyTo({
                 center: [
-                    fullPlan[currentFolder].location_data[0].lng,
-                    fullPlan[currentFolder].location_data[0].lat,
+                    fullPlan[currentFolder]?.location_data[0]?.lng,
+                    fullPlan[currentFolder]?.location_data[0]?.lat,
                 ],
             });
         }
