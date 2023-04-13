@@ -22,19 +22,27 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
     const [disable, setDisable] = React.useState<boolean>(false);
     const { width } = useElementSize(title);
     const containerSize = useElementSize(`slider-container-${title}`);
-    const widthCal = -locationList.length * (16 + width) + containerSize.width;
+    const calculateWidth = () => {
+        return -locationList.length * (16 + width) + containerSize.width;
+    };
+    const [widthCal, setWidthCal] = React.useState<number>(calculateWidth());
+
     const calculateOffset = (isForward: boolean) => {
-        const offset = isForward ? -width * 2 : width * 2;
+        const distance = Math.floor(width * 2.5);
+        const offset = isForward ? -distance : distance;
         if (widthCal > 0) {
             setDisable(true);
-        } else if (calculatedOffset + offset > 0) {
+        } else if (calculatedOffset + offset >= 0) {
             setCalculatedOffset(0);
-        } else if (calculatedOffset + offset < widthCal) {
+        } else if (calculatedOffset + offset <= widthCal) {
             setCalculatedOffset(widthCal);
         } else {
             setCalculatedOffset((prev) => prev + offset);
         }
     };
+    React.useEffect(() => {
+        setWidthCal(calculateWidth());
+    }, [containerSize]);
     return (
         <div
             id={`slider-container-${title}`}
