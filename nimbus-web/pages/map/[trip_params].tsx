@@ -25,6 +25,7 @@ export default function map({ trip_params }: any) {
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingPolyline, setIsLoadingPolyline] = useState(true);
 
     useEffect(() => {
         dispatch({
@@ -55,7 +56,8 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip = await fetchTrip();
-            console.log(trip);
+
+            setIsLoadingPolyline(true);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
@@ -83,11 +85,13 @@ export default function map({ trip_params }: any) {
                         index
                     ).then(async (result) => {
                         const coordinates: any[] = [];
+                        let map_polyline = "";
 
                         loc_ids.push(await result);
 
                         // console.log(`[${[day].toString()}]`);
                         const sorted_days = sortObject(loc_ids);
+                        console.log(sorted_days);
 
                         const correctlyOrdered: any = [];
                         sorted_days.forEach((day: any, index: any) => {
@@ -135,8 +139,10 @@ export default function map({ trip_params }: any) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
-                            const map_polyline = await response.json();
+                            map_polyline = await response.json();
+                            console.log(map_polyline);
 
+                            setIsLoadingPolyline(false);
                             const decoded = polyline.decode(map_polyline);
                             const routeArrs: any = [];
                             decoded.forEach((arr) => {

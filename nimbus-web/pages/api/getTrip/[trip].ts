@@ -6,20 +6,27 @@ export default async function handler(
 ) {
     const { trip } = req.query;
     try {
-        const payload = JSON.parse(decodeURIComponent(trip as string));
-        const response = await fetch(
-            "http://34.28.125.106:5000/get_trip_mcts",
-            {
-                method: "POST",
-                body: JSON.stringify(payload),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Api-Key": "thisisforpip",
-                },
-            }
-        );
+        const payload = {
+            trip_pace: "1",
+            travel_method: "drive,walk",
+            ...JSON.parse(decodeURIComponent(trip as string)),
+        };
+        console.log(payload);
+
+        const response = await fetch("http://35.188.9.187:5000/get_trip_mcts", {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                "Content-Type": "application/json",
+                "Api-Key": "thisisforpip",
+            },
+        });
+        // const response = await fetch(
+        //     "http://35.188.9.187:5000/get_sample_trip"
+        // );
 
         const result = await response.json();
+        console.log(result);
 
         const travelTimes: any = [];
         const locations: any = [];
