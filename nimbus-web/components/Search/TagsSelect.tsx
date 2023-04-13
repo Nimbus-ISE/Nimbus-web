@@ -33,19 +33,18 @@ const TagsSelect = ({ callback }: IProps) => {
                                 key={data}
                                 label={data}
                                 onClick={handleClick(data)}
-                                // className="shadow-md"
                                 color={
                                     selectTag.indexOf(data) > -1
-                                        ? "primary"
+                                        ? "success"
                                         : "secondary"
                                 }
                                 sx={TagsStyles}
                                 variant={
                                     selectTag.indexOf(data) > -1
-                                        ? "outlined"
-                                        : "filled"
+                                        ? "filled"
+                                        : "outlined"
                                 }
-                                className="shadow-md"
+                                className="shadow-sm"
                             />
                         );
                     })}

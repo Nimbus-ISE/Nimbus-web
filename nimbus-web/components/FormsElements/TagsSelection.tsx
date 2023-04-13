@@ -58,7 +58,6 @@ const TagsSelection = () => {
                                 key={data}
                                 label={data}
                                 onClick={handleClick(data)}
-                                // className="shadow-md"
                                 color={
                                     selectTag.indexOf(data) > -1
                                         ? "success"
