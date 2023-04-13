@@ -20,7 +20,7 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
     Dates: <DateForm />,
     Style: <TripTypeInput />,
     Budget: <BudgetInput />,
-    Distance: <DistanceInput />,
+    Transport: <DistanceInput />,
     Tags: <TagsSelection />,
 };
 
@@ -42,7 +42,7 @@ const Form = ({ formArr }: IProps) => {
                     <div
                         style={{ height: height }}
                         id="input-container"
-                        className="flex flex-col overflow-y-scroll w-full"
+                        className="flex flex-col overflow-y-scroll w-full text-neutral-700 mx-auto"
                     >
                         {index !== 0 ? (
                             <button
@@ -59,12 +59,16 @@ const Form = ({ formArr }: IProps) => {
                         ) : (
                             <div className="flex-1" />
                         )}
-                        <div className="text-center text-2xl sm:text-3xl md:text-4xl text-neutral-800 font-extrabold px-0 py-5">
+                        <div className="text-center text-2xl sm:text-3xl md:text-4xl text-neutral-700 font-extrabold px-0 py-5">
                             {item.title}
                         </div>
-                        <div className="my-7 text-xs flex justify-center">
+                        <div className="text-sm md:text-sm mx-auto max-w-[30rem] text-center">
+                            {item.description}
+                        </div>
+                        <div className="my-7 text-xs flex justify-center w-full">
                             {formMapper[item.type]}
                         </div>
+
                         {index !== formArr.length - 1 ? (
                             <button
                                 onClick={(e) => {

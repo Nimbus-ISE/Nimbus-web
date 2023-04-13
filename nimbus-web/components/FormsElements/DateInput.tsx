@@ -43,8 +43,8 @@ const DateInput = () => {
 
     return (
         <ThemeProvider theme={nimbusTheme}>
-            <div ref={ref} className="flex flex-wrap justify-center mx-auto">
-                <div className="start-date my-2 mx-3 cursor-pointer">
+            <div ref={ref} className="flex flex-wrap justify-evenly">
+                <div className="start-date my-2 cursor-pointer">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <MobileDatePicker
                             value={startDate}
@@ -81,12 +81,12 @@ const DateInput = () => {
                     </LocalizationProvider>
                 </div>
                 <div
-                    className="flex items-center justify-center dateLabel"
+                    className="flex items-center justify-center dateLabel mx-3"
                     style={{ color: "rgb(107 114 128)" }}
                 >
                     {startDate && endDate ? "to" : ""}
                 </div>
-                <div className="end-date my-2 mx-3">
+                <div className="end-date my-2">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <MobileDatePicker
                             label={endDate ? "" : "End Date"}

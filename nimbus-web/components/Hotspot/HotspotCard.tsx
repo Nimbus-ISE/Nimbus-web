@@ -3,6 +3,7 @@ import Image from "next/image";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainCardExtender from "./MainCardExtender";
 import MobileCardExtender from "./MobileCardExtender";
+import NimbusStamp from "../NimbusStamp";
 
 interface IProps {
     obj: any;
@@ -54,6 +55,9 @@ const HotspotCard = ({
                 className={`absolute flex top-0 bottom-0 left-0 right-0
                 z-10 h-full w-[18rem] transform-gpu duration-500`}
             >
+                <div className="absolute top-6 right-5">
+                    <NimbusStamp />
+                </div>
                 <Image
                     className={`h-[95%] w-[95%] m-auto object-cover border-white border-[10px]`}
                     src={obj.url}
