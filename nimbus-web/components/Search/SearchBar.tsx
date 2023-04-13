@@ -49,7 +49,7 @@ const SearchBar = ({
         if (inputRef.current) inputRef.current.value = loc_name;
         searchQuery();
         setListIsShowing(false);
-        if (disableNavigate) router.push(`/location/${loc_id}`);
+        if (!disableNavigate) router.push(`/location/${loc_id}`);
     };
     const searchQuery = async () => {
         if (inputRef.current && inputRef.current.value.length !== 0) {

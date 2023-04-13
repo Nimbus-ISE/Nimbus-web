@@ -39,6 +39,7 @@ const LocationInput = () => {
             inputClassName="w-full h-full bg-gray-100 shadow-md
             rounded-xl px-8 text-neutral-700 leading-tight border-[1px]
             hover:opacity-70 transition"
+            disableNavigate
         />
         /*<input
             ref={inputRef}
