@@ -91,7 +91,6 @@ export default function map({ trip_params }: any) {
 
                         // console.log(`[${[day].toString()}]`);
                         const sorted_days = sortObject(loc_ids);
-                        console.log(sorted_days);
 
                         const correctlyOrdered: any = [];
                         sorted_days.forEach((day: any, index: any) => {
@@ -108,8 +107,6 @@ export default function map({ trip_params }: any) {
                                 location_data: ordered_loc_ids,
                             });
                         });
-
-                        console.log(correctlyOrdered);
 
                         if (!isMounted && !initialized) {
                             dispatch({
@@ -140,7 +137,6 @@ export default function map({ trip_params }: any) {
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
                             map_polyline = await response.json();
-                            console.log(map_polyline);
 
                             setIsLoadingPolyline(false);
                             const decoded = polyline.decode(map_polyline);

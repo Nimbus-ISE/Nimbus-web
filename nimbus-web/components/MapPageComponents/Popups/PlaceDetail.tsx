@@ -9,7 +9,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     const [reviewData, setReviewData]: any = useState([]);
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
-    console.log(data.loc_id);
+
     const fetchReview = async (loc_id: any) => {
         const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
         const plan = await res.json();

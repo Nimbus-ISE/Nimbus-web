@@ -42,8 +42,6 @@ export default async function handler(
         // ON L.loc_id = I.loc_id
         // WHERE  L.loc_id =113`;
 
-        console.log(location_data);
-
         res.status(200).json({ day: day, location_data });
         // res.status(200).json(location_data);
     } catch (e) {

@@ -5,7 +5,6 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
-    console.log(props.travelTimes[0].travel_dur);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
