@@ -7,7 +7,8 @@ import capitalizeFirst from "@/utils/capitalizeFirst";
 
 import { getPlanTabState } from "../PlanTabContext";
 const ClosingFullFolder = () => {
-    const { currentFolderView, fullPlan, travelTime } = getPlanTabState();
+    const { currentFolderView, fullPlan, travelTime, arrivalAndLeaveTimes } =
+        getPlanTabState();
 
     return (
         <>
@@ -36,6 +37,11 @@ const ClosingFullFolder = () => {
                                                 places={[...data.location_data]}
                                                 travelTimes={[
                                                     ...travelTime[index],
+                                                ]}
+                                                arrivalAndLeaveTimes={[
+                                                    ...arrivalAndLeaveTimes[
+                                                        index
+                                                    ],
                                                 ]}
                                             />
                                         </div>
