@@ -33,7 +33,7 @@ const search = () => {
         setTagsText(tagString1);
         try {
             setLoading(true);
-            const res = await fetch(`/api/tagsearch/${tagString}`);
+            const res = await fetch(`/api/search/${tagString}`);
             const locationList = await res.json();
             // console.log(locationList);
             setLocationList(locationList);

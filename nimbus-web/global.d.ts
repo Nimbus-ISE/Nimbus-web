@@ -6,10 +6,16 @@ declare interface IForm {
     description: string;
 }
 declare interface IKeyString {
-    [key: string]: any;
+    [key: string]: number | string | null;
 }
 declare interface IFormData extends IKeyString {
-    // TODO: add types to send to ALGO here
+    must_include: number;
+    start_date: string;
+    end_date: string;
+    trip_pace: number;
+    budget: number;
+    travel_method: string;
+    tags: string;
 }
 declare interface IReview {
     author: string;

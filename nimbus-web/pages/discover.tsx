@@ -1,8 +1,8 @@
 import React from "react";
 import useElementSize from "@/hooks/useElementSize";
-import SearchBar from "@/components/Search/SearchBar";
 import Card from "@/components/Cards/Card";
 import Loading from "@/components/Loading";
+import getLocationList from "@/utils/api/getLocationList";
 
 const grid = [
     "grid-cols-1",
@@ -15,8 +15,9 @@ const grid = [
     "grid-cols-8",
 ];
 
-const discover = () => {
-    const [locationList, setLocationList] = React.useState<Array<any>>();
+const discover = ({ locationProp }: any) => {
+    const [locationList, setLocationList] =
+        React.useState<Array<any>>(locationProp);
     const [columns, setColumns] = React.useState<string>("");
     const [loading, setLoading] = React.useState<boolean>(false);
     const size = useElementSize();
@@ -30,9 +31,6 @@ const discover = () => {
             setLoading(false);
         }
     };
-    React.useEffect(() => {
-        query();
-    }, []);
     React.useEffect(() => {
         const cols = Math.floor((size.width - 80) / 288);
         const cols1 = Math.floor((size.width - 80 - (cols - 1) * 20) / 288);
@@ -70,3 +68,9 @@ const discover = () => {
 };
 
 export default discover;
+
+export async function getStaticProps() {
+    const locationProp = await getLocationList();
+    console.log(locationProp);
+    return { props: { locationProp } };
+}

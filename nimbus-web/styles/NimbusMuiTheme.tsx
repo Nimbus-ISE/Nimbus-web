@@ -91,8 +91,8 @@ export const datePickerStyles = {
     boxShadow:
         "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // tailwind shadow-md
     "& fieldset": {
-        borderColor: "rgb(243 244 246)",
-        borderWidth: "2px",
+        borderColor: "rgb(238 238 238)",
+        borderWidth: "1.5px",
         borderRadius: "12px",
     },
     "& .MuiSvgIcon-root": {
@@ -105,6 +105,7 @@ export const datePickerStyles = {
     "& .MuiOutlinedInput-root:hover": {
         "& > fieldset": {
             borderColor: "#f5f5f7",
+            borderWidth: "1px",
         },
     },
     "& .MuiFormLabel-root": {
@@ -130,7 +131,12 @@ export const TripTypeStyles = {
 
 export const TagsStyles = {
     margin: "3px",
+    borderColor: "rgb(238 238 238)",
+    borderWidth: "1px",
     borderRadius: "12px",
+    "&:hover": {
+        color: "#00adb3",
+    },
 };
 
 export const BudgetStyles = {
@@ -139,6 +145,8 @@ export const BudgetStyles = {
 
 export const ButtonChipStyles = {
     margin: "10px",
+    borderColor: "rgb(238 238 238)",
+    borderWidth: "1.5px",
     borderRadius: "12px",
     width: "8rem",
     height: "5rem",
