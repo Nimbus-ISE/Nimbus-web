@@ -24,6 +24,7 @@ interface PlanTabContextStateType {
     alternatives: any;
     changed: boolean;
     currentAlternativeView: number;
+    arrivalAndLeaveTimes: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -43,6 +44,12 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return {
                 ...state,
                 travelTime: action.payload,
+            };
+        }
+        case "SET_ARRIVAL_LEAVE_TIME": {
+            return {
+                ...state,
+                arrivalAndLeaveTimes: action.payload,
             };
         }
         case "CHANGE_PLAN": {
@@ -240,6 +247,7 @@ const initialState: PlanTabContextStateType = {
         },
     ],
     changed: false,
+    arrivalAndLeaveTimes: [],
 };
 
 const PlanTabContext = createContext(

@@ -1,10 +1,12 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import capitalizeFirst from "@/utils/capitalizeFirst";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
+    console.log(props.arrivalAndLeaveTimes);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -80,12 +82,15 @@ const PlanGraph = (props: PlanGraphProps) => {
                             </div>
 
                             <div className="text-[12px] text-left ml-4">
-                                {/* opening hours:{" "}
-                                {place["opening hours"][0] + " am "}-
-                                {" " + place["opening hours"][1] + " pm"}
+                                Arrival Time:{" "}
+                                {props.arrivalAndLeaveTimes[
+                                    index
+                                ].arrival_time.substring(0, 5)}
                                 <br />
-                                Estimate Time of Activty:{" "}
-                                {`${Number(place.durationH).toFixed(1)} hrs`} */}
+                                Leave Time:{" "}
+                                {props.arrivalAndLeaveTimes[
+                                    index
+                                ].leave_time.substring(0, 5)}
                             </div>
                         </div>
                     </div>
@@ -94,10 +99,34 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
-                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
-                                <div>
+                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
+                                    {props.travelTimes[index].travel_type ===
+                                        "walk" && (
+                                        <img
+                                            src="/images/WalkingMan.png"
+                                            height={"23"}
+                                            width={"23"}
+                                            className="ml-3 mt-1"
+                                        />
+                                    )}
+                                    {props.travelTimes[index].travel_type ===
+                                        "drive" && (
+                                        <img
+                                            src="/images/Car.png"
+                                            height={"36"}
+                                            width={"36"}
+                                            className="ml-[0.4rem] mt-2"
+                                        />
+                                    )}
+                                </div>
+                                <div className="flex gap-4">
+                                    <span className="font-bold text-[#45d8d0] text-left">
+                                        {capitalizeFirst(
+                                            props.travelTimes[index].travel_type
+                                        )}
+                                    </span>
                                     {props.travelTimes[index]?.travel_dur !== 0
-                                        ? `Travel Time: ${
+                                        ? ` ~ ${
                                               props.travelTimes[index]
                                                   ?.travel_dur > 60
                                                   ? (

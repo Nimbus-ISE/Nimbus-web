@@ -17,6 +17,7 @@ const FolderSmall = () => {
         fullPlan,
         openSavePlan,
         travelTime,
+        arrivalAndLeaveTimes,
     } = getPlanTabState();
 
     const dispatch: any = getPlanTabDispatch();
@@ -99,6 +100,11 @@ const FolderSmall = () => {
                                                                 index
                                                             ],
                                                         ]}
+                                                        arrivalAndLeaveTimes={[
+                                                            ...arrivalAndLeaveTimes[
+                                                                index
+                                                            ],
+                                                        ]}
                                                     />
                                                 )}
                                             {!isBigScreen &&
@@ -112,6 +118,11 @@ const FolderSmall = () => {
                                                         ]}
                                                         travelTimes={[
                                                             ...travelTime[
+                                                                index
+                                                            ],
+                                                        ]}
+                                                        arrivalAndLeaveTimes={[
+                                                            ...arrivalAndLeaveTimes[
                                                                 index
                                                             ],
                                                         ]}

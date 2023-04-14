@@ -2,6 +2,7 @@ import {
     Plan,
     TravelDuration,
     Location,
+    LocationOrTravelDuration,
 } from "@/components/MapPageComponents/PlanTab/PlanTabTypes";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,8 +13,6 @@ export default async function handler(
     const { trip } = req.query;
     try {
         const payload = {
-            trip_pace: "1",
-            travel_method: "drive,walk",
             ...JSON.parse(decodeURIComponent(trip as string)),
         };
 
@@ -30,20 +29,39 @@ export default async function handler(
         );
 
         const result: Plan = await response.json();
+        console.log(result);
+
         const travelTimes: Array<Array<TravelDuration>> = [];
-        const locations: Array<Array<Location>> = [];
+        const locations: Array<Array<number>> = [];
+        const arrivalAndLeaveTimes: Array<
+            Array<{
+                arrival_time: any;
+                leave_time: any;
+            }>
+        > = [];
 
         result.forEach((day: any) => {
             const tempTravelTime: Array<TravelDuration> = [];
-            const tempLocations: Array<Location> = [];
-            day.forEach((point: any, index: any) => {
-                if (index % 2 === 0) tempLocations.push(point.loc_id);
-                else tempTravelTime.push(point);
+            const tempArrivalAndLeaveTimes: Array<{
+                arrival_time: any;
+                leave_time: any;
+            }> = [];
+            const tempLocations: Array<number> = [];
+            day.forEach((point: Location | TravelDuration, index: any) => {
+                if (index % 2 === 0) {
+                    tempLocations.push((point as Location).loc_id);
+                    tempArrivalAndLeaveTimes.push({
+                        arrival_time: (point as Location).arrival_time,
+                        leave_time: (point as Location).leave_time,
+                    });
+                } else tempTravelTime.push(point as TravelDuration);
             });
             travelTimes.push(tempTravelTime);
             locations.push(tempLocations);
+            arrivalAndLeaveTimes.push(tempArrivalAndLeaveTimes);
         });
-        res.status(200).json({ locations, travelTimes });
+
+        res.status(200).json({ locations, travelTimes, arrivalAndLeaveTimes });
     } catch (err) {
         res.status(500).json("error invalid url");
     }

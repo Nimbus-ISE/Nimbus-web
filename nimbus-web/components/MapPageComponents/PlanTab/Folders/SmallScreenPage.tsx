@@ -28,7 +28,7 @@ const SmallScreenPage = () => {
                         <div>
                             {openReview && (
                                 <div
-                                    className="bg-[#3e4560] bg-opacity-50 opacity-100 z-10  w-full h-[74vh] fixed top-0 "
+                                    className="bg-[#3e4560] bg-opacity-50 opacity-100 z-10  w-full  h-[68.5vh] absolute top-0 "
                                     onMouseDown={() => {
                                         dispatch({
                                             type: "TOGGLE_PLACE_DETAILS",
@@ -61,7 +61,7 @@ const SmallScreenPage = () => {
                 <>
                     <Alternative />
                     <div
-                        className="bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[75.5`vh] fixed top-0  "
+                        className="bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[68.5vh] absolute top-0  "
                         onMouseDown={() => {
                             dispatch({
                                 type: "TOGGLE_ALTERNATIVES",
@@ -72,7 +72,7 @@ const SmallScreenPage = () => {
                 </>
             )}
             {map_polyline === "" && (
-                <div className=" bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[75.5vh] fixed top-0">
+                <div className=" bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[68.5vh] absolute top-0">
                     <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[35vh] left-[30vw] h-20 w-40">
                         Loading map...
                     </div>
