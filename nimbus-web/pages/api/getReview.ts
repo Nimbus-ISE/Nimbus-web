@@ -5,9 +5,17 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const loc_id: any = req.query.loc_id;
+    interface Review {
+        review_text: string;
+        author: string;
+        review_rating: string;
+        review_date: Date;
+        review_url: string;
+        full_tag_list: string;
+    }
+    const loc_id: string = req.query.loc_id! as string;
 
-    let query: any = sql`
+    let query = sql`
             SELECT  R.review_text,
             R.author, R.rating AS review_rating, R.review_date, R.url AS review_url,
             string_agg(B.tag_name, ', ') as full_tag_list
@@ -18,7 +26,7 @@ export default async function handler(
             `;
 
     try {
-        const review_data = await query;
+        const review_data: Array<Review> = await query;
 
         res.status(200).json(review_data);
         // res.status(200).json(location_data);

@@ -6,11 +6,11 @@ import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData } = getPlanTabState();
-    const [reviewData, setReviewData]: any = useState([]);
+    const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
 
-    const fetchReview = async (loc_id: any) => {
+    const fetchReview = async (loc_id: string) => {
         const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
         const plan = await res.json();
         return plan;
@@ -22,16 +22,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             });
         })();
     }, [placeData]);
-    // reviewData.forEach((n: any) => {
-    //     console.log(n);
-    // });
 
-    // useEffect(() => {
-    //     if (reviewData.length === 0) {
-    //         setReviewData(reviewData);
-    //     }
-    //     console.log(reviewData);
-    // }, [reviewData]);
     return (
         <>
             <div

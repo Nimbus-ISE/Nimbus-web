@@ -15,6 +15,7 @@ const BigScreenPage = () => {
         openReview,
         placeData,
         openSavePlan,
+        map_polyline,
     } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
@@ -49,6 +50,13 @@ const BigScreenPage = () => {
                         {!openReview && openAlternatives && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3">
                                 <Alternative />
+                            </div>
+                        )}
+                        {map_polyline === "" && (
+                            <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3  z-50">
+                                <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[45vh] left-[30vw] h-20 w-40">
+                                    Loading map...
+                                </div>
                             </div>
                         )}
                     </div>

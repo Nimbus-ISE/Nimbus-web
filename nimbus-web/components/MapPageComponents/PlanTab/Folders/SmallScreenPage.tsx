@@ -8,8 +8,14 @@ import SideBar from "./SideBar";
 import TripMap from "../../MapboxMap/TripMap";
 
 const SmallScreenPage = () => {
-    const { openFullTab, openAlternatives, openReview, placeData, fullPlan } =
-        getPlanTabState();
+    const {
+        openFullTab,
+        openAlternatives,
+        openReview,
+        placeData,
+        fullPlan,
+        map_polyline,
+    } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
 
     return (
@@ -55,7 +61,7 @@ const SmallScreenPage = () => {
                 <>
                     <Alternative />
                     <div
-                        className="bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[74vh] fixed top-0  "
+                        className="bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[75.5`vh] fixed top-0  "
                         onMouseDown={() => {
                             dispatch({
                                 type: "TOGGLE_ALTERNATIVES",
@@ -64,6 +70,13 @@ const SmallScreenPage = () => {
                         }}
                     ></div>
                 </>
+            )}
+            {map_polyline === "" && (
+                <div className=" bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[75.5vh] fixed top-0">
+                    <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[35vh] left-[30vw] h-20 w-40">
+                        Loading map...
+                    </div>
+                </div>
             )}
         </>
     );

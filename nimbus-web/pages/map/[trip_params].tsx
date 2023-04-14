@@ -25,18 +25,12 @@ export default function map({ trip_params }: any) {
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [isLoadingPolyline, setIsLoadingPolyline] = useState(true);
 
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-
-        // if (isMounted) {
-        //     if (isBigScreen) blockScroll();
-        //     else allowScroll();
-        // }
     }, [screenSize]);
 
     useEffect(() => {
@@ -45,7 +39,7 @@ export default function map({ trip_params }: any) {
             const plan = await res.json();
             return plan;
         };
-        const fetchLocationDetails = async (loc_ids: string, day: any) => {
+        const fetchLocationDetails = async (loc_ids: string, day: string) => {
             const response = await fetch(
                 `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
             );
@@ -57,20 +51,18 @@ export default function map({ trip_params }: any) {
             const loc_ids: any = [];
             const trip = await fetchTrip();
 
-            setIsLoadingPolyline(true);
-
             dispatch({
                 type: "SET_TRAVEL_TIME",
                 payload: trip.travelTimes,
             });
-            const tempPinState: any[] = [];
+            const tempPinState: Array<Array<string>> = [];
 
             if (trip === "error invalid url") {
                 setError(true);
                 return;
             }
-            trip.locations.forEach((day: any, index: any) => {
-                const tempPin: any = [];
+            trip.locations.forEach((day: any, index: string) => {
+                const tempPin: string[] = [];
 
                 day.forEach(() => {
                     tempPin.push("#000");
@@ -84,14 +76,9 @@ export default function map({ trip_params }: any) {
                         `[${[trip.locations[index]].toString()}]`,
                         index
                     ).then(async (result) => {
-                        const coordinates: any[] = [];
-                        let map_polyline = "";
-
+                        const coordinates: Array<Array<string>> = [];
                         loc_ids.push(await result);
-
-                        // console.log(`[${[day].toString()}]`);
                         const sorted_days = sortObject(loc_ids);
-
                         const correctlyOrdered: any = [];
                         sorted_days.forEach((day: any, index: any) => {
                             const ordered_loc_ids: any = [];
@@ -115,12 +102,11 @@ export default function map({ trip_params }: any) {
                             });
                             setIsMounted(true);
                         }
-                        // console.log(loc_ids);
+
                         const plan = initialized ? fullPlan : correctlyOrdered;
 
                         plan.forEach((day: any, index: any) => {
-                            const tempCoordinates: any = [];
-                            // console.log(day);
+                            const tempCoordinates: Array<string> = [];
                             day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
                             });
@@ -136,9 +122,8 @@ export default function map({ trip_params }: any) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
-                            map_polyline = await response.json();
+                            const map_polyline = await response.json();
 
-                            setIsLoadingPolyline(false);
                             const decoded = polyline.decode(map_polyline);
                             const routeArrs: any = [];
                             decoded.forEach((arr) => {
@@ -153,55 +138,12 @@ export default function map({ trip_params }: any) {
                     });
                 }
             });
-
-            // loc_ids.forEach((day: any) => {
-            //     fetchLocationDetails(day.toString()).then((result: any) => {
-            //         console.log(result);
-            //     });
-            // });
         })().then(() => {
             setIsLoading(false);
         });
 
         setInitalized(true);
     }, [currentFolder, changed]);
-    // useEffect(() => {
-    //     if (initialized) {
-    //         (async () => {
-    //             if (fullPlan[currentFolder]) {
-    //                 console.log(fullPlan[currentFolder]);
-
-    //                 const coordinates: any = [];
-    //                 fullPlan[currentFolder].location_data.forEach(
-    //                     (location: any) => {
-    //                         coordinates.push(
-    //                             `[${location.lat},${location.lng}]`
-    //                         );
-    //                     }
-    //                 );
-    //                 coordinates.forEach((location: any) => {
-    //                     location.replace(/'/g, '"');
-    //                 });
-
-    //                 const response = await fetch(
-    //                     `/api/getRoute?trip=${coordinates[currentFolder]}`
-    //                 );
-    //                 const map_polyline = await response.json();
-    //                 const decoded = polyline.decode(map_polyline);
-    //                 const routeArrs: any = [];
-    //                 decoded.forEach((arr) => {
-    //                     routeArrs.push(arr.reverse());
-    //                 });
-
-    //                 dispatch({
-    //                     type: "SET_ROUTE",
-    //                     payload: routeArrs,
-    //                 });
-    //             }
-    //             console.log("hi");
-    //         })();
-    //     }
-    // }, [fullPlan]);
 
     return (
         <>
@@ -231,7 +173,7 @@ export default function map({ trip_params }: any) {
                         }}
                         className={
                             isBigScreen
-                                ? "grid place-items-center z-50 bg-gray-300 text-black grid-cols-12 absolute w-full overflow-hidden"
+                                ? "grid place-items-center z-50 bg-gradient-to-r from-[#21D7E8] to-[#FFDE59] text-black grid-cols-12 absolute w-full overflow-hidden"
                                 : "  z-50  bg-gray-300 text-black absolute w-full overflow-hidden gap-0"
                         }
                     >
