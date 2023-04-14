@@ -99,7 +99,26 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
-                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
+                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
+                                    {props.travelTimes[index].travel_type ===
+                                        "walk" && (
+                                        <img
+                                            src="/images/WalkingMan.png"
+                                            height={"23"}
+                                            width={"23"}
+                                            className="ml-3 mt-1"
+                                        />
+                                    )}
+                                    {props.travelTimes[index].travel_type ===
+                                        "drive" && (
+                                        <img
+                                            src="/images/Car.png"
+                                            height={"36"}
+                                            width={"36"}
+                                            className="ml-[0.4rem] mt-2"
+                                        />
+                                    )}
+                                </div>
                                 <div className="flex gap-4">
                                     <span className="font-bold text-[#45d8d0] text-left">
                                         {capitalizeFirst(
