@@ -10,6 +10,7 @@ export interface PlanGraphProps {
     dayNumber: number;
     clickable: boolean;
     travelTimes: any;
+    arrivalAndLeaveTimes: any;
 }
 
 export interface PlaceType {
@@ -54,7 +55,7 @@ export interface TravelDuration {
     travel_type: "walk";
 }
 
-type LocationOrTravelDuration = Location | TravelDuration;
+export type LocationOrTravelDuration = Location | TravelDuration;
 
 export type Schedule = LocationOrTravelDuration[];
 

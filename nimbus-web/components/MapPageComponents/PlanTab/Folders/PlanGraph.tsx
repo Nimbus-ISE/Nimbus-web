@@ -5,6 +5,7 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
+    console.log(props.arrivalAndLeaveTimes);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -80,12 +81,15 @@ const PlanGraph = (props: PlanGraphProps) => {
                             </div>
 
                             <div className="text-[12px] text-left ml-4">
-                                {/* opening hours:{" "}
-                                {place["opening hours"][0] + " am "}-
-                                {" " + place["opening hours"][1] + " pm"}
+                                Arrival Time:{" "}
+                                {props.arrivalAndLeaveTimes[
+                                    index
+                                ].arrival_time.substring(0, 5)}
                                 <br />
-                                Estimate Time of Activty:{" "}
-                                {`${Number(place.durationH).toFixed(1)} hrs`} */}
+                                Leave Time:{" "}
+                                {props.arrivalAndLeaveTimes[
+                                    index
+                                ].leave_time.substring(0, 5)}
                             </div>
                         </div>
                     </div>

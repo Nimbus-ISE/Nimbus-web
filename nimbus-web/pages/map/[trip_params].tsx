@@ -25,7 +25,11 @@ export default function map({ trip_params }: any) {
     const [initialized, setInitalized] = useState(false);
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-
+    type tripType = {
+        locations: any;
+        travelTimes: any;
+        arrivalAndLeaveTimes: any;
+    };
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
@@ -49,18 +53,23 @@ export default function map({ trip_params }: any) {
 
         (async () => {
             const loc_ids: any = [];
-            const trip = await fetchTrip();
+            const trip: tripType = await fetchTrip();
+            console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
                 payload: trip.travelTimes,
             });
+            dispatch({
+                type: "SET_ARRIVAL_LEAVE_TIME",
+                payload: trip.arrivalAndLeaveTimes,
+            });
             const tempPinState: Array<Array<string>> = [];
 
-            if (trip === "error invalid url") {
-                setError(true);
-                return;
-            }
+            // if ((trip as string) === "error invalid url") {
+            //     setError(true);
+            //     return;
+            // }
             trip.locations.forEach((day: any, index: string) => {
                 const tempPin: string[] = [];
 
