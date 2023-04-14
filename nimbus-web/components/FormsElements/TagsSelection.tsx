@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 import { PlanContext } from "../Plan";
 import { tags } from "@/misc";
-import search from "@/pages/search";
 import router from "next/router";
 
 const TagsSelection = () => {
@@ -33,14 +32,14 @@ const TagsSelection = () => {
 
     React.useEffect(() => {
         if (formData) {
-            const data = {
-                //location: formData.location,
-                start_date: formData.date ? formData.date[0] : null,
-                end_date: formData.date ? formData.date[1] : null,
+            const data: IFormData = {
+                must_include: formData.locationId,
+                start_date: formData.date ? formData.date[0] : undefined,
+                end_date: formData.date ? formData.date[1] : undefined,
                 trip_pace: formData.tripType,
                 budget: formData.budget,
                 travel_method: formData.travelMethod,
-                tags: formData.tags ? formData.tags.join() : null,
+                tags: formData.tags ? formData.tags.join() : undefined,
             };
             console.log(data);
             setPayload(JSON.stringify(data));
@@ -59,7 +58,6 @@ const TagsSelection = () => {
                                 key={data}
                                 label={data}
                                 onClick={handleClick(data)}
-                                // className="shadow-md"
                                 color={
                                     selectTag.indexOf(data) > -1
                                         ? "success"
