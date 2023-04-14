@@ -1,6 +1,7 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
+import capitalizeFirst from "@/utils/capitalizeFirst";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
@@ -99,9 +100,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
                                 <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full"></div>
-                                <div>
+                                <div className="flex gap-4">
+                                    <span className="font-bold text-[#45d8d0] text-left">
+                                        {capitalizeFirst(
+                                            props.travelTimes[index].travel_type
+                                        )}
+                                    </span>
                                     {props.travelTimes[index]?.travel_dur !== 0
-                                        ? `Travel Time: ${
+                                        ? ` ~ ${
                                               props.travelTimes[index]
                                                   ?.travel_dur > 60
                                                   ? (
