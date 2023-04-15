@@ -31,9 +31,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET_FULL_PLAN": {
             const intialCoordinates: any = [];
-            // action.payload.forEach((day: any) => {
-            //     intialCoordinates.push(day[0].coordinate);
-            // });
             return {
                 ...state,
                 fullPlan: action.payload,
@@ -119,9 +116,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     openReview: false,
                 };
             }
-        // case "TOGGLE_ALTERNATIVES": {
-        //     return { ...state, openAlternatives: !state.openAlternatives };
-        // }
+
         case "INCREMENT_FOLDER": {
             if (state.currentFolderView < 2) {
                 return {
@@ -177,7 +172,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
         default: {
             console.log("error");
             return state;
-            break;
         }
     }
 }

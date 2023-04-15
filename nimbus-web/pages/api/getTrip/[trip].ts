@@ -39,7 +39,6 @@ export default async function handler(
                 leave_time: any;
             }>
         > = [];
-
         result.forEach((day: any) => {
             const tempTravelTime: Array<TravelDuration> = [];
             const tempArrivalAndLeaveTimes: Array<{

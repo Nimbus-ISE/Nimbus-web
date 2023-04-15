@@ -1,10 +1,8 @@
 import React from "react";
 import classes from "./ClosingFullFolder.module.css";
-
 import PlanGraph from "./PlanGraph";
 import numberToWords from "@/utils/numberTranslator";
 import capitalizeFirst from "@/utils/capitalizeFirst";
-
 import { getPlanTabState } from "../PlanTabContext";
 const ClosingFullFolder = () => {
     const { currentFolderView, fullPlan, travelTime, arrivalAndLeaveTimes } =
@@ -70,11 +68,6 @@ const ClosingFullFolder = () => {
                         }
                     })}
                 </div>
-
-                {/* <img
-                    src="/images/map_placeholder.webp"
-                    className=" absolute z-[-100] right-0 top-0 h-[110vh] w-[66.6666666667vw]"
-                /> */}
             </>
         </>
     );
