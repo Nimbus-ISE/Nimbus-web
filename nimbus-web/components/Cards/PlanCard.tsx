@@ -23,11 +23,11 @@ const PlanCard = ({ planList }: IProps) => {
     return (
         <div
             id="plan-card-container"
-            className="flex flex-col md:w-[80%] mx-auto"
+            className="flex flex-col md:w-[80%] w-full mx-auto"
         >
             <div
                 className="text-xl font-semibold text-neutral-500
-                 border-b-neutral-500 border-b-[1px] pb-1"
+                 border-b-neutral-500 border-b-[1px] pb-1 md:mx-0 mx-3"
             >
                 SAVED PLANS
             </div>

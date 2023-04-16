@@ -32,8 +32,8 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
             <PlanCard planList={planList} />
             <div className="my-7 w-full">
                 <div
-                    className="md:w-[80%] mx-auto text-xl font-semibold text-neutral-500
-                 border-b-neutral-500 border-b-[1px] pb-1"
+                    className="md:w-[80%] md:mx-auto text-xl font-semibold text-neutral-500
+                 border-b-neutral-500 border-b-[1px] pb-1 mx-3"
                 >
                     RECENTLY VIEWED
                 </div>
