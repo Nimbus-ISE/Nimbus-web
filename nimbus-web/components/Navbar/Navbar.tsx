@@ -12,7 +12,7 @@ import getPremiumType from "@/utils/getPremiumType";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 interface IProps {
-    user: UserProfile;
+    user: UserProfile | undefined;
     isLoading: boolean;
 }
 
@@ -56,7 +56,7 @@ const Navbar = ({ user, isLoading }: IProps) => {
     const isLargerThanMedium = useMediaQuery("(min-width: 800px)");
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     const calculateMobileList = () => {
-        return user && !isLoading && premiumType==="None"
+        return user && !isLoading && premiumType === "None"
             ? [
                   ...leftList,
                   { name: "Search", route: "/search" },

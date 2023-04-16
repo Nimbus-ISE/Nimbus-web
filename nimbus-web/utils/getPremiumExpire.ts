@@ -1,6 +1,6 @@
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 
-const getPremiumExpire = (user: UserProfile, type?: "number") => {
+const getPremiumExpire = (user: UserProfile | undefined, type?: "number") => {
     if (user) {
         const numDate = user[
             `https://nimbus-web.vercel.app/premium_expire`
