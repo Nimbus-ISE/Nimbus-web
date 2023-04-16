@@ -8,7 +8,7 @@ import PlanCard from "./Cards/PlanCard";
 
 interface IProps {
     user: UserProfileType;
-    recentlyViewedList: Array<unknown>;
+    recentlyViewedList: Array<unknown> | undefined;
     planList: Array<unknown>;
 }
 
@@ -37,12 +37,18 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                 >
                     RECENTLY VIEWED
                 </div>
-                <Slider
-                    title=" "
-                    locationList={recentlyViewedList}
-                    shape="circle"
-                    onClickCallback={(id) => {}}
-                />
+                {recentlyViewedList ? (
+                    <Slider
+                        title=" "
+                        locationList={recentlyViewedList}
+                        shape="circle"
+                        onClickCallback={(id) => {}}
+                    />
+                ) : (
+                    <div className="text-center text-neutral-400 font-semibold py-10">
+                        You don't have any recently viewed locations
+                    </div>
+                )}
             </div>
         </div>
     ) : null;

@@ -3,11 +3,13 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Profile from "@/components/Profile";
-import getTrendingList from "@/utils/api/getTrendingList";
 import getLocationList from "@/utils/api/getLocationList";
+import getRecentlyViewedList from "@/utils/api/getRecentlyViewedList";
+import { GetServerSidePropsContext } from "next";
+import getRecentlyViewed from "@/utils/getRecentlyViewed";
 
 interface IProps {
-    recentlyViewedList: Array<unknown>;
+    recentlyViewedList: Array<unknown> | undefined;
     planList: Array<unknown>;
 }
 
@@ -33,8 +35,12 @@ export default withPageAuthRequired(profile, {
     onError: (error) => <ErrorMessage>{error.message}</ErrorMessage>,
 });
 
-export async function getStaticProps() {
-    const recentlyViewedList = await getTrendingList();
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+    const cookies = context.req.cookies;
+    const rv = getRecentlyViewed(cookies.rv);
+    console.log("rv", rv);
+    let recentlyViewedList;
+    if (rv) recentlyViewedList = await getRecentlyViewedList(rv);
     const planList = await getLocationList();
     console.log(recentlyViewedList);
     return { props: { recentlyViewedList, planList } };
