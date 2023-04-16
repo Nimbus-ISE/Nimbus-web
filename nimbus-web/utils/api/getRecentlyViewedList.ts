@@ -12,7 +12,14 @@ const getRecentlyViewedList = async (rv: Array<number>) => {
                 ) I ON L.loc_id = I.loc_id
                 WHERE L.loc_id IN ${sql(rv)}
                 GROUP BY L.loc_id, I.url
-                ORDER BY L.view_count DESC`;
+                ORDER BY CASE
+                    ${rv.map(
+                        (locId, index) => sql`
+                    WHEN L.loc_id = ${locId} THEN ${index + 1}
+                    `
+                    )}
+                    ELSE ${rv.length + 1}
+                END`;
             resolve(location_data);
         } catch (e) {
             console.log(e);

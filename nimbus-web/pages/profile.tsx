@@ -40,7 +40,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const rv = getRecentlyViewed(cookies.rv);
     console.log("rv", rv);
     let recentlyViewedList;
-    if (rv) recentlyViewedList = await getRecentlyViewedList(rv);
+    if (rv) {
+        recentlyViewedList = await getRecentlyViewedList(rv.reverse());
+    }
     const planList = await getLocationList();
     console.log(recentlyViewedList);
     return { props: { recentlyViewedList, planList } };
