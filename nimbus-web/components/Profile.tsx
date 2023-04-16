@@ -5,6 +5,7 @@ import getPremiumType from "@/utils/getPremiumType";
 import UserProfile from "./UserProfile";
 import Slider from "./SliderList/Slider";
 import PlanCard from "./Cards/PlanCard";
+import { useRouter } from "next/router";
 
 interface IProps {
     user: UserProfileType;
@@ -13,6 +14,7 @@ interface IProps {
 }
 
 const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
+    const router = useRouter();
     const [date, setDate] = React.useState<string>();
     const premiumExpire = getPremiumExpire(user);
     React.useEffect(() => {
@@ -42,7 +44,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                         title=" "
                         locationList={recentlyViewedList}
                         shape="circle"
-                        onClickCallback={(id) => {}}
+                        onClickCallback={(id) => router.push(`/location/${id}`)}
                     />
                 ) : (
                     <div className="text-center text-neutral-400 font-semibold py-10">
