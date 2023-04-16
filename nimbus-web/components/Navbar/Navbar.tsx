@@ -8,9 +8,11 @@ import NavbarLogo from "./NavbarLogo";
 import MobileLeft from "./MobileLeft";
 import TagsButton from "../Search/TagsButton";
 import SearchBar from "../Search/SearchBar";
+import getPremiumType from "@/utils/getPremiumType";
+import { UserProfile } from "@auth0/nextjs-auth0/client";
 
 interface IProps {
-    user: unknown;
+    user: UserProfile;
     isLoading: boolean;
 }
 
@@ -48,12 +50,13 @@ const rightListLogout = [
 ];
 
 const Navbar = ({ user, isLoading }: IProps) => {
+    const premiumType = getPremiumType(user);
     const router = useRouter();
     const isLogoVisible = useMediaQuery("(min-width: 950px)");
     const isLargerThanMedium = useMediaQuery("(min-width: 800px)");
     const [openDrawer, setOpenDrawer] = React.useState<boolean>(false);
     const calculateMobileList = () => {
-        return user && !isLoading
+        return user && !isLoading && premiumType==="None"
             ? [
                   ...leftList,
                   { name: "Search", route: "/search" },
