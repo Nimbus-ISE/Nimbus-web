@@ -48,7 +48,7 @@ const iconMapping: { [key: string]: React.ReactNode } = {
 const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
     const router = useRouter();
     const filterName = (nameStr: string) => {
-        const res = nameStr.match(/^([^@]+)/);
+        const res = nameStr?.match(/^([^@]+)/);
         return res ? res[1] : nameStr;
     };
     const onCheckout = () => {

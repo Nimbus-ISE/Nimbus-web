@@ -11,7 +11,7 @@ const Filter = ({ color, className }: IProps) => {
             <div
                 style={className}
                 className={`absolute top-0 bottom-0 left-0 right-0 
-                bg-gradient-to-t from-black to-transparent z-10`}
+                bg-gradient-to-t from-gray-900 to-transparent z-10`}
             />
             <div
                 className={`absolute top-0 bottom-0 left-0 right-0 ${color} opacity-10 z-10`}

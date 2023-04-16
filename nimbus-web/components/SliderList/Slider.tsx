@@ -25,6 +25,9 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
     const calculateWidth = () => {
         return -locationList.length * (16 + width) + containerSize.width;
     };
+    const isForwardable = () => {
+        return locationList.length * (16 + width) > containerSize.width;
+    };
     const [widthCal, setWidthCal] = React.useState<number>(calculateWidth());
 
     const calculateOffset = (isForward: boolean) => {
@@ -71,7 +74,7 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
                                 </div>
                             </button>
                         ) : null}
-                        {calculatedOffset !== widthCal ? (
+                        {calculatedOffset !== widthCal && isForwardable() ? (
                             <button
                                 onClick={() => calculateOffset(true)}
                                 className="flex w-20 h-full bg-gradient-to-l from-neutral-100 to-transparent
