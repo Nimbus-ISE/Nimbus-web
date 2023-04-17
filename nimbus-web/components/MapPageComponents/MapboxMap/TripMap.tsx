@@ -93,13 +93,9 @@ const TripMap = () => {
                                         >
                                             {pinState[currentFolder][index] && (
                                                 <Popup
-                                                    anchor="bottom"
-                                                    longitude={
-                                                        point.lng - 0.00005
-                                                    }
-                                                    latitude={
-                                                        point.lat + 0.0002
-                                                    }
+                                                    anchor="top"
+                                                    longitude={point.lng}
+                                                    latitude={point.lat}
                                                 >
                                                     <div className="font-extrabold">
                                                         {
