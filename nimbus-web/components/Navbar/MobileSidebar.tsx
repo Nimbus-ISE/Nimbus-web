@@ -77,7 +77,7 @@ const MobileSidebar = ({ list, openDrawer, setOpenDrawer, user }: IProps) => {
                 <List>
                     {list.map((listItem, index) =>
                         typeof listItem !== "string" ? (
-                            <ListItem key={index} disablePadding>
+                            <ListItem key={listItem.name} disablePadding>
                                 <ListItemButton
                                     onClick={() => {
                                         if (listItem.route.includes("logout")) {

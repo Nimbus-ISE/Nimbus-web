@@ -1,7 +1,9 @@
 import FullDetailCard from "@/components/FullDetailCard/FullDetailCard";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import addRecentlyViewed from "@/utils/addRecentlyViewed";
 import getLocation from "@/utils/api/getLocation";
 import { GetStaticPropsContext } from "next";
+import Background from "@/components/Background";
 import React from "react";
 
 interface IProps {
@@ -9,13 +11,24 @@ interface IProps {
 }
 
 const location = ({ location }: IProps) => {
+    const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     React.useEffect(() => {
         console.log("add to recently viewed");
         addRecentlyViewed(location.loc_id);
     }, []);
     return (
-        <div className="min-h-screen h-full w-screen overflow-x-hidden font-montserrat p-10 bg-neutral-100">
-            <FullDetailCard location={location} />
+        <div className="relative flex min-h-screen h-full w-full overflow-x-hidden font-montserrat bg-neutral-100">
+            <Background />
+            <div
+                style={{
+                    marginTop: isLargerThanMedium ? "2.5%" : 0,
+                    marginBottom: isLargerThanMedium ? "2.5%" : 0,
+                }}
+                className={`flex flex-col md:rounded-xl shadow-lg bg-neutral-100 h-full
+                min-h-screen m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] z-10 pb-5`}
+            >
+                <FullDetailCard location={location} />
+            </div>
         </div>
     );
 };

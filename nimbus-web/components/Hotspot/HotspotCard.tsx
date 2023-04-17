@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import MainCardExtender from "./MainCardExtender";
 import MobileCardExtender from "./MobileCardExtender";
@@ -58,11 +57,9 @@ const HotspotCard = ({
                 <div className="absolute top-6 right-5">
                     <NimbusStamp />
                 </div>
-                <Image
+                <img
                     className={`h-[95%] w-[95%] m-auto object-cover border-white border-[10px]`}
                     src={obj.url}
-                    width={240}
-                    height={320}
                     alt={obj.loc_name}
                 />
             </div>

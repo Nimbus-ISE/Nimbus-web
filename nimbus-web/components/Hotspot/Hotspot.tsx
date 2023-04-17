@@ -55,9 +55,9 @@ const Hotspot = ({ props }: IProps) => {
     return (
         <div
             id="hotspot"
-            className="relative flex text-black h-full w-screen bg-neutral-200 py-10 overflow-hidden"
+            className="relative flex text-black h-full w-screen bg-neutral-200 md:py-16 py-10 overflow-hidden"
         >
-            <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full">
+            <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full md:scale-125">
                 <div
                     id="hotspot-left"
                     className={`${
@@ -68,10 +68,11 @@ const Hotspot = ({ props }: IProps) => {
                     text-center md:shadow-md m-auto md:m-1 rounded-xl`}
                 >
                     <div className="m-auto">
-                        <h1 className="text-4xl md:text-5xl font-extrabold p-5">
-                            ICONIC PLACES
+                        <h1 className="text-4xl md:text-5xl font-extrabold p-5 drop-shadow-md">
+                            <div className="text-tricolorgreen">ICONIC</div>
+                            <div className="text-teal-400">PLACES</div>
                         </h1>
-                        <p className="text-xs md:text-sm px-5 pb-5 md:pb-0">
+                        <p className="text-xs md:text-xs px-5 pb-5 md:pb-0 text-justify">
                             The "Iconic Places" category in our trip planner
                             showcases the country's most enchanting landmarks
                             and natural wonders. These gems offer a glimpse into
