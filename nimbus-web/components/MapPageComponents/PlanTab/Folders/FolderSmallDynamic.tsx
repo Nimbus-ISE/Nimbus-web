@@ -146,6 +146,10 @@ const FolderSmall = () => {
                                 className={classes.arrowLabel}
                                 onMouseDown={() => {
                                     dispatch({ type: "DECREMENT_FOLDER" });
+                                    dispatch({
+                                        type: "SET_ROUTE",
+                                        payload: "",
+                                    });
                                 }}
                             >
                                 <svg
@@ -163,6 +167,10 @@ const FolderSmall = () => {
                                 className={classes.arrowLabel}
                                 onMouseDown={() => {
                                     dispatch({ type: "INCREMENT_FOLDER" });
+                                    dispatch({
+                                        type: "SET_ROUTE",
+                                        payload: "",
+                                    });
                                 }}
                             >
                                 <svg
