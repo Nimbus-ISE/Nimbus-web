@@ -68,7 +68,8 @@ const Navbar = ({ user, isLoading }: IProps) => {
                   "upgrade",
                   rightListLogout[1],
               ]
-            : [
+            : !user
+            ? [
                   ...leftList,
                   { name: "Search", route: "/search" },
                   "divider",
@@ -76,6 +77,16 @@ const Navbar = ({ user, isLoading }: IProps) => {
                   "divider",
                   "profile",
                   ...rightListLogin,
+              ]
+            : [
+                  ...leftList,
+                  { name: "Search", route: "/search" },
+                  "divider",
+                  { name: "Register Place", route: "/register" },
+                  "divider",
+                  "profile",
+                  rightListLogout[0],
+                  rightListLogout[1],
               ];
     };
     const [mobileList, setMobileList] = React.useState<Array<any>>(
