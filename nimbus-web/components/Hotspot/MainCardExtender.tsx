@@ -31,14 +31,14 @@ const MainCardExtender = ({ obj, expand, index }: IProps) => {
                 } absolute flex w-[130%] top-0 bottom-0 left-0 right-0 h-full transition duration-500 p-5 my-auto`}
             >
                 <div className="m-auto text-neutral-800">
-                    <h1 className="font-extrabold text-4xl drop-shadow-sm">
+                    <h1 className="font-extrabold text-3xl drop-shadow-sm">
                         {obj.loc_name}
                     </h1>
-                    <div className="flex font-bold text-base py-1">
+                    <div className="flex font-bold text-sm py-1">
                         <LocationOnIcon />
                         Krung Thep Maha Nakhon
                     </div>
-                    <Stars size={16} rating={obj.rating} />
+                    <Stars size={15} rating={obj.rating} />
                     <p className="text-xs py-3">{obj.description}</p>
                     <Button
                         onClick={handleViewMore}
