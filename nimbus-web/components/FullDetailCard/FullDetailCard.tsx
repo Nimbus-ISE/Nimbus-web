@@ -88,136 +88,127 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
     const handleSelectDestination = () => {};
 
     return (
-        <>
-            <div className="text-black max-w-screen-lg mx-auto">
-                <Stack spacing={3}>
-                    <Stack
-                        direction="row"
-                        justifyContent="center"
-                        alignItems="center"
-                    >
-                        <Stack width="60%">
-                            <img
-                                className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
-                                src={imageList}
-                                alt={loc_name}
-                            />
-                            <Box
-                                display="flex"
-                                alignItems="center"
-                                justifyContent="space-between"
-                                className="shadow-md"
-                                sx={{
-                                    backgroundColor: "#e9e9e9",
-                                    borderRadius: "0px 0px 8px 8px",
-                                    width: "100%",
-                                    height: "35px",
-                                }}
-                                px={6}
+        <div className="text-black mx-auto p-12 w-full">
+            <Stack spacing={3}>
+                <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <Stack width="60%">
+                        <img
+                            className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
+                            src={imageList}
+                            alt={loc_name}
+                        />
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            className="shadow-md"
+                            sx={{
+                                backgroundColor: "#e9e9e9",
+                                borderRadius: "0px 0px 8px 8px",
+                                width: "100%",
+                                height: "35px",
+                            }}
+                            px={6}
+                        >
+                            <IconButton
+                                disabled={currentPage == 0 ? true : false}
+                                onClick={handleBack}
                             >
-                                <IconButton
-                                    disabled={currentPage == 0 ? true : false}
-                                    onClick={handleBack}
+                                <ArrowBackIosIcon sx={{ fontSize: 15 }} />
+                            </IconButton>
+                            <Stack spacing={1} direction="row">
+                                {pageNumbers.map((number) => {
+                                    return (
+                                        <DotPagination
+                                            key={number}
+                                            show={currentPage == number}
+                                            index={number}
+                                        />
+                                    );
+                                })}
+                            </Stack>
+                            <IconButton
+                                disabled={
+                                    currentPage == url.length - 1 ? true : false
+                                }
+                                onClick={handleNext}
+                            >
+                                <ArrowForwardIosIcon sx={{ fontSize: 15 }} />
+                            </IconButton>
+                        </Box>
+                    </Stack>
+                    <Stack width="40%" pl={4}>
+                        <div className="text-right text-neutral-400">
+                            <Typography sx={baseSx} variant="body2">
+                                {Number(lat).toFixed(4)},{" "}
+                                {Number(lng).toFixed(4)}
+                            </Typography>
+                        </div>
+                        <Typography sx={boldSx} variant="h4">
+                            {loc_name}
+                        </Typography>
+                        <Typography sx={baseSx} variant="h6">
+                            {province}
+                        </Typography>
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            py={3}
+                            justifyContent="flex-start"
+                        >
+                            <LocationOnIcon fontSize="large" />
+                            <Stack spacing={1}>
+                                <Typography
+                                    sx={{ ...baseSx, marginY: "auto" }}
+                                    variant="body1"
                                 >
-                                    <ArrowBackIosIcon sx={{ fontSize: 15 }} />
-                                </IconButton>
-                                <Stack spacing={1} direction="row">
-                                    {pageNumbers.map((number) => {
-                                        return (
-                                            <DotPagination
-                                                key={number}
-                                                show={currentPage == number}
-                                                index={number}
-                                            />
-                                        );
-                                    })}
-                                </Stack>
-                                <IconButton
-                                    disabled={
-                                        currentPage == url.length - 1
-                                            ? true
-                                            : false
-                                    }
-                                    onClick={handleNext}
-                                >
-                                    <ArrowForwardIosIcon
-                                        sx={{ fontSize: 15 }}
-                                    />
-                                </IconButton>
-                            </Box>
-                        </Stack>
-                        <Stack width="40%" pl={4}>
-                            <div className="text-right text-neutral-400">
-                                <Typography sx={baseSx} variant="body2">
-                                    {Number(lat).toFixed(4)},{" "}
-                                    {Number(lng).toFixed(4)}
+                                    {address}
                                 </Typography>
-                            </div>
-                            <Typography sx={boldSx} variant="h4">
-                                {loc_name}
-                            </Typography>
-                            <Typography sx={baseSx} variant="h6">
-                                {province}
-                            </Typography>
-                            <Stack
-                                direction="row"
-                                spacing={1}
-                                py={3}
-                                justifyContent="flex-start"
-                            >
-                                <LocationOnIcon fontSize="large" />
-                                <Stack spacing={1}>
-                                    <Typography
-                                        sx={{ ...baseSx, marginY: "auto" }}
-                                        variant="body1"
-                                    >
-                                        {address}
-                                    </Typography>
-                                    {/*<Typography
+                                {/*<Typography
                                     variant="body2"
                                     sx={{ fontStyle: "italic" }}
                                 >
 						{data.openTime}
 						</Typography>*/}
-                                </Stack>
                             </Stack>
-                            <div className="flex gap-2 pb-5 pl-1 text-neutral-500">
-                                <LocalOfferIcon className="w-8 h-8" />
-                                <Typography
-                                    variant="body2"
-                                    sx={{ ...baseSx, marginY: "auto" }}
-                                >
-                                    {tags}
-                                </Typography>
-                            </div>
-                            <div className="mx-auto">
-                                <Stars
-                                    size={20}
-                                    rating={Number(location_rating)}
-                                />
-                            </div>
-                            <button
-                                onClick={handleSelectDestination}
-                                className={styles.button}
-                            >
-                                <div className="font-bold text-white text-lg">
-                                    SELECT AS DESTINATION
-                                </div>
-                            </button>
                         </Stack>
+                        <div className="flex gap-2 pb-5 pl-1 text-neutral-500">
+                            <LocalOfferIcon className="w-8 h-8" />
+                            <Typography
+                                variant="body2"
+                                sx={{ ...baseSx, marginY: "auto" }}
+                            >
+                                {tags}
+                            </Typography>
+                        </div>
+                        <div className="mx-auto">
+                            <Stars size={20} rating={Number(location_rating)} />
+                        </div>
+                        <button
+                            onClick={handleSelectDestination}
+                            className={styles.button}
+                        >
+                            <div className="font-bold text-white text-lg">
+                                SELECT AS DESTINATION
+                            </div>
+                        </button>
                     </Stack>
-                    <Typography sx={lightSx}>{description}</Typography>
                 </Stack>
-                <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
-                    USER REVIEWS
-                </div>
-                <div className="grid grid-cols-1 gap-2">
-                    {reviews.map((review) => {
-                        return <Review review={review} />;
-                    })}
-                </div>
+                <Typography sx={lightSx}>{description}</Typography>
+            </Stack>
+            <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
+                USER REVIEWS
             </div>
-        </>
+            <div className="grid grid-cols-1 gap-2">
+                {reviews.map((review) => {
+                    return <Review review={review} />;
+                })}
+            </div>
+        </div>
     );
 };
 

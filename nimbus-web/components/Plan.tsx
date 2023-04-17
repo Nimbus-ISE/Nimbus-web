@@ -7,6 +7,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import useElementSize from "@/hooks/useElementSize";
 import ConfirmForm from "./FormsElements/ConfirmForm";
 import Loading from "./Loading";
+import Background from "./Background";
 
 interface IScrollContext {
     currentValue: number;
@@ -144,30 +145,26 @@ const Plan = () => {
             >
                 <div
                     style={{ height: height }}
-                    className="relative flex bg-cover bg-center text-black overflow-hidden"
+                    className="relative flex text-black overflow-hidden bg-neutral-100"
                 >
-                    <div className="absolute w-full h-full top-0 bottom-0 left-0 right-0 m-auto backdrop-blur-md z-[2]" />
-                    <img
-                        src="/images/bg.webp"
-                        className="absolute object-cover object-bottom w-full h-full aspect-video z-[1]"
-                    />
                     {isLoading ? (
                         <div className="absolute z-50 top-0 bottom-0 left-0 right-0 m-auto flex min-h-screen h-full w-full bg-neutral-100">
                             <Loading />
                         </div>
                     ) : null}
-                    <div
-                        className="absolute top-0 bottom-0 left-0 right-0 opacity-40
-                        bg-gradient-to-r from-tricolorgreen to-yellow-300 z-10"
-                    />
+                    <Background />
                     <div
                         id="plan-card"
                         style={{
                             //maxHeight: isLargerThanMedium ? "40rem" : "100%",
-                            height: height - (isLargerThanMedium ? 64 : 0),
+                            height:
+                                height -
+                                (isLargerThanMedium
+                                    ? window.innerHeight * 0.1
+                                    : 0),
                         }}
                         className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100
-                        pl-5 m-auto max-w-[70rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        pl-5 m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
                             <div
@@ -177,7 +174,10 @@ const Plan = () => {
                                         ? "40rem"
                                         : "100%",*/
                                     height:
-                                        height - (isLargerThanMedium ? 64 : 0),
+                                        height -
+                                        (isLargerThanMedium
+                                            ? window.innerHeight * 0.1
+                                            : 0),
                                 }}
                             >
                                 <div className="w-[4rem] md:w-[9rem] h-[90%] my-auto">
