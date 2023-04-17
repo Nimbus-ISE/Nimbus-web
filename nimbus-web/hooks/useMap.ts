@@ -57,7 +57,6 @@ const useMap = () => {
     const [points, setPoints] = useState([] as any);
 
     const mapRef = React.useRef<mapboxgl.Map | null>(null);
-    const [route, setRoute] = useState([] as any);
 
     const onSelect = useCallback((longitude: number, latitude: number) => {
         mapRef.current?.flyTo({
@@ -67,71 +66,27 @@ const useMap = () => {
     }, []);
 
     useEffect(() => {
-        // const fetchRoute = async () => {
-        //     const res = await fetch(`api/getRoute?day=${currentFolder}`);
-        //     const result = await res.json();
-        //     return result;
-        // };
-        // fetchRoute().then((route) => {
-        //     const decoded = polyline.decode(route);
-
-        // });
-        // const decoded = polyline.decode(map_polyline);
-        // const routeArrs: any = [];
-        // decoded.forEach((arr) => {
-        //     routeArrs.push(arr.reverse());
-        // });
-        // setRoute(routeArrs);
-        //     }
-        // const fetchTrip = async () => {
-        //     const res = await fetch(`http://localhost:3000/api/getTrip`);
-        //     const plan = await res.json();
-        //     return plan;
-        // };
-        // fetchTrip().then((trip) => {
-        //     dispatch({
-        //         type: "SET_FULL_PLAN",
-        //         payload: trip.result,
-        //     });
         const tempPinState: any[] = [];
         plan.forEach((day: any) => {
             const tempPin: any = [];
 
             day.location_data?.forEach(() => {
-                tempPin.push("#000");
+                tempPin.push(false);
             });
             if (tempPinState.length < day.location_data?.length) {
                 tempPinState.push(tempPin);
             }
         });
-        //     setPoints(trip.points);
 
         setPinState(tempPinState);
-        // });
     }, [currentFolder, plan]);
-
-    // useEffect(() => {
-    //     if (isMounted.current) {
-    //         const tempPoints: any = [];
-    //         plan.forEach((day: any) => {
-    //             const temp: any = [];
-    //             day.forEach((points: any) => {
-    //                 temp.push(points.coordinate);
-    //             });
-    //             tempPoints.push(temp);
-    //         });
-    //         setPoints(tempPoints);
-    //     } else {
-    //         isMounted.current = true;
-    //     }
-    // }, [plan]);
 
     const togglePinState = (day: number, changeIndex: number) => {
         pinState[day].forEach((_: any, index: any) => {
             if (index === changeIndex) {
-                pinState[day][changeIndex] = "#45D8D0";
+                pinState[day][changeIndex] = true;
             } else {
-                pinState[day][index] = "#000";
+                pinState[day][index] = false;
             }
         });
 
