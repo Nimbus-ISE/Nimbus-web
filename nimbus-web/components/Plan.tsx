@@ -3,7 +3,7 @@ import Form from "@/components/FormsElements/Form";
 import PageIndicator from "@/components/PageIndicator/PageIndicator";
 import useViewportHeight from "@/hooks/useViewportHeight";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import * as Scroll from "react-scroll";
+//import * as Scroll from "react-scroll";
 import useElementSize from "@/hooks/useElementSize";
 import ConfirmForm from "./FormsElements/ConfirmForm";
 import Loading from "./Loading";
@@ -167,7 +167,7 @@ const Plan = () => {
                             height: height - (isLargerThanMedium ? 64 : 0),
                         }}
                         className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100
-                        pl-5 m-auto max-w-[60rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        pl-5 m-auto max-w-[70rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
                             <div

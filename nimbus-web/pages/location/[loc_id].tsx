@@ -1,4 +1,5 @@
 import FullDetailCard from "@/components/FullDetailCard/FullDetailCard";
+import addRecentlyViewed from "@/utils/addRecentlyViewed";
 import getLocation from "@/utils/api/getLocation";
 import { GetStaticPropsContext } from "next";
 import React from "react";
@@ -8,6 +9,10 @@ interface IProps {
 }
 
 const location = ({ location }: IProps) => {
+    React.useEffect(() => {
+        console.log("add to recently viewed");
+        addRecentlyViewed(location.loc_id);
+    }, []);
     return (
         <div className="min-h-screen h-full w-screen overflow-x-hidden font-montserrat p-10 bg-neutral-100">
             <FullDetailCard location={location} />

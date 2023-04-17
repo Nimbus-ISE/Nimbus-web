@@ -1,26 +1,14 @@
 import Card from "@/components/Cards/Card";
 import Loading from "@/components/Loading";
 import TagsSelect from "@/components/Search/TagsSelect";
-import useElementSize from "@/hooks/useElementSize";
+import useGridColumns from "@/hooks/useGridColumns";
 import React from "react";
-
-const grid = [
-    "grid-cols-1",
-    "grid-cols-2",
-    "grid-cols-3",
-    "grid-cols-4",
-    "grid-cols-5",
-    "grid-cols-6",
-    "grid-cols-7",
-    "grid-cols-8",
-];
 
 const search = () => {
     const [locationList, setLocationList] = React.useState<Array<any>>();
-    const [columns, setColumns] = React.useState<string>("");
     const [loading, setLoading] = React.useState<boolean>(false);
     const [tagsText, setTagsText] = React.useState<string>("");
-    const size = useElementSize();
+    const gridColumnsClass = useGridColumns();
     const query = async (tags: Array<string>) => {
         let tagsCollector = "";
         let tagsCollector1 = "";
@@ -41,11 +29,6 @@ const search = () => {
             setLoading(false);
         }
     };
-    React.useEffect(() => {
-        const cols = Math.floor((size.width - 80) / 288);
-        const cols1 = Math.floor((size.width - 80 - (cols - 1) * 20) / 288);
-        setColumns(grid[cols1 - 1]);
-    }, [size]);
     return (
         <div className="flex flex-col min-h-screen h-full w-full bg-neutral-100 text-black">
             <div className="text-left text-4xl font-extrabold px-7 py-7 drop-shadow-sm">
@@ -71,7 +54,7 @@ const search = () => {
                             </div>
                         </div>
                         <div
-                            className={`grid ${columns} gap-5 w-fit mx-auto m-5 my-8`}
+                            className={`grid ${gridColumnsClass} gap-5 w-fit mx-auto m-5 my-8`}
                         >
                             {locationList.map((location) => {
                                 return <Card location={location} />;

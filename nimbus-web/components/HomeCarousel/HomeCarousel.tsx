@@ -9,24 +9,28 @@ import Filter from "./Filter";
 
 const carouselList = [
     {
-        src: "/images/bg.webp",
-        filter: "bg-emerald-500",
-    },
-    {
-        src: "/images/ThorsWell.jpg",
-        filter: "bg-sky-500",
-    },
-    {
-        src: "/images/BlackHole.jpg",
-        filter: "bg-orange-500",
-    },
-    {
-        src: "/images/db11.jpg",
+        src: "/images/home.webp",
         filter: "bg-yellow-500",
     },
     {
-        src: "/images/bg.webp",
+        src: "/images/home1.webp",
         filter: "bg-emerald-500",
+    },
+    {
+        src: "/images/home2.webp",
+        filter: "bg-pink-500",
+    },
+    {
+        src: "/images/home3.webp",
+        filter: "bg-yellow-500",
+    },
+    {
+        src: "/images/home4.webp",
+        filter: "bg-emerald-500",
+    },
+    {
+        src: "/images/home.webp",
+        filter: "bg-yellow-500",
     },
 ];
 
