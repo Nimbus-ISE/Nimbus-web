@@ -6,7 +6,6 @@ import capitalizeFirst from "@/utils/capitalizeFirst";
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
-    console.log(props.arrivalAndLeaveTimes);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -21,7 +20,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place?.url}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full  cursor-pointer shadow bg-fuchsia-500"
+                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow bg-fuchsia-500"
                                     : "h-24 w-24 rounded-full shadow ml-2"
                             }
                             onMouseDown={() => {

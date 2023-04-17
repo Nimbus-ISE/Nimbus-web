@@ -1,13 +1,10 @@
 import React from "react";
 import FolderFullDynamic from "./FolderFullDynamic";
-import { testData } from "@/test_data/testData";
-import usePlanTab from "@/hooks/usePlanTab";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import ClosingFullFolder from "./ClosingFullFolder";
 
 const FullScreenPlan = () => {
-    const { currentFolderView, isClosingFullFolder, fullPlan } =
-        getPlanTabState();
+    const { isClosingFullFolder, fullPlan } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     return (
         <>

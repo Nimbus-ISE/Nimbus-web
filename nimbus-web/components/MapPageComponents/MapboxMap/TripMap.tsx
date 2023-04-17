@@ -1,7 +1,7 @@
 import React from "react";
 import useMapLogic from "@/hooks/useMap";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
-import Pin from "@/components/Pin";
+import Pin from "@/components/MapPageComponents/MapboxMap/Pin";
 import Map, {
     Marker,
     ScaleControl,
@@ -9,6 +9,7 @@ import Map, {
     Source,
     AttributionControl,
     useMap,
+    Popup,
 } from "react-map-gl";
 
 const TripMap = () => {
@@ -40,7 +41,7 @@ const TripMap = () => {
         }
 
         mapRef.current?.resize();
-    }, [currentFolder, points[currentFolder], pinState, fullPlan, mainMap]);
+    }, [currentFolder, points[currentFolder], fullPlan, mainMap]);
 
     return (
         <>
@@ -90,13 +91,32 @@ const TripMap = () => {
                                                 e.originalEvent.stopPropagation();
                                             }}
                                         >
-                                            <span className="text-center bg-black text-cyan-300 p-[2px] rounded">
-                                                {
-                                                    fullPlan[currentFolder]
-                                                        .location_data[index]
-                                                        .loc_name
-                                                }
-                                            </span>
+                                            {pinState[currentFolder][index] && (
+                                                <Popup
+                                                    anchor="top"
+                                                    longitude={point.lng}
+                                                    latitude={point.lat}
+                                                >
+                                                    <div className="font-extrabold">
+                                                        {
+                                                            fullPlan[
+                                                                currentFolder
+                                                            ].location_data[
+                                                                index
+                                                            ].loc_name
+                                                        }
+                                                    </div>
+                                                </Popup>
+                                            )}
+                                            <div
+                                                className="bg-transparent h-10 w-10 z-100 translate-y-10"
+                                                onMouseEnter={() => {
+                                                    togglePinState(
+                                                        currentFolder,
+                                                        index
+                                                    );
+                                                }}
+                                            ></div>
 
                                             {pinState[currentFolder] && (
                                                 <Pin
@@ -111,6 +131,7 @@ const TripMap = () => {
                                         </Marker>
                                     );
                                 },
+
                                 []
                             )}
 
