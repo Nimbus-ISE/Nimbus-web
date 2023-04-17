@@ -1,7 +1,7 @@
 import React from "react";
 import useMapLogic from "@/hooks/useMap";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
-import Pin from "@/components/Pin";
+import Pin from "@/components/MapPageComponents/MapboxMap/Pin";
 import Map, {
     Marker,
     ScaleControl,
@@ -111,6 +111,7 @@ const TripMap = () => {
                                         </Marker>
                                     );
                                 },
+
                                 []
                             )}
 

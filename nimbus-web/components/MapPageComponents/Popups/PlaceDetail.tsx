@@ -9,6 +9,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
     const data = placeData.place;
+    console.log(data);
 
     const fetchReview = async (loc_id: string) => {
         const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
@@ -70,7 +71,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                         <div className="text-xs">{props.address}</div>
 
-                        <Stars rating={100} size={40} />
+                        <Stars rating={data.rating} size={40} />
 
                         <div
                             className={

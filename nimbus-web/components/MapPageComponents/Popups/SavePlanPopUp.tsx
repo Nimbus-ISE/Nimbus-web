@@ -58,7 +58,7 @@ const SavePlanPopUp = () => {
         <>
             {isBigScreen && (
                 <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[75vw] top-[36vh] z-10 text-white"
+                    className="bg-black w-10 h-10 rounded-full absolute left-[45vw] top-[36vh] z-10 text-white"
                     onClick={() => {
                         dispatch({ type: "TOGGLE_SAVE_PLAN" });
                     }}
@@ -69,7 +69,7 @@ const SavePlanPopUp = () => {
             <div
                 className={
                     isBigScreen
-                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[50vw] text-center text-xl flex flex-col items-center "
+                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[20vw] text-center text-xl flex flex-col items-center "
                         : "bg-white w-96 p-2 rounded-lg mt-20 pb-8 text-center text-xl flex flex-col items-center z-100"
                 }
             >

@@ -129,7 +129,9 @@ const FolderSmall = () => {
                                                     />
                                                 )}
 
-                                            {openSavePlan && <SavePlanPopUp />}
+                                            {openSavePlan && !isBigScreen && (
+                                                <SavePlanPopUp />
+                                            )}
                                         </div>
                                     )}
                                 </>

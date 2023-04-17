@@ -10,7 +10,7 @@ const pinStyle = {
     stroke: "none",
 };
 
-function Pin({ size = 30, fill = "#000", number = "" }) {
+function Pin({ size = 30, fill = "#000", number = 0 }) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ function Pin({ size = 30, fill = "#000", number = "" }) {
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
 
             <text
-                x="8.5"
+                x={number >= 10 ? "4.5" : "8.5"}
                 y="15"
                 stroke="white"
                 font-weight="lighter"
