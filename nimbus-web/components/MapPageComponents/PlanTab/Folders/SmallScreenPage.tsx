@@ -73,7 +73,7 @@ const SmallScreenPage = () => {
             )}
             {map_polyline === "" && (
                 <div className=" bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[68.5vh] absolute top-0">
-                    <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[35vh] left-[30vw] h-20 w-40">
+                    <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[35vh] rounded-xl left-[30vw] h-20 w-40">
                         Loading map...
                     </div>
                 </div>

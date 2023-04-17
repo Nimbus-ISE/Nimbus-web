@@ -62,7 +62,7 @@ const BigScreenPage = () => {
                         )}
                         {map_polyline === "" && (
                             <div className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3  z-50">
-                                <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[45vh] left-[30vw] h-20 w-40">
+                                <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[45vh] rounded-xl left-[30vw] h-20 w-40">
                                     Loading map...
                                 </div>
                             </div>

@@ -117,16 +117,6 @@ const TripMap = () => {
                                                     );
                                                 }}
                                             ></div>
-                                            {/* {pinState[currentFolder][index] && (
-                                                <span className="text-center bg-black text-cyan-300 p-[2px] rounded ">
-                                                    {
-                                                        fullPlan[currentFolder]
-                                                            .location_data[
-                                                            index
-                                                        ].loc_name
-                                                    }
-                                                </span>
-                                            )} */}
 
                                             {pinState[currentFolder] && (
                                                 <Pin

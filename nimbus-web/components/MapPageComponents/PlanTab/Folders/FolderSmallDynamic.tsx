@@ -18,6 +18,7 @@ const FolderSmall = () => {
         openSavePlan,
         travelTime,
         arrivalAndLeaveTimes,
+        currentFolder,
     } = getPlanTabState();
 
     const dispatch: any = getPlanTabDispatch();
@@ -40,6 +41,8 @@ const FolderSmall = () => {
             setTabsClass(classes.tabs);
         }
     }, [openFullTab, currentFolderView]);
+    console.log(fullPlan.length);
+    console.log(currentFolderView);
 
     return (
         <>
@@ -140,49 +143,69 @@ const FolderSmall = () => {
 
                     {fullPlan.length > 3 && (
                         <>
-                            <input type="radio" name="tabs" id={`arrow`} />
-                            <label
-                                htmlFor={`arrow`}
-                                className={classes.arrowLabel}
-                                onMouseDown={() => {
-                                    dispatch({ type: "DECREMENT_FOLDER" });
-                                    dispatch({
-                                        type: "SET_ROUTE",
-                                        payload: "",
-                                    });
-                                }}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    version="1.1"
-                                    width="20"
-                                    height="100"
-                                >
-                                    <polygon points="0,50 100,0 100,100" />
-                                </svg>
-                            </label>
-                            <input type="radio" name="tabs" id={`arrow`} />
-                            <label
-                                htmlFor={`arrow`}
-                                className={classes.arrowLabel}
-                                onMouseDown={() => {
-                                    dispatch({ type: "INCREMENT_FOLDER" });
-                                    dispatch({
-                                        type: "SET_ROUTE",
-                                        payload: "",
-                                    });
-                                }}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    version="1.1"
-                                    width="20"
-                                    height="100"
-                                    className="rotate-180"
-                                >
-                                    <polygon points="0,50 100,0 100,100" />
-                                </svg>
-                            </label>
+                            {currentFolderView !== 0 && (
+                                <>
+                                    <input
+                                        type="radio"
+                                        name="tabs"
+                                        id={`arrow`}
+                                    />
+                                    <label
+                                        htmlFor={`arrow`}
+                                        className={classes.arrowLabel}
+                                        onMouseDown={() => {
+                                            dispatch({
+                                                type: "DECREMENT_FOLDER",
+                                            });
+                                            dispatch({
+                                                type: "SET_ROUTE",
+                                                payload: "",
+                                            });
+                                        }}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            version="1.1"
+                                            width="20"
+                                            height="100"
+                                        >
+                                            <polygon points="0,50 100,0 100,100" />
+                                        </svg>
+                                    </label>
+                                </>
+                            )}
+                            {currentFolderView !== fullPlan.length - 2 && (
+                                <>
+                                    <input
+                                        type="radio"
+                                        name="tabs"
+                                        id={`arrow`}
+                                    />
+                                    <label
+                                        htmlFor={`arrow`}
+                                        className={classes.arrowLabel}
+                                        onMouseDown={() => {
+                                            dispatch({
+                                                type: "INCREMENT_FOLDER",
+                                            });
+                                            dispatch({
+                                                type: "SET_ROUTE",
+                                                payload: "",
+                                            });
+                                        }}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            version="1.1"
+                                            width="20"
+                                            height="100"
+                                            className="rotate-180"
+                                        >
+                                            <polygon points="0,50 100,0 100,100" />
+                                        </svg>
+                                    </label>
+                                </>
+                            )}
                             {/* <svg height="500" width="500">
                                 <polygon points="250,60 100,400 400,400" />
                                 Sorry, your browser does not support inline SVG.
