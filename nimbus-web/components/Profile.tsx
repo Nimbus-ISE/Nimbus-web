@@ -22,6 +22,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
     const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     React.useEffect(() => {
         if (user && premiumExpire) {
+            console.log(user);
             setDate(premiumExpire.toString());
         }
     }, [user]);
@@ -29,7 +30,6 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
         <div className="relative flex flex-col min-h-screen h-full w-full bg-neutral-100 text-black">
             <Background />
             <div
-                id="discover-page-container"
                 style={{
                     marginTop: isLargerThanMedium ? "2.5%" : 0,
                     marginBottom: isLargerThanMedium ? "2.5%" : 0,
