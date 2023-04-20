@@ -27,7 +27,7 @@ export default async function handler(
                 },
             }
         );
-
+        console.log(response);
         const result: Plan = await response.json();
         console.log(result);
 
@@ -62,6 +62,7 @@ export default async function handler(
 
         res.status(200).json({ locations, travelTimes, arrivalAndLeaveTimes });
     } catch (err) {
+        console.log(err);
         res.status(500).json("error invalid url");
     }
 }

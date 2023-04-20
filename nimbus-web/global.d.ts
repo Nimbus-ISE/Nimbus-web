@@ -24,3 +24,12 @@ declare interface IReview {
     review_date: number | Date;
     review_url?: string;
 }
+
+declare interface IUpgradeCard {
+    backgroundColor: string;
+    color: string;
+    planName: string;
+    priceStr: string;
+    list: Array<string>;
+    value: "Monthly" | "Yearly" | "None";
+}
