@@ -1,6 +1,5 @@
 import React from "react";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
-
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import UserProfile from "@/components/UserProfile";
