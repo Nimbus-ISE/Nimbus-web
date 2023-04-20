@@ -5,7 +5,7 @@ import { nimbusTheme } from "@/styles/NimbusMuiTheme";
 
 const Loading = () => (
     <ThemeProvider theme={nimbusTheme}>
-        <div className="m-auto">
+        <div className="m-auto drop-shadow-sm">
             <CircularProgress color="primary" />
         </div>
     </ThemeProvider>
