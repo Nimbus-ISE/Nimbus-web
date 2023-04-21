@@ -56,7 +56,6 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip: tripType = await fetchTrip();
-            // console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",

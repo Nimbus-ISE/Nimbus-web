@@ -27,9 +27,8 @@ export default async function handler(
                 },
             }
         );
-        console.log(response);
+
         const result: Plan = await response.json();
-        console.log(result);
 
         const travelTimes: Array<Array<TravelDuration>> = [];
         const locations: Array<Array<number>> = [];

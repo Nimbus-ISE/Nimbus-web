@@ -13,7 +13,7 @@ const SavePlanPopUp = () => {
     const plan: any = [];
     const savePlan: any = [];
 
-    function handleClick() {
+    async function handleClick() {
         const name = inputRef.current.value;
         fullPlan.forEach((day: any, dayIndex: any) => {
             const dayPlan: any = [];
@@ -47,19 +47,16 @@ const SavePlanPopUp = () => {
             });
             plan.push(dayPlan);
         });
-        savePlan["name"] = name;
-        savePlan["day_plan"] = plan;
-        savePlan["trip_params"] = trip_params;
 
-        console.log(savePlan);
-        fetch("/api/postSavedPlan", {
+        savePlan.push({ name: name, day_plan: plan, trip_params: trip_params });
+
+        await fetch("/api/postSavedPlan", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(savePlan),
         });
-        //Some Fetching shit
     }
 
     return (
