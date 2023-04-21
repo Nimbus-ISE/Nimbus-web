@@ -3,10 +3,10 @@ import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Profile from "@/components/Profile";
-import getLocationList from "@/utils/api/getLocationList";
 import getRecentlyViewedList from "@/utils/api/getRecentlyViewedList";
 import { GetServerSidePropsContext } from "next";
 import getRecentlyViewed from "@/utils/getRecentlyViewed";
+import getSavedPlan from "@/utils/api/getSavedPlan";
 
 interface IProps {
     recentlyViewedList: Array<unknown> | undefined;
@@ -43,7 +43,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     if (rv) {
         recentlyViewedList = await getRecentlyViewedList(rv.reverse());
     }
-    const planList = await getLocationList();
+    const planList = await getSavedPlan(cookies.userID);
     console.log(recentlyViewedList);
     return { props: { recentlyViewedList, planList } };
 }

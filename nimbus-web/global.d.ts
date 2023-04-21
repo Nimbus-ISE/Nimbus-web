@@ -33,8 +33,3 @@ declare interface IUpgradeCard {
     list: Array<string>;
     value: "Monthly" | "Yearly" | "None";
 }
-
-declare interface ICustomClaim {
-    "https://nimbus-ise.vercel.app/premium_type": "None" | "Monthly" | "Yearly";
-    "https://nimbus-ise.vercel.app/premium_expire": number;
-}

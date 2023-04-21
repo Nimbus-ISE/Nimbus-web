@@ -3,6 +3,7 @@ import React from "react";
 import useGridColumns from "@/hooks/useGridColumns";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
+import SavedPlanCard from "./SavedPlanCard";
 
 interface IProps {
     planList: Array<unknown>;
@@ -38,14 +39,14 @@ const PlanCard = ({ planList }: IProps) => {
                 className={`grid gap-5 w-fit mx-auto my-5`}
             >
                 {!expand && planList.length > cols
-                    ? [...planList].splice(0, cols).map((location: any) => (
-                          <div key={location.loc_id}>
-                              <Card location={location} />
+                    ? [...planList].splice(0, cols).map((params: any) => (
+                          <div key={params.name}>
+                              <SavedPlanCard planParams={params} />
                           </div>
                       ))
-                    : planList.map((location: any) => (
-                          <div key={location.loc_id}>
-                              <Card location={location} />
+                    : planList.map((params: any) => (
+                          <div key={params.name}>
+                              <SavedPlanCard planParams={params} />
                           </div>
                       ))}
             </div>

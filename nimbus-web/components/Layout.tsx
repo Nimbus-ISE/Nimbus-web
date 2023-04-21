@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import getPremiumExpire from "@/utils/getPremiumExpire";
 import getPremiumType from "@/utils/getPremiumType";
 import checkPremium from "@/utils/checkPremium";
+import Cookies from "js-cookie";
 
 const excludePathnameList = ["/plan", "/map"];
 
@@ -24,12 +25,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     React.useEffect(() => {
         if (user) {
             console.log("check premium status on new session");
-            /*updateOnNewSession(user, router);
+            const userID = Cookies.get("user_id");
+            if (!userID && user.sub) {
+                Cookies.set("userID", user.sub);
+            }
+            updateOnNewSession(user, router);
             const metadata = {
-                premium_type: getPremiumType(user),
-                premium_expire: getPremiumExpire(user, "number"),
+                premium_type: getPremiumType(user) as
+                    | "Monthly"
+                    | "Yearly"
+                    | "None",
+                premium_expire: getPremiumExpire(user, "number") as number,
             };
-            checkPremium(metadata, user, router);*/
+            checkPremium(metadata, user, router);
         }
     }, [user, router]);
     return !isLoading ? (
