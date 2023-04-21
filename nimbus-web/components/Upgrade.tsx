@@ -23,7 +23,7 @@ const upgradeData = [
         planName: "MONTHLY",
         priceStr: "150฿",
         list: [
-            "5 Plan Save Slot",
+            "5 Plans Save Slot",
             "Plan up to 5 days per trip",
             "View other users save plan",
         ],
@@ -35,7 +35,7 @@ const upgradeData = [
         planName: "YEARLY",
         priceStr: "100฿",
         list: [
-            "10 Plan Save Slot",
+            "10 Plans Save Slot",
             "Plan up to 7 days per trip",
             "All benefits of monthly plan",
         ],
