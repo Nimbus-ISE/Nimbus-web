@@ -1,3 +1,10 @@
+export const domain = "https://nimbus-ise.vercel.app";
+
+export const customClaims = {} as { [key: string]: any };
+customClaims[`${domain}/premium_type`] = "None";
+customClaims[`${domain}/premium_expire`] = 1682047709922;
+customClaims[`${domain}/email`] = "hello123@gmail.com";
+
 export const tags = [
     "Restaurant",
     "Hidden Gem",

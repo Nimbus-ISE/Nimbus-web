@@ -7,12 +7,12 @@ import { useRouter } from "next/router";
 import UserProfile from "../UserProfile";
 import truncateWithDot from "@/utils/truncateWithDot";
 import getPremiumType from "@/utils/getPremiumType";
-import getUserEmail from "@/utils/getUserEmail";
+import getCustomClaim from "@/utils/getCustomClaim";
 
 const UserWindow = ({ user }: { user: any }) => {
     const router = useRouter();
     const premium_type = getPremiumType(user);
-    const email = getUserEmail(user);
+    const email = getCustomClaim(user, "email");
     const handleOnCheckout = () => {
         checkout({
             lineItems: [

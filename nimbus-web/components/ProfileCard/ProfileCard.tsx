@@ -1,16 +1,15 @@
 import React from "react";
-import EditIcon from "@mui/icons-material/Edit";
 import { Button, Stack, Typography } from "@mui/material";
 import UserProfile from "../UserProfile";
 import { UserProfile as IUserProfile } from "@auth0/nextjs-auth0/client";
-import getUserEmail from "@/utils/getUserEmail";
 import getPremiumType from "@/utils/getPremiumType";
 import getPremiumExpire from "@/utils/getPremiumExpire";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import getCustomClaim from "@/utils/getCustomClaim";
 
 const ProfileCard = ({ user }: { user: IUserProfile }) => {
-    const email = getUserEmail(user);
+    const email = getCustomClaim(user, "email");
     const premium_type = getPremiumType(user);
     const premium_expire = getPremiumExpire(user) as Date;
     return user ? (

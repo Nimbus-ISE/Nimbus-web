@@ -1,5 +1,6 @@
 import Profile from "@/components/Profile";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { customClaims } from "@/misc";
 
 export default {
     title: "Profile",
@@ -15,6 +16,7 @@ export const LongPlanList = Template.bind({});
 
 ShortPlanList.args = {
     user: {
+        ...customClaims,
         family_name: "P",
         given_name: "Nattakit",
         locale: "en",
@@ -23,50 +25,46 @@ ShortPlanList.args = {
         picture:
             "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
         updated_at: "2023-01-24T01:01:39.063Z",
-        "https://nimbus-ise.vercel.app/premium_type": "None",
-        "https://nimbus-ise.vercel.app/premium_expire": 1682047709922,
-        "https://nimbus-ise.vercel.app/email": "hello123@gmail.com",
     },
     planList: [
         {
-            loc_id: 45,
-            loc_name: "Chicken Rice by J’Bo",
-            full_tag_list: "Restaurant,Hidden Gem",
-            url: "https://10619-2.s.cdn12.com/rests/original/107_503835483.jpg",
-            price_level: 1,
-            lat: 13.7432201,
-            lng: 100.5228919,
-            rating: "4.4",
+            name: "test plan",
+            day_plan: [[]],
+            trip_params: {
+                must_include: 50,
+                start_date: "2023-04-20T00:00:00.000",
+                end_date: "2023-04-22T00:00:00.000",
+                trip_pace: 0,
+                budget: 1,
+                travel_method: "walk",
+                tags: "Sports,Family,Hidden Gem,Must See Attraction",
+            },
         },
         {
-            loc_id: 46,
-            loc_name: "Jeh Nong Professional Barista",
-            full_tag_list: "Hidden Gem,Snack",
-            url: "https://fastly.4sqi.net/img/general/600x600/44822634_ifwKir9mvrl0NOBdmjfzEeKlnepqeqN9omE1_4TkB9Y.jpg",
-            price_level: 1,
-            lat: 13.7409272,
-            lng: 100.523517,
-            rating: "4.6",
+            name: "test plan 1",
+            day_plan: [[]],
+            trip_params: {
+                must_include: 44,
+                start_date: "2023-04-21T00:00:00.000",
+                end_date: "2023-04-25T00:00:00.000",
+                trip_pace: 1,
+                budget: 3,
+                travel_method: "drive",
+                tags: "Nightlife,Family,Hidden Gem",
+            },
         },
         {
-            loc_id: 47,
-            loc_name: "U Center 1",
-            full_tag_list: "Market",
-            url: "https://1.bp.blogspot.com/-YuMzU6nc9p0/VeRyHZ3KDzI/AAAAAAAAALo/w8wRbTX3084/s1600/_DSC8290.JPG",
-            price_level: 0,
-            lat: 13.7350659,
-            lng: 100.5268764,
-            rating: "3.9",
-        },
-        {
-            loc_id: 48,
-            loc_name: "I'm Park Chula",
-            full_tag_list: "Shopping,Mall,Luxury,Modern,Must See Attraction",
-            url: "https://course.webmonsterlab.com/wp-content/uploads/2022/05/chitacreation-classroom-kliquex-samyan-im-park-chula7-2.jpg",
-            price_level: 0,
-            lat: 13.7401041,
-            lng: 100.5246152,
-            rating: "4.1",
+            name: "test plan 2",
+            day_plan: [[]],
+            trip_params: {
+                must_include: 78,
+                start_date: "2023-05-12T00:00:00.000",
+                end_date: "2023-05-14T00:00:00.000",
+                trip_pace: 2,
+                budget: 0,
+                travel_method: "walk",
+                tags: "Restaurant,Hidden Gem",
+            },
         },
     ],
     recentlyViewedList: [
@@ -165,6 +163,7 @@ ShortPlanList.args = {
 
 LongPlanList.args = {
     user: {
+        ...customClaims,
         family_name: "P",
         given_name: "Nattakit",
         locale: "en",
@@ -173,9 +172,6 @@ LongPlanList.args = {
         picture:
             "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
         updated_at: "2023-01-24T01:01:39.063Z",
-        "https://nimbus-ise.vercel.app/premium_type": "Monthly",
-        "https://nimbus-ise.vercel.app/premium_expire": 1682047709922,
-        "https://nimbus-ise.vercel.app/email": "hello123@gmail.com",
     },
     planList: [
         {
