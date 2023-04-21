@@ -36,7 +36,7 @@ export const tags = [
     "Photography",
     "Snack",
     "Buffet",
-];
+].sort();
 
 export const formArr: Array<IForm> = [
     {

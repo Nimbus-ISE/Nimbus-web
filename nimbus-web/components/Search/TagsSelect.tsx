@@ -44,7 +44,7 @@ const TagsSelect = ({ callback }: IProps) => {
                                         ? "filled"
                                         : "outlined"
                                 }
-                                className="shadow-sm"
+                                className="shadow-md border-neutral-300"
                             />
                         );
                     })}
