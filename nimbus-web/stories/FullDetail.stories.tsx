@@ -1,4 +1,5 @@
 import FullDetailCard from "@/components/FullDetailCard/FullDetailCard";
+import Profile from "@/pages/profile";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {

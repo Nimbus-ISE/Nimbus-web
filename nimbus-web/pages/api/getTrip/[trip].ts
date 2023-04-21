@@ -17,7 +17,7 @@ export default async function handler(
         };
 
         const response = await fetch(
-            "http://34.143.204.53:8080/get_trip_mcts",
+            `http://${process.env.ALGO_API_IP}:${process.env.ALGO_API_PORT}/get_trip_mcts`,
             {
                 method: "POST",
                 body: JSON.stringify(payload),
