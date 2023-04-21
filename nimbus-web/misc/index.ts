@@ -4,6 +4,7 @@ export const customClaims = {} as { [key: string]: any };
 customClaims[`${domain}/premium_type`] = "None";
 customClaims[`${domain}/premium_expire`] = 1682047709922;
 customClaims[`${domain}/email`] = "hello123@gmail.com";
+customClaims[`${domain}/created_at`] = "2023-04-04T16:41:54.389Z";
 
 export const tags = [
     "Restaurant",

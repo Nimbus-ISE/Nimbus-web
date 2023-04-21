@@ -10,6 +10,7 @@ import getCustomClaim from "@/utils/getCustomClaim";
 
 const ProfileCard = ({ user }: { user: IUserProfile }) => {
     const email = getCustomClaim(user, "email");
+    const created_at = getCustomClaim(user, "created_at");
     const premium_type = getPremiumType(user);
     const premium_expire = getPremiumExpire(user) as Date;
     return user ? (
@@ -49,8 +50,28 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                     >
                         {user.name ? (
                             <>
-                                <span className="font-semibold">Email: </span>
+                                <span className="font-semibold">
+                                    Email:{"  "}
+                                </span>
                                 {email}
+                            </>
+                        ) : null}
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            fontFamily: "montserrat",
+                            color: "#696969",
+                        }}
+                    >
+                        {created_at ? (
+                            <>
+                                <span className="font-semibold">
+                                    Account Created:{"  "}
+                                </span>
+                                {new Date(
+                                    created_at as string
+                                ).toLocaleDateString()}
                             </>
                         ) : null}
                     </Typography>
@@ -64,7 +85,8 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                         >
                             <span className="font-semibold">
                                 Premium Expires:
-                            </span>{" "}
+                            </span>
+                            {"  "}
                             {premium_expire.toDateString()}
                         </Typography>
                     ) : null}
