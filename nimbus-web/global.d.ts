@@ -1,3 +1,5 @@
+import { UserProfile } from "@auth0/nextjs-auth0/client";
+
 declare module "react-scroll";
 
 declare interface IForm {
@@ -32,4 +34,9 @@ declare interface IUpgradeCard {
     priceStr: string;
     list: Array<string>;
     value: "Monthly" | "Yearly" | "None";
+}
+
+declare interface IUserProfile extends UserProfile {
+    "https://nimbus-ise.vercel.app/premium_type": "None" | "Monthly" | "Yearly";
+    "https://nimbus-ise.vercel.app/premium_expire": number;
 }

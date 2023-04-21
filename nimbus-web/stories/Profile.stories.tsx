@@ -23,6 +23,9 @@ ShortPlanList.args = {
         picture:
             "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
         updated_at: "2023-01-24T01:01:39.063Z",
+        "https://nimbus-ise.vercel.app/premium_type": "None",
+        "https://nimbus-ise.vercel.app/premium_expire": 1682047709922,
+        "https://nimbus-ise.vercel.app/email": "hello123@gmail.com",
     },
     planList: [
         {
@@ -170,6 +173,9 @@ LongPlanList.args = {
         picture:
             "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
         updated_at: "2023-01-24T01:01:39.063Z",
+        "https://nimbus-ise.vercel.app/premium_type": "Monthly",
+        "https://nimbus-ise.vercel.app/premium_expire": 1682047709922,
+        "https://nimbus-ise.vercel.app/email": "hello123@gmail.com",
     },
     planList: [
         {

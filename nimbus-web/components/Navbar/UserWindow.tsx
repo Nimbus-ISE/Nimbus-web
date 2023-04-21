@@ -7,10 +7,12 @@ import { useRouter } from "next/router";
 import UserProfile from "../UserProfile";
 import truncateWithDot from "@/utils/truncateWithDot";
 import getPremiumType from "@/utils/getPremiumType";
+import getUserEmail from "@/utils/getUserEmail";
 
 const UserWindow = ({ user }: { user: any }) => {
     const router = useRouter();
-    const premiumType = getPremiumType(user);
+    const premium_type = getPremiumType(user);
+    const email = getUserEmail(user);
     const handleOnCheckout = () => {
         checkout({
             lineItems: [
@@ -35,17 +37,23 @@ const UserWindow = ({ user }: { user: any }) => {
         <div
             className={`absolute flex flex-col p-2 top-[68px] -right-2 bg-white 
             shadow-md w-56 ${
-                premiumType === "None" ? "h-52" : "h-40"
+                premium_type === "None" ? "h-52" : "h-40"
             } rounded-xl text-black`}
         >
             <div className="flex p-2">
                 <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
-                    <div className="font-semibold">
+                    <div className="flex gap-2 font-semibold">
                         {truncateWithDot(user.name, 13)}
+                        {premium_type !== "None" ? (
+                            <FontAwesomeIcon
+                                className="my-auto text-yellow-400 drop-shadow-sm"
+                                icon={faCrown}
+                            />
+                        ) : null}
                     </div>
-                    <div className="text-sm text-neutral-500">
-                        {truncateWithDot(user.email, 15)}
+                    <div className="text-xs text-neutral-500">
+                        {truncateWithDot(email, 15)}
                     </div>
                 </div>
             </div>
@@ -68,7 +76,7 @@ const UserWindow = ({ user }: { user: any }) => {
                     >
                         <div className="m-auto font-montserrat">Profile</div>
                     </Button>
-                    {premiumType === "None" ? (
+                    {premium_type === "None" ? (
                         <Button
                             onMouseDown={handleOnUpgrade}
                             variant="outlined"
