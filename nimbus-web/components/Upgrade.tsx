@@ -72,9 +72,9 @@ const Upgrade = ({ user }: { user: UserProfile }) => {
         <div className="relative grid place-items-center min-h-screen h-full bg-neutral-100 text-black">
             <img
                 src="/images/home1.webp"
-                className="absolute top-0 bottom-0 left-0 right-0 w-full h-full opacity-30"
+                className="absolute object-cover object-bottom top-0 bottom-0 left-0 right-0 w-full h-full opacity-30 aspect-video"
             />
-            <div className="flex gap-5">
+            <div className="flex flex-col justify-center flex-wrap md:flex-row gap-5 py-12 px-1">
                 {upgradeData.map((upgradeItem) => {
                     const upgradeProps = {
                         ...upgradeItem,

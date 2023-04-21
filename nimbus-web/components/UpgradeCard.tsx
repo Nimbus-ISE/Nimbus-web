@@ -24,8 +24,8 @@ const UpgradeCard = ({
             style={{
                 color: color,
             }}
-            className="relative flex flex-col justify-between w-[18rem] h-[25rem]
-            p-4 backdrop-blur-lg rounded-3xl z-10 bg-transparent"
+            className="relative flex flex-col justify-between md:w-[18rem] h-[25rem]
+            p-4 backdrop-blur-lg rounded-3xl z-10 bg-transparent w-[80vw]"
         >
             <div
                 style={{
