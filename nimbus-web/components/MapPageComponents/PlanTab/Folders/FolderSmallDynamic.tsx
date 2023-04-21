@@ -18,6 +18,7 @@ const FolderSmall = () => {
         openSavePlan,
         travelTime,
         arrivalAndLeaveTimes,
+        currentFolder,
     } = getPlanTabState();
 
     const dispatch: any = getPlanTabDispatch();
@@ -28,7 +29,7 @@ const FolderSmall = () => {
     };
 
     useEffect(() => {
-        setOpenedTab(`tab${currentFolderView}`);
+        setOpenedTab(`tab${currentFolder}`);
 
         if (isBigScreen && !openFullTab) {
             setTabsClass(classes.tabs);
