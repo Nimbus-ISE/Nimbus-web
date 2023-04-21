@@ -32,7 +32,10 @@ const PlanCard = ({ planList }: IProps) => {
                 SAVED PLANS
             </div>
             <div
-                className={`grid grid-flow-col gap-5 ${gridColumnsClass} w-fit mx-auto my-5`}
+                style={{
+                    gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                }}
+                className={`grid gap-5 w-fit mx-auto my-5`}
             >
                 {!expand && planList.length > cols
                     ? [...planList].splice(0, cols).map((location: any) => (
