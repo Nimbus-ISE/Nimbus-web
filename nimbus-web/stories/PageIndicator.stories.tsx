@@ -1,13 +1,6 @@
 import PageIndicator from "@/components/PageIndicator/PageIndicator";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
-const formArr: Array<IForm> = [
-    { type: "Location", title: "Where would you like to go?" },
-    { type: "Dates", title: "Select the dates" },
-    { type: "Style", title: "What kind of trip?" },
-    { type: "Budget", title: "What is your budget?" },
-    { type: "Tags", title: "Select some tags" },
-];
+import { formArr } from "@/misc";
 
 export default {
     title: "PageIndicator",

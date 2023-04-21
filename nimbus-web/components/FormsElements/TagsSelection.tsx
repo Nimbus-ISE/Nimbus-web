@@ -5,7 +5,6 @@ import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
 import { PlanContext } from "../Plan";
 import { tags } from "@/misc";
 import router from "next/router";
-import { IFormData } from "@/global";
 
 const TagsSelection = () => {
     const { formData, setFormDataField, setIsConfirmActive } =
