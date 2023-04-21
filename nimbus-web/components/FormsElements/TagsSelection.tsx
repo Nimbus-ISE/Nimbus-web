@@ -7,8 +7,8 @@ import { tags } from "@/misc";
 import router from "next/router";
 
 const TagsSelection = () => {
-    const { formData, setFormDataField, setIsConfirmActive } =
-        React.useContext(PlanContext);
+    // const { formData, setFormDataField, setIsConfirmActive } =
+    //     React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const [payload, setPayload] = React.useState<string>("");
     const handleClick = (tag: string) => () => {
@@ -24,27 +24,27 @@ const TagsSelection = () => {
         setSelectTag(newSelectTag);
     };
 
-    React.useEffect(() => {
-        setFormDataField("tags", selectTag);
-    }, [selectTag]);
+    // React.useEffect(() => {
+    //     setFormDataField("tags", selectTag);
+    // }, [selectTag]);
 
     const ref = React.useRef<any>();
 
-    React.useEffect(() => {
-        if (formData) {
-            const data: IFormData = {
-                must_include: formData.locationId,
-                start_date: formData.date ? formData.date[0] : undefined,
-                end_date: formData.date ? formData.date[1] : undefined,
-                trip_pace: formData.tripType,
-                budget: formData.budget,
-                travel_method: formData.travelMethod,
-                tags: formData.tags ? formData.tags.join() : undefined,
-            };
-            console.log(data);
-            setPayload(JSON.stringify(data));
-        }
-    }, [formData]);
+    // React.useEffect(() => {
+    //     if (formData) {
+    //         const data: IFormData = {
+    //             must_include: formData.locationId,
+    //             start_date: formData.date ? formData.date[0] : undefined,
+    //             end_date: formData.date ? formData.date[1] : undefined,
+    //             trip_pace: formData.tripType,
+    //             budget: formData.budget,
+    //             travel_method: formData.travelMethod,
+    //             tags: formData.tags ? formData.tags.join() : undefined,
+    //         };
+    //         console.log(data);
+    //         setPayload(JSON.stringify(data));
+    //     }
+    // }, [formData]);
 
     // const data = formData;
 
@@ -70,6 +70,13 @@ const TagsSelection = () => {
                                         : "outlined"
                                 }
                                 className="shadow-md"
+                                disabled={
+                                    selectTag.length != 5
+                                        ? false
+                                        : selectTag.includes(data)
+                                        ? false
+                                        : true
+                                }
                             />
                         );
                     })}

@@ -3,8 +3,6 @@ import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { ThemeProvider } from "@mui/material/styles";
 import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
@@ -13,6 +11,10 @@ import { PlanContext } from "../Plan";
 import { InputAdornment } from "@mui/material";
 import convertDateToUTCPlus7 from "@/utils/convertUTC7ISOString";
 
+import getPremiumExpire from "@/utils/getPremiumExpire";
+import getPremiumType from "@/utils/getPremiumType";
+import { useUser } from "@auth0/nextjs-auth0/client";
+
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
 
@@ -20,6 +22,7 @@ const DateInput = () => {
     const { formData, setFormDataField } = React.useContext(PlanContext);
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
+    const { user } = useUser();
 
     React.useEffect(() => {
         if (startDate && endDate) {
@@ -73,10 +76,18 @@ const DateInput = () => {
                                 />
                             )}
                             inputFormat="DD/MM/YYYY"
+                            minDate={
+                                getPremiumType(user) === "Yearly"
+                                    ? endDate?.subtract(6, "day")
+                                    : getPremiumType(user) === "Monthly"
+                                    ? endDate?.subtract(4, "day")
+                                    : endDate?.subtract(2, "day")
+                            }
                             maxDate={endDate}
                             closeOnSelect={false}
                             disablePast
                             autoFocus={false}
+                            showToolbar={false}
                         />
                     </LocalizationProvider>
                 </div>
@@ -115,9 +126,17 @@ const DateInput = () => {
                             )}
                             inputFormat="DD/MM/YYYY"
                             minDate={startDate}
+                            maxDate={
+                                getPremiumType(user) === "Yearly"
+                                    ? startDate?.add(6, "day")
+                                    : getPremiumType(user) === "Monthly"
+                                    ? startDate?.add(4, "day")
+                                    : startDate?.add(2, "day")
+                            }
                             closeOnSelect={false}
                             disablePast
                             autoFocus={false}
+                            showToolbar={false}
                         />
                     </LocalizationProvider>
                 </div>
