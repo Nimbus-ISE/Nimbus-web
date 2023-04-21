@@ -17,7 +17,7 @@ export default async function handler(
         };
 
         const response = await fetch(
-            "http://34.173.38.122:5000/get_trip_mcts",
+            "http://34.143.204.53:8080/get_trip_mcts",
             {
                 method: "POST",
                 body: JSON.stringify(payload),

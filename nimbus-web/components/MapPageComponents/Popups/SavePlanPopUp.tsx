@@ -1,13 +1,17 @@
 import React, { FormEvent, useRef } from "react";
 import { getPlanTabState, getPlanTabDispatch } from "../PlanTab/PlanTabContext";
 const SavePlanPopUp = () => {
-    const { isBigScreen, fullPlan, arrivalAndLeaveTimes, travelTime } =
-        getPlanTabState();
+    const {
+        isBigScreen,
+        fullPlan,
+        arrivalAndLeaveTimes,
+        travelTime,
+        trip_params,
+    } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const inputRef: any = useRef(null);
     const plan: any = [];
     const savePlan: any = [];
-    console.log(travelTime);
 
     function handleClick() {
         const name = inputRef.current.value;
@@ -43,7 +47,11 @@ const SavePlanPopUp = () => {
             });
             plan.push(dayPlan);
         });
-        savePlan.push({ name: name, plan });
+        savePlan["name"] = name;
+        savePlan["day_plan"] = plan;
+        savePlan["trip_params"] = trip_params;
+
+        console.log(savePlan);
         fetch("/api/postSavedPlan", {
             method: "POST",
             headers: {
@@ -58,7 +66,7 @@ const SavePlanPopUp = () => {
         <>
             {isBigScreen && (
                 <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[45vw] top-[36vh] z-10 text-white"
+                    className="bg-black w-10 h-10 rounded-full absolute left-[81vw] top-[36vh] z-10 text-white"
                     onClick={() => {
                         dispatch({ type: "TOGGLE_SAVE_PLAN" });
                     }}
@@ -69,7 +77,7 @@ const SavePlanPopUp = () => {
             <div
                 className={
                     isBigScreen
-                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[20vw] text-center text-xl flex flex-col items-center "
+                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[50vw] text-center text-xl flex flex-col items-center "
                         : "bg-white w-96 p-2 rounded-lg mt-20 pb-8 text-center text-xl flex flex-col items-center z-100"
                 }
             >

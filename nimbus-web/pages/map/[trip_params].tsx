@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Head from "next/head";
-
 import useMediaQuery from "@/hooks/useMediaQuery";
 import {
     getPlanTabDispatch,
@@ -9,7 +8,6 @@ import {
 } from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
-
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 import { GetServerSidePropsContext } from "next";
@@ -35,6 +33,10 @@ export default function map({ trip_params }: any) {
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
+        dispatch({
+            type: "SET_TRIP_PARAMS",
+            payload: trip_params,
+        });
     }, [screenSize]);
 
     useEffect(() => {
@@ -54,7 +56,7 @@ export default function map({ trip_params }: any) {
         (async () => {
             const loc_ids: any = [];
             const trip: tripType = await fetchTrip();
-            console.log(trip);
+            // console.log(trip);
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
@@ -114,7 +116,7 @@ export default function map({ trip_params }: any) {
 
                         const plan = initialized ? fullPlan : correctlyOrdered;
 
-                        plan.forEach((day: any, index: any) => {
+                        plan.forEach((day: any) => {
                             const tempCoordinates: Array<string> = [];
                             day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);

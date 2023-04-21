@@ -18,7 +18,6 @@ const FolderSmall = () => {
         openSavePlan,
         travelTime,
         arrivalAndLeaveTimes,
-        currentFolder,
     } = getPlanTabState();
 
     const dispatch: any = getPlanTabDispatch();
@@ -41,8 +40,7 @@ const FolderSmall = () => {
             setTabsClass(classes.tabs);
         }
     }, [openFullTab, currentFolderView]);
-    console.log(fullPlan.length);
-    console.log(currentFolderView);
+    console.log(fullPlan);
 
     return (
         <>
