@@ -1,6 +1,6 @@
 import React from "react";
 
-declare interface IProps {
+interface IProps {
     backgroundColor: string;
     color: string;
     planName: string;
