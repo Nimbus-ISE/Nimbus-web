@@ -29,14 +29,14 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                 className={`flex flex-col md:rounded-xl shadow-lg bg-neutral-100 h-full pt-12
                 min-h-screen m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] z-10 pb-5`}
             >
-                <div className="md:w-[80%] p-5 pb-12 flex justify-left bg-neutral-100 mx-auto">
+                <div className="md:w-[80%] w-[90%] p-5 pb-12 flex justify-left bg-neutral-100 mx-auto">
                     <ProfileCard user={user} />
                 </div>
                 <PlanCard planList={planList} maxPlans={maxPlans} />
                 <div className="my-7 w-full">
                     <div
-                        className="md:w-[80%] md:mx-auto text-xl font-semibold text-neutral-500
-                 border-b-neutral-500 border-b-[1px] pb-1 mx-3"
+                        className="md:w-[80%] w-[90%] mx-auto text-xl font-semibold text-neutral-500
+                    border-b-neutral-500 md:border-b-[1px] pb-1"
                     >
                         RECENTLY VIEWED
                     </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import UserProfile from "../UserProfile";
 import { UserProfile as IUserProfile } from "@auth0/nextjs-auth0/client";
 import getPremiumType from "@/utils/getPremiumType";
@@ -13,16 +13,22 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
     const created_at = getCustomClaim(user, "created_at");
     const premium_type = getPremiumType(user);
     const premium_expire = getPremiumExpire(user) as Date;
+    const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     return user ? (
-        <Stack spacing={3} alignItems="center" direction="row">
+        <Stack
+            spacing={3}
+            alignItems="center"
+            direction={isLargerThanMedium ? "row" : "column"}
+        >
             <UserProfile src={user.picture as string} size={80} />
             <Stack
                 direction="row"
                 alignItems="center"
                 justifyContent="space-between"
+                flexWrap="wrap"
                 width="100%"
             >
-                <Stack>
+                <Stack spacing={0.5}>
                     <div className="flex gap-3">
                         <Typography
                             variant="h6"
@@ -30,6 +36,7 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                                 fontFamily: "montserrat",
                                 color: "#333333",
                                 fontWeight: "bold",
+                                wordBreak: "break-word",
                             }}
                         >
                             {user.name ? user.name : email}
@@ -48,14 +55,8 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                             color: "#696969",
                         }}
                     >
-                        {user.name ? (
-                            <>
-                                <span className="font-semibold">
-                                    Email:{"  "}
-                                </span>
-                                {email}
-                            </>
-                        ) : null}
+                        <span className="font-semibold">Email:{"  "}</span>
+                        {email}
                     </Typography>
                     <Typography
                         variant="body2"

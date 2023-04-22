@@ -55,7 +55,7 @@ export default function SavedPlanCard({
                 header="Delete saved plan"
                 sub="Deleting your saved plan will remove it from the system. This action is irreversible."
             />
-            <div id="saved-plan-card" className="relative">
+            <div id="saved-plan-card" className="relative md:w-72 w-full">
                 <div className="absolute top-0 right-0 z-10">
                     <button
                         onClick={() => setIsConfirmActive(true)}
@@ -69,7 +69,7 @@ export default function SavedPlanCard({
                         const stringified = JSON.stringify(planParams);
                         router.push(`/map/${stringified}`);
                     }}
-                    className="group w-72 max-w-sm overflow-hidden shadow-md hover:shadow-xl bg-white duration-500 rounded-xl"
+                    className="group w-full overflow-hidden shadow-md hover:shadow-xl bg-white duration-500 rounded-xl"
                 >
                     <div
                         style={{
@@ -120,7 +120,6 @@ export default function SavedPlanCard({
                             </div>
                         </div>
                     </div>
-
                     <div className="">
                         <div
                             className="flex px-6 pt-2 overflow-x-scroll"

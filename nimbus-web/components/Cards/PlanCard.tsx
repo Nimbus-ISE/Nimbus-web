@@ -27,11 +27,11 @@ const PlanCard = ({ planList, maxPlans }: IProps) => {
     return (
         <div
             id="plan-card-container"
-            className="flex flex-col md:w-[80%] w-full mx-auto"
+            className="flex flex-col md:w-[80%] w-[90%] mx-auto"
         >
             <div
                 className="text-xl font-semibold text-neutral-500
-                 border-b-neutral-500 border-b-[1px] pb-1 md:mx-0 mx-3"
+                 border-b-neutral-500 md:border-b-[1px] pb-1"
             >
                 <span>SAVED PLANS</span>
                 <span className="ml-2 font-normal">
@@ -73,7 +73,7 @@ const PlanCard = ({ planList, maxPlans }: IProps) => {
                     style={{
                         gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
                     }}
-                    className={`grid gap-5 w-fit mx-auto my-5`}
+                    className={`grid gap-5 w-full md:w-fit mx-auto my-5`}
                 >
                     {!expand && planList.length > cols
                         ? [...planList].splice(0, cols).map((params: any) => (

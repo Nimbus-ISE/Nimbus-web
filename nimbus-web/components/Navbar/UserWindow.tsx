@@ -44,7 +44,10 @@ const UserWindow = ({ user }: { user: any }) => {
                 <UserProfile src={user.picture} size={40} />
                 <div className="px-3">
                     <div className="flex gap-2 font-semibold">
-                        {truncateWithDot(user.name, 13)}
+                        {truncateWithDot(
+                            user.name,
+                            premium_type === "None" ? 13 : 10
+                        )}
                         {premium_type !== "None" ? (
                             <FontAwesomeIcon
                                 className="my-auto text-yellow-400 drop-shadow-sm"
