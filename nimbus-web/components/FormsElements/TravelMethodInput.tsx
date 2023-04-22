@@ -21,9 +21,11 @@ const TravelMethodInput = () => {
         setTravelMethod(index);
         setFormDataField("travelMethod", choices[index][1]);
     };
+
     React.useEffect(() => {
         setFormDataField("travelMethod", choices[0][1]);
     }, []);
+
     return (
         <ThemeProvider theme={nimbusTheme}>
             <div className="flex flex-initial flex-wrap justify-center">

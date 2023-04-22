@@ -7,10 +7,12 @@ import { tags } from "@/misc";
 import router from "next/router";
 
 const TagsSelection = () => {
-    // const { formData, setFormDataField, setIsConfirmActive } =
-    //     React.useContext(PlanContext);
+    const { formData } = React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const [payload, setPayload] = React.useState<string>("");
+    const [alert, setAlert] = React.useState<boolean>(false);
+    const [tempData, setTempData] = React.useState<IFormData>();
+
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
         if (newSelectTag.indexOf(tag) > -1) {
@@ -30,23 +32,35 @@ const TagsSelection = () => {
 
     const ref = React.useRef<any>();
 
-    // React.useEffect(() => {
-    //     if (formData) {
-    //         const data: IFormData = {
-    //             must_include: formData.locationId,
-    //             start_date: formData.date ? formData.date[0] : undefined,
-    //             end_date: formData.date ? formData.date[1] : undefined,
-    //             trip_pace: formData.tripType,
-    //             budget: formData.budget,
-    //             travel_method: formData.travelMethod,
-    //             tags: formData.tags ? formData.tags.join() : undefined,
-    //         };
-    //         console.log(data);
-    //         setPayload(JSON.stringify(data));
-    //     }
-    // }, [formData]);
+    React.useEffect(() => {
+        if (formData) {
+            const data: IFormData = {
+                must_include: formData.locationId,
+                start_date: formData.date ? formData.date[0] : undefined,
+                end_date: formData.date ? formData.date[1] : undefined,
+                trip_pace: formData.tripType,
+                budget: formData.budget,
+                travel_method: formData.travelMethod,
+                tags: formData.tags ? formData.tags.join() : undefined,
+            };
+            setTempData(data);
+        }
+    }, [formData]);
 
-    // const data = formData;
+    React.useEffect(() => {
+        if (tempData?.start_date && tempData.end_date) {
+            setAlert(false);
+        }
+    });
+
+    const handleContinue = async () => {
+        // setIsConfirmActive(true);
+        if (tempData && !(tempData.start_date || tempData.end_date)) {
+            setAlert(true);
+        } else {
+            router.push(`/map/${encodeURIComponent(payload)}`);
+        }
+    };
 
     return (
         <div className="mx-auto">
@@ -81,18 +95,24 @@ const TagsSelection = () => {
                         );
                     })}
                 </div>
-                <div className="flex mx-auto w-full">
+                <div className="flex flex-col mx-auto w-full">
+                    {alert ? (
+                        <div className="relative">
+                            <div className="absolute top-3 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
+                                Please select valid date(s)!
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                     <Button
-                        onClick={async () => {
-                            // setIsConfirmActive(true);
-                            router.push(`/map/${encodeURIComponent(payload)}`);
-                        }}
+                        onClick={handleContinue}
                         variant="outlined"
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
                             color: "black",
-                            marginTop: "50px",
+                            marginTop: "30px",
                             paddingX: "5rem",
                             marginX: "auto",
                             textTransform: "none",
