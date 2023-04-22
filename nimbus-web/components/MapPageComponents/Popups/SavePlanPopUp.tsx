@@ -21,7 +21,7 @@ const SavePlanPopUp = () => {
                 if (travelTime[dayIndex][locationIndex]) {
                     dayPlan.push(
                         {
-                            type: "location",
+                            type: "locations",
                             loc_id: location.loc_id,
                             arrival_time:
                                 arrivalAndLeaveTimes[dayIndex][locationIndex]
@@ -34,7 +34,7 @@ const SavePlanPopUp = () => {
                     );
                 } else {
                     dayPlan.push({
-                        type: "location",
+                        type: "locations",
                         loc_id: location.loc_id,
                         arrival_time:
                             arrivalAndLeaveTimes[dayIndex][locationIndex]
@@ -48,12 +48,18 @@ const SavePlanPopUp = () => {
             plan.push(dayPlan);
         });
 
-        savePlan.push({ name: name, day_plan: plan, trip_params: trip_params });
+        savePlan.push({
+            name: name,
+            day_plan: plan,
+            trip_params: JSON.parse(trip_params),
+        });
+        // console.log(JSON.stringify(savePlan));
 
         await fetch("/api/postSavedPlan", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Api-Key": "thisisforpip",
             },
             body: JSON.stringify(savePlan),
         });

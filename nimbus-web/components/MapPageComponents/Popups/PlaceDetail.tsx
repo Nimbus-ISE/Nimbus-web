@@ -54,7 +54,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 <div className="grid grid-cols-12 p-6 gap-6 ">
                     {isBigScreen && (
                         <img
-                            src={data?.url}
+                            src={data?.url.split(",")[0]}
                             className="rounded-xl border-2 bg-blue-100 col-span-7 "
                         />
                     )}

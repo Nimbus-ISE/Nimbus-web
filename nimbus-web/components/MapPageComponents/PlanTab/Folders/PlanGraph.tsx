@@ -17,7 +17,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                     <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
                     <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
                         <img
-                            src={place?.url}
+                            src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
                                     ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow bg-fuchsia-500"
@@ -64,7 +64,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <button
-                                        onClick={() => {
+                                        onClick={async () => {
                                             dispatch({
                                                 type: "TOGGLE_ALTERNATIVES",
                                                 payload: true,

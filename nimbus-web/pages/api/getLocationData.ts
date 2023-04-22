@@ -25,11 +25,11 @@ export default async function handler(
     const day: string | string[] | undefined = req.query.day;
     const arr: Array<number> = JSON.parse(loc_ids);
 
-    let query = sql`SELECT L.*, I.url
+    let query = sql`SELECT L.*, string_agg(DISTINCT I.url, ', ') as url
     FROM location_data L
     LEFT OUTER JOIN image I
     ON L.loc_id = I.loc_id
-    WHERE  L.loc_id IN  ${sql([arr])} `;
+    WHERE  L.loc_id IN  ${sql([arr])} GROUP BY L.loc_id`;
 
     try {
         if (!arr) {
@@ -37,6 +37,8 @@ export default async function handler(
         }
 
         const location_data: Array<Location> = await query;
+        console.log(location_data);
+
         res.status(200).json({ day: day, location_data });
         // res.status(200).json(location_data);
     } catch (e) {

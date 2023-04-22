@@ -24,10 +24,12 @@ export default function map({ trip_params }: any) {
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     type tripType = {
+        [x: string]: any;
         locations: any;
         travelTimes: any;
         arrivalAndLeaveTimes: any;
     };
+
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
@@ -40,118 +42,136 @@ export default function map({ trip_params }: any) {
     }, [screenSize]);
 
     useEffect(() => {
-        const fetchTrip = async () => {
-            const res = await fetch(`/api/getTrip/${trip_params}`);
-            const plan = await res.json();
-            return plan;
-        };
-        const fetchLocationDetails = async (loc_ids: string, day: string) => {
-            const response = await fetch(
-                `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
-            );
-            const data = await response.json();
-            return data;
-        };
+        if (trip_params.name === undefined) {
+            const fetchTrip = async () => {
+                const res = await fetch(`/api/getTrip/${trip_params}`);
+                const plan = await res.json();
+                return plan;
+            };
+            const fetchLocationDetails = async (
+                loc_ids: string,
+                day: string
+            ) => {
+                const response = await fetch(
+                    `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+                );
+                const data = await response.json();
+                return data;
+            };
 
-        (async () => {
-            const loc_ids: any = [];
-            const trip: tripType = await fetchTrip();
+            (async () => {
+                const loc_ids: any = [];
+                let trip: any = [];
+                if (trip_params.name === undefined) {
+                    trip = await fetchTrip();
+                } else {
+                    trip = JSON.parse(trip_params.plan_sequence);
+                }
+                console.log(trip);
 
-            dispatch({
-                type: "SET_TRAVEL_TIME",
-                payload: trip.travelTimes,
-            });
-            dispatch({
-                type: "SET_ARRIVAL_LEAVE_TIME",
-                payload: trip.arrivalAndLeaveTimes,
-            });
-            const tempPinState: Array<Array<string>> = [];
-
-            // if ((trip as string) === "error invalid url") {
-            //     setError(true);
-            //     return;
-            // }
-            trip.locations.forEach((day: any, index: string) => {
-                const tempPin: string[] = [];
-
-                day.forEach(() => {
-                    tempPin.push("#000");
+                dispatch({
+                    type: "SET_TRAVEL_TIME",
+                    payload: trip.travelTimes,
                 });
-                if (tempPinState.length < trip.locations.length) {
-                    tempPinState.push(tempPin);
-                }
+                dispatch({
+                    type: "SET_ARRIVAL_LEAVE_TIME",
+                    payload: trip.arrivalAndLeaveTimes,
+                });
+                dispatch({ type: "SET_TRIP_ID", payload: trip.trip_id });
+                const tempPinState: Array<Array<string>> = [];
+                trip.locations.forEach((day: any, index: string) => {
+                    const tempPin: string[] = [];
 
-                if (loc_ids.length < trip.locations.length) {
-                    fetchLocationDetails(
-                        `[${[trip.locations[index]].toString()}]`,
-                        index
-                    ).then(async (result) => {
-                        const coordinates: Array<Array<string>> = [];
-                        loc_ids.push(await result);
-                        const sorted_days = sortObject(loc_ids);
-                        const correctlyOrdered: any = [];
-                        sorted_days.forEach((day: any, index: any) => {
-                            const ordered_loc_ids: any = [];
-                            day.location_data?.forEach((point: any) => {
-                                const indexOfData = trip.locations[
-                                    index
-                                ].indexOf(point.loc_id);
-                                if (indexOfData >= 0)
-                                    ordered_loc_ids[indexOfData] = point;
-                            });
-                            correctlyOrdered.push({
-                                day: index.toString(),
-                                location_data: ordered_loc_ids,
-                            });
-                        });
-
-                        if (!isMounted && !initialized) {
-                            dispatch({
-                                type: "SET_FULL_PLAN",
-                                payload: correctlyOrdered,
-                            });
-                            setIsMounted(true);
-                        }
-
-                        const plan = initialized ? fullPlan : correctlyOrdered;
-
-                        plan.forEach((day: any) => {
-                            const tempCoordinates: Array<string> = [];
-                            day.location_data?.forEach((loc: any) => {
-                                tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
-                            });
-                            coordinates.push(tempCoordinates);
-                        });
-
-                        coordinates.forEach((day: any) => {
-                            day.forEach((point: string) => {
-                                point.replace(/'/g, '"');
-                            });
-                        });
-                        if (coordinates[currentFolder]) {
-                            const response = await fetch(
-                                `/api/getRoute?trip=${coordinates[currentFolder]}`
-                            );
-                            const map_polyline = await response.json();
-
-                            const decoded = polyline.decode(map_polyline);
-                            const routeArrs: any = [];
-                            decoded.forEach((arr) => {
-                                routeArrs.push(arr.reverse());
-                            });
-
-                            dispatch({
-                                type: "SET_ROUTE",
-                                payload: routeArrs,
-                            });
-                        }
+                    day.forEach(() => {
+                        tempPin.push("#000");
                     });
-                }
-            });
-        })().then(() => {
-            setIsLoading(false);
-        });
+                    if (tempPinState.length < trip.locations.length) {
+                        tempPinState.push(tempPin);
+                    }
 
+                    if (loc_ids.length < trip.locations.length) {
+                        fetchLocationDetails(
+                            `[${[trip.locations[index]].toString()}]`,
+                            index
+                        ).then(async (result) => {
+                            console.log(result);
+
+                            const coordinates: Array<Array<string>> = [];
+                            loc_ids.push(await result);
+                            const sorted_days = sortObject(loc_ids);
+                            const correctlyOrdered: any = [];
+                            sorted_days.forEach((day: any, index: any) => {
+                                const ordered_loc_ids: any = [];
+                                day.location_data?.forEach((point: any) => {
+                                    const indexOfData = trip.locations[
+                                        index
+                                    ].indexOf(point.loc_id);
+                                    if (indexOfData >= 0)
+                                        ordered_loc_ids[indexOfData] = point;
+                                });
+                                correctlyOrdered.push({
+                                    day: index.toString(),
+                                    location_data: ordered_loc_ids,
+                                });
+                            });
+
+                            if (!isMounted && !initialized) {
+                                dispatch({
+                                    type: "SET_FULL_PLAN",
+                                    payload: correctlyOrdered,
+                                });
+                                setIsMounted(true);
+                            }
+
+                            const plan = initialized
+                                ? fullPlan
+                                : correctlyOrdered;
+
+                            plan.forEach((day: any) => {
+                                const tempCoordinates: Array<string> = [];
+                                day.location_data?.forEach((loc: any) => {
+                                    tempCoordinates.push(
+                                        `[${loc.lat},${loc.lng}]`
+                                    );
+                                });
+                                coordinates.push(tempCoordinates);
+                            });
+
+                            coordinates.forEach((day: any) => {
+                                day.forEach((point: string) => {
+                                    point.replace(/'/g, '"');
+                                });
+                            });
+                            if (coordinates[currentFolder]) {
+                                const response = await fetch(
+                                    `/api/getRoute?trip=${coordinates[currentFolder]}`
+                                );
+                                const map_polyline = await response.json();
+
+                                const decoded = polyline.decode(map_polyline);
+                                const routeArrs: any = [];
+                                decoded.forEach((arr) => {
+                                    routeArrs.push(arr.reverse());
+                                });
+
+                                dispatch({
+                                    type: "SET_ROUTE",
+                                    payload: routeArrs,
+                                });
+                            }
+                        });
+                    }
+                });
+            })().then(() => {
+                setIsLoading(false);
+            });
+        }
+        // else {
+        //     dispatch({
+        //         type: "SET_IS_SAVE_PLAN",
+        //         action: { trip_name: trip_params.name, isSavePlan: true },
+        //     });
+        // }
         setInitalized(true);
     }, [currentFolder, changed]);
 
@@ -193,7 +213,7 @@ export default function map({ trip_params }: any) {
                     </div>
                 </div>
             )}
-            {error && <div>Ligma</div>}
+            {error && <div>ERROR</div>}
         </>
     );
 }
