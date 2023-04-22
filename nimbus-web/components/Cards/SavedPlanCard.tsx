@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import stringToGradient from "@/utils/stringToGradient";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import ConfirmModal from "../ConfirmModal";
 
 const tripPace = [
     { type: "Chill", color: "#80cda7" },
@@ -17,26 +19,58 @@ export default function SavedPlanCard({
 }: {
     planParams: {
         name: string;
+        plan_id: number;
         day_plan: Array<Array<unknown>>;
         trip_params: IFormData;
     };
 }) {
-    const { name, day_plan, trip_params } = planParams;
+    const { name, plan_id, trip_params } = planParams;
     const router = useRouter();
     const [tagList, setTagList] = React.useState<Array<string>>([]);
+    const [confirmActive, setIsConfirmActive] = React.useState<boolean>(false);
+    const handleDeletePlan = async () => {
+        try {
+            const response = await fetch(`/api/deleteSavedPlan/${plan_id}`);
+            if (response.ok) {
+                alert("Plan deleted successfully");
+                router.replace(router.asPath);
+            } else {
+                alert("Error deleting plan");
+            }
+        } catch (e: any) {
+            alert(`Error deleting plan: ${e.message}`);
+        }
+    };
     React.useEffect(() => {
         console.log(trip_params);
         setTagList(trip_params.tags.split(","));
     }, [trip_params.tags]);
     return (
         <>
-            <button
-                onClick={() => {
-                    const stringified = JSON.stringify(planParams);
-                    router.push(`/map/${stringified}`);
-                }}
-            >
-                <div className="group w-72 max-w-sm overflow-hidden shadow-md hover:shadow-xl bg-white duration-500 rounded-xl">
+            <ConfirmModal
+                confirmActive={confirmActive}
+                setIsConfirmActive={setIsConfirmActive}
+                onAcceptCallback={handleDeletePlan}
+                onDeclineCallback={() => {}}
+                header="Delete saved plan"
+                sub="Deleting your saved plan will remove it from the system. This action is irreversible."
+            />
+            <div id="saved-plan-card" className="relative">
+                <div className="absolute top-0 right-0 z-10">
+                    <button
+                        onClick={() => setIsConfirmActive(true)}
+                        className="w-12 h-12 text-white drop-shadow-sm hover:text-red-400"
+                    >
+                        <DeleteRoundedIcon />
+                    </button>
+                </div>
+                <button
+                    onClick={() => {
+                        const stringified = JSON.stringify(planParams);
+                        router.push(`/map/${stringified}`);
+                    }}
+                    className="group w-72 max-w-sm overflow-hidden shadow-md hover:shadow-xl bg-white duration-500 rounded-xl"
+                >
                     <div
                         style={{
                             background: stringToGradient(
@@ -103,8 +137,8 @@ export default function SavedPlanCard({
                             ))}
                         </div>
                     </div>
-                </div>
-            </button>
+                </button>
+            </div>
         </>
     );
 }

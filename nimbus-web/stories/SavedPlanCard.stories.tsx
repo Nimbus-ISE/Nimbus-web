@@ -15,6 +15,7 @@ export const Primary = Template.bind({});
 Primary.args = {
     planParams: {
         name: "test plan",
+        plan_id: 13,
         day_plan: [
             [
                 {

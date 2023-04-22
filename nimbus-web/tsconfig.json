@@ -25,7 +25,8 @@
         "**/*.tsx",
         "test_data/testData.ts",
         "components/MapPageComponents/PlanTab/PlanTabContext.tsx",
-        "components/MapPageComponents/PlanTab/PlanTabContext.tss"
+        "components/MapPageComponents/PlanTab/PlanTabContext.tss",
+        "pages/api/deleteSavedPlan"
     ],
     "exclude": ["node_modules"]
 }
