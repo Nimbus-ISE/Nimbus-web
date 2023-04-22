@@ -51,7 +51,7 @@ const ImagePagination = ({
             {isLargerThanMedium ? (
                 <img
                     // className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
-                    className="rounded-t-xl"
+                    className="h-72 rounded-t-xl"
                     src={imageList}
                     alt={loc_name}
                 />
