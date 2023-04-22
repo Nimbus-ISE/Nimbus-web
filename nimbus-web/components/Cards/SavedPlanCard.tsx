@@ -32,7 +32,8 @@ export default function SavedPlanCard({
         <>
             <button
                 onClick={() => {
-                    //router.push(`/location/${location.loc_id}`);
+                    const stringified = JSON.stringify(planParams);
+                    router.push(`/map/${stringified}`);
                 }}
             >
                 <div className="group w-72 max-w-sm overflow-hidden shadow-md hover:shadow-xl bg-white duration-500 rounded-xl">
@@ -42,11 +43,11 @@ export default function SavedPlanCard({
                                 JSON.stringify(trip_params)
                             ),
                         }}
-                        className="flex w-full h-40 aspect-auto hover:-translate-y-1 hover:scale-105 transition duration-700"
+                        className="flex w-full h-36 aspect-auto group-hover:-translate-y-1 group-hover:scale-105 transition duration-700"
                     >
                         <FontAwesomeIcon
                             icon={faMapLocationDot}
-                            className="w-28 h-28 aspect-auto m-auto invert drop-shadow-lg fill-white"
+                            className="w-24 h-24 aspect-auto m-auto invert drop-shadow-lg fill-white"
                         />
                     </div>
                     <div className="px-6 py-2 pb-0">

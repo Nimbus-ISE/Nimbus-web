@@ -23,11 +23,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         );
     };
     React.useEffect(() => {
+        const userID = Cookies.get("user_id");
         if (user) {
             console.log("check premium status on new session");
-            const userID = Cookies.get("user_id");
             if (!userID && user.sub) {
-                Cookies.set("userID", user.sub);
+                Cookies.set("user_id", user.sub);
             }
             updateOnNewSession(user, router);
             const metadata = {
@@ -38,6 +38,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 premium_expire: getPremiumExpire(user, "number") as number,
             };
             checkPremium(metadata, user, router);
+        } else {
+            if (userID) Cookies.remove("user_id");
         }
     }, [user, router]);
     return !isLoading ? (
