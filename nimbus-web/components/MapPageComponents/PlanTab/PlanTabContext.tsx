@@ -25,6 +25,11 @@ interface PlanTabContextStateType {
     changed: boolean;
     currentAlternativeView: number;
     arrivalAndLeaveTimes: any;
+    trip_params: any;
+    trip_id: string;
+    isSavePlan: boolean;
+    trip_name: string;
+    alternative_index: number;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -61,6 +66,10 @@ function reducer(state: PlanTabContextStateType, action: any) {
 
                 changed: !state.changed,
             };
+        }
+        case "DELETE_LOCATION": {
+            state.fullPlan;
+            return { ...state };
         }
         case "SET_SELECTED_LOCATION_INDEX": {
             return { ...state, selectedLocationIndex: action.payload };
@@ -169,6 +178,25 @@ function reducer(state: PlanTabContextStateType, action: any) {
         case "SET_ROUTE": {
             return { ...state, map_polyline: action.payload };
         }
+        case "SET_TRIP_PARAMS": {
+            return { ...state, trip_params: action.payload };
+        }
+        case "SET_TRIP_ID": {
+            return { ...state, trip_id: action.payload };
+        }
+        case "SET_IS_SAVE_PLAN": {
+            return {
+                ...state,
+                trip_name: action.payload.trip_name,
+                isSavePlan: true,
+            };
+        }
+        case "SET_ALTERNATIVE_INDEX": {
+            return { ...state, alternative_index: action.payload };
+        }
+        case "SET_ALTERNATIVES": {
+            return { ...state, alternatives: action.payload };
+        }
         default: {
             console.log("error");
             return state;
@@ -242,6 +270,11 @@ const initialState: PlanTabContextStateType = {
     ],
     changed: false,
     arrivalAndLeaveTimes: [],
+    trip_params: [],
+    trip_id: "",
+    isSavePlan: false,
+    trip_name: "",
+    alternative_index: 0,
 };
 
 const PlanTabContext = createContext(

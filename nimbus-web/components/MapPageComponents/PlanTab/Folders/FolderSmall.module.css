@@ -138,8 +138,15 @@
     height: 87.5vh;
 }
 /* .tab::-webkit-scrollbar {
-    color: black;
+    background-color: #a6a6a6;
+    color: #606060;
 } */
+.tab::-webkit-scrollbar-thumb {
+    background: #606060;
+}
+.tab::-webkit-scrollbar {
+    width: 10px;
+}
 .tab {
     display: block;
     border-top-right-radius: 12px;
