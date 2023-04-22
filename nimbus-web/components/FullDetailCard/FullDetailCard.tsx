@@ -83,7 +83,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                 <Stack
                     direction={isLargerThanMedium ? "row" : "column"}
                     justifyContent="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                 >
                     <ImagePagination
                         loc_name={location.loc_name}
