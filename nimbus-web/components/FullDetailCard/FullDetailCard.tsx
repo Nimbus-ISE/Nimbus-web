@@ -1,8 +1,7 @@
 import React from "react";
-import { Divider } from "@material-ui/core";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
 import useMediaQuery from "@/hooks/useMediaQuery";
 
@@ -74,7 +73,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
         tags,
         reviews,
     } = location;
-    
+
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const handleSelectDestination = () => {};
 
