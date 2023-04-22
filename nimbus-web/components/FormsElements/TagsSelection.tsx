@@ -77,8 +77,8 @@ const TagsSelection = () => {
                 <div className="flex mx-auto w-full">
                     <Button
                         onClick={async () => {
-                            // setIsConfirmActive(true);
-                            router.push(`/map/${encodeURIComponent(payload)}`);
+                            setIsConfirmActive(true);
+                            // router.push(`/map/${encodeURIComponent(payload)}`);
                         }}
                         variant="outlined"
                         sx={{
