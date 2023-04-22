@@ -127,11 +127,11 @@ const Plan = () => {
                                     : 0),
                         }}
                         className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100
-                        pl-5 m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
                             <div
-                                className="flex my-auto"
+                                className="pl-5 flex my-auto"
                                 style={{
                                     /*maxHeight: isLargerThanMedium
                                         ? "40rem"
