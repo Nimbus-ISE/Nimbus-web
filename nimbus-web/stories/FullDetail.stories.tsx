@@ -27,6 +27,7 @@ RealDataExample.args = {
         tags: "Must See Attraction, Shopping, Mall, Luxury, Market",
         url: [
             "https://a.cdn-hotels.com/gdcs/production26/d417/16464b49-90e2-4dbf-b39f-7625e1f796cb.jpg",
+            "https://www.prachachat.net/wp-content/uploads/2022/01/MBK-Center.jpg",
         ],
         reviews: [
             {
