@@ -7,7 +7,6 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { loc_id } = req.query;
-    console.log(loc_id);
 
     try {
         const location_data = await getLocation(loc_id as string);
