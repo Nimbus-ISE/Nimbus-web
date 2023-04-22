@@ -11,7 +11,7 @@ const upgradeData = [
         planName: "STARTER",
         priceStr: "FREE",
         list: [
-            "1 Plan Save Slot",
+            "2 Plans Save Slot",
             "Plan up to 3 days per trip",
             "View other users profile",
         ],

@@ -1,14 +1,12 @@
 import React from "react";
 import { UserProfile as UserProfileType } from "@auth0/nextjs-auth0/client";
-import getPremiumExpire from "@/utils/getPremiumExpire";
-import getPremiumType from "@/utils/getPremiumType";
-import UserProfile from "./UserProfile";
 import Slider from "./SliderList/Slider";
 import PlanCard from "./Cards/PlanCard";
 import Background from "@/components/Background";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useRouter } from "next/router";
 import ProfileCard from "./ProfileCard/ProfileCard";
+import getMaxPlans from "@/utils/getMaxPlans";
 
 interface IProps {
     user: UserProfileType;
@@ -18,15 +16,8 @@ interface IProps {
 
 const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
     const router = useRouter();
-    const [date, setDate] = React.useState<string>();
-    const premiumExpire = getPremiumExpire(user);
     const isLargerThanMedium = useMediaQuery("(min-width:768px)");
-    React.useEffect(() => {
-        if (user && premiumExpire) {
-            console.log(user);
-            setDate(premiumExpire.toString());
-        }
-    }, [user]);
+    const maxPlans = getMaxPlans(user);
     return user ? (
         <div className="relative flex flex-col min-h-screen h-full w-full bg-neutral-100 text-black">
             <Background />
@@ -41,7 +32,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                 <div className="md:w-[80%] p-5 pb-12 flex justify-left bg-neutral-100 mx-auto">
                     <ProfileCard user={user} />
                 </div>
-                <PlanCard planList={planList} />
+                <PlanCard planList={planList} maxPlans={maxPlans} />
                 <div className="my-7 w-full">
                     <div
                         className="md:w-[80%] md:mx-auto text-xl font-semibold text-neutral-500
