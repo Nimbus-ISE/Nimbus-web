@@ -4,11 +4,11 @@ Nimbus Travel Planner is a web application that empowers users to effortlessly p
 
 ## Features
 
-- Search for flights and hotels based on destination, dates, and other criteria
-- View detailed information about destinations, including recommended activities and attractions
-- Save favorite locations and activities for easy reference later
-- Plan and organize travel itineraries, including flights, hotels, and activities
-- Collaborate with friends and family to plan group trips
+- Search for locations by tags or by name
+- View detailed information about each location
+- Generate customized travel plans from user's preferences and dates
+- Further customize the generated travel plans with alternative places
+- Save the generated travel plans for easy reference or edit them later
 
 ## Technologies Used
 
@@ -41,5 +41,5 @@ The following environment variables are required to run Nimbus Travel Planner:
 - `REDIS_HOST`: the host url of the redis database
 - `ALGO_API_IP`: the IP of the algorithm instance
 - `ALGO_API_PORT`: the port of the algorithm
-- `MAPBOX_ACESS_TOKEN`= the Mapbox API Access token
-- `DIRECTIONS_API_KEY`= the Google directions API key
+- `MAPBOX_ACESS_TOKEN`: the Mapbox API Access token
+- `DIRECTIONS_API_KEY`: the Google directions API key
