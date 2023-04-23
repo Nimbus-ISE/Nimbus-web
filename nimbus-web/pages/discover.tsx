@@ -37,7 +37,7 @@ const discover = ({ locationProp }: any) => {
                 <div className="text-left text-4xl font-extrabold px-7 py-7 drop-shadow-sm">
                     DISCOVER PLACES
                 </div>
-                <div className="bg-white rounded-3xl shadow-md mx-5 mb-5 text-center">
+                <div className="rounded-3xl mb-5 text-center w-full">
                     {
                         /*loading ? (
                     <div className="flex w-full my-20">

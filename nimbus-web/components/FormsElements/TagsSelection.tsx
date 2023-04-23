@@ -89,7 +89,7 @@ const TagsSelection = () => {
     };
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto max-w-[40rem]">
             <ThemeProvider theme={nimbusTheme}>
                 <div className="flex flex-wrap justify-center">
                     {tags.sort().map((data) => {

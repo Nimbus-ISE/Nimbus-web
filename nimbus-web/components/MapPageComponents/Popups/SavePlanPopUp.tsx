@@ -1,15 +1,19 @@
 import React, { FormEvent, useRef } from "react";
 import { getPlanTabState, getPlanTabDispatch } from "../PlanTab/PlanTabContext";
 const SavePlanPopUp = () => {
-    const { isBigScreen, fullPlan, arrivalAndLeaveTimes, travelTime } =
-        getPlanTabState();
+    const {
+        isBigScreen,
+        fullPlan,
+        arrivalAndLeaveTimes,
+        travelTime,
+        trip_params,
+    } = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
     const inputRef: any = useRef(null);
     const plan: any = [];
     const savePlan: any = [];
-    console.log(travelTime);
 
-    function handleClick() {
+    async function handleClick() {
         const name = inputRef.current.value;
         fullPlan.forEach((day: any, dayIndex: any) => {
             const dayPlan: any = [];
@@ -17,7 +21,7 @@ const SavePlanPopUp = () => {
                 if (travelTime[dayIndex][locationIndex]) {
                     dayPlan.push(
                         {
-                            type: "location",
+                            type: "locations",
                             loc_id: location.loc_id,
                             arrival_time:
                                 arrivalAndLeaveTimes[dayIndex][locationIndex]
@@ -30,7 +34,7 @@ const SavePlanPopUp = () => {
                     );
                 } else {
                     dayPlan.push({
-                        type: "location",
+                        type: "locations",
                         loc_id: location.loc_id,
                         arrival_time:
                             arrivalAndLeaveTimes[dayIndex][locationIndex]
@@ -43,22 +47,29 @@ const SavePlanPopUp = () => {
             });
             plan.push(dayPlan);
         });
-        savePlan.push({ name: name, plan });
-        fetch("/api/postSavedPlan", {
+
+        savePlan.push({
+            name: name,
+            day_plan: plan,
+            trip_params: JSON.parse(trip_params),
+        });
+        // console.log(JSON.stringify(savePlan));
+
+        await fetch("/api/postSavedPlan", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Api-Key": "thisisforpip",
             },
             body: JSON.stringify(savePlan),
         });
-        //Some Fetching shit
     }
 
     return (
         <>
             {isBigScreen && (
                 <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[45vw] top-[36vh] z-10 text-white"
+                    className="bg-black w-10 h-10 rounded-full absolute left-[81vw] top-[36vh] z-10 text-white"
                     onClick={() => {
                         dispatch({ type: "TOGGLE_SAVE_PLAN" });
                     }}
@@ -69,7 +80,7 @@ const SavePlanPopUp = () => {
             <div
                 className={
                     isBigScreen
-                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[20vw] text-center text-xl flex flex-col items-center "
+                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[50vw] text-center text-xl flex flex-col items-center "
                         : "bg-white w-96 p-2 rounded-lg mt-20 pb-8 text-center text-xl flex flex-col items-center z-100"
                 }
             >

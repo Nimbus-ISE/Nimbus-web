@@ -29,7 +29,7 @@ const FolderSmall = () => {
     };
 
     useEffect(() => {
-        setOpenedTab(`tab${currentFolderView}`);
+        setOpenedTab(`tab${currentFolder}`);
 
         if (isBigScreen && !openFullTab) {
             setTabsClass(classes.tabs);
@@ -41,8 +41,8 @@ const FolderSmall = () => {
             setTabsClass(classes.tabs);
         }
     }, [openFullTab, currentFolderView]);
-    console.log(fullPlan.length);
-    console.log(currentFolderView);
+    console.log(fullPlan);
+    console.log(travelTime);
 
     return (
         <>

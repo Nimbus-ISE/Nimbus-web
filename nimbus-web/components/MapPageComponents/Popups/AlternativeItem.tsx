@@ -27,11 +27,11 @@ const AlternativeItem = (props: any) => {
                 }
             >
                 <img
-                    src={props.location.url}
+                    src={props.location.url.split(",")[0]}
                     className={
                         isBigScreen
-                            ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-110 duration-300"
-                            : " h-[35vw] w-[35vw] rounded-full hover:scale-110 duration-300 "
+                            ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-105 duration-300"
+                            : " h-[35vw] w-[35vw] rounded-full hover:scale-105 duration-300 "
                     }
                     onMouseDown={() => {
                         dispatch({
@@ -65,10 +65,9 @@ const AlternativeItem = (props: any) => {
             <button
                 className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300 z-10"
                 onMouseDown={() => {
-                    console.log(props.location);
                     dispatch({
                         type: "TOGGLE_PLACE_DETAILS",
-                        payload: { place: props.location },
+                        payload: { place: props.location, index: props.index },
                     });
                 }}
             >

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import StarIcon from "@mui/icons-material/Star";
 import CircleIcon from "@mui/icons-material/Circle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
 import Review from "../MapPageComponents/Popups/Review";
-import styles from "./Button.module.css";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import ImagePagination from "./ImagePagination";
 
+import styles from "./Button.module.css";
 interface FullDetailCardProps {
     location: {
         loc_id: number;
@@ -26,9 +27,13 @@ interface FullDetailCardProps {
     };
 }
 
-interface DotPaginationProps {
-    show: boolean;
-    index: number;
+// interface DotPaginationProps {
+//     show: boolean;
+//     index: number;
+// }
+
+interface SelectButtonProps {
+    onClick: () => void;
 }
 
 const lightSx = {
@@ -44,15 +49,13 @@ const boldSx = {
     fontFamily: "Montserrat",
 };
 
-const DotPagination = ({ show, index }: DotPaginationProps) => {
+const SelectButton = ({ onClick }: SelectButtonProps) => {
     return (
-        <>
-            {show ? (
-                <CircleIcon sx={{ color: "#45D8D0", fontSize: 8 }} />
-            ) : (
-                <CircleIcon sx={{ color: "#A6A6A6", fontSize: 8 }} />
-            )}
-        </>
+        <button onClick={onClick} className={styles.button}>
+            <div className="font-bold text-white text-lg">
+                SELECT AS DESTINATION
+            </div>
+        </button>
     );
 };
 
@@ -70,94 +73,53 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
         tags,
         reviews,
     } = location;
-    const [imageList, setImageList] = useState(url[0]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const pageNumbers = [];
 
-    for (let i = 0; i < url.length; i++) {
-        pageNumbers.push(i);
-    }
-    const handleNext = () => {
-        setCurrentPage(currentPage + 1);
-        setImageList(url[currentPage + 1]);
-    };
-    const handleBack = () => {
-        setCurrentPage(currentPage - 1);
-        setImageList(url[currentPage - 1]);
-    };
+    const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const handleSelectDestination = () => {};
 
     return (
-        <div className="text-black mx-auto p-12 w-full">
-            <Stack spacing={3}>
+        <div className="text-black mx-auto p-12 w-full  bg-white">
+            <Stack spacing={3} pb={2}>
                 <Stack
-                    direction="row"
+                    direction={isLargerThanMedium ? "row" : "column"}
                     justifyContent="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                 >
-                    <Stack width="60%">
-                        <img
-                            className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
-                            src={imageList}
-                            alt={loc_name}
-                        />
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            justifyContent="space-between"
-                            className="shadow-md"
-                            sx={{
-                                backgroundColor: "#e9e9e9",
-                                borderRadius: "0px 0px 8px 8px",
-                                width: "100%",
-                                height: "35px",
-                            }}
-                            px={6}
-                        >
-                            <IconButton
-                                disabled={currentPage == 0 ? true : false}
-                                onClick={handleBack}
-                            >
-                                <ArrowBackIosIcon sx={{ fontSize: 15 }} />
-                            </IconButton>
-                            <Stack spacing={1} direction="row">
-                                {pageNumbers.map((number) => {
-                                    return (
-                                        <DotPagination
-                                            key={number}
-                                            show={currentPage == number}
-                                            index={number}
-                                        />
-                                    );
-                                })}
-                            </Stack>
-                            <IconButton
-                                disabled={
-                                    currentPage == url.length - 1 ? true : false
-                                }
-                                onClick={handleNext}
-                            >
-                                <ArrowForwardIosIcon sx={{ fontSize: 15 }} />
-                            </IconButton>
-                        </Box>
-                    </Stack>
-                    <Stack width="40%" pl={4}>
-                        <div className="text-right text-neutral-400">
-                            <Typography sx={baseSx} variant="body2">
-                                {Number(lat).toFixed(4)},{" "}
-                                {Number(lng).toFixed(4)}
-                            </Typography>
-                        </div>
+                    <ImagePagination
+                        loc_name={location.loc_name}
+                        url={location.url}
+                        isLargerThanMedium={isLargerThanMedium}
+                    />
+                    <Stack
+                        width={isLargerThanMedium ? "40%" : "100%"}
+                        p={isLargerThanMedium ? 0 : 3}
+                        pl={isLargerThanMedium ? 4 : 0}
+                        py={isLargerThanMedium ? 0 : 1}
+                    >
+                        {isLargerThanMedium ? (
+                            <div className="text-right text-neutral-400">
+                                <Typography sx={baseSx} variant="subtitle2">
+                                    {Number(lat).toFixed(4)},{" "}
+                                    {Number(lng).toFixed(4)}
+                                </Typography>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                         <Typography sx={boldSx} variant="h4">
                             {loc_name}
                         </Typography>
-                        <Typography sx={baseSx} variant="h6">
+                        <Typography
+                            sx={baseSx}
+                            variant={isLargerThanMedium ? "h6" : "subtitle2"}
+                        >
                             {province}
                         </Typography>
                         <Stack
                             direction="row"
                             spacing={1}
-                            py={3}
+                            py={isLargerThanMedium ? 3 : 0}
+                            pt={isLargerThanMedium ? 0 : 1}
                             justifyContent="flex-start"
                         >
                             <LocationOnIcon fontSize="large" />
@@ -176,29 +138,40 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
 						</Typography>*/}
                             </Stack>
                         </Stack>
-                        <div className="flex gap-2 pb-5 pl-1 text-neutral-500">
-                            <LocalOfferIcon className="w-8 h-8" />
+                        <Stack
+                            direction="row"
+                            spacing={1}
+                            justifyContent="flex-start"
+                            pl={1}
+                        >
+                            <LocalOfferIcon
+                                className="w-8 h-8"
+                                sx={{ color: "#6A6261" }}
+                            />
                             <Typography
                                 variant="body2"
+                                color="#6A6261"
                                 sx={{ ...baseSx, marginY: "auto" }}
                             >
                                 {tags}
                             </Typography>
-                        </div>
-                        <div className="mx-auto">
+                        </Stack>
+                        <div className={isLargerThanMedium ? "mx-auto" : "p-2"}>
                             <Stars size={20} rating={Number(location_rating)} />
                         </div>
-                        <button
-                            onClick={handleSelectDestination}
-                            className={styles.button}
-                        >
-                            <div className="font-bold text-white text-lg">
-                                SELECT AS DESTINATION
-                            </div>
-                        </button>
+                        <SelectButton onClick={handleSelectDestination} />
                     </Stack>
                 </Stack>
-                <Typography sx={lightSx}>{description}</Typography>
+                {isLargerThanMedium ? (
+                    <Typography sx={lightSx}>{description}</Typography>
+                ) : (
+                    <>
+                        <Divider />
+                        <Stack px={3}>
+                            <Typography sx={lightSx}>{description}</Typography>
+                        </Stack>
+                    </>
+                )}
             </Stack>
             <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
                 USER REVIEWS

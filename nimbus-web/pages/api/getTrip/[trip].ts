@@ -17,7 +17,7 @@ export default async function handler(
         };
 
         const response = await fetch(
-            `http://${process.env.ALGO_API_IP}:${process.env.ALGO_API_PORT}/get_trip_mcts`,
+            "http://34.143.131.141:8080/get_trip_mcts",
             {
                 method: "POST",
                 body: JSON.stringify(payload),
@@ -27,8 +27,8 @@ export default async function handler(
                 },
             }
         );
-        console.log(response);
-        const result: Plan = await response.json();
+
+        const result: any = await response.json();
         console.log(result);
 
         const travelTimes: Array<Array<TravelDuration>> = [];
@@ -39,7 +39,7 @@ export default async function handler(
                 leave_time: any;
             }>
         > = [];
-        result.forEach((day: any) => {
+        result.travel_plan.forEach((day: any) => {
             const tempTravelTime: Array<TravelDuration> = [];
             const tempArrivalAndLeaveTimes: Array<{
                 arrival_time: any;
@@ -60,7 +60,12 @@ export default async function handler(
             arrivalAndLeaveTimes.push(tempArrivalAndLeaveTimes);
         });
 
-        res.status(200).json({ locations, travelTimes, arrivalAndLeaveTimes });
+        res.status(200).json({
+            locations,
+            travelTimes,
+            arrivalAndLeaveTimes,
+            trip_id: result.trip_id,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json("error invalid url");

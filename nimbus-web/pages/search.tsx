@@ -47,9 +47,7 @@ const search = () => {
                 <div className="text-left text-4xl font-extrabold px-7 py-7 drop-shadow-sm">
                     FILTER BY TAGS
                 </div>
-                <div
-                    className={`bg-white rounded-3xl shadow-md mx-5 mb-5 text-center h-fit`}
-                >
+                <div className={`rounded-3xl mx-5 mb-5 text-center h-fit`}>
                     <div
                         className={`py-5 border-b-[0.75px] ${
                             locationList

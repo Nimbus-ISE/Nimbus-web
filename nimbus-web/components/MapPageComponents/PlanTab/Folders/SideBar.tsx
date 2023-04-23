@@ -90,7 +90,7 @@ const SideBar = () => {
                         )}
                     </button>
                     <button
-                        className="absolute bg-black  top-[72vh] left-[76vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded cursor-pointer"
+                        className="absolute bg-black  top-[72vh] left-[76vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded cursor-pointer "
                         onClick={() => {
                             dispatch({ type: "OPEN_FULL_FOLDER" });
                         }}

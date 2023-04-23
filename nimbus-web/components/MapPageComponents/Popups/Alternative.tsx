@@ -1,11 +1,114 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AlternativeItem from "./AlternativeItem";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
+import addDate from "@/utils/addDate";
 
 const Alternative = () => {
-    const { isBigScreen, alternatives, currentAlternativeView }: any =
-        getPlanTabState();
+    const {
+        isBigScreen,
+        alternatives,
+        currentAlternativeView,
+        arrivalAndLeaveTimes,
+        fullPlan,
+        travelTime,
+        trip_params,
+        currentFolder,
+        selectedLocationIndex,
+    }: any = getPlanTabState();
     const dispatch: any = getPlanTabDispatch();
+    const plan: any = [];
+    const savePlan: any = [];
+    console.log(fullPlan);
+    const fetchLocationDetails = async (loc_ids: string, day: string) => {
+        const response = await fetch(
+            `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+        );
+        const data = await response.json();
+        return data;
+    };
+
+    useEffect(() => {
+        fullPlan.forEach((day: any, dayIndex: any) => {
+            const dayPlan: any = [];
+            if (plan.length < fullPlan.length) {
+                day.location_data.forEach(
+                    (location: any, locationIndex: any) => {
+                        if (travelTime[dayIndex][locationIndex]) {
+                            dayPlan.push(
+                                {
+                                    type: "locations",
+                                    loc_id: location.loc_id,
+                                    arrival_time:
+                                        arrivalAndLeaveTimes[dayIndex][
+                                            locationIndex
+                                        ].arrival_time,
+                                    leave_time:
+                                        arrivalAndLeaveTimes[dayIndex][
+                                            locationIndex
+                                        ].leave_time,
+                                },
+                                travelTime[dayIndex][locationIndex]
+                            );
+                        } else {
+                            dayPlan.push({
+                                type: "locations",
+                                loc_id: location.loc_id,
+                                arrival_time:
+                                    arrivalAndLeaveTimes[dayIndex][
+                                        locationIndex
+                                    ].arrival_time,
+                                leave_time:
+                                    arrivalAndLeaveTimes[dayIndex][
+                                        locationIndex
+                                    ].leave_time,
+                            });
+                        }
+                    }
+                );
+                plan.push(dayPlan);
+            }
+        });
+        savePlan.push({
+            day: addDate(
+                JSON.parse(trip_params).start_date,
+                Number(currentFolder)
+            ),
+            loc_id: fullPlan[currentFolder].location_data[selectedLocationIndex]
+                .loc_id,
+            trip: plan,
+        });
+
+        (async () => {
+            const response = await fetch("/api/getAlternatives", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(savePlan[0]),
+            });
+            const result = await response.json();
+
+            const alternatives: any = [];
+            const queryLocIds: any = [];
+            result.forEach((day: any) => {
+                alternatives.push(day[selectedLocationIndex][0]);
+                queryLocIds.push(day[selectedLocationIndex][0].loc_id);
+            });
+            const alternativeLocations: any = await fetchLocationDetails(
+                `[${queryLocIds.toString()}]`,
+                currentFolder
+            );
+            console.log(alternativeLocations);
+
+            dispatch({
+                type: "SET_ALTERNATIVES",
+                payload: {
+                    locations: alternativeLocations.location_data,
+                    // trips: [result[sele``]],
+                },
+            });
+
+            console.log(result);
+        })();
+    }, []);
 
     return (
         <>
@@ -33,8 +136,8 @@ const Alternative = () => {
                 <div
                     className={
                         isBigScreen
-                            ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2"
-                            : "rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14"
+                            ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden"
+                            : "rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden"
                     }
                 >
                     <div className="flex flex-col place-items-center ">
@@ -49,9 +152,14 @@ const Alternative = () => {
                                         : "flex flex-row gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
-                                {alternatives.map((location: any) => (
-                                    <AlternativeItem location={location} />
-                                ))}
+                                {alternatives.map(
+                                    (location: any, index: any) => (
+                                        <AlternativeItem
+                                            location={location}
+                                            index={index}
+                                        />
+                                    )
+                                )}
                             </div>
                         )}
                         {!isBigScreen && (
@@ -66,7 +174,7 @@ const Alternative = () => {
                                     >
                                         <img
                                             src="/images/Arrow_right.png"
-                                            className="w-20 absolute top-[39vh] right-8"
+                                            className="w-16 absolute top-[35vh] right-2 rotate-90"
                                         />
                                     </button>
                                 )}
@@ -80,7 +188,7 @@ const Alternative = () => {
                                     >
                                         <img
                                             src="/images/Arrow_right.png"
-                                            className="w-20 absolute top-[39vh] left-8 rotate-180"
+                                            className="w-16 absolute top-[35vh] left-2 -rotate-90"
                                         />
                                     </button>
                                 )}

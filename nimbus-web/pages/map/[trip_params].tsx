@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Head from "next/head";
-
 import useMediaQuery from "@/hooks/useMediaQuery";
 import {
     getPlanTabDispatch,
@@ -9,7 +8,6 @@ import {
 } from "@/components/MapPageComponents/PlanTab/PlanTabContext";
 import BigScreenPage from "@/components/MapPageComponents/PlanTab/Folders/BigScreenPage";
 import SmallScreenPage from "@/components/MapPageComponents/PlanTab/Folders/SmallScreenPage";
-
 import polyline from "@mapbox/polyline";
 import sortObject from "@/utils/sortObject";
 import { GetServerSidePropsContext } from "next";
@@ -26,14 +24,23 @@ export default function map({ trip_params }: any) {
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     type tripType = {
+        [x: string]: any;
         locations: any;
         travelTimes: any;
         arrivalAndLeaveTimes: any;
     };
+
+    const trip_params_object = JSON.parse(trip_params);
+    console.log(trip_params_object);
+
     useEffect(() => {
         dispatch({
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
+        });
+        dispatch({
+            type: "SET_TRIP_PARAMS",
+            payload: trip_params_object.trip_params,
         });
     }, [screenSize]);
 
@@ -53,8 +60,44 @@ export default function map({ trip_params }: any) {
 
         (async () => {
             const loc_ids: any = [];
-            const trip: tripType = await fetchTrip();
-            console.log(trip);
+            let trip: any = [];
+            if (trip_params_object.name === undefined) {
+                trip = await fetchTrip();
+                console.log(trip);
+            } else {
+                const dayPlans = trip_params_object.day_plan;
+                const locIds: any = [];
+                const travelTimes: any = [];
+                const arrivalAndLeaveTimes: any = [];
+
+                console.log(dayPlans);
+
+                dayPlans.forEach((day: any) => {
+                    const tempLocId: any = [];
+                    const tempTravelTimes: any = [];
+                    const tempArrivalAndLeaveTimes: any = [];
+                    day.forEach((node: any, index: any) => {
+                        if (node.type === "location") {
+                            tempLocId.push(node.loc_id);
+                            tempArrivalAndLeaveTimes.push({
+                                arrival_time: node.arrival_time,
+                                leave_time: node.leave_time,
+                            });
+                        } else tempTravelTimes.push(node);
+                    });
+                    locIds.push(tempLocId);
+                    travelTimes.push(tempTravelTimes);
+                    arrivalAndLeaveTimes.push(tempArrivalAndLeaveTimes);
+                });
+                trip["locations"] = locIds;
+                trip["travelTimes"] = travelTimes;
+                trip["arrivalAndLeaveTimes"] = arrivalAndLeaveTimes;
+                trip["trip_id"] = trip_params_object.name;
+                dispatch({
+                    type: "SET_IS_SAVE_PLAN",
+                    payload: { trip_name: trip_params_object.name },
+                });
+            }
 
             dispatch({
                 type: "SET_TRAVEL_TIME",
@@ -64,12 +107,8 @@ export default function map({ trip_params }: any) {
                 type: "SET_ARRIVAL_LEAVE_TIME",
                 payload: trip.arrivalAndLeaveTimes,
             });
+            dispatch({ type: "SET_TRIP_ID", payload: trip.trip_id });
             const tempPinState: Array<Array<string>> = [];
-
-            // if ((trip as string) === "error invalid url") {
-            //     setError(true);
-            //     return;
-            // }
             trip.locations.forEach((day: any, index: string) => {
                 const tempPin: string[] = [];
 
@@ -85,6 +124,8 @@ export default function map({ trip_params }: any) {
                         `[${[trip.locations[index]].toString()}]`,
                         index
                     ).then(async (result) => {
+                        console.log(result);
+
                         const coordinates: Array<Array<string>> = [];
                         loc_ids.push(await result);
                         const sorted_days = sortObject(loc_ids);
@@ -114,7 +155,7 @@ export default function map({ trip_params }: any) {
 
                         const plan = initialized ? fullPlan : correctlyOrdered;
 
-                        plan.forEach((day: any, index: any) => {
+                        plan.forEach((day: any) => {
                             const tempCoordinates: Array<string> = [];
                             day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
@@ -192,7 +233,7 @@ export default function map({ trip_params }: any) {
                     </div>
                 </div>
             )}
-            {error && <div>Ligma</div>}
+            {error && <div>ERROR</div>}
         </>
     );
 }
