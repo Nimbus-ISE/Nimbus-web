@@ -76,7 +76,7 @@ export default function map({ trip_params }: any) {
                     const tempLocId: any = [];
                     const tempTravelTimes: any = [];
                     const tempArrivalAndLeaveTimes: any = [];
-                    ``;
+
                     day.forEach((node: any, index: any) => {
                         if (node.type === "location") {
                             tempLocId.push(node.loc_id);
