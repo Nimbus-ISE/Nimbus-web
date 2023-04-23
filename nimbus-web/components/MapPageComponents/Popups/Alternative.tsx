@@ -68,11 +68,10 @@ const Alternative = () => {
                 plan.push(dayPlan);
             }
         });
+        console.log(trip_params);
+
         savePlan.push({
-            day: addDate(
-                JSON.parse(trip_params).start_date,
-                Number(currentFolder)
-            ),
+            day: addDate(trip_params.start_date, Number(currentFolder)),
             loc_id: fullPlan[currentFolder].location_data[selectedLocationIndex]
                 .loc_id,
             trip: plan,
@@ -102,11 +101,9 @@ const Alternative = () => {
                 type: "SET_ALTERNATIVES",
                 payload: {
                     locations: alternativeLocations.location_data,
-                    // trips: [result[sele``]],
+                    trips: result,
                 },
             });
-
-            console.log(result);
         })();
     }, []);
 

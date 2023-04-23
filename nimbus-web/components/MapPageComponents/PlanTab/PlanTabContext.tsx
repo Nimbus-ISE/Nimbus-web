@@ -31,6 +31,7 @@ interface PlanTabContextStateType {
     trip_name: string;
     alternative_index: number;
     chosen_alternative_index: number;
+    alternative_trips: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -56,15 +57,65 @@ function reducer(state: PlanTabContextStateType, action: any) {
             };
         }
         case "CHANGE_PLAN": {
-            const changePlan = (day: number, oldLocationIndex: number) => {
-                state.fullPlan[day].location_data[oldLocationIndex] =
-                    action.payload.location;
+            const changePlan = async (
+                day: number,
+                oldLocationIndex: number
+            ) => {
+                const newDayPlan: any = [];
+                state.alternative_trips[state.chosen_alternative_index].forEach(
+                    (loc: any, index: any) => {
+                        if (index === oldLocationIndex) {
+                            newDayPlan.push(loc[0]);
+                        } else {
+                            newDayPlan.push(loc);
+                        }
+                    }
+                );
+                const locIds: any = [];
+                // console.log(newDayPlan);
+                newDayPlan.forEach((node: any) => {
+                    if (node.type === "locations") {
+                        locIds.push(Number(node.loc_id));
+                    }
+                });
+                console.log(locIds);
+
+                const fetchLocationDetails = async (
+                    loc_ids: string,
+                    day: string
+                ) => {
+                    const response = await fetch(
+                        `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+                    );
+                    const data = await response.json();
+                    return data;
+                };
+                const newDayPlanDetails = await fetchLocationDetails(
+                    `[${[locIds].toString()}]`,
+                    day.toString()
+                );
+                console.log(newDayPlanDetails);
+                const ordered_loc_ids: any = [];
+                const correctly_ordered = [];
+                newDayPlanDetails.location_data.forEach((point: any) => {
+                    const indexOfData = locIds.indexOf(point.loc_id);
+                    if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
+                });
+                correctly_ordered.push({
+                    day: day.toString(),
+                    location_data: ordered_loc_ids,
+                });
+                console.log(correctly_ordered);
+                console.log(state.fullPlan);
+
+                state.fullPlan[day] = correctly_ordered[0];
             };
+
             changePlan(action.payload.day, action.payload.oldLocationIndex);
 
             return {
                 ...state,
-
+                chosen_alternative_index: action.payload.index,
                 changed: !state.changed,
             };
         }
@@ -119,7 +170,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     ...state,
                     openReview: true,
                     placeData: action.payload.place,
-                    chosen_alternative_index: action.payload.index,
                 };
             } else {
                 return {
@@ -197,7 +247,11 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return { ...state, alternative_index: action.payload };
         }
         case "SET_ALTERNATIVES": {
-            return { ...state, alternatives: action.payload.locations };
+            return {
+                ...state,
+                alternatives: action.payload.locations,
+                alternative_trips: action.payload.trips,
+            };
         }
         default: {
             console.log("error");
@@ -278,6 +332,7 @@ const initialState: PlanTabContextStateType = {
     trip_name: "",
     alternative_index: 0,
     chosen_alternative_index: 0,
+    alternative_trips: [],
 };
 
 const PlanTabContext = createContext(

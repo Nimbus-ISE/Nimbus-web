@@ -40,6 +40,7 @@ const AlternativeItem = (props: any) => {
                                 day: currentFolder,
                                 oldLocationIndex: selectedLocationIndex,
                                 location: props.location,
+                                index: props.index,
                             },
                         });
                         dispatch({
@@ -67,7 +68,7 @@ const AlternativeItem = (props: any) => {
                 onMouseDown={() => {
                     dispatch({
                         type: "TOGGLE_PLACE_DETAILS",
-                        payload: { place: props.location, index: props.index },
+                        payload: { place: props.location },
                     });
                 }}
             >
