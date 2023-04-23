@@ -1,13 +1,13 @@
 import React from "react";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CircleIcon from "@mui/icons-material/Circle";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Divider, Stack, Typography } from "@mui/material";
-
-import useMediaQuery from "@/hooks/useMediaQuery";
-
-import Review from "../MapPageComponents/Popups/Review";
 import Stars from "../Stars";
-
+import Review from "../MapPageComponents/Popups/Review";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import ImagePagination from "./ImagePagination";
 
 import styles from "./Button.module.css";

@@ -9,6 +9,22 @@ const tripBudget = ["0","100","500","1000","More than 1000"]
 const ConfirmForm = () => {
     const router = useRouter();
     const { formData, setIsConfirmActive } = React.useContext(PlanContext);
+    const [payload, setPayload] = React.useState<string>("");
+    React.useEffect(() => {
+        if (formData) {
+            const data: IFormData = {
+                must_include: formData.locationId,
+                start_date: formData.date ? formData.date[0] : undefined,
+                end_date: formData.date ? formData.date[1] : undefined,
+                trip_pace: formData.tripType,
+                budget: formData.budget,
+                travel_method: formData.travelMethod,
+                tags: formData.tags ? formData.tags.join() : undefined,
+            };
+            console.log(data);
+            setPayload(JSON.stringify(data));
+        }
+    }, [formData]);
     return (
             <div className="m-auto pb-10 h-full mx-auto w-[90%] md:w-[75%] overflow-y-scroll hide-scrollbar">
                 <div className="text-center text-4xl font-extrabold px-0 pt-5">
@@ -69,7 +85,9 @@ const ConfirmForm = () => {
                 </div>
                 <div className="flex mx-auto w-full">
                     <Button
-                        onClick={() => {}}
+                        onClick={() => {
+                            router.push(`/map/${encodeURIComponent(payload)}`);
+                        }}
                         variant="outlined"
                         sx={{
                             borderRadius: "999px",

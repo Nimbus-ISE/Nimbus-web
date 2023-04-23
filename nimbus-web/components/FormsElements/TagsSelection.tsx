@@ -49,10 +49,10 @@ const TagsSelection = () => {
     // const data = formData;
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto max-w-[40rem]">
             <ThemeProvider theme={nimbusTheme}>
                 <div ref={ref} className="flex flex-wrap justify-center">
-                    {tags.sort().map((data) => {
+                    {tags.map((data) => {
                         return (
                             <Chip
                                 key={data}

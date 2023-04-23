@@ -1,4 +1,5 @@
 import UserWindow from "@/components/Navbar/UserWindow";
+import { customClaims } from "@/misc";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 export default {
@@ -14,9 +15,9 @@ export const Primary = Template.bind({});
 
 Primary.args = {
     user: {
+        ...customClaims,
         name: "Woosh",
-        email: "woosh@gmail.com",
         picture:
-            "https://lh3.googleusercontent.com/a/AEdFTp6iLiISrRmP7tzgSxUEBAX9Vj_SFZproPM2vXcprG8=s96-c",
+            "https://lh3.googleusercontent.com/a/AGNmyxZdUFO-hnLZQ1VO-zR7aMwe6_UVV_ShEIcJ4lAdti0=s96-c",
     },
 };
