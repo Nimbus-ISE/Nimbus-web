@@ -8,7 +8,7 @@ const getSavedPlan = async (user_id: string | undefined) => {
             SELECT plan_id, plan_sequence FROM plan where plan_id in (
                 SELECT plan_id FROM user_data U JOIN saved S 
                  ON U.user_id = S.user_id
-                 WHERE U.user_id ='auth0|642c62dc9e6ad19131004860'`;
+                 WHERE U.user_id = 'auth0|642c62dc9e6ad19131004860')`;
             console.log("SAVEDPLANDATA", savedPlanData);
             const mapped = savedPlanData.map((planData: any) => {
                 const temp = JSON.parse(planData.plan_sequence)[0];
