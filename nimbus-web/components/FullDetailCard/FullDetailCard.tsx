@@ -1,16 +1,15 @@
 import React from "react";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CircleIcon from "@mui/icons-material/Circle";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Divider, Stack, Typography } from "@mui/material";
+import { Button, Divider, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
 import Review from "../MapPageComponents/Popups/Review";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ImagePagination from "./ImagePagination";
-
-import styles from "./Button.module.css";
+import { ThemeProvider } from "@mui/material";
+import { nimbusTheme } from "@/styles/NimbusMuiTheme";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 interface FullDetailCardProps {
     location: {
         loc_id: number;
@@ -27,21 +26,16 @@ interface FullDetailCardProps {
     };
 }
 
-// interface DotPaginationProps {
-//     show: boolean;
-//     index: number;
-// }
-
 interface SelectButtonProps {
     onClick: () => void;
 }
 
 const lightSx = {
-    fontWeight: 400,
+    fontWeight: 300,
     fontFamily: "Montserrat",
 };
 const baseSx = {
-    fontWeight: 500,
+    fontWeight: 400,
     fontFamily: "Montserrat",
 };
 const boldSx = {
@@ -51,11 +45,18 @@ const boldSx = {
 
 const SelectButton = ({ onClick }: SelectButtonProps) => {
     return (
-        <button onClick={onClick} className={styles.button}>
-            <div className="font-bold text-white text-lg">
-                SELECT AS DESTINATION
-            </div>
-        </button>
+        <ThemeProvider theme={nimbusTheme}>
+            <Button
+                onClick={onClick}
+                variant="contained"
+                color="primary"
+                className="bg-[#00c4cc] rounded-xl"
+            >
+                <div className="font-bold text-white text-lg font-montserrat">
+                    SELECT AS DESTINATION
+                </div>
+            </Button>
+        </ThemeProvider>
     );
 };
 
@@ -74,16 +75,21 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
         reviews,
     } = location;
 
+    const router = useRouter();
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
-    const handleSelectDestination = () => {};
+    const isLargerThanLarge = useMediaQuery("(min-width: 1024px)");
+    const handleSelectDestination = () => {
+        Cookies.set("location_info", `${loc_id.toString()}|${loc_name}`);
+        router.push("/plan");
+    };
 
     return (
-        <div className="text-black mx-auto p-12 w-full  bg-white">
+        <div className="relative text-black mx-auto p-5 md:p-12 w-full max-w-screen-xl">
             <Stack spacing={3} pb={2}>
                 <Stack
-                    direction={isLargerThanMedium ? "row" : "column"}
+                    direction={isLargerThanLarge ? "row" : "column"}
                     justifyContent="center"
-                    alignItems="flex-start"
+                    alignItems="center"
                 >
                     <ImagePagination
                         loc_name={location.loc_name}
@@ -91,13 +97,13 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                         isLargerThanMedium={isLargerThanMedium}
                     />
                     <Stack
-                        width={isLargerThanMedium ? "40%" : "100%"}
-                        p={isLargerThanMedium ? 0 : 3}
-                        pl={isLargerThanMedium ? 4 : 0}
-                        py={isLargerThanMedium ? 0 : 1}
+                        width={isLargerThanLarge ? "40%" : "100%"}
+                        paddingX={isLargerThanLarge ? 4 : 0}
+                        marginY={isLargerThanLarge ? 0 : "1rem"}
+                        spacing={1}
                     >
                         {isLargerThanMedium ? (
-                            <div className="text-right text-neutral-400">
+                            <div className="absolute top-2 right-5 text-right text-neutral-400">
                                 <Typography sx={baseSx} variant="subtitle2">
                                     {Number(lat).toFixed(4)},{" "}
                                     {Number(lng).toFixed(4)}
@@ -110,15 +116,20 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                             {loc_name}
                         </Typography>
                         <Typography
-                            sx={baseSx}
-                            variant={isLargerThanMedium ? "h6" : "subtitle2"}
+                            sx={{
+                                ...baseSx,
+                                fontWeight: 500,
+                                color: "#666666",
+                            }}
+                            variant={
+                                isLargerThanMedium ? "subtitle1" : "subtitle2"
+                            }
                         >
                             {province}
                         </Typography>
                         <Stack
                             direction="row"
                             spacing={1}
-                            py={isLargerThanMedium ? 3 : 0}
                             pt={isLargerThanMedium ? 0 : 1}
                             justifyContent="flex-start"
                         >
@@ -126,7 +137,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                             <Stack spacing={1}>
                                 <Typography
                                     sx={{ ...baseSx, marginY: "auto" }}
-                                    variant="body1"
+                                    variant="body2"
                                 >
                                     {address}
                                 </Typography>
@@ -156,19 +167,32 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                                 {tags}
                             </Typography>
                         </Stack>
-                        <div className={isLargerThanMedium ? "mx-auto" : "p-2"}>
-                            <Stars size={20} rating={Number(location_rating)} />
+                        <div className="flex w-full py-1">
+                            <div
+                                className={
+                                    isLargerThanMedium ? "mx-auto" : "p-2"
+                                }
+                            >
+                                <Stars
+                                    size={20}
+                                    rating={Number(location_rating)}
+                                />
+                            </div>
                         </div>
                         <SelectButton onClick={handleSelectDestination} />
                     </Stack>
                 </Stack>
                 {isLargerThanMedium ? (
-                    <Typography sx={lightSx}>{description}</Typography>
+                    <Typography variant="subtitle2" sx={baseSx}>
+                        {description}
+                    </Typography>
                 ) : (
                     <>
                         <Divider />
                         <Stack px={3}>
-                            <Typography sx={lightSx}>{description}</Typography>
+                            <Typography variant="subtitle2" sx={baseSx}>
+                                {description}
+                            </Typography>
                         </Stack>
                     </>
                 )}

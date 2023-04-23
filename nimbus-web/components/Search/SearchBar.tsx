@@ -7,6 +7,7 @@ interface IProps {
     className?: string;
     inputClassName?: string;
     disableNavigate?: boolean;
+    value?: string;
 }
 
 const SearchBar = ({
@@ -14,6 +15,7 @@ const SearchBar = ({
     inputClassName,
     valueCallback,
     disableNavigate,
+    value,
 }: IProps) => {
     const router = useRouter();
     const [items, setItems] = React.useState<Array<any>>([]);
@@ -61,6 +63,9 @@ const SearchBar = ({
             setItems(locationList);
         }
     };
+    React.useEffect(() => {
+        if (inputRef.current && value) inputRef.current.value = value;
+    }, [value]);
     return (
         <div
             id={`searchbar-container-${className}`}

@@ -1,6 +1,7 @@
 import React from "react";
 import { PlanContext } from "../Plan";
 import SearchBar from "../Search/SearchBar";
+import Cookies from "js-cookie";
 
 /*const iconPlaceHolder = (
     <svg
@@ -20,18 +21,32 @@ import SearchBar from "../Search/SearchBar";
 );*/
 
 const LocationInput = () => {
-    const { setFormDataField } = React.useContext(PlanContext);
-    //const inputRef = React.useRef<any>();
-    /*const handleOnChange = () => {
-        if (inputRef.current)
-            setFormDataField("location", inputRef.current.value);
-    };*/
+    const { formData, setFormDataField } = React.useContext(PlanContext);
+    const [locationValue, setLocationValue] = React.useState<string>();
     const handleValueCallback = (loc_name: string, loc_id: number) => {
-        setFormDataField("locationId", loc_id);
+        setFormDataField("locationId", [loc_id, loc_name]);
     };
-    /*React.useEffect(() => {
-        if (formData.location) inputRef.current.value = formData.location;
-    }, []);*/
+    React.useEffect(() => {
+        const locationInfo = Cookies.get("location_info")?.split("|");
+        if (locationInfo) {
+            setLocationValue(locationInfo[1]);
+            console.log("setLocationId", [
+                Number(locationInfo[0]),
+                locationInfo[1],
+            ]);
+            setTimeout(
+                () =>
+                    setFormDataField("locationId", [
+                        Number(locationInfo[0]),
+                        locationInfo[1],
+                    ]),
+                500
+            );
+            Cookies.remove("location_info");
+        } else if (formData.locationId) {
+            setLocationValue(formData.locationId[1]);
+        }
+    }, []);
     return (
         <SearchBar
             valueCallback={handleValueCallback}
@@ -40,6 +55,7 @@ const LocationInput = () => {
             rounded-xl px-8 text-neutral-700 leading-tight border-[1px]
             hover:opacity-70 transition"
             disableNavigate
+            value={locationValue}
         />
         /*<input
             ref={inputRef}

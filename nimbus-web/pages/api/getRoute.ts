@@ -23,7 +23,7 @@ export default async function handler(
         });
 
         const routeResponse = await fetch(
-            `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&key=AIzaSyDJSTWjqR3w__4qaPpUPjyNLfDUbokZ8Bc`
+            `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&key=${process.env.DIRECTIONS_API_KEY}`
         );
         const result = await routeResponse.json();
 
