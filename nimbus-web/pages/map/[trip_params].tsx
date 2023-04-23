@@ -76,7 +76,6 @@ export default function map({ trip_params }: any) {
                     const tempLocId: any = [];
                     const tempTravelTimes: any = [];
                     const tempArrivalAndLeaveTimes: any = [];
-
                     day.forEach((node: any, index: any) => {
                         if (node.type === "location") {
                             tempLocId.push(node.loc_id);
@@ -94,6 +93,10 @@ export default function map({ trip_params }: any) {
                 trip["travelTimes"] = travelTimes;
                 trip["arrivalAndLeaveTimes"] = arrivalAndLeaveTimes;
                 trip["trip_id"] = trip_params_object.name;
+                dispatch({
+                    type: "SET_IS_SAVE_PLAN",
+                    payload: { trip_name: trip_params_object.name },
+                });
             }
 
             dispatch({
@@ -189,12 +192,6 @@ export default function map({ trip_params }: any) {
             setIsLoading(false);
         });
 
-        // else {
-        //     dispatch({
-        //         type: "SET_IS_SAVE_PLAN",
-        //         action: { trip_name: trip_params.name, isSavePlan: true },
-        //     });
-        // }
         setInitalized(true);
     }, [currentFolder, changed]);
 
