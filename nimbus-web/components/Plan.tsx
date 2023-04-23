@@ -21,6 +21,8 @@ interface IPlanContext {
     formData: any;
     setFormData: React.Dispatch<React.SetStateAction<IFormData>>;
     setFormDataField: (field: string, input: any) => void;
+    planProgess: any;
+    setPlanProgress: React.Dispatch<React.SetStateAction<boolean[]>>;
 }
 
 export const ScrollContext = React.createContext<IScrollContext>(
@@ -30,6 +32,9 @@ export const ScrollContext = React.createContext<IScrollContext>(
 export const PlanContext = React.createContext<IPlanContext>(
     {} as IPlanContext
 );
+
+const progress = Array(6).fill(false);
+// progress[3] = true; // if we want the budgetinput to have a default of 0
 
 const Plan = () => {
     const [formData, setFormData] = React.useState<any>({});
@@ -47,6 +52,12 @@ const Plan = () => {
     const { height } = useViewportHeight();
     const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     const pageSize = useElementSize(isConfirmActive ? "" : "input-container");
+    const [inputProgess, setInputProgess] = React.useState<boolean[]>(progress);
+    // const setPlanProgress = (index: number, value: boolean) => {
+    //     const temp = [...inputProgess];
+    //     temp[index] = value;
+    //     setInputProgess(temp);
+    // };
     //const ref = React.useRef<any>();
     //const scrollTimerRef = React.useRef<any>();
     /*const handleOnClick = (index: number) => {
@@ -104,6 +115,8 @@ const Plan = () => {
                     formData: formData,
                     setFormData: setFormData,
                     setFormDataField: setFormDataField,
+                    planProgess: inputProgess,
+                    setPlanProgress: setInputProgess,
                 }}
             >
                 <div

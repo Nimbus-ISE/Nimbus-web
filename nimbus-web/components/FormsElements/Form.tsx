@@ -10,6 +10,7 @@ import { ScrollContext } from "../Plan";
 import ArrowUpward from "@mui/icons-material/ArrowUpward";
 import ArrowDownward from "@mui/icons-material/ArrowDownward";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { PlanContext } from "../Plan";
 
 interface IProps {
     formArr: Array<IForm>;
@@ -26,8 +27,10 @@ const formMapper: { [key: string]: ReactElement<any, any> } = {
 
 const Form = ({ formArr }: IProps) => {
     const { currentValue, setCurrentValue } = React.useContext(ScrollContext);
+    const { formData } = React.useContext(PlanContext);
     const { height } = useElementSize("plan-card");
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
+
     const handleOnClick = (index: number, isForward: boolean) => {
         if (isForward) {
             setCurrentValue(index + 1);
@@ -35,6 +38,7 @@ const Form = ({ formArr }: IProps) => {
             setCurrentValue(index - 1);
         }
     };
+
     return (
         <form>
             {formArr.map((item, index) => {
@@ -65,10 +69,11 @@ const Form = ({ formArr }: IProps) => {
                         <div className="text-sm md:text-sm mx-auto max-w-[30rem] text-center">
                             {item.description}
                         </div>
-                        <div className="my-7 text-xs flex justify-center w-full">
-                            {formMapper[item.type]}
+                        <div className="flex-column">
+                            <div className="my-7 text-xs flex justify-center w-full">
+                                {formMapper[item.type]}
+                            </div>
                         </div>
-
                         {index !== formArr.length - 1 ? (
                             <button
                                 onClick={(e) => {
@@ -77,6 +82,7 @@ const Form = ({ formArr }: IProps) => {
                                 }}
                                 className="flex p-3 w-full flex-1 group rounded-full"
                             >
+                                {}
                                 <div className="bg-white h-11 w-11 p-2 flex rounded-full m-auto shadow-sm group-hover:translate-y-3 transition duration-500">
                                     <ArrowDownward className="h-7 w-7 m-auto text-neutral-400  group-hover:text-tricolorgreen" />
                                 </div>

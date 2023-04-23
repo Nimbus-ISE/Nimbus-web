@@ -15,15 +15,17 @@ const choices = [
 
 const TravelMethodInput = () => {
     const { setFormDataField } = React.useContext(PlanContext);
-    const [travelMethod, setTravelMethod] = React.useState<number>(0);
+    const [travelMethod, setTravelMethod] = React.useState<number>(-1);
 
     const handleClick = (index: number) => {
         setTravelMethod(index);
         setFormDataField("travelMethod", choices[index][1]);
     };
+
     React.useEffect(() => {
         setFormDataField("travelMethod", choices[0][1]);
     }, []);
+
     return (
         <ThemeProvider theme={nimbusTheme}>
             <div className="flex flex-initial flex-wrap justify-center">
