@@ -85,22 +85,28 @@ const Alternative = () => {
                 body: JSON.stringify(savePlan[0]),
             });
             const result = await response.json();
-            console.log(result);
+
             const alternatives: any = [];
             const queryLocIds: any = [];
             result.forEach((day: any) => {
                 alternatives.push(day[selectedLocationIndex][0]);
                 queryLocIds.push(day[selectedLocationIndex][0].loc_id);
             });
-            const alternativeLocation: any = await fetchLocationDetails(
+            const alternativeLocations: any = await fetchLocationDetails(
                 `[${queryLocIds.toString()}]`,
                 currentFolder
             );
+            console.log(alternativeLocations);
+
             dispatch({
                 type: "SET_ALTERNATIVES",
-                payload: alternativeLocation.location_data,
+                payload: {
+                    locations: alternativeLocations.location_data,
+                    // trips: [result[sele``]],
+                },
             });
-            console.log(alternativeLocation);
+
+            console.log(result);
         })();
     }, []);
 
@@ -146,9 +152,14 @@ const Alternative = () => {
                                         : "flex flex-row gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
-                                {alternatives.map((location: any) => (
-                                    <AlternativeItem location={location} />
-                                ))}
+                                {alternatives.map(
+                                    (location: any, index: any) => (
+                                        <AlternativeItem
+                                            location={location}
+                                            index={index}
+                                        />
+                                    )
+                                )}
                             </div>
                         )}
                         {!isBigScreen && (

@@ -22,7 +22,7 @@ const FolderFull = (props: FolderFullProps) => {
                     <div className={classes.tab}>
                         <div
                             className={
-                                "flex w-full gap-20 animate-graph-expand"
+                                "flex w-full  gap-20 animate-graph-expand"
                             }
                         >
                             {fullPlan.map((data: any, index: any) => {
@@ -31,7 +31,7 @@ const FolderFull = (props: FolderFullProps) => {
                                     index < currentFolderView + 3
                                 ) {
                                     return (
-                                        <div className="h-[40rem] overflow-y-scroll overflow-x-hidden scrollbar-hide p-2 ">
+                                        <div className="h-[90vh] overflow-y-scroll overflow-x-hidden scrollbar-hide p-2 ">
                                             <PlanGraph
                                                 clickable={false}
                                                 dayNumber={index + 1}

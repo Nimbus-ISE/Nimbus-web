@@ -30,6 +30,7 @@ interface PlanTabContextStateType {
     isSavePlan: boolean;
     trip_name: string;
     alternative_index: number;
+    chosen_alternative_index: number;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -117,7 +118,8 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return {
                     ...state,
                     openReview: true,
-                    placeData: action.payload,
+                    placeData: action.payload.place,
+                    chosen_alternative_index: action.payload.index,
                 };
             } else {
                 return {
@@ -195,7 +197,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return { ...state, alternative_index: action.payload };
         }
         case "SET_ALTERNATIVES": {
-            return { ...state, alternatives: action.payload };
+            return { ...state, alternatives: action.payload.locations };
         }
         default: {
             console.log("error");
@@ -275,6 +277,7 @@ const initialState: PlanTabContextStateType = {
     isSavePlan: false,
     trip_name: "",
     alternative_index: 0,
+    chosen_alternative_index: 0,
 };
 
 const PlanTabContext = createContext(

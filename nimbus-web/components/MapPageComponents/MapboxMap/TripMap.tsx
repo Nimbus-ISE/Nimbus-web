@@ -88,6 +88,7 @@ const TripMap = () => {
                                                         ].location_data[index],
                                                     },
                                                 });
+
                                                 e.originalEvent.stopPropagation();
                                             }}
                                         >
