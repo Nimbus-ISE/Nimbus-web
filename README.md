@@ -41,5 +41,5 @@ The following environment variables are required to run Nimbus Travel Planner:
 - `REDIS_HOST`: the host url of the redis database
 - `ALGO_API_IP`: the IP of the algorithm instance
 - `ALGO_API_PORT`: the port of the algorithm
-- `MAPBOX_ACESS_TOKEN`= the Mapbox API Access token
-- `DIRECTIONS_API_KEY`= the Google directions API key
+- `MAPBOX_ACESS_TOKEN`: the Mapbox API Access token
+- `DIRECTIONS_API_KEY`: the Google directions API key
