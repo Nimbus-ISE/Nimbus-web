@@ -1,18 +1,15 @@
 import React from "react";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CircleIcon from "@mui/icons-material/Circle";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Button, Divider, Stack, Typography } from "@mui/material";
 import Stars from "../Stars";
 import Review from "../MapPageComponents/Popups/Review";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ImagePagination from "./ImagePagination";
 import { ThemeProvider } from "@mui/material";
-
-import styles from "./Button.module.css";
 import { nimbusTheme } from "@/styles/NimbusMuiTheme";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 interface FullDetailCardProps {
     location: {
         loc_id: number;
@@ -28,11 +25,6 @@ interface FullDetailCardProps {
         reviews: Array<IReview>;
     };
 }
-
-// interface DotPaginationProps {
-//     show: boolean;
-//     index: number;
-// }
 
 interface SelectButtonProps {
     onClick: () => void;
@@ -83,9 +75,13 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
         reviews,
     } = location;
 
+    const router = useRouter();
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
     const isLargerThanLarge = useMediaQuery("(min-width: 1024px)");
-    const handleSelectDestination = () => {};
+    const handleSelectDestination = () => {
+        Cookies.set("location_info", `${loc_id.toString()}|${loc_name}`);
+        router.push("/plan");
+    };
 
     return (
         <div className="relative text-black mx-auto p-5 md:p-12 w-full max-w-screen-xl">

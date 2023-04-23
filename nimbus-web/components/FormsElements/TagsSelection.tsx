@@ -32,8 +32,11 @@ const TagsSelection = () => {
 
     React.useEffect(() => {
         if (formData) {
+            console.log(formData);
             const data: IFormData = {
-                must_include: formData.locationId,
+                must_include: formData.locationId
+                    ? formData.locationId[0]
+                    : undefined,
                 start_date: formData.date ? formData.date[0] : undefined,
                 end_date: formData.date ? formData.date[1] : undefined,
                 trip_pace: formData.tripType,

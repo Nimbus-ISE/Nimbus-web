@@ -79,16 +79,13 @@ const Plan = () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
-
-    React.useEffect(() => {
-        console.log(pageSize.height);
-    }, [pageSize]);
     React.useEffect(() => {
         //updates value and sets snap direction according to increment
         //setSnapUp(currentValue < ref.current ? true : false);
         //ref.current = currentValue;
         setCurrentValue(0);
-        setTimeout(() => setIsLoading(false), 500);
+        setTimeout(() => setIsLoading(false), 400);
+        return () => setIsLoading(true);
     }, [isConfirmActive]);
     return (
         <ScrollContext.Provider
@@ -111,7 +108,7 @@ const Plan = () => {
                     className="relative flex text-black overflow-hidden bg-neutral-100"
                 >
                     {isLoading ? (
-                        <div className="absolute z-50 top-0 bottom-0 left-0 right-0 m-auto flex min-h-screen h-full w-full bg-neutral-100">
+                        <div className="absolute z-50 top-0 bottom-0 left-0 right-0 m-auto flex bg-neutral-100">
                             <Loading />
                         </div>
                     ) : null}
