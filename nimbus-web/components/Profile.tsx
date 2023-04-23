@@ -9,6 +9,7 @@ import ProfileCard from "./ProfileCard/ProfileCard";
 import getMaxPlans from "@/utils/getMaxPlans";
 import { Button, Divider } from "@mui/material";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
+import ConfirmModal from "./ConfirmModal";
 
 interface IProps {
     user: UserProfileType;
@@ -20,6 +21,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
     const router = useRouter();
     const isLargerThanMedium = useMediaQuery("(min-width:768px)");
     const maxPlans = getMaxPlans(user);
+    const [confirmActive, setIsConfirmActive] = React.useState<boolean>(false);
     const handleDeleteAccount = async () => {
         const response = await fetch(`/api/deleteUser/${user.sub}`);
         if (response.ok) {
@@ -32,6 +34,16 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
     return user ? (
         <div className="relative flex flex-col min-h-screen h-full w-full bg-neutral-100 text-black">
             <Background />
+            <ConfirmModal
+                confirmActive={confirmActive}
+                setIsConfirmActive={setIsConfirmActive}
+                onAcceptCallback={handleDeleteAccount}
+                onDeclineCallback={() => {}}
+                header="Delete my account"
+                sub="Deleting your account is an irreversible action and
+                will permanently delete all of your data. Please
+                proceed with caution."
+            />
             <div
                 style={{
                     marginTop: isLargerThanMedium ? "2.5%" : 0,
@@ -65,7 +77,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                     >
                         RECENTLY VIEWED
                     </div>
-                    {recentlyViewedList ? (
+                    {recentlyViewedList && recentlyViewedList.length !== 0 ? (
                         <Slider
                             title=" "
                             locationList={recentlyViewedList}
@@ -80,14 +92,10 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                         </div>
                     )}
                 </div>
-                {isLargerThanMedium ? (
-                    <div className="py-3" />
-                ) : (
-                    <div className="md:w-[80%] w-[90%] mx-auto py-3">
-                        <Divider />
-                    </div>
-                )}
-                <div className="md:w-[80%] w-[90%] mx-auto bg-red-100 border border-red-500 rounded-xl text-red-700 px-4 py-3">
+                <div className="md:w-[80%] w-[90%] mx-auto py-5">
+                    <Divider />
+                </div>
+                <div className="md:w-[80%] w-[90%] mx-auto bg-red-50 border border-red-500 rounded-xl text-red-700 px-4 py-5 my-5">
                     <div className="text-xl font-bold">DANGER ZONE:</div>
 
                     <div className="flex flex-col gap-5 md:flex-row justify-between p-3 w-full">
@@ -97,7 +105,7 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                             proceed with caution.
                         </div>
                         <Button
-                            onMouseDown={handleDeleteAccount}
+                            onMouseDown={() => setIsConfirmActive(true)}
                             variant="outlined"
                             color="error"
                             startIcon={<WarningRoundedIcon />}

@@ -14,12 +14,8 @@ import getSavedPlan from "@/utils/api/getSavedPlan";
 import { customClaims } from "@/misc";
 
 interface IProps {
-    recentlyViewedList: Array<unknown> | undefined;
-    planList: Array<{
-        user: UserProfile;
-        recentlyViewedList: Array<unknown> | undefined;
-        planList: Array<unknown>;
-    }>;
+    recentlyViewedList: Array<unknown>;
+    planList: Array<unknown>;
 }
 
 function profile({ recentlyViewedList, planList }: IProps) {
@@ -66,6 +62,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     let recentlyViewedList;
     if (rv) {
         recentlyViewedList = await getRecentlyViewedList(rv.reverse());
+    } else {
+        recentlyViewedList = [];
     }
     console.log("RV", rv);
     const planList = await getSavedPlan(cookies.user_id);
