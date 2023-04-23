@@ -32,6 +32,7 @@ interface PlanTabContextStateType {
     alternative_index: number;
     chosen_alternative_index: number;
     alternative_trips: any;
+    alternative_travel_time: any;
 }
 
 function reducer(state: PlanTabContextStateType, action: any) {
@@ -70,6 +71,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     }
                 );
                 const locIds: any = [];
+
                 console.log(newDayPlan);
 
                 newDayPlan.forEach((node: any) => {
@@ -77,7 +79,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
                         locIds.push(Number(node.loc_id));
                     }
                 });
-                console.log(locIds);
 
                 const fetchLocationDetails = async (
                     loc_ids: string,
@@ -107,10 +108,11 @@ function reducer(state: PlanTabContextStateType, action: any) {
                     day: day.toString(),
                     location_data: ordered_loc_ids,
                 });
-                console.log(correctly_ordered);
-                console.log(state.fullPlan);
 
                 state.fullPlan[day] = correctly_ordered[0];
+
+                state.travelTime[state.currentFolder] =
+                    state.alternative_travel_time[action.payload.index];
             };
 
             changePlan(action.payload.day, action.payload.oldLocationIndex);
@@ -253,6 +255,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 ...state,
                 alternatives: action.payload.locations,
                 alternative_trips: action.payload.trips,
+                alternative_travel_time: action.payload.travelTime,
             };
         }
         default: {
@@ -335,6 +338,7 @@ const initialState: PlanTabContextStateType = {
     alternative_index: 0,
     chosen_alternative_index: 0,
     alternative_trips: [],
+    alternative_travel_time: 0,
 };
 
 const PlanTabContext = createContext(

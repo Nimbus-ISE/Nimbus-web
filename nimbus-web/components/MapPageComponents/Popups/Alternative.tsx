@@ -68,7 +68,6 @@ const Alternative = () => {
                 plan.push(dayPlan);
             }
         });
-        console.log(trip_params);
 
         savePlan.push({
             day: addDate(trip_params.start_date, Number(currentFolder)),
@@ -87,23 +86,26 @@ const Alternative = () => {
 
             const alternatives: any = [];
             const queryLocIds: any = [];
-            console.log(result);
-            const index = 0;
+            const travelTimes: any = [];
 
             result.forEach((day: any) => {
                 const tempResult: any = [];
+                const tempTravelTime: any = [];
                 day.forEach((point: any) => {
                     if (point.type === "locations") tempResult.push(point);
+                    else tempTravelTime.push(point);
                 });
 
                 alternatives.push(tempResult[selectedLocationIndex]);
                 queryLocIds.push(tempResult[selectedLocationIndex].loc_id);
+                travelTimes.push(tempTravelTime);
             });
+            console.log(travelTimes);
+
             const alternativeLocations: any = await fetchLocationDetails(
                 `[${queryLocIds.toString()}]`,
                 currentFolder
             );
-            console.log(queryLocIds);
 
             const ordered_loc_ids: any = [];
             const correctly_ordered = [];
@@ -126,6 +128,7 @@ const Alternative = () => {
                 payload: {
                     locations: correctly_ordered[0].location_data,
                     trips: result,
+                    travelTime: travelTimes,
                 },
             });
         })();

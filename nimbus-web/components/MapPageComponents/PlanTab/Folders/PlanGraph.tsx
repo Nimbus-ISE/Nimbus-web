@@ -2,10 +2,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import capitalizeFirst from "@/utils/capitalizeFirst";
+import { useEffect } from "react";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab, isClosingFullFolder, isBigScreen } = getPlanTabState();
+    const { openFullTab, isClosingFullFolder, isBigScreen, travelTime } =
+        getPlanTabState();
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
