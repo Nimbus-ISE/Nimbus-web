@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Box, IconButton, Stack } from "@mui/material";
+import { Box, IconButton, Stack, useMediaQuery } from "@mui/material";
 
 interface ImagePaginationProps {
     loc_name: string;
@@ -33,6 +33,7 @@ const ImagePagination = ({
 }: ImagePaginationProps) => {
     const [imageList, setImageList] = useState(url[0]);
     const [currentPage, setCurrentPage] = useState(0);
+    const isLargerThanLarge = useMediaQuery("(min-width: 1024px)");
     const pageNumbers = [];
 
     for (let i = 0; i < url.length; i++) {
@@ -47,17 +48,16 @@ const ImagePagination = ({
         setImageList(url[currentPage - 1]);
     };
     return (
-        <Stack width={isLargerThanMedium ? "60%" : "100%"}>
+        <Stack width={isLargerThanLarge ? "60%" : "100%"}>
             {isLargerThanMedium ? (
                 <img
-                    // className="h-72 shadow-md aspect-video object-cover rounded-t-xl"
-                    className="h-72 rounded-t-xl"
+                    className="h-72 rounded-t-xl object-cover aspect-ratio shadow-md"
                     src={imageList}
                     alt={loc_name}
                 />
             ) : (
                 <img
-                    // className="h-52 w-100 shadow-md aspect-video object-cover "
+                    className="h-80 shadow-md aspect-video object-cover rounded-t-xl"
                     src={imageList}
                     alt={loc_name}
                 />
@@ -66,12 +66,9 @@ const ImagePagination = ({
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                className="shadow-md"
+                className="shadow-sm rounded-b-xl"
                 sx={{
-                    backgroundColor: "#e9e9e9",
-                    borderRadius: isLargerThanMedium
-                        ? "0px 0px 8px 8px"
-                        : "0px 0px 0px 0 px",
+                    backgroundColor: "#ffffff",
                     width: "100%",
                 }}
                 px={6}
