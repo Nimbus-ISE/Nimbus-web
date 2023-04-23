@@ -41,8 +41,6 @@ const FolderSmall = () => {
             setTabsClass(classes.tabs);
         }
     }, [openFullTab, currentFolderView]);
-    console.log(fullPlan);
-    console.log(travelTime);
 
     return (
         <>

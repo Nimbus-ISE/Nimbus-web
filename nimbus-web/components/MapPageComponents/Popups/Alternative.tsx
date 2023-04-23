@@ -18,7 +18,7 @@ const Alternative = () => {
     const dispatch: any = getPlanTabDispatch();
     const plan: any = [];
     const savePlan: any = [];
-    console.log(fullPlan);
+
     const fetchLocationDetails = async (loc_ids: string, day: string) => {
         const response = await fetch(
             `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
@@ -68,11 +68,9 @@ const Alternative = () => {
                 plan.push(dayPlan);
             }
         });
+
         savePlan.push({
-            day: addDate(
-                JSON.parse(trip_params).start_date,
-                Number(currentFolder)
-            ),
+            day: addDate(trip_params.start_date, Number(currentFolder)),
             loc_id: fullPlan[currentFolder].location_data[selectedLocationIndex]
                 .loc_id,
             trip: plan,
@@ -88,25 +86,51 @@ const Alternative = () => {
 
             const alternatives: any = [];
             const queryLocIds: any = [];
+            const travelTimes: any = [];
+
             result.forEach((day: any) => {
-                alternatives.push(day[selectedLocationIndex][0]);
-                queryLocIds.push(day[selectedLocationIndex][0].loc_id);
+                const tempResult: any = [];
+                const tempTravelTime: any = [];
+                day.forEach((point: any) => {
+                    if (point.type === "locations") tempResult.push(point);
+                    else tempTravelTime.push(point);
+                });
+
+                alternatives.push(tempResult[selectedLocationIndex]);
+                queryLocIds.push(tempResult[selectedLocationIndex].loc_id);
+                travelTimes.push(tempTravelTime);
             });
+            console.log(travelTimes);
+
             const alternativeLocations: any = await fetchLocationDetails(
                 `[${queryLocIds.toString()}]`,
                 currentFolder
             );
-            console.log(alternativeLocations);
+
+            const ordered_loc_ids: any = [];
+            const correctly_ordered = [];
+            alternativeLocations.location_data?.forEach((point: any) => {
+                const indexOfData = queryLocIds.indexOf(
+                    point.loc_id.toString()
+                );
+
+                if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
+            });
+            correctly_ordered.push({
+                day: currentFolder.toString(),
+                location_data: ordered_loc_ids,
+            });
+
+            console.log(correctly_ordered);
 
             dispatch({
                 type: "SET_ALTERNATIVES",
                 payload: {
-                    locations: alternativeLocations.location_data,
-                    // trips: [result[sele``]],
+                    locations: correctly_ordered[0].location_data,
+                    trips: result,
+                    travelTime: travelTimes,
                 },
             });
-
-            console.log(result);
         })();
     }, []);
 
