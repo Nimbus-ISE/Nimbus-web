@@ -15,7 +15,7 @@ const choices = [
 
 const TravelMethodInput = () => {
     const { setFormDataField } = React.useContext(PlanContext);
-    const [travelMethod, setTravelMethod] = React.useState<number>(0);
+    const [travelMethod, setTravelMethod] = React.useState<number>(-1);
 
     const handleClick = (index: number) => {
         setTravelMethod(index);

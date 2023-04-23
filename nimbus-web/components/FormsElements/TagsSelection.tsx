@@ -6,12 +6,25 @@ import { PlanContext } from "../Plan";
 import { tags } from "@/misc";
 import router from "next/router";
 
+const formDataKeys = [
+    "locationId",
+    "date",
+    "tripType",
+    "budget",
+    "travelMethod",
+    "tags",
+];
+
+const progress = Array(6).fill(false);
+progress[3] = true; // default = 0 for budgetInput
+
 const TagsSelection = () => {
-    const { formData } = React.useContext(PlanContext);
+    const { formData, setFormDataField } = React.useContext(PlanContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const [payload, setPayload] = React.useState<string>("");
-    const [alert, setAlert] = React.useState<boolean>(false);
-    const [tempData, setTempData] = React.useState<IFormData>();
+    const [invalid, setInvalid] = React.useState<boolean>(false);
+    // const [tempData, setTempData] = React.useState<IFormData>();
+    const [inputProgess, setInputProgess] = React.useState<boolean[]>(progress);
 
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -26,38 +39,71 @@ const TagsSelection = () => {
         setSelectTag(newSelectTag);
     };
 
+    React.useEffect(() => {
+        setFormDataField("tags", selectTag);
+    }, [selectTag]);
+
     // React.useEffect(() => {
-    //     setFormDataField("tags", selectTag);
-    // }, [selectTag]);
+    //     if (formData) {
+    //         const data: IFormData = {
+    //             must_include: formData.locationId,
+    //             start_date: formData.date ? formData.date[0] : undefined,
+    //             end_date: formData.date ? formData.date[1] : undefined,
+    //             trip_pace: formData.tripType,
+    //             budget: formData.budget,
+    //             travel_method: formData.travelMethod,
+    //             tags: formData.tags ? formData.tags.join() : undefined,
+    //         };
+    //         setTempData(data);
+    //     }
+    // }, [formData]);
 
-    const ref = React.useRef<any>();
+    // React.useEffect(() => {
+    //     if (
+    //         tempData?.start_date &&
+    //         tempData.end_date &&
+    //         tempData.must_include
+    //     ) {
+    //         setInvalid(false);
+    //     }
+    // });
 
     React.useEffect(() => {
-        if (formData) {
-            const data: IFormData = {
-                must_include: formData.locationId,
-                start_date: formData.date ? formData.date[0] : undefined,
-                end_date: formData.date ? formData.date[1] : undefined,
-                trip_pace: formData.tripType,
-                budget: formData.budget,
-                travel_method: formData.travelMethod,
-                tags: formData.tags ? formData.tags.join() : undefined,
-            };
-            setTempData(data);
-        }
-    }, [formData]);
+        formDataKeys.map((data, index) => {
+            if ((10 % index !== 0 || index == 1) && formData[data]) {
+                inputProgess[index] = true;
+            }
+            if (index == 2 && formData[data] > -1) {
+                inputProgess[2] = true;
+            }
+            if (index == 5 && formData[data] && formData[data].length > 0) {
+                inputProgess[5] = true;
+            } else {
+                inputProgess[5] = false;
+            }
+        });
+    });
 
     React.useEffect(() => {
-        if (tempData?.start_date && tempData.end_date) {
-            setAlert(false);
+        if (inputProgess.every((element) => element === true)) {
+            setInvalid(false);
+        } else {
+            setInvalid(true);
         }
     });
 
     const handleContinue = async () => {
         // setIsConfirmActive(true);
-        if (tempData && !(tempData.start_date || tempData.end_date)) {
-            setAlert(true);
-        } else {
+        // if (tempData && !(tempData.start_date || tempData.end_date)) {
+        //     setInvalid(true);
+        // } else {
+        //     router.push(`/map/${encodeURIComponent(payload)}`);
+        //   }
+
+        console.log(inputProgess);
+        console.log(formData);
+
+        if (inputProgess.every((element) => element === true)) {
             router.push(`/map/${encodeURIComponent(payload)}`);
         }
     };
@@ -65,7 +111,7 @@ const TagsSelection = () => {
     return (
         <div className="mx-auto">
             <ThemeProvider theme={nimbusTheme}>
-                <div ref={ref} className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center">
                     {tags.sort().map((data) => {
                         return (
                             <Chip
@@ -84,30 +130,23 @@ const TagsSelection = () => {
                                         : "outlined"
                                 }
                                 className="shadow-md"
-                                disabled={
-                                    selectTag.length != 5
-                                        ? false
-                                        : selectTag.includes(data)
-                                        ? false
-                                        : true
-                                }
+                                // // limiting tags selection to 5
+                                // disabled={
+                                //     selectTag.length != 5
+                                //         ? false
+                                //         : selectTag.includes(data)
+                                //         ? false
+                                //         : true
+                                // }
                             />
                         );
                     })}
                 </div>
                 <div className="flex flex-col mx-auto w-full">
-                    {alert ? (
-                        <div className="relative">
-                            <div className="absolute top-3 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
-                                Please select valid date(s)!
-                            </div>
-                        </div>
-                    ) : (
-                        ""
-                    )}
                     <Button
                         onClick={handleContinue}
                         variant="outlined"
+                        disabled={invalid ? true : false}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
@@ -125,6 +164,15 @@ const TagsSelection = () => {
                     >
                         <div className="m-auto font-montserrat">Continue</div>
                     </Button>
+                    {invalid ? (
+                        <div className="relative">
+                            <div className="absolute my-2 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
+                                Please complete all inputs before continuing!
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </ThemeProvider>
         </div>

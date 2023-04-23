@@ -11,16 +11,16 @@ const choices = ["Chill", "Balanced", "Travel"];
 
 const TripTypeInput = () => {
     const { setFormDataField } = React.useContext(PlanContext);
-    const [tripType, setTripType] = React.useState<number>(0);
+    const [tripType, setTripType] = React.useState<number>(-1);
 
     const handleClick = (index: number) => {
         setTripType(index);
         setFormDataField("tripType", index);
     };
 
-    React.useEffect(() => {
-        setFormDataField("tripType", 0);
-    }, []);
+    // React.useEffect(() => {
+    //     setFormDataField("tripType", 0);
+    // }, []);
 
     return (
         <ThemeProvider theme={nimbusTheme}>

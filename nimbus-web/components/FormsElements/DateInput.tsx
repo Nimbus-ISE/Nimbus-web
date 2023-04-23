@@ -22,7 +22,7 @@ const DateInput = () => {
     const { formData, setFormDataField } = React.useContext(PlanContext);
     const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
     const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
-    const { user } = useUser();
+    // const { user } = useUser();
 
     React.useEffect(() => {
         if (startDate && endDate) {
@@ -59,9 +59,9 @@ const DateInput = () => {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    defaultValue={
-                                        formData.date ? formData.date[0] : ""
-                                    }
+                                    // defaultValue={
+                                    //     formData.date ? formData.date[0] : ""
+                                    // }
                                     onKeyDown={handleKeyDown}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
@@ -77,11 +77,12 @@ const DateInput = () => {
                             )}
                             inputFormat="DD/MM/YYYY"
                             minDate={
-                                getPremiumType(user) === "Yearly"
-                                    ? endDate?.subtract(6, "day")
-                                    : getPremiumType(user) === "Monthly"
-                                    ? endDate?.subtract(4, "day")
-                                    : endDate?.subtract(2, "day")
+                                // getPremiumType(user) === "Yearly"
+                                //     ? endDate?.subtract(6, "day")
+                                //     : getPremiumType(user) === "Monthly"
+                                //     ? endDate?.subtract(4, "day")
+                                //     : endDate?.subtract(2, "day")
+                                endDate?.subtract(2, "day")
                             }
                             maxDate={endDate}
                             closeOnSelect={false}
@@ -108,9 +109,9 @@ const DateInput = () => {
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
-                                    defaultValue={
-                                        formData.date ? formData.date[1] : ""
-                                    }
+                                    // defaultValue={
+                                    //     formData.date ? formData.date[1] : ""
+                                    // }
                                     onKeyDown={handleKeyDown}
                                     className={datePickerClass}
                                     sx={datePickerStyles}
@@ -127,11 +128,12 @@ const DateInput = () => {
                             inputFormat="DD/MM/YYYY"
                             minDate={startDate}
                             maxDate={
-                                getPremiumType(user) === "Yearly"
-                                    ? startDate?.add(6, "day")
-                                    : getPremiumType(user) === "Monthly"
-                                    ? startDate?.add(4, "day")
-                                    : startDate?.add(2, "day")
+                                // getPremiumType(user) === "Yearly"
+                                //     ? startDate?.add(6, "day")
+                                //     : getPremiumType(user) === "Monthly"
+                                //     ? startDate?.add(4, "day")
+                                // : startDate?.add(2, "day")
+                                startDate?.add(2, "day")
                             }
                             closeOnSelect={false}
                             disablePast
