@@ -2,15 +2,34 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
-import { PlanContext } from "../Plan";
+import { PlanContext, ScrollContext } from "../Plan";
 import { tags } from "@/misc";
-import router from "next/router";
+
+const formDataKeys = [
+    "locationId",
+    "date",
+    "tripType",
+    "budget",
+    "travelMethod",
+    "tags",
+];
+
+const progress = Array(6).fill(false);
+progress[3] = true; // default = 0 for budgetInput
 
 const TagsSelection = () => {
-    const { formData, setFormDataField, setIsConfirmActive } =
-        React.useContext(PlanContext);
+    const {
+        formData,
+        setFormDataField,
+        planProgess,
+        setPlanProgress,
+        setIsConfirmActive,
+    } = React.useContext(PlanContext);
+    const { currentValue } = React.useContext(ScrollContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const [payload, setPayload] = React.useState<string>("");
+    const [invalid, setInvalid] = React.useState<boolean>(false);
+
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
         if (newSelectTag.indexOf(tag) > -1) {
@@ -28,34 +47,52 @@ const TagsSelection = () => {
         setFormDataField("tags", selectTag);
     }, [selectTag]);
 
-    const ref = React.useRef<any>();
-
+    // Detecting the progress of the user input
     React.useEffect(() => {
         if (formData) {
-            console.log(formData);
-            const data: IFormData = {
-                must_include: formData.locationId
-                    ? formData.locationId[0]
-                    : undefined,
-                start_date: formData.date ? formData.date[0] : undefined,
-                end_date: formData.date ? formData.date[1] : undefined,
-                trip_pace: formData.tripType,
-                budget: formData.budget,
-                travel_method: formData.travelMethod,
-                tags: formData.tags ? formData.tags.join() : undefined,
-            };
-            console.log(data);
-            setPayload(JSON.stringify(data));
+            console.log("update plan progress");
+            const progress = formDataKeys.map((data, index) => {
+                if ((10 % index !== 0 || index == 1) && formData[data]) {
+                    return true;
+                }
+                if (index == 2 && formData[data] > -1) {
+                    return true;
+                }
+                if (index == 5 && formData[data] && formData[data].length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            setPlanProgress(progress);
         }
     }, [formData]);
 
-    // const data = formData;
+    // Setting the form's state to "valid" when all inputs are valid
+    React.useEffect(() => {
+        if (planProgess.every((element: boolean) => element === true)) {
+            setInvalid(false);
+        } else {
+            setInvalid(true);
+        }
+    });
+
+    // When the user clicks the "continue" button
+    const handleContinue = async () => {
+        console.log(planProgess);
+        console.log(formData);
+
+        if (planProgess.every((element: boolean) => element === true)) {
+            console.log("continue");
+            setIsConfirmActive(true);
+        }
+    };
 
     return (
         <div className="mx-auto max-w-[40rem]">
             <ThemeProvider theme={nimbusTheme}>
-                <div ref={ref} className="flex flex-wrap justify-center">
-                    {tags.map((data) => {
+                <div className="flex flex-wrap justify-center">
+                    {tags.sort().map((data) => {
                         return (
                             <Chip
                                 key={data}
@@ -73,22 +110,28 @@ const TagsSelection = () => {
                                         : "outlined"
                                 }
                                 className="shadow-md"
+                                // // limiting tags selection to 5
+                                // disabled={
+                                //     selectTag.length != 5
+                                //         ? false
+                                //         : selectTag.includes(data)
+                                //         ? false
+                                //         : true
+                                // }
                             />
                         );
                     })}
                 </div>
-                <div className="flex mx-auto w-full">
+                <div className="flex flex-col mx-auto w-full">
                     <Button
-                        onClick={async () => {
-                            setIsConfirmActive(true);
-                            // router.push(`/map/${encodeURIComponent(payload)}`);
-                        }}
+                        onClick={handleContinue}
                         variant="outlined"
+                        disabled={invalid ? true : false}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
                             color: "black",
-                            marginTop: "50px",
+                            marginTop: "30px",
                             paddingX: "5rem",
                             marginX: "auto",
                             textTransform: "none",
@@ -101,6 +144,15 @@ const TagsSelection = () => {
                     >
                         <div className="m-auto font-montserrat">Continue</div>
                     </Button>
+                    {invalid ? (
+                        <div className="relative">
+                            <div className="absolute my-2 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
+                                Please complete all inputs before continuing!
+                            </div>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             </ThemeProvider>
         </div>

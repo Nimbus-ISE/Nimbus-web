@@ -71,8 +71,8 @@ const BudgetInput = (props: any) => {
                         slots={{
                             valueLabel: ValueLabelComponent,
                         }}
-                        // defaultValue={formData.budget}
-                        value={value}
+                        defaultValue={0}
+                        // value={value}
                         valueLabelDisplay="on"
                         step={1}
                         min={0}

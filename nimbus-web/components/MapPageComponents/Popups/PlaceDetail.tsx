@@ -5,11 +5,10 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
-    const { isBigScreen, placeData } = getPlanTabState();
+    const { isBigScreen, placeData: data } = getPlanTabState();
     const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
-    const data = placeData.place;
-    console.log(data);
+    // const data = placeData;
 
     const fetchReview = async (loc_id: string) => {
         const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
@@ -18,18 +17,18 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     };
     useEffect(() => {
         (async () => {
-            fetchReview(data.loc_id).then((result: any) => {
+            fetchReview(data?.loc_id).then((result: any) => {
                 setReviewData(result);
             });
         })();
-    }, [placeData]);
+    }, [data]);
 
     return (
         <>
             <div
                 className={
                     isBigScreen
-                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-24 left-[57%] z-50 cursor-pointer"
+                        ? "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[13vh] left-[57%] z-50 cursor-pointer"
                         : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[15vh] left-[89vw]  z-50 cursor-pointer  "
                 }
                 onMouseDown={() => {
@@ -71,7 +70,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                         <div className="text-xs">{props.address}</div>
 
-                        <Stars rating={data.rating} size={40} />
+                        <Stars rating={data?.rating} size={40} />
 
                         <div
                             className={
@@ -99,7 +98,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                     </div>
 
-                    {reviewData.map((review: any) => {
+                    {reviewData?.map((review: any) => {
                         return (
                             <>
                                 <Review

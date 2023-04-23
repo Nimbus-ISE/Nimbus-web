@@ -65,10 +65,9 @@ const AlternativeItem = (props: any) => {
             <button
                 className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300 z-10"
                 onMouseDown={() => {
-                    console.log(props.location);
                     dispatch({
                         type: "TOGGLE_PLACE_DETAILS",
-                        payload: { place: props.location },
+                        payload: { place: props.location, index: props.index },
                     });
                 }}
             >
