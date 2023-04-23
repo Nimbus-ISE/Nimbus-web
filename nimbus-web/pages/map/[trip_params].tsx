@@ -63,14 +63,11 @@ export default function map({ trip_params }: any) {
             let trip: any = [];
             if (trip_params_object.name === undefined) {
                 trip = await fetchTrip();
-                console.log(trip);
             } else {
                 const dayPlans = trip_params_object.day_plan;
                 const locIds: any = [];
                 const travelTimes: any = [];
                 const arrivalAndLeaveTimes: any = [];
-
-                console.log(dayPlans);
 
                 dayPlans.forEach((day: any) => {
                     const tempLocId: any = [];
@@ -124,8 +121,6 @@ export default function map({ trip_params }: any) {
                         `[${[trip.locations[index]].toString()}]`,
                         index
                     ).then(async (result) => {
-                        console.log(result);
-
                         const coordinates: Array<Array<string>> = [];
                         loc_ids.push(await result);
                         const sorted_days = sortObject(loc_ids);

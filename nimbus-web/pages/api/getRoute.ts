@@ -23,9 +23,10 @@ export default async function handler(
         });
 
         const routeResponse = await fetch(
-            `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&key=${process.env.DIRECTIONS_API_KEY}`
+            `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&waypoints=${waypoints}&key=AIzaSyBwNJxetuxzanP6-IW1k2pdmIc0VtZjtlg`
         );
         const result = await routeResponse.json();
+        console.log(result);
 
         res.status(200).json(result.routes[0].overview_polyline.points);
     } catch (err) {

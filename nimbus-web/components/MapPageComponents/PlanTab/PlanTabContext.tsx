@@ -61,18 +61,17 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 day: number,
                 oldLocationIndex: number
             ) => {
+                console.log(state.alternative_trips[action.payload.index]);
+
                 const newDayPlan: any = [];
-                state.alternative_trips[state.chosen_alternative_index].forEach(
+                state.alternative_trips[action.payload.index].forEach(
                     (loc: any, index: any) => {
-                        if (index === oldLocationIndex) {
-                            newDayPlan.push(loc[0]);
-                        } else {
-                            newDayPlan.push(loc);
-                        }
+                        newDayPlan.push(loc);
                     }
                 );
                 const locIds: any = [];
-                // console.log(newDayPlan);
+                console.log(newDayPlan);
+
                 newDayPlan.forEach((node: any) => {
                     if (node.type === "locations") {
                         locIds.push(Number(node.loc_id));
@@ -99,8 +98,11 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 const correctly_ordered = [];
                 newDayPlanDetails.location_data.forEach((point: any) => {
                     const indexOfData = locIds.indexOf(point.loc_id);
+
                     if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
                 });
+                console.log(ordered_loc_ids);
+
                 correctly_ordered.push({
                     day: day.toString(),
                     location_data: ordered_loc_ids,

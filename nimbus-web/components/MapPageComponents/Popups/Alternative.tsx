@@ -18,7 +18,7 @@ const Alternative = () => {
     const dispatch: any = getPlanTabDispatch();
     const plan: any = [];
     const savePlan: any = [];
-    console.log(fullPlan);
+
     const fetchLocationDetails = async (loc_ids: string, day: string) => {
         const response = await fetch(
             `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
@@ -87,20 +87,44 @@ const Alternative = () => {
 
             const alternatives: any = [];
             const queryLocIds: any = [];
+            console.log(result);
+            const index = 0;
+
             result.forEach((day: any) => {
-                alternatives.push(day[selectedLocationIndex][0]);
-                queryLocIds.push(day[selectedLocationIndex][0].loc_id);
+                const tempResult: any = [];
+                day.forEach((point: any) => {
+                    if (point.type === "locations") tempResult.push(point);
+                });
+
+                alternatives.push(tempResult[selectedLocationIndex]);
+                queryLocIds.push(tempResult[selectedLocationIndex].loc_id);
             });
             const alternativeLocations: any = await fetchLocationDetails(
                 `[${queryLocIds.toString()}]`,
                 currentFolder
             );
-            console.log(alternativeLocations);
+            console.log(queryLocIds);
+
+            const ordered_loc_ids: any = [];
+            const correctly_ordered = [];
+            alternativeLocations.location_data?.forEach((point: any) => {
+                const indexOfData = queryLocIds.indexOf(
+                    point.loc_id.toString()
+                );
+
+                if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
+            });
+            correctly_ordered.push({
+                day: currentFolder.toString(),
+                location_data: ordered_loc_ids,
+            });
+
+            console.log(correctly_ordered);
 
             dispatch({
                 type: "SET_ALTERNATIVES",
                 payload: {
-                    locations: alternativeLocations.location_data,
+                    locations: correctly_ordered[0].location_data,
                     trips: result,
                 },
             });
