@@ -7,6 +7,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { useRouter } from "next/router";
 import ProfileCard from "./ProfileCard/ProfileCard";
 import getMaxPlans from "@/utils/getMaxPlans";
+import { Divider } from "@mui/material";
 
 interface IProps {
     user: UserProfileType;
@@ -32,8 +33,14 @@ const Profile = ({ user, planList, recentlyViewedList }: IProps) => {
                 <div className="md:w-[80%] w-[90%] p-5 pb-12 flex justify-left bg-neutral-100 mx-auto">
                     <ProfileCard user={user} />
                 </div>
+                {isLargerThanMedium ? null : (
+                    <Divider className="md:w-[80%] w-[90%] mx-auto my-3" />
+                )}
                 <PlanCard planList={planList} maxPlans={maxPlans} />
-                <div className="my-7 w-full">
+                {isLargerThanMedium ? null : (
+                    <Divider className="md:w-[80%] w-[90%] mx-auto my-3" />
+                )}
+                <div className="w-full">
                     <div
                         className="md:w-[80%] w-[90%] mx-auto text-xl font-semibold text-neutral-500
                     border-b-neutral-500 md:border-b-[1px] pb-1"
