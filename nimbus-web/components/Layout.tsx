@@ -26,9 +26,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         const userID = Cookies.get("user_id");
         if (user) {
             console.log("check premium status on new session");
-            if (!userID && user.sub) {
-                Cookies.set("user_id", user.sub);
-            }
             updateOnNewSession(user, router);
             const metadata = {
                 premium_type: getPremiumType(user) as
@@ -38,6 +35,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 premium_expire: getPremiumExpire(user, "number") as number,
             };
             checkPremium(metadata, user, router);
+            if (!userID && user.sub) {
+                Cookies.set("user_id", user.sub);
+            }
         } else {
             if (userID) Cookies.remove("user_id");
         }
