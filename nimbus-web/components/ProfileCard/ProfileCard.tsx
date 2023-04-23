@@ -7,8 +7,11 @@ import getPremiumExpire from "@/utils/getPremiumExpire";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import getCustomClaim from "@/utils/getCustomClaim";
+import { useRouter } from "next/router";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const ProfileCard = ({ user }: { user: IUserProfile }) => {
+    const router = useRouter();
     const email = getCustomClaim(user, "email");
     const created_at = getCustomClaim(user, "created_at");
     const premium_type = getPremiumType(user);
@@ -18,18 +21,25 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
         <Stack
             spacing={3}
             alignItems="center"
+            justifyItems="center"
             direction={isLargerThanMedium ? "row" : "column"}
+            sx={{
+                width: "100%",
+            }}
         >
-            <UserProfile src={user.picture as string} size={80} />
+            <UserProfile
+                src={user.picture as string}
+                size={isLargerThanMedium ? 80 : 160}
+            />
             <Stack
                 direction="row"
                 alignItems="center"
-                justifyContent="space-between"
+                justifyContent={isLargerThanMedium ? "space-between" : "center"}
                 flexWrap="wrap"
                 width="100%"
             >
                 <Stack spacing={0.5}>
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 text-center">
                         <Typography
                             variant="h6"
                             sx={{
@@ -37,6 +47,7 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                                 color: "#333333",
                                 fontWeight: "bold",
                                 wordBreak: "break-word",
+                                textAlign: "left",
                             }}
                         >
                             {user.name ? user.name : email}
@@ -53,6 +64,7 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                         sx={{
                             fontFamily: "montserrat",
                             color: "#696969",
+                            textAlign: "left",
                         }}
                     >
                         <span className="font-semibold">Email:{"  "}</span>
@@ -63,6 +75,7 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                         sx={{
                             fontFamily: "montserrat",
                             color: "#696969",
+                            textAlign: "left",
                         }}
                     >
                         {created_at ? (
@@ -82,6 +95,7 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                             sx={{
                                 fontFamily: "montserrat",
                                 color: "#696969",
+                                textAlign: "left",
                             }}
                         >
                             <span className="font-semibold">
@@ -92,28 +106,20 @@ const ProfileCard = ({ user }: { user: IUserProfile }) => {
                         </Typography>
                     ) : null}
                 </Stack>
-                {/*<Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: "#45D8D0",
-                        borderRadius: "18px",
-                        marginY: "2rem",
-                    }}
-                >
-                    <Typography
-                        variant="body2"
-                        align="center"
-                        sx={{
-                            color: "#FFFFFF",
-                            fontFamily: "montserrat",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        EDIT
-                    </Typography>
-                    <EditIcon sx={{ fontSize: 14 }} />
-                </Button>*/}
             </Stack>
+            <Button
+                onMouseDown={() => router.push("/api/auth/logout")}
+                variant="outlined"
+                color="error"
+                startIcon={<LogoutRoundedIcon />}
+                sx={{
+                    textTransform: "none",
+                    width: "12rem",
+                    marginY: "2rem",
+                }}
+            >
+                <div className="m-auto font-montserrat">Sign out</div>
+            </Button>
         </Stack>
     ) : null;
 };

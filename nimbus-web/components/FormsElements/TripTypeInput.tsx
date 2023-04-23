@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Chip from "@mui/material/Chip";
 import { ThemeProvider } from "@mui/material";
 import { nimbusTheme, ButtonChipStyles } from "../../styles/NimbusMuiTheme";
@@ -10,39 +10,37 @@ import { PlanContext } from "../Plan";
 const choices = ["Chill", "Balanced", "Travel"];
 
 const TripTypeInput = () => {
-    const { formData, setFormDataField } = React.useContext(PlanContext);
-    const [tripType, setTripType] = React.useState<number>(0);
+    const { setFormDataField } = React.useContext(PlanContext);
+    const [tripType, setTripType] = React.useState<number>(-1);
 
-    React.useEffect(() => {
-        setFormDataField("tripType", tripType);
-    }, [tripType]);
-
-    const handleClick = (choice: string) => () => {
-        setTripType(choices.indexOf(choice));
-        console.log(choice, tripType);
+    const handleClick = (index: number) => {
+        setTripType(index);
+        setFormDataField("tripType", index);
     };
 
     return (
         <ThemeProvider theme={nimbusTheme}>
             <div className="flex flex-initial flex-wrap justify-center">
-                {choices.map((data) => {
+                {choices.map((choice, index) => {
                     return (
                         <Chip
                             icon={
-                                data === "Chill" ? (
+                                choice === "Chill" ? (
                                     <EmojiFoodBeverageIcon />
-                                ) : data === "Balanced" ? (
+                                ) : choice === "Balanced" ? (
                                     <NightlifeIcon />
                                 ) : (
                                     <HikingIcon />
                                 )
                             }
-                            key={data}
-                            label={data}
-                            className={"shadow-md distance-" + data}
-                            onClick={handleClick(data)}
+                            key={choice}
+                            label={choice}
+                            className={"shadow-md distance-" + choice}
+                            onClick={() => handleClick(index)}
                             color={
-                                data === choices[tripType] ? "success" : "info"
+                                choice === choices[tripType]
+                                    ? "success"
+                                    : "info"
                             }
                             sx={ButtonChipStyles}
                             variant="filled"
