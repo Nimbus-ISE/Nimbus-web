@@ -1,4 +1,4 @@
-# Nimbus Travel Planner
+# Nimbus Travel Planner (ICE CAPSTONE PROJECT)
 
 Nimbus Travel Planner is a web application that empowers users to effortlessly plan their travel itineraries for Bangkok, Thailand. The application offers a comprehensive search engine for various destinations in Bangkok and enables users to view detailed information and reviews for each location. Our advanced algorithm generates personalized itineraries for each user based on their preferences and travel dates. With Nimbus Travel Planner, planning a perfect trip to Bangkok has never been easier.
 
@@ -24,7 +24,7 @@ Nimbus Travel Planner is a web application that empowers users to effortlessly p
 - Redis for caching access tokens
 - Various other libraries and tools for styling, testing, and deployment
 
-### Environment Variables
+## Environment Variables
 
 The following environment variables are required to run Nimbus Travel Planner:
 
@@ -41,5 +41,9 @@ The following environment variables are required to run Nimbus Travel Planner:
 - `REDIS_HOST`: the host url of the redis database
 - `ALGO_API_IP`: the IP of the algorithm instance
 - `ALGO_API_PORT`: the port of the algorithm
-- `MAPBOX_ACESS_TOKEN`: the Mapbox API Access token
+- `NEXT_PUBLIC_MAPBOX_TOKEN`: the Mapbox API Access token
 - `DIRECTIONS_API_KEY`: the Google directions API key
+
+## License
+
+Nimbus Travel Planner is licensed under the MIT license. See `LICENSE` for more information.
