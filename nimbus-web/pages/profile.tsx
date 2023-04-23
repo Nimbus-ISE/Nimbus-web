@@ -23,8 +23,8 @@ interface IProps {
 }
 
 function profile({ recentlyViewedList, planList }: IProps) {
-    const { user, isLoading } = useUser();
-    /*const isLoading = false;
+    // const { user, isLoading } = useUser();
+    const isLoading = false;
     const user = {
         ...customClaims,
         family_name: "P",
@@ -35,7 +35,7 @@ function profile({ recentlyViewedList, planList }: IProps) {
         picture:
             "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
         updated_at: "2023-01-24T01:01:39.063Z",
-    };*/
+    };
     console.log(recentlyViewedList, planList);
     return (
         <>
@@ -52,12 +52,12 @@ function profile({ recentlyViewedList, planList }: IProps) {
     );
 }
 
-export default withPageAuthRequired(profile, {
-    onRedirecting: () => <Loading />,
-    onError: (error) => <ErrorMessage>{error.message}</ErrorMessage>,
-});
+// export default withPageAuthRequired(profile, {
+//     onRedirecting: () => <Loading />,
+//     onError: (error) => <ErrorMessage>{error.message}</ErrorMessage>,
+// });
 
-//export default profile;
+export default profile;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const cookies = context.req.cookies;

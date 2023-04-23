@@ -42,6 +42,7 @@ const FolderSmall = () => {
         }
     }, [openFullTab, currentFolderView]);
     console.log(fullPlan);
+    console.log(travelTime);
 
     return (
         <>

@@ -51,7 +51,7 @@ const FolderFull = (props: FolderFullProps) => {
                             })}
 
                             <button
-                                className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[20%] "
+                                className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[38vh] "
                                 onClick={() => {
                                     dispatch({
                                         type: "ANIMATE_CLOSING_FOLDER",
