@@ -18,10 +18,6 @@ const TripTypeInput = () => {
         setFormDataField("tripType", index);
     };
 
-    // React.useEffect(() => {
-    //     setFormDataField("tripType", 0);
-    // }, []);
-
     return (
         <ThemeProvider theme={nimbusTheme}>
             <div className="flex flex-initial flex-wrap justify-center">

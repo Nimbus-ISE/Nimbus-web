@@ -30,52 +30,9 @@ const Form = ({ formArr }: IProps) => {
     const { formData } = React.useContext(PlanContext);
     const { height } = useElementSize("plan-card");
     const isLargerThanMedium = useMediaQuery("(min-width: 768px)");
-    const [locInvalid, setLocInvalid] = React.useState<boolean>(false);
-    const [dateInvalid, setDateInvalid] = React.useState<boolean>(false);
-    // const [tempData, setTempData] = React.useState<IFormData>();
-
-    // React.useEffect(() => {
-    //     if (formData) {
-    //         const data: IFormData = {
-    //             must_include: formData.locationId,
-    //             start_date: formData.date ? formData.date[0] : undefined,
-    //             end_date: formData.date ? formData.date[1] : undefined,
-    //             trip_pace: formData.tripType,
-    //             budget: formData.budget,
-    //             travel_method: formData.travelMethod,
-    //             tags: formData.tags ? formData.tags.join() : undefined,
-    //         };
-    //         setTempData(data);
-    //     }
-    // }, [formData]);
-
-    // React.useEffect(() => {
-    //     if (formData.locationId) {
-    //         setLocInvalid(false);
-    //     }
-    //     if (formData.date) {
-    //         setDateInvalid(false);
-    //     }
-    // });
 
     const handleOnClick = (index: number, isForward: boolean) => {
         if (isForward) {
-            // console.log(formData);
-            // if (index == 0 && formData && !formData.locationId) {
-            //     setLocInvalid(true);
-            //     // console.log("block scroll");
-            // } else if (
-            //     index == 1 &&
-            //     !formData.date
-            //     // !(formData.date[0] && formData.date[1])
-            // ) {
-            //     setDateInvalid(true);
-            //     console.log("date invalid");
-            // } else {
-            //     setDateInvalid(false);
-            //     setCurrentValue(index + 1);
-            //     console.log("date valid");
-            // }
             setCurrentValue(index + 1);
         } else {
             setCurrentValue(index - 1);
@@ -116,24 +73,6 @@ const Form = ({ formArr }: IProps) => {
                             <div className="my-7 text-xs flex justify-center w-full">
                                 {formMapper[item.type]}
                             </div>
-                            {/* {locInvalid && index == 0 ? (
-                                <div className="relative">
-                                    <div className="absolute text-xs flex justify-center align-middle w-full text-[#00C4CC]">
-                                        Please select a valid destination!
-                                    </div>
-                                </div>
-                            ) : (
-                                ""
-                            )}
-                            {dateInvalid && index == 1 ? (
-                                <div className="relative">
-                                    <div className="absolute text-xs flex justify-center align-middle w-full text-[#00C4CC]">
-                                        Please select valid date(s)!
-                                    </div>
-                                </div>
-                            ) : (
-                                ""
-                            )} */}
                         </div>
                         {index !== formArr.length - 1 ? (
                             <button

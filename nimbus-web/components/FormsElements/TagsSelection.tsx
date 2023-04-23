@@ -2,9 +2,8 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import { Button, ThemeProvider } from "@mui/material";
 import { nimbusTheme, TagsStyles } from "../../styles/NimbusMuiTheme";
-import { PlanContext } from "../Plan";
+import { PlanContext, ScrollContext } from "../Plan";
 import { tags } from "@/misc";
-import router from "next/router";
 
 const formDataKeys = [
     "locationId",
@@ -19,12 +18,17 @@ const progress = Array(6).fill(false);
 progress[3] = true; // default = 0 for budgetInput
 
 const TagsSelection = () => {
-    const { formData, setFormDataField } = React.useContext(PlanContext);
+    const {
+        formData,
+        setFormDataField,
+        planProgess,
+        setPlanProgress,
+        setIsConfirmActive,
+    } = React.useContext(PlanContext);
+    const { currentValue } = React.useContext(ScrollContext);
     const [selectTag, setSelectTag] = React.useState<string[]>([]);
     const [payload, setPayload] = React.useState<string>("");
     const [invalid, setInvalid] = React.useState<boolean>(false);
-    // const [tempData, setTempData] = React.useState<IFormData>();
-    const [inputProgess, setInputProgess] = React.useState<boolean[]>(progress);
 
     const handleClick = (tag: string) => () => {
         let newSelectTag = [...selectTag];
@@ -43,68 +47,44 @@ const TagsSelection = () => {
         setFormDataField("tags", selectTag);
     }, [selectTag]);
 
-    // React.useEffect(() => {
-    //     if (formData) {
-    //         const data: IFormData = {
-    //             must_include: formData.locationId,
-    //             start_date: formData.date ? formData.date[0] : undefined,
-    //             end_date: formData.date ? formData.date[1] : undefined,
-    //             trip_pace: formData.tripType,
-    //             budget: formData.budget,
-    //             travel_method: formData.travelMethod,
-    //             tags: formData.tags ? formData.tags.join() : undefined,
-    //         };
-    //         setTempData(data);
-    //     }
-    // }, [formData]);
-
-    // React.useEffect(() => {
-    //     if (
-    //         tempData?.start_date &&
-    //         tempData.end_date &&
-    //         tempData.must_include
-    //     ) {
-    //         setInvalid(false);
-    //     }
-    // });
-
+    // Detecting the progress of the user input
     React.useEffect(() => {
-        formDataKeys.map((data, index) => {
-            if ((10 % index !== 0 || index == 1) && formData[data]) {
-                inputProgess[index] = true;
-            }
-            if (index == 2 && formData[data] > -1) {
-                inputProgess[2] = true;
-            }
-            if (index == 5 && formData[data] && formData[data].length > 0) {
-                inputProgess[5] = true;
-            } else {
-                inputProgess[5] = false;
-            }
-        });
-    });
+        if (formData) {
+            console.log("update plan progress");
+            const progress = formDataKeys.map((data, index) => {
+                if ((10 % index !== 0 || index == 1) && formData[data]) {
+                    return true;
+                }
+                if (index == 2 && formData[data] > -1) {
+                    return true;
+                }
+                if (index == 5 && formData[data] && formData[data].length > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            setPlanProgress(progress);
+        }
+    }, [formData]);
 
+    // Setting the form's state to "valid" when all inputs are valid
     React.useEffect(() => {
-        if (inputProgess.every((element) => element === true)) {
+        if (planProgess.every((element: boolean) => element === true)) {
             setInvalid(false);
         } else {
             setInvalid(true);
         }
     });
 
+    // When the user clicks the "continue" button
     const handleContinue = async () => {
-        // setIsConfirmActive(true);
-        // if (tempData && !(tempData.start_date || tempData.end_date)) {
-        //     setInvalid(true);
-        // } else {
-        //     router.push(`/map/${encodeURIComponent(payload)}`);
-        //   }
-
-        console.log(inputProgess);
+        console.log(planProgess);
         console.log(formData);
 
-        if (inputProgess.every((element) => element === true)) {
-            router.push(`/map/${encodeURIComponent(payload)}`);
+        if (planProgess.every((element: boolean) => element === true)) {
+            console.log("continue");
+            setIsConfirmActive(true);
         }
     };
 
