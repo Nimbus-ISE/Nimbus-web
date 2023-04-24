@@ -26,6 +26,7 @@ const Alternative = () => {
         const data = await response.json();
         return data;
     };
+    console.log(trip_params);
 
     useEffect(() => {
         fullPlan.forEach((day: any, dayIndex: any) => {
@@ -75,6 +76,9 @@ const Alternative = () => {
                 .loc_id,
             trip: plan,
         });
+        console.log(
+            fullPlan[currentFolder].location_data[selectedLocationIndex].loc_id
+        );
 
         (async () => {
             const response = await fetch("/api/getAlternatives", {
@@ -82,6 +86,8 @@ const Alternative = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(savePlan[0]),
             });
+            console.log(response);
+
             const result = await response.json();
 
             const alternatives: any = [];
@@ -172,7 +178,7 @@ const Alternative = () => {
                             <div
                                 className={
                                     isBigScreen
-                                        ? "flex gap-[0.5rem] place-items-center mt-6 "
+                                        ? "flex gap-[0.5rem]  mt-6 "
                                         : "flex flex-row gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
