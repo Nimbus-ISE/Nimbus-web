@@ -102,11 +102,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
 
                 state.fullPlan[state.currentFolder].location_data =
                     remadeDayPlan;
-                console.log(1, state.travelTime[state.currentFolder]);
-                console.log(
-                    2,
-                    state.alternative_travel_time[action.payload.index]
-                );
             };
             state.travelTime[state.currentFolder] =
                 state.alternative_travel_time[action.payload.index];
