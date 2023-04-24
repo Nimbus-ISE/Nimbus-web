@@ -170,7 +170,9 @@ export default function map({ trip_params }: any) {
                                 point.replace(/'/g, '"');
                             });
                         });
-                        if (coordinates[currentFolder]) {
+                        console.log(coordinates[currentFolder]);
+
+                        if (coordinates[currentFolder].length > 0) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
