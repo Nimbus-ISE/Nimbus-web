@@ -99,14 +99,17 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 newDayPlanDetails.forEach((loc: any, index: any) => {
                     remadeDayPlan.push(...loc.location_data);
                 });
-                console.log(remadeDayPlan);
 
                 state.fullPlan[state.currentFolder].location_data =
                     remadeDayPlan;
-
-                state.travelTime[state.currentFolder] =
-                    state.alternative_travel_time[action.payload.index];
+                console.log(1, state.travelTime[state.currentFolder]);
+                console.log(
+                    2,
+                    state.alternative_travel_time[action.payload.index]
+                );
             };
+            state.travelTime[state.currentFolder] =
+                state.alternative_travel_time[action.payload.index];
 
             changePlan(action.payload.day, action.payload.oldLocationIndex);
 

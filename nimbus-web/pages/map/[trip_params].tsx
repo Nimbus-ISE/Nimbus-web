@@ -107,10 +107,12 @@ export default function map({ trip_params }: any) {
                 });
             }
 
-            dispatch({
-                type: "SET_TRAVEL_TIME",
-                payload: trip.travelTimes,
-            });
+            if (!initialized) {
+                dispatch({
+                    type: "SET_TRAVEL_TIME",
+                    payload: trip.travelTimes,
+                });
+            }
             dispatch({
                 type: "SET_ARRIVAL_LEAVE_TIME",
                 payload: trip.arrivalAndLeaveTimes,

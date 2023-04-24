@@ -53,7 +53,6 @@ const SavePlanPopUp = () => {
             day_plan: plan,
             trip_params: trip_params,
         });
-        // console.log(JSON.stringify(savePlan));
 
         await fetch("/api/postSavedPlan", {
             method: "POST",

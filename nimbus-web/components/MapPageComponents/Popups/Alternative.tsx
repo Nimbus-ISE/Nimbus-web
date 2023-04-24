@@ -117,6 +117,7 @@ const Alternative = () => {
                 if (locations.length < alternativeLocations.length)
                     locations.push(...day.location_data);
             });
+            console.log(travelTimes);
 
             dispatch({
                 type: "SET_ALTERNATIVES",
