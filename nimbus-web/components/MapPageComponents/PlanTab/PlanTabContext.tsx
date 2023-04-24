@@ -114,6 +114,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 ...state,
                 chosen_alternative_index: action.payload.index,
                 changed: !state.changed,
+                map_polyline: "",
             };
         }
         case "DELETE_LOCATION": {
