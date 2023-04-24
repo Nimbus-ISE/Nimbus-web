@@ -17,10 +17,10 @@ const ConfirmForm = () => {
     //     if (formData.date) {
     //         setFormDataField("date", [
     //             convertDateToUTCPlus7(
-    //                 formData.date[0].toDate().toISOString() as string
+    //                 startDate.toDate().toISOString() as string
     //             ),
     //             convertDateToUTCPlus7(
-    //                 formData.date[1].toDate().toISOString() as string
+    //                 endDate.toDate().toISOString() as string
     //             ),
     //         ]);
     //     }
@@ -36,10 +36,10 @@ const ConfirmForm = () => {
             ),
         ]);
 
-        // console.log(formData);
-        // console.log(payload);
+        console.log(formData);
+        console.log(payload);
 
-        pushPayload();
+        // pushPayload();
     };
 
     const pushPayload = () => {
