@@ -51,7 +51,9 @@ const marks = [
 
 const BudgetInput = (props: any) => {
     const { formData, setFormDataField } = React.useContext(PlanContext);
-    const [value, setValue] = React.useState<number>(0);
+    const [value, setValue] = React.useState<number>(
+        formData.budget ? formData.budget : 0
+    );
 
     const handleChange = (event: any, newValue: number | number[]) => {
         console.log(event.target.value);
@@ -71,8 +73,8 @@ const BudgetInput = (props: any) => {
                         slots={{
                             valueLabel: ValueLabelComponent,
                         }}
-                        defaultValue={0}
-                        // value={value}
+                        // defaultValue={0}
+                        value={value}
                         valueLabelDisplay="on"
                         step={1}
                         min={0}
