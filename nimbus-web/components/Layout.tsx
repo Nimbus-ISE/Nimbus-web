@@ -9,6 +9,7 @@ import getPremiumExpire from "@/utils/getPremiumExpire";
 import getPremiumType from "@/utils/getPremiumType";
 import checkPremium from "@/utils/checkPremium";
 import Cookies from "js-cookie";
+import BackToTop from "./BackToTop";
 
 const excludePathnameList = ["/plan", "/map"];
 
@@ -45,6 +46,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     return !isLoading ? (
         <div>
             <Navbar user={user} isLoading={isLoading} />
+            <BackToTop />
             <div className="flex w-full h-16 shadow-md bg-gradient-to-r from-tricolorgreen to-yellow-300" />
             {children}
             {includeLayout() ? <Footer /> : null}
