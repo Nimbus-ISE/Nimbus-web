@@ -132,7 +132,7 @@ const TagsSelection = () => {
                     <Button
                         onClick={handleContinue}
                         variant="outlined"
-                        // disabled={invalid ? true : false}
+                        disabled={invalid ? true : false}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
