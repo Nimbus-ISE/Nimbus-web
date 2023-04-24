@@ -64,9 +64,7 @@ const TripMap = () => {
                             gridColumnStart: 5,
                             gridColumnEnd: "span 12",
                         }}
-                        mapboxAccessToken={
-                            "pk.eyJ1IjoicGlwcC00MzIiLCJhIjoiY2xkYnF1NXU4MDM2MjNxcXdrczFibHJsdiJ9.uuksf9mguzejH6e6R0RQxg"
-                        }
+                        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
                         mapStyle="mapbox://styles/mapbox/streets-v12?optimize=true'"
                     >
                         {fullPlan[currentFolder] &&
