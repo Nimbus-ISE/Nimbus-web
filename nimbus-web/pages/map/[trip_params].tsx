@@ -31,7 +31,6 @@ export default function map({ trip_params }: any) {
     };
 
     const trip_params_object = JSON.parse(trip_params);
-    console.log(trip_params_object);
 
     useEffect(() => {
         dispatch({
@@ -57,9 +56,14 @@ export default function map({ trip_params }: any) {
             const plan = await res.json();
             return plan;
         };
-        const fetchLocationDetails = async (loc_ids: string, day: string) => {
+        const fetchLocationDetails = async (queryObj: any) => {
             const response = await fetch(
-                `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+                `/api/getLocationData?loc_ids=${queryObj}`,
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(queryObj),
+                }
             );
             const data = await response.json();
             return data;
@@ -113,6 +117,7 @@ export default function map({ trip_params }: any) {
             });
             dispatch({ type: "SET_TRIP_ID", payload: trip.trip_id });
             const tempPinState: Array<Array<string>> = [];
+            const getLocationDetailObject: any = {};
             trip.locations?.forEach((day: any, index: string) => {
                 const tempPin: string[] = [];
 
@@ -123,75 +128,128 @@ export default function map({ trip_params }: any) {
                     tempPinState.push(tempPin);
                 }
 
-                if (loc_ids.length < trip.locations.length) {
-                    fetchLocationDetails(
-                        `[${[trip.locations[index]].toString()}]`,
-                        index
-                    ).then(async (result) => {
-                        const coordinates: Array<Array<string>> = [];
-                        loc_ids.push(await result);
-                        const sorted_days = sortObject(loc_ids);
-                        const correctlyOrdered: any = [];
-                        sorted_days?.forEach((day: any, index: any) => {
-                            const ordered_loc_ids: any = [];
-                            day.location_data?.forEach((point: any) => {
-                                const indexOfData = trip.locations[
-                                    index
-                                ].indexOf(point.loc_id);
-                                if (indexOfData >= 0)
-                                    ordered_loc_ids[indexOfData] = point;
-                            });
-                            correctlyOrdered.push({
-                                day: index.toString(),
-                                location_data: ordered_loc_ids,
-                            });
-                        });
+                trip.locations.forEach((day: any, index: any) => {
+                    getLocationDetailObject["day " + index.toString()] = day;
+                });
 
-                        if (!isMounted && !initialized) {
-                            dispatch({
-                                type: "SET_FULL_PLAN",
-                                payload: correctlyOrdered,
-                            });
-                            setIsMounted(true);
-                        }
+                // if (loc_ids.length < trip.locations.length) {
+                //     fetchLocationDetails(
+                //         `[${[trip.locations[index]].toString()}]`,
+                //         index
+                //     ).then(async (result) => {
+                //         const coordinates: Array<Array<string>> = [];
+                //         loc_ids.push(await result);
+                //         const sorted_days = sortObject(loc_ids);
+                //         const correctlyOrdered: any = [];
+                //         sorted_days?.forEach((day: any, index: any) => {
+                //             const ordered_loc_ids: any = [];
+                //             day.location_data?.forEach((point: any) => {
+                //                 const indexOfData = trip.locations[
+                //                     index
+                //                 ].indexOf(point.loc_id);
+                //                 if (indexOfData >= 0)
+                //                     ordered_loc_ids[indexOfData] = point;
+                //             });
+                //             correctlyOrdered.push({
+                //                 day: index.toString(),
+                //                 location_data: ordered_loc_ids,
+                //             });
+                //         });
 
-                        const plan = initialized ? fullPlan : correctlyOrdered;
+                //         if (!isMounted && !initialized) {
+                //             dispatch({
+                //                 type: "SET_FULL_PLAN",
+                //                 payload: correctlyOrdered,
+                //             });
+                //             setIsMounted(true);
+                //         }
 
-                        plan?.forEach((day: any) => {
-                            const tempCoordinates: Array<string> = [];
-                            day.location_data?.forEach((loc: any) => {
-                                tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
-                            });
-                            coordinates.push(tempCoordinates);
-                        });
+                //         const plan = initialized ? fullPlan : correctlyOrdered;
 
-                        coordinates?.forEach((day: any) => {
-                            day?.forEach((point: string) => {
-                                point.replace(/'/g, '"');
-                            });
-                        });
-                        console.log(coordinates[currentFolder]);
+                //         plan?.forEach((day: any) => {
+                //             const tempCoordinates: Array<string> = [];
+                //             day.location_data?.forEach((loc: any) => {
+                //                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
+                //             });
+                //             coordinates.push(tempCoordinates);
+                //         });
 
-                        if (coordinates[currentFolder].length > 0) {
-                            const response = await fetch(
-                                `/api/getRoute?trip=${coordinates[currentFolder]}`
-                            );
-                            const map_polyline = await response.json();
+                //         coordinates?.forEach((day: any) => {
+                //             day?.forEach((point: string) => {
+                //                 point.replace(/'/g, '"');
+                //             });
+                //         });
+                //         console.log(coordinates[currentFolder]);
 
-                            const decoded = polyline.decode(map_polyline);
-                            const routeArrs: any = [];
-                            decoded?.forEach((arr) => {
-                                routeArrs.push(arr.reverse());
-                            });
+                //         if (coordinates[currentFolder].length > 0) {
+                //             const response = await fetch(
+                //                 `/api/getRoute?trip=${coordinates[currentFolder]}`
+                //             );
+                //             const map_polyline = await response.json();
 
-                            dispatch({
-                                type: "SET_ROUTE",
-                                payload: routeArrs,
-                            });
-                        }
-                    });
-                }
+                //             const decoded = polyline.decode(map_polyline);
+                //             const routeArrs: any = [];
+                //             decoded?.forEach((arr) => {
+                //                 routeArrs.push(arr.reverse());
+                //             });
+
+                //             dispatch({
+                //                 type: "SET_ROUTE",
+                //                 payload: routeArrs,
+                //             });
+                //         }
+                //     });
+                // }
             });
+            console.log(getLocationDetailObject);
+
+            fetchLocationDetails(getLocationDetailObject).then(
+                async (result) => {
+                    const coordinates: Array<Array<string>> = [];
+                    console.log(result);
+
+                    if (!isMounted && !initialized) {
+                        dispatch({
+                            type: "SET_FULL_PLAN",
+                            payload: result,
+                        });
+                        setIsMounted(true);
+                    }
+                    const plan = initialized ? fullPlan : result;
+                    plan?.forEach((day: any) => {
+                        const tempCoordinates: Array<string> = [];
+                        day.location_data?.forEach((loc: any) => {
+                            tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
+                        });
+                        coordinates.push(tempCoordinates);
+                    });
+
+                    coordinates?.forEach((day: any) => {
+                        day?.forEach((point: string) => {
+                            point.replace(/'/g, '"');
+                        });
+                    });
+                    console.log(coordinates[currentFolder]);
+
+                    if (coordinates[currentFolder].length > 0) {
+                        const response = await fetch(
+                            `/api/getRoute?trip=${coordinates[currentFolder]}`
+                        );
+                        const map_polyline = await response.json();
+
+                        const decoded = polyline.decode(map_polyline);
+                        const routeArrs: any = [];
+                        decoded?.forEach((arr) => {
+                            routeArrs.push(arr.reverse());
+                        });
+
+                        dispatch({
+                            type: "SET_ROUTE",
+                            payload: routeArrs,
+                        });
+                    }
+                }
+            );
         })().then(() => {
             setIsLoading(false);
         });
