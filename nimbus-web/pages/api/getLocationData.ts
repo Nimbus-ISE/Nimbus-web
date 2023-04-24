@@ -26,13 +26,9 @@ export default async function handler(
     const lengthOfDays: any = [];
 
     Object.keys(loc_ids_obj).forEach((key: any) => {
-        console.log(...loc_ids_obj[key]);
-
         loc_ids.push(...loc_ids_obj[key]);
         lengthOfDays.push(loc_ids_obj[key].length);
     });
-    console.log(loc_ids_obj);
-    console.log(loc_ids);
 
     let query = sql`SELECT L.*, string_agg(DISTINCT I.url, ', ') as url
     FROM location_data L
