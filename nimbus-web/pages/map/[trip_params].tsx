@@ -38,10 +38,20 @@ export default function map({ trip_params }: any) {
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-        dispatch({
-            type: "SET_TRIP_PARAMS",
-            payload: trip_params_object.trip_params,
-        });
+        if (trip_params_object.name !== undefined) {
+            console.log(1);
+
+            dispatch({
+                type: "SET_TRIP_PARAMS",
+                payload: trip_params_object.trip_params,
+            });
+        } else {
+            console.log(2);
+            dispatch({
+                type: "SET_TRIP_PARAMS",
+                payload: trip_params_object,
+            });
+        }
     }, [screenSize]);
 
     useEffect(() => {

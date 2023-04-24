@@ -69,7 +69,7 @@ const SavePlanPopUp = () => {
         <>
             {isBigScreen && (
                 <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[81vw] top-[36vh] z-10 text-white"
+                    className="bg-black w-10 h-10 rounded-full absolute left-[75vw] top-[35vh] z-10 text-white"
                     onClick={() => {
                         dispatch({ type: "TOGGLE_SAVE_PLAN" });
                     }}

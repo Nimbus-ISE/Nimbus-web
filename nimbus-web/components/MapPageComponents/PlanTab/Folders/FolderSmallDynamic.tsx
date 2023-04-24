@@ -40,7 +40,7 @@ const FolderSmall = () => {
         } else {
             setTabsClass(classes.tabs);
         }
-    }, [openFullTab, currentFolderView]);
+    }, [openFullTab, currentFolderView, travelTime]);
 
     return (
         <>
