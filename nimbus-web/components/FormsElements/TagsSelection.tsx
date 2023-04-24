@@ -14,9 +14,6 @@ const formDataKeys = [
     "tags",
 ];
 
-const progress = Array(6).fill(false);
-progress[3] = true; // default = 0 for budgetInput
-
 const TagsSelection = () => {
     const {
         formData,
@@ -25,9 +22,10 @@ const TagsSelection = () => {
         setPlanProgress,
         setIsConfirmActive,
     } = React.useContext(PlanContext);
-    const { currentValue } = React.useContext(ScrollContext);
-    const [selectTag, setSelectTag] = React.useState<string[]>([]);
-    const [payload, setPayload] = React.useState<string>("");
+    const [selectTag, setSelectTag] = React.useState<string[]>(
+        formData.tags ? formData.tags : []
+    );
+
     const [invalid, setInvalid] = React.useState<boolean>(false);
 
     const handleClick = (tag: string) => () => {
@@ -50,15 +48,22 @@ const TagsSelection = () => {
     // Detecting the progress of the user input
     React.useEffect(() => {
         if (formData) {
-            console.log("update plan progress");
+            // console.log("update plan progress");
             const progress = formDataKeys.map((data, index) => {
-                if ((10 % index !== 0 || index == 1) && formData[data]) {
+                if (
+                    (5 % index !== 0 || index === 1) &&
+                    (formData[data] || formData[data] === 0)
+                ) {
                     return true;
                 }
-                if (index == 2 && formData[data] > -1) {
+                if (index === 2 && formData[data] > -1) {
                     return true;
                 }
-                if (index == 5 && formData[data] && formData[data].length > 0) {
+                if (
+                    index === 5 &&
+                    formData[data] &&
+                    formData[data].length > 0
+                ) {
                     return true;
                 } else {
                     return false;
@@ -86,6 +91,7 @@ const TagsSelection = () => {
             console.log("continue");
             setIsConfirmActive(true);
         }
+        setIsConfirmActive(true);
     };
 
     return (
@@ -126,7 +132,7 @@ const TagsSelection = () => {
                     <Button
                         onClick={handleContinue}
                         variant="outlined"
-                        disabled={invalid ? true : false}
+                        // disabled={invalid ? true : false}
                         sx={{
                             borderRadius: "999px",
                             borderColor: "black",
@@ -145,9 +151,9 @@ const TagsSelection = () => {
                         <div className="m-auto font-montserrat">Continue</div>
                     </Button>
                     {invalid ? (
-                        <div className="relative">
-                            <div className="absolute my-2 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
-                                Please complete all inputs before continuing!
+                        <div className="relative flex justify-center">
+                            <div className="absolute my-2 text-xs flex justify-center align-middle text-center text-[#00C4CC] ">
+                                Please complete all inputs first!
                             </div>
                         </div>
                     ) : (

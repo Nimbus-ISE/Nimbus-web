@@ -7,8 +7,6 @@ export default async function handler(
 ) {
     try {
         const data = req.body;
-        console.log(data);
-        console.log(data.trip[0]);
 
         const response = await fetch(
             "http://34.143.131.141:8080/get_alternative_place",

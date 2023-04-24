@@ -1,6 +1,6 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
-import { PlanContext } from "../Plan";
+import { PlanContext, ScrollContext } from "../Plan";
 import Slider, { SliderValueLabelProps } from "@mui/material/Slider";
 import Tooltip from "@mui/material/Tooltip";
 import { ThemeProvider } from "@mui/material";
@@ -50,8 +50,11 @@ const marks = [
 ];
 
 const BudgetInput = (props: any) => {
+    const { currentValue } = React.useContext(ScrollContext);
     const { formData, setFormDataField } = React.useContext(PlanContext);
-    const [value, setValue] = React.useState<number>(0);
+    const [value, setValue] = React.useState<number>(
+        formData.budget ? formData.budget : 0
+    );
 
     const handleChange = (event: any, newValue: number | number[]) => {
         console.log(event.target.value);
@@ -59,8 +62,11 @@ const BudgetInput = (props: any) => {
     };
 
     React.useEffect(() => {
-        setFormDataField("budget", value);
-    }, [value]);
+        if (currentValue === 3) {
+            console.log("set budget", value);
+            setFormDataField("budget", value);
+        }
+    }, [value, currentValue]);
 
     return (
         <>
@@ -71,8 +77,8 @@ const BudgetInput = (props: any) => {
                         slots={{
                             valueLabel: ValueLabelComponent,
                         }}
-                        defaultValue={0}
-                        // value={value}
+                        // defaultValue={0}
+                        value={value}
                         valueLabelDisplay="on"
                         step={1}
                         min={0}

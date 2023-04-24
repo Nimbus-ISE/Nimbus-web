@@ -9,29 +9,27 @@ import { nimbusTheme, datePickerStyles } from "../../styles/NimbusMuiTheme";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { PlanContext } from "../Plan";
 import { InputAdornment } from "@mui/material";
-import convertDateToUTCPlus7 from "@/utils/convertUTC7ISOString";
 
-import getPremiumExpire from "@/utils/getPremiumExpire";
-import getPremiumType from "@/utils/getPremiumType";
-import { useUser } from "@auth0/nextjs-auth0/client";
+// import getPremiumExpire from "@/utils/getPremiumExpire";
+// import getPremiumType from "@/utils/getPremiumType";
+// import { useUser } from "@auth0/nextjs-auth0/client";
 
 const datePickerClass =
     "bg-gray-100 rounded-xl hover:opacity-70 focus:bg-white";
 
 const DateInput = () => {
     const { formData, setFormDataField } = React.useContext(PlanContext);
-    const [startDate, setStartDate] = React.useState<Dayjs | null>(null);
-    const [endDate, setEndDate] = React.useState<Dayjs | null>(null);
+    const [startDate, setStartDate] = React.useState<Dayjs | null>(
+        formData.date ? formData.date[0] : null
+    );
+    const [endDate, setEndDate] = React.useState<Dayjs | null>(
+        formData.date ? formData.date[1] : null
+    );
     // const { user } = useUser();
 
     React.useEffect(() => {
         if (startDate && endDate) {
-            setFormDataField("date", [
-                convertDateToUTCPlus7(
-                    startDate.toDate().toISOString() as string
-                ),
-                convertDateToUTCPlus7(endDate.toDate().toISOString() as string),
-            ]);
+            setFormDataField("date", [startDate, endDate]);
         }
     }, [startDate, endDate]);
 
