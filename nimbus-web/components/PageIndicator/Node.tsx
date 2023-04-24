@@ -4,6 +4,8 @@ import * as Scroll from "react-scroll";
 import { PlanContext, ScrollContext } from "../Plan";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import CheckIcon from "@mui/icons-material/Check";
+import Grow from "@mui/material/Grow";
+import Fade from "@mui/material/Fade";
 import plan from "@/pages/plan";
 
 interface IProps {
@@ -56,11 +58,15 @@ const Node = ({ size, active, index, name, isCurrent }: IProps) => {
             <div className="absolute top-0 bottom-0 left-12 my-auto h-fit text-sm">
                 {isLargerThanMedium ? name : null}
             </div>
-            <div className="m-auto">
+            <div className="m-auto delay-700">
                 {planProgess[index] == true ? (
-                    <CheckIcon fontSize="small" />
+                    <Grow in={planProgess[index]}>
+                        <CheckIcon fontSize="small" />
+                    </Grow>
                 ) : (
-                    index + 1
+                    <Fade in={!planProgess[index]}>
+                        <div>{index + 1}</div>
+                    </Fade>
                 )}
             </div>
         </button>

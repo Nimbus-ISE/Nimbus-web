@@ -2,14 +2,50 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/router";
 import React from "react";
 import { PlanContext, ScrollContext } from "../Plan";
+import convertDateToUTCPlus7 from "@/utils/convertUTC7ISOString";
 
 const tripPace = ["Chill", "Balanced", "Travel"];
 const tripBudget = ["0", "100", "500", "1000", "More than 1000"];
 
 const ConfirmForm = () => {
     const router = useRouter();
-    const { formData, setIsConfirmActive } = React.useContext(PlanContext);
+    const { formData, setIsConfirmActive, setFormDataField } =
+        React.useContext(PlanContext);
     const [payload, setPayload] = React.useState<string>("");
+
+    // React.useEffect(() => {
+    //     if (formData.date) {
+    //         setFormDataField("date", [
+    //             convertDateToUTCPlus7(
+    //                 formData.date[0].toDate().toISOString() as string
+    //             ),
+    //             convertDateToUTCPlus7(
+    //                 formData.date[1].toDate().toISOString() as string
+    //             ),
+    //         ]);
+    //     }
+    // }, [formData]);
+
+    const handleOnClick = () => {
+        setFormDataField("date", [
+            convertDateToUTCPlus7(
+                formData.date[0].toDate().toISOString() as string
+            ),
+            convertDateToUTCPlus7(
+                formData.date[1].toDate().toISOString() as string
+            ),
+        ]);
+
+        // console.log(formData);
+        // console.log(payload);
+
+        pushPayload();
+    };
+
+    const pushPayload = () => {
+        router.push(`/map/${encodeURIComponent(payload)}`);
+    };
+
     React.useEffect(() => {
         if (formData) {
             const data: IFormData = {
@@ -97,7 +133,7 @@ const ConfirmForm = () => {
                 <div className="relative bg-gray-100 px-10 pt-2 pb-2 shadow-l ring-1 mx-auto w-[90%] md:w-[75%] ring-gray-900/5 sm:mx-auto rounded-lg sm:px-15 shadow-md">
                     {formData.travelMethod
                         ? formData.travelMethod
-                              .replace("walk", "Walking")
+                              .replace("walk", " Walking")
                               .replace("drive", "Driving")
                         : null}
                 </div>
@@ -116,9 +152,7 @@ const ConfirmForm = () => {
             </div>
             <div className="flex mx-auto w-full">
                 <Button
-                    onClick={() => {
-                        router.push(`/map/${encodeURIComponent(payload)}`);
-                    }}
+                    onClick={handleOnClick}
                     variant="outlined"
                     sx={{
                         borderRadius: "999px",
@@ -143,3 +177,6 @@ const ConfirmForm = () => {
 };
 
 export default ConfirmForm;
+function setFormDataField(arg0: string, arg1: string[]) {
+    throw new Error("Function not implemented.");
+}

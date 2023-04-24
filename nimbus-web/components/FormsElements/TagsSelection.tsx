@@ -14,9 +14,6 @@ const formDataKeys = [
     "tags",
 ];
 
-const progress = Array(6).fill(false);
-progress[3] = true; // default = 0 for budgetInput
-
 const TagsSelection = () => {
     const {
         formData,
@@ -25,9 +22,10 @@ const TagsSelection = () => {
         setPlanProgress,
         setIsConfirmActive,
     } = React.useContext(PlanContext);
-    const { currentValue } = React.useContext(ScrollContext);
-    const [selectTag, setSelectTag] = React.useState<string[]>([]);
-    const [payload, setPayload] = React.useState<string>("");
+    const [selectTag, setSelectTag] = React.useState<string[]>(
+        formData.tags ? formData.tags : []
+    );
+
     const [invalid, setInvalid] = React.useState<boolean>(false);
 
     const handleClick = (tag: string) => () => {
@@ -52,7 +50,10 @@ const TagsSelection = () => {
         if (formData) {
             console.log("update plan progress");
             const progress = formDataKeys.map((data, index) => {
-                if ((10 % index !== 0 || index == 1) && formData[data]) {
+                if (
+                    (10 % index !== 0 || index == 1) &&
+                    (formData[data] || formData[data] == 0)
+                ) {
                     return true;
                 }
                 if (index == 2 && formData[data] > -1) {
@@ -145,8 +146,8 @@ const TagsSelection = () => {
                         <div className="m-auto font-montserrat">Continue</div>
                     </Button>
                     {invalid ? (
-                        <div className="relative">
-                            <div className="absolute my-2 text-xs flex justify-center align-middle w-full text-[#00C4CC] ">
+                        <div className="relative flex justify-center">
+                            <div className="absolute my-2 text-xs flex justify-center align-middle text-center text-[#00C4CC] ">
                                 Please complete all inputs before continuing!
                             </div>
                         </div>
