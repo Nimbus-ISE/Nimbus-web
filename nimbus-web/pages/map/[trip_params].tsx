@@ -38,10 +38,17 @@ export default function map({ trip_params }: any) {
             type: "SET_SCREEN_SIZE",
             payload: screenSize,
         });
-        dispatch({
-            type: "SET_TRIP_PARAMS",
-            payload: trip_params_object.trip_params,
-        });
+        if (trip_params_object.name !== undefined) {
+            dispatch({
+                type: "SET_TRIP_PARAMS",
+                payload: trip_params_object.trip_params,
+            });
+        } else {
+            dispatch({
+                type: "SET_TRIP_PARAMS",
+                payload: trip_params_object,
+            });
+        }
     }, [screenSize]);
 
     useEffect(() => {
@@ -69,11 +76,11 @@ export default function map({ trip_params }: any) {
                 const travelTimes: any = [];
                 const arrivalAndLeaveTimes: any = [];
 
-                dayPlans.forEach((day: any) => {
+                dayPlans?.forEach((day: any) => {
                     const tempLocId: any = [];
                     const tempTravelTimes: any = [];
                     const tempArrivalAndLeaveTimes: any = [];
-                    day.forEach((node: any, index: any) => {
+                    day?.forEach((node: any, index: any) => {
                         if (node.type === "location") {
                             tempLocId.push(node.loc_id);
                             tempArrivalAndLeaveTimes.push({
@@ -106,10 +113,10 @@ export default function map({ trip_params }: any) {
             });
             dispatch({ type: "SET_TRIP_ID", payload: trip.trip_id });
             const tempPinState: Array<Array<string>> = [];
-            trip.locations.forEach((day: any, index: string) => {
+            trip.locations?.forEach((day: any, index: string) => {
                 const tempPin: string[] = [];
 
-                day.forEach(() => {
+                day?.forEach(() => {
                     tempPin.push("#000");
                 });
                 if (tempPinState.length < trip.locations.length) {
@@ -125,7 +132,7 @@ export default function map({ trip_params }: any) {
                         loc_ids.push(await result);
                         const sorted_days = sortObject(loc_ids);
                         const correctlyOrdered: any = [];
-                        sorted_days.forEach((day: any, index: any) => {
+                        sorted_days?.forEach((day: any, index: any) => {
                             const ordered_loc_ids: any = [];
                             day.location_data?.forEach((point: any) => {
                                 const indexOfData = trip.locations[
@@ -150,7 +157,7 @@ export default function map({ trip_params }: any) {
 
                         const plan = initialized ? fullPlan : correctlyOrdered;
 
-                        plan.forEach((day: any) => {
+                        plan?.forEach((day: any) => {
                             const tempCoordinates: Array<string> = [];
                             day.location_data?.forEach((loc: any) => {
                                 tempCoordinates.push(`[${loc.lat},${loc.lng}]`);
@@ -158,12 +165,14 @@ export default function map({ trip_params }: any) {
                             coordinates.push(tempCoordinates);
                         });
 
-                        coordinates.forEach((day: any) => {
-                            day.forEach((point: string) => {
+                        coordinates?.forEach((day: any) => {
+                            day?.forEach((point: string) => {
                                 point.replace(/'/g, '"');
                             });
                         });
-                        if (coordinates[currentFolder]) {
+                        console.log(coordinates[currentFolder]);
+
+                        if (coordinates[currentFolder].length > 0) {
                             const response = await fetch(
                                 `/api/getRoute?trip=${coordinates[currentFolder]}`
                             );
@@ -171,7 +180,7 @@ export default function map({ trip_params }: any) {
 
                             const decoded = polyline.decode(map_polyline);
                             const routeArrs: any = [];
-                            decoded.forEach((arr) => {
+                            decoded?.forEach((arr) => {
                                 routeArrs.push(arr.reverse());
                             });
 
