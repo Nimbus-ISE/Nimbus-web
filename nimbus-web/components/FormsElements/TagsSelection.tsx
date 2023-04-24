@@ -148,7 +148,7 @@ const TagsSelection = () => {
                     {invalid ? (
                         <div className="relative flex justify-center">
                             <div className="absolute my-2 text-xs flex justify-center align-middle text-center text-[#00C4CC] ">
-                                Please complete all inputs before continuing!
+                                Please complete all inputs first!
                             </div>
                         </div>
                     ) : (
