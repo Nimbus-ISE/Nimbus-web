@@ -80,9 +80,6 @@ const Alternative = () => {
                 .loc_id,
             trip: plan,
         });
-        console.log(
-            fullPlan[currentFolder].location_data[selectedLocationIndex].loc_id
-        );
 
         (async () => {
             const response = await fetch("/api/getAlternatives", {
@@ -90,7 +87,6 @@ const Alternative = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(savePlan[0]),
             });
-            console.log(response);
 
             const result = await response.json();
 
@@ -112,19 +108,15 @@ const Alternative = () => {
                 ];
                 travelTimes.push(tempTravelTime);
             });
-            // console.log(queryLocIds);
-            console.log(queryLocIds);
 
             const alternativeLocations: any = await fetchLocationDetails(
                 queryLocIds
             );
-            console.log(alternativeLocations);
 
             alternativeLocations.forEach((day: any) => {
                 if (locations.length < alternativeLocations.length)
                     locations.push(...day.location_data);
             });
-            console.log(locations);
 
             dispatch({
                 type: "SET_ALTERNATIVES",
@@ -134,7 +126,6 @@ const Alternative = () => {
                     travelTime: travelTimes,
                 },
             });
-            console.log(alternativeOptions[0]);
         })();
     }, []);
 
