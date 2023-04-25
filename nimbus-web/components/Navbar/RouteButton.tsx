@@ -17,7 +17,7 @@ const RouteButton = ({ name, route }: IProps) => {
             }}
             variant="text"
             onClick={onClick}
-            className="hover:text-tricolorgreen whitespace-nowrap"
+            className="hover:text-tricolorgreen whitespace-nowrap rounded-lg"
         >
             <div className="font-montserrat">{name}</div>
         </Button>

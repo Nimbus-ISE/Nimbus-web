@@ -29,7 +29,7 @@ const BigScreenPage = () => {
                     {openSavePlan && (
                         <>
                             <div
-                                className="bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 "
+                                className="bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0"
                                 onMouseDown={() => {
                                     dispatch({ type: "TOGGLE_SAVE_PLAN" });
                                 }}

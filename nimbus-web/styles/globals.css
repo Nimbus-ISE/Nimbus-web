@@ -100,6 +100,13 @@
     margin: 0;
 }
 
+/* .trapezoid {
+    border-left: 50px solid red;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    width: 0;
+} */
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }

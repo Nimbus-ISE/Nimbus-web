@@ -1,5 +1,8 @@
 import React, { FormEvent, useRef } from "react";
 import { getPlanTabState, getPlanTabDispatch } from "../PlanTab/PlanTabContext";
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
+
 const SavePlanPopUp = () => {
     const {
         isBigScreen,
@@ -65,43 +68,45 @@ const SavePlanPopUp = () => {
     }
 
     return (
-        <>
-            {isBigScreen && (
-                <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[75vw] top-[35vh] z-10 text-white"
-                    onClick={() => {
-                        dispatch({ type: "TOGGLE_SAVE_PLAN" });
-                    }}
-                >
-                    X
-                </button>
-            )}
+        <div className="text-neutral-700">
             <div
                 className={
                     isBigScreen
-                        ? "bg-white w-96 p-2 rounded-lg absolute top-[38vh] left-[50vw] text-center text-xl flex flex-col items-center "
+                        ? "bg-white w-[90] h-[100px] p-2 rounded-xl absolute top-8 left-[36%] text-center text-sm flex flex-col items-center justify-center duration-300"
                         : "bg-white w-96 p-2 rounded-lg mt-20 pb-8 text-center text-xl flex flex-col items-center z-100"
                 }
             >
-                <div className="font-bold">Save Plan?</div>
+                {isBigScreen && (
+                    <button
+                        className="hover:bg-gray-100 h-9 w-9 p-2 rounded-lg absolute duration-300 top-1 right-1 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
+                        onClick={() => {
+                            dispatch({ type: "TOGGLE_SAVE_PLAN" });
+                        }}
+                    >
+                        <CloseIcon sx={{ height: "20px" }} />
+                    </button>
+                )}
+                <div className="font-bold">Save Plan</div>
+                <div className="flex items-center p-4 justify-evenly">
+                    <input
+                        ref={inputRef}
+                        placeholder="Enter plan name..."
+                        className="focus:outline-0 rounded-lg bg-neutral-100 text-netral-700 w-60 h-9 shadow-sm p-2 border-[1px] border-neutral-300"
+                    />
+                    <button
+                        className="hover:opacity-50 h-9 p-2 ml-5 rounded-lg duration-300 top-16 right-10 text-white text-sm flex justify-center items-center bg-[#45D8D0]"
+                        onClick={() => {
+                            handleClick();
 
-                <input
-                    ref={inputRef}
-                    placeholder="Enter plan name"
-                    className="rounded-full bg-slate-300 text-black m-4 text-center w-80"
-                />
-                <button
-                    className="bg-[#45d8d0] text-black w-20 rounded-full hover:scale-110 duration-300"
-                    onClick={() => {
-                        handleClick();
-
-                        dispatch({ type: "SAVE_PLAN" });
-                    }}
-                >
-                    SAVE
-                </button>
+                            dispatch({ type: "SAVE_PLAN" });
+                        }}
+                    >
+                        <SaveIcon sx={{ height: "20px" }} />
+                        <p>&nbsp;save</p>
+                    </button>
+                </div>
             </div>
-        </>
+        </div>
     );
 };
 
