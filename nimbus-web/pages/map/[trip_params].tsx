@@ -13,6 +13,7 @@ import sortObject from "@/utils/sortObject";
 import { GetServerSidePropsContext } from "next";
 import useViewportHeight from "@/hooks/useViewportHeight";
 import Loading from "@/components/Loading";
+import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
 
 export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
@@ -61,18 +62,6 @@ export default function map({ trip_params }: any) {
             const res = await fetch(`/api/getTrip/${trip_params}`);
             const plan = await res.json();
             return plan;
-        };
-        const fetchLocationDetails = async (queryObj: any) => {
-            const response = await fetch(
-                `/api/getLocationData?loc_ids=${queryObj}`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(queryObj),
-                }
-            );
-            const data = await response.json();
-            return data;
         };
 
         (async () => {

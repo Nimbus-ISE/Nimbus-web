@@ -1,3 +1,4 @@
+import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
 import { createContext, useContext, useReducer } from "react";
 interface placeDataType {
     loc_id: any;
@@ -67,12 +68,7 @@ function reducer(state: any, action: any) {
         }
 
         case "CHANGE_PLAN": {
-            const changePlan = async (
-                day: number,
-                oldLocationIndex: number
-            ) => {
-                console.log(state.alternative_trips[action.payload.index]);
-
+            const changePlan = async () => {
                 const newDayPlan: any = [];
                 state.alternative_trips[action.payload.index].forEach(
                     (loc: any, index: any) => {
@@ -89,21 +85,8 @@ function reducer(state: any, action: any) {
                     }
                 });
 
-                const fetchLocationDetails = async (queryObj: any) => {
-                    const response = await fetch(
-                        `/api/getLocationData?loc_ids=${queryObj}`,
-                        {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(queryObj),
-                        }
-                    );
-                    const data = await response.json();
-                    return data;
-                };
-
                 const newDayPlanDetails = await fetchLocationDetails(queryObj);
-                console.log(newDayPlanDetails);
+
                 const remadeDayPlan: any = [];
                 newDayPlanDetails.forEach((loc: any, index: any) => {
                     remadeDayPlan.push(...loc.location_data);
@@ -116,7 +99,7 @@ function reducer(state: any, action: any) {
             state.travelTime[state.currentFolder] =
                 state.alternative_travel_time[action.payload.index];
 
-            changePlan(action.payload.day, action.payload.oldLocationIndex);
+            changePlan();
 
             return {
                 ...state,
