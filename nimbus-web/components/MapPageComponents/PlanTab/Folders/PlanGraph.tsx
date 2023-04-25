@@ -20,7 +20,7 @@ const PlanGraph = (props: PlanGraphProps) => {
     }, [travelTime]);
 
     return (
-        <div className="flex flex-col items-left  mt-4 bg-white pb-10">
+        <div className="flex flex-col items-left bg-white mt-2 pb-10">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
                 Day {props.dayNumber}
             </div>
@@ -47,49 +47,38 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <div
                             className={
                                 isBigScreen
-                                    ? "flex flex-col "
+                                    ? "flex flex-col w-full"
                                     : "flex flex-col w-[55vw]"
                             }
                         >
-                            <div className="flex gap-2">
-                                {place?.loc_name?.length < 20 && (
-                                    <div
-                                        className={
-                                            isBigScreen
-                                                ? "text-base font-bold ml-4 "
-                                                : "text-xl  ml-4"
-                                        }
-                                    >
-                                        {place.loc_name}
-                                    </div>
-                                )}
-                                {place?.loc_name?.length >= 20 && (
-                                    <div
-                                        className={
-                                            isBigScreen
-                                                ? "text-base  font-bold ml-4 text-left"
-                                                : "text-xl ml-4 text-left"
-                                        }
-                                    >
-                                        {place.loc_name}
-                                    </div>
-                                )}
+                            <div className="flex justify-between">
+                                <div
+                                    className={
+                                        isBigScreen
+                                            ? "text-base text-neutral-800 font-bold ml-4 text-left"
+                                            : "text-xl ml-4 text-left"
+                                    }
+                                >
+                                    {place.loc_name}
+                                </div>
                                 {(!openFullTab || isClosingFullFolder) && (
-                                    <button
-                                        className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 rounded-md p-0.5"
-                                        onClick={async () => {
-                                            dispatch({
-                                                type: "TOGGLE_ALTERNATIVES",
-                                                payload: true,
-                                            });
-                                            dispatch({
-                                                type: "SET_SELECTED_LOCATION_INDEX",
-                                                payload: index,
-                                            });
-                                        }}
-                                    >
-                                        <EditIcon fontSize="small" />
-                                    </button>
+                                    <div className="relative h-[20px] right-2">
+                                        <button
+                                            className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 rounded-md p-0.5"
+                                            onClick={async () => {
+                                                dispatch({
+                                                    type: "TOGGLE_ALTERNATIVES",
+                                                    payload: true,
+                                                });
+                                                dispatch({
+                                                    type: "SET_SELECTED_LOCATION_INDEX",
+                                                    payload: index,
+                                                });
+                                            }}
+                                        >
+                                            <EditIcon fontSize="small" />
+                                        </button>
+                                    </div>
                                 )}
                             </div>
 
