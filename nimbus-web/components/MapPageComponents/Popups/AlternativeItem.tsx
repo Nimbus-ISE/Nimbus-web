@@ -19,8 +19,8 @@ const AlternativeItem = (props: any) => {
             <button
                 className={
                     isBigScreen
-                        ? " h-[10rem] w-[10rem] rounded-full duration-300"
-                        : " h-[35vw] w-[35vw] rounded-full duration-300 "
+                        ? " h-[10rem] w-[10rem] rounded-full duration-300 hover:shadow-lg"
+                        : " h-[35vw] w-[35vw] rounded-full duration-300 hover:shadow-lg"
                 }
             >
                 <img
@@ -28,7 +28,7 @@ const AlternativeItem = (props: any) => {
                     className={
                         isBigScreen
                             ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md"
-                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md "
+                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md"
                     }
                     onMouseDown={() => {
                         dispatch({
@@ -41,8 +41,11 @@ const AlternativeItem = (props: any) => {
                             },
                         });
                         dispatch({
-                            type: "TOGGLE_ALTERNATIVES",
-                            payload: false,
+                            type: "SET",
+                            payload: {
+                                property: "openAlternatives",
+                                value: false,
+                            },
                         });
                     }}
                 />
@@ -50,6 +53,7 @@ const AlternativeItem = (props: any) => {
             <div className="text-lg text-neutral-800 font-bold mt-2 text-center">
                 {data.loc_name}
             </div>
+
             <Stars rating={4.5} size={15} />
             <div className="text-[0.5rem] w-44 mt-2">{data.description}</div>
             <div className="flex w-full h-full justify-center items-end mt-2">
@@ -57,8 +61,11 @@ const AlternativeItem = (props: any) => {
                     className="hover:bg-gray-100 h-7 w-full p-2 rounded-lg duration-300 top-16 right-10 text-[#45D8D0] text-sm flex justify-center items-center border-[1px] border-[#45D8D0] bg-white backdrop-blur-sm bg-opacity-50 animate-fade-in"
                     onMouseDown={() => {
                         dispatch({
-                            type: "TOGGLE_PLACE_DETAILS",
-                            payload: { place: data },
+                            type: "MULTI_SET",
+                            payload: {
+                                property: ["openReview", "placeData"],
+                                value: [true, data],
+                            },
                         });
                     }}
                 >

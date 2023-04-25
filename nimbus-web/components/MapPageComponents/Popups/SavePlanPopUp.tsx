@@ -127,16 +127,17 @@ const SavePlanPopUp = () => {
     //                 />
     //                 <button
     //                     className="hover:opacity-50 h-9 p-2 ml-5 rounded-lg duration-300 top-16 right-10 text-white text-sm flex justify-center items-center bg-[#45D8D0]"
+
     return isLoading || !user ? null : (
         <>
             <Fade in={transition}>
                 <div
                     className={`bg-white p-2 rounded-xl text-center text-xl flex flex-col items-center md:shadow-md
-                    ${
-                        isBigScreen
-                            ? "absolute top-[38vh] py-5 w-96 left-[50vw]"
-                            : "mt-20 pb-8 z-[100] w-full h-full"
-                    }`}
+                                        ${
+                                            isBigScreen
+                                                ? "absolute top-[38vh] py-5 w-96 left-[50vw]"
+                                                : "mt-20 pb-8 z-[100] w-full h-full"
+                                        }`}
                 >
                     <div className="font-bold">Save trip plan</div>
 
@@ -150,7 +151,13 @@ const SavePlanPopUp = () => {
                             onClick={() => {
                                 handleClick();
 
-                                dispatch({ type: "SAVE_PLAN" });
+                                dispatch({
+                                    type: "SET",
+                                    payload: {
+                                        property: "openSavePlan",
+                                        value: false,
+                                    },
+                                });
                             }}
                             // >
                             //                  <SaveIcon sx={{ height: "20px" }} />

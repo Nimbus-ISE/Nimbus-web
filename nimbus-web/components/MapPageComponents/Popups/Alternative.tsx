@@ -5,6 +5,7 @@ import addDate from "@/utils/addDate";
 import ChevronRightIconRounded from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftIconRounded from "@mui/icons-material/ChevronLeftRounded";
 import CloseIcon from "@mui/icons-material/Close";
+import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
 
 const Alternative = () => {
     const {
@@ -23,18 +24,6 @@ const Alternative = () => {
     const savePlan: any = [];
     const locations: any = [];
 
-    const fetchLocationDetails = async (queryObj: any) => {
-        const response = await fetch(
-            `/api/getLocationData?loc_ids=${queryObj}`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(queryObj),
-            }
-        );
-        const data = await response.json();
-        return data;
-    };
     useEffect(() => {
         fullPlan.forEach((day: any, dayIndex: any) => {
             const dayPlan: any = [];
@@ -120,14 +109,16 @@ const Alternative = () => {
                 if (locations.length < alternativeLocations.length)
                     locations.push(...day.location_data);
             });
-            console.log(travelTimes);
 
             dispatch({
-                type: "SET_ALTERNATIVES",
+                type: "MULTI_SET",
                 payload: {
-                    locations: locations,
-                    trips: result,
-                    travelTime: travelTimes,
+                    property: [
+                        "alternatives",
+                        "alternative_trips",
+                        "alternative_travel_time",
+                    ],
+                    value: [locations, result, travelTimes],
                 },
             });
         })();
@@ -144,7 +135,15 @@ const Alternative = () => {
             >
                 <button
                     className="absolute right-0 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
-                    onClick={() => dispatch({ type: "TOGGLE_ALTERNATIVES" })}
+                    onClick={() =>
+                        dispatch({
+                            type: "SET",
+                            payload: {
+                                property: "openAlternatives",
+                                value: false,
+                            },
+                        })
+                    }
                 >
                     <>
                         <CloseIcon sx={{ height: "20px" }} />

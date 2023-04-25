@@ -15,31 +15,30 @@ const PlanGraph = (props: PlanGraphProps) => {
         currentFolder,
     } = getPlanTabState();
 
-    useEffect(() => {
-        console.log(travelTime);
-    }, [travelTime]);
+    useEffect(() => {}, [travelTime]);
 
     return (
         <div className="flex flex-col items-left bg-white mt-2 pb-10">
-            <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
+            <div className="flex justify-center items-center ml-[18px] h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-bold ">
                 Day {props.dayNumber}
             </div>
             {props.places?.map((place: any, index: any) => (
                 <>
-                    <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
+                    <div className="h-10 w-1 ml-14 bg-[#45d8d0] "></div>
+                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] duration-300">
                         <img
                             src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-fuchsia-500"
-                                    : "h-24 w-24 rounded-full shadow-md ml-2"
+                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-[#45D0D8]"
+                                    : "h-24 w-24 rounded-full cursor-pointer shadow-md ml-2"
                             }
                             onMouseDown={() => {
                                 dispatch({
-                                    type: "TOGGLE_PLACE_DETAILS",
+                                    type: "MULTI_SET",
                                     payload: {
-                                        place: place,
+                                        property: ["openReview", "placeData"],
+                                        value: [true, place],
                                     },
                                 });
                             }}
@@ -55,24 +54,38 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 <div
                                     className={
                                         isBigScreen
-                                            ? "text-base text-neutral-800 font-bold ml-4 text-left"
-                                            : "text-xl ml-4 text-left"
+                                            ? "text-base text-neutral-800 font-bold ml-4 cursor-pointer text-left"
+                                            : "text-xl text-neutral-800 ml-4 cursor-pointer text-left"
                                     }
+                                    onMouseDown={() => {
+                                        dispatch({
+                                            type: "MULTI_SET",
+                                            payload: {
+                                                property: [
+                                                    "openReview",
+                                                    "placeData",
+                                                ],
+                                                value: [true, place],
+                                            },
+                                        });
+                                    }}
                                 >
                                     {place.loc_name}
                                 </div>
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <div className="relative h-[20px] right-2">
                                         <button
-                                            className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 rounded-md p-0.5"
-                                            onClick={async () => {
+                                            className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 duration-300 rounded-md p-0.5"
+                                            onClick={() => {
                                                 dispatch({
-                                                    type: "TOGGLE_ALTERNATIVES",
-                                                    payload: true,
-                                                });
-                                                dispatch({
-                                                    type: "SET_SELECTED_LOCATION_INDEX",
-                                                    payload: index,
+                                                    type: "MULTI_SET",
+                                                    payload: {
+                                                        property: [
+                                                            "openAlternatives",
+                                                            "selectedLocationIndex",
+                                                        ],
+                                                        value: [true, index],
+                                                    },
                                                 });
                                             }}
                                         >
@@ -164,7 +177,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             });
                         }}
                         className={`w-20 h-9 transition duration-500 text-xs text-white shadow-md
-             bg-neutral-500 backdrop-blur-md rounded-lg z-50`}
+             bg-neutral-500 backdrop-blur-md rounded-lg z-50 hover:opacity-50`}
                     >
                         <KeyboardArrowUpRoundedIcon />
                     </button>

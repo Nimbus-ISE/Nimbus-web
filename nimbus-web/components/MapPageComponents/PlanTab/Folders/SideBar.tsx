@@ -71,7 +71,7 @@ const SideBar = () => {
                         </button>
 
                         <button
-                            className="trapezoid absolute flex justify-center items-center bg-white top-[36vh] p-2 h-28 w-6 rounded-r-lg z-[99999] right-[-20px] text-neutral-500"
+                            className="trapezoid absolute flex justify-center items-center bg-white top-[36vh] p-2 h-28 w-6 rounded-r-lg right-[-20px] text-neutral-500"
                             onClick={handleOpenFolder}
                         >
                             <ChevronRightIconRounded />
