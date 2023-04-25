@@ -16,7 +16,7 @@ const SavePlanPopUp = () => {
     const { user, isLoading } = useUser();
     const dispatch: any = getPlanTabDispatch();
     const inputRef: any = useRef(null);
-    const [transition, setTransition] = React.useState<boolean>(false);
+    const [transition, setTransition] = React.useState<boolean>();
     const plan: any = [];
     const savePlan: any = [];
     /*const user = {
@@ -70,7 +70,7 @@ const SavePlanPopUp = () => {
             trip_params: trip_params,
         });
 
-        console.log(savePlan);
+        console.log("savePlan", user);
 
         const response = await fetch(`/api/postSavedPlan/${user?.sub}`, {
             method: "POST",
@@ -93,7 +93,7 @@ const SavePlanPopUp = () => {
         return () => setTransition(false);
     }, []);
     React.useEffect(() => {
-        if (!transition)
+        if (transition === false)
             setTimeout(() => dispatch({ type: "TOGGLE_SAVE_PLAN" }), 100);
     }, [transition]);
 
