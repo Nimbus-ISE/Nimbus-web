@@ -32,7 +32,10 @@ const BigScreenPage = () => {
                             <div
                                 className="bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0"
                                 onMouseDown={() => {
-                                    dispatch({ type: "TOGGLE_SAVE_PLAN" });
+                                    dispatch({
+                                        type: "TOGGLE",
+                                        payload: { property: "openSavePlan" },
+                                    });
                                 }}
                             ></div>
                             <SavePlanPopUp />
@@ -44,7 +47,13 @@ const BigScreenPage = () => {
                             <div
                                 className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 "
                                 onMouseDown={() => {
-                                    dispatch({ type: "TOGGLE_PLACE_DETAILS" });
+                                    dispatch({
+                                        type: "SET",
+                                        payload: {
+                                            property: "openReview",
+                                            value: false,
+                                        },
+                                    });
                                 }}
                             >
                                 <PlaceDetail

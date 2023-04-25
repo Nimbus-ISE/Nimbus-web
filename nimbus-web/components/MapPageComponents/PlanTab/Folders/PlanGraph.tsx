@@ -15,9 +15,7 @@ const PlanGraph = (props: PlanGraphProps) => {
         currentFolder,
     } = getPlanTabState();
 
-    useEffect(() => {
-        console.log(travelTime);
-    }, [travelTime]);
+    useEffect(() => {}, [travelTime]);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white pb-10">
@@ -37,9 +35,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                             }
                             onMouseDown={() => {
                                 dispatch({
-                                    type: "TOGGLE_PLACE_DETAILS",
+                                    type: "MULTI_SET",
                                     payload: {
-                                        place: place,
+                                        property: ["openReview", "placeData"],
+                                        value: [true, place],
                                     },
                                 });
                             }}
@@ -76,15 +75,16 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <button
-                                        className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 rounded-md p-0.5"
-                                        onClick={async () => {
+                                        onClick={() => {
                                             dispatch({
-                                                type: "TOGGLE_ALTERNATIVES",
-                                                payload: true,
-                                            });
-                                            dispatch({
-                                                type: "SET_SELECTED_LOCATION_INDEX",
-                                                payload: index,
+                                                type: "MULTI_SET",
+                                                payload: {
+                                                    property: [
+                                                        "openAlternatives",
+                                                        "selectedLocationIndex",
+                                                    ],
+                                                    value: [true, index],
+                                                },
                                             });
                                         }}
                                     >

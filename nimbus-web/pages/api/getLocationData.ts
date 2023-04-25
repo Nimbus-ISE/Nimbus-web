@@ -46,14 +46,10 @@ export default async function handler(
 
     try {
         const location_data: Array<Location> = await query;
-        // console.log(location_data);
 
         const return_obj: any = [];
-        // console.log(lengthOfDays);
 
         lengthOfDays.forEach((len: any, index: any) => {
-            // console.log(len);
-
             return_obj.push({
                 day: index,
                 location_data: location_data.slice(0, len),
