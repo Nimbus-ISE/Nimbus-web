@@ -27,15 +27,9 @@ export default async function handler(
                 },
             }
         );
-        // .then((result: any) => {
-        //     console.log(result);
-        // })
-        // .catch((err: any) => {
-        //     console.log(err);
-        // });
 
         const result: any = await response.json();
-        // console.log(result);
+        console.log(result);
 
         const travelTimes: Array<Array<TravelDuration>> = [];
         const locations: Array<Array<number>> = [];

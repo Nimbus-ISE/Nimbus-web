@@ -16,7 +16,10 @@ const SideBar = () => {
                     <button
                         className="bg-black w-8 h-8 absolute rounded top-[9vh] left-[28.5vw] text-white"
                         onClick={() => {
-                            dispatch({ type: "TOGGLE_SAVE_PLAN" });
+                            dispatch({
+                                type: "TOGGLE",
+                                payload: { property: "openSavePlan" },
+                            });
                         }}
                     >
                         <svg
@@ -38,7 +41,19 @@ const SideBar = () => {
                     <button
                         className="absolute bg-white top-[36vh]   p-2 h-28 rounded-r-xl z-10 left-[33%]"
                         onClick={() => {
-                            dispatch({ type: "OPEN_FULL_FOLDER" });
+                            dispatch({
+                                type: "MULTI_SET",
+                                payload: {
+                                    property: [
+                                        "openFullTab",
+                                        "closed",
+                                        "openAlternatives",
+                                        "openReview",
+                                        "isClosingFullFolder",
+                                    ],
+                                    value: [true, false, false, false, false],
+                                },
+                            });
                         }}
                     >
                         <svg
@@ -58,7 +73,10 @@ const SideBar = () => {
                     <button
                         className="absolute bg-black top-[72vh] left-[88vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded cursor-pointer"
                         onClick={() => {
-                            dispatch({ type: "TOGGLE_SAVE_PLAN" });
+                            dispatch({
+                                type: "TOGGLE",
+                                payload: { property: "openSavePlan" },
+                            });
                         }}
                     >
                         {!openSavePlan && (
@@ -92,7 +110,19 @@ const SideBar = () => {
                     <button
                         className="absolute bg-black  top-[72vh] left-[76vw] z-10 w-10 h-10 text-white text-center font-extrabold text-2xl rounded cursor-pointer "
                         onClick={() => {
-                            dispatch({ type: "OPEN_FULL_FOLDER" });
+                            dispatch({
+                                type: "MULTI_SET",
+                                payload: {
+                                    property: [
+                                        "openFullTab",
+                                        "closed",
+                                        "openAlternatives",
+                                        "openReview",
+                                        "isClosingFullFolder",
+                                    ],
+                                    value: [true, false, false, false, false],
+                                },
+                            });
                         }}
                     >
                         <svg
@@ -116,7 +146,19 @@ const SideBar = () => {
                 <button
                     className="absolute bg-white  p-2 z-10 top-[10%] left-[90%] font-extrabold text-2xl animate-slide-in"
                     onClick={() => {
-                        dispatch({ type: "CLOSE_FULL_FOLDER" });
+                        dispatch({
+                            type: "MULTI_SET",
+                            payload: {
+                                property: [
+                                    "openFullTab",
+                                    "closed",
+                                    "openAlternatives",
+                                    "openReview",
+                                    "isClosingFullFolder",
+                                ],
+                                value: [false, true, false, false, false],
+                            },
+                        });
                     }}
                 >
                     {"X"}

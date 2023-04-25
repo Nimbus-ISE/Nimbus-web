@@ -54,10 +54,32 @@ const FolderFull = (props: FolderFullProps) => {
                                 className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[38vh] "
                                 onClick={() => {
                                     dispatch({
-                                        type: "ANIMATE_CLOSING_FOLDER",
+                                        type: "SET",
+                                        payload: {
+                                            property: "isClosingFullFolder",
+                                            value: true,
+                                        },
                                     });
                                     setTimeout(() => {
-                                        dispatch({ type: "CLOSE_FULL_FOLDER" });
+                                        dispatch({
+                                            type: "MULTI_SET",
+                                            payload: {
+                                                property: [
+                                                    "openFullTab",
+                                                    "closed",
+                                                    "openAlternatives",
+                                                    "openReview",
+                                                    "isClosingFullFolder",
+                                                ],
+                                                value: [
+                                                    false,
+                                                    true,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                ],
+                                            },
+                                        });
                                     }, 1100);
                                 }}
                             >

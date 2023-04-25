@@ -64,12 +64,14 @@ const FolderSmall = () => {
                                         onChange={() => {
                                             toggleTabs(`tab${index}`);
                                             dispatch({
-                                                type: "SET_CURRENT_FOLDER",
-                                                payload: index,
-                                            });
-                                            dispatch({
-                                                type: "SET_ROUTE",
-                                                payload: "",
+                                                type: "MULTI_SET",
+                                                payload: {
+                                                    property: [
+                                                        "currentFolder",
+                                                        "map_polyline",
+                                                    ],
+                                                    value: [index, ""],
+                                                },
                                             });
                                         }}
                                     />

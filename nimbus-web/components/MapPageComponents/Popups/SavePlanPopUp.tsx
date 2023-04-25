@@ -70,7 +70,10 @@ const SavePlanPopUp = () => {
                 <button
                     className="bg-black w-10 h-10 rounded-full absolute left-[75vw] top-[35vh] z-10 text-white"
                     onClick={() => {
-                        dispatch({ type: "TOGGLE_SAVE_PLAN" });
+                        dispatch({
+                            type: "TOGGLE",
+                            payload: { property: "openSavePlan" },
+                        });
                     }}
                 >
                     X
@@ -94,8 +97,10 @@ const SavePlanPopUp = () => {
                     className="bg-[#45d8d0] text-black w-20 rounded-full hover:scale-110 duration-300"
                     onClick={() => {
                         handleClick();
-
-                        dispatch({ type: "SAVE_PLAN" });
+                        dispatch({
+                            type: "SET",
+                            payload: { property: "openSavePlan", value: false },
+                        });
                     }}
                 >
                     SAVE

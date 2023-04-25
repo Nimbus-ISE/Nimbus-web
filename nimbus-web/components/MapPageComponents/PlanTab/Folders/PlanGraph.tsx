@@ -14,9 +14,7 @@ const PlanGraph = (props: PlanGraphProps) => {
         currentFolder,
     } = getPlanTabState();
 
-    useEffect(() => {
-        console.log(travelTime);
-    }, [travelTime]);
+    useEffect(() => {}, [travelTime]);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -36,9 +34,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                             }
                             onMouseDown={() => {
                                 dispatch({
-                                    type: "TOGGLE_PLACE_DETAILS",
+                                    type: "MULTI_SET",
                                     payload: {
-                                        place: place,
+                                        property: ["openReview", "placeData"],
+                                        value: [true, place],
                                     },
                                 });
                             }}
@@ -75,14 +74,16 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <button
-                                        onClick={async () => {
+                                        onClick={() => {
                                             dispatch({
-                                                type: "TOGGLE_ALTERNATIVES",
-                                                payload: true,
-                                            });
-                                            dispatch({
-                                                type: "SET_SELECTED_LOCATION_INDEX",
-                                                payload: index,
+                                                type: "MULTI_SET",
+                                                payload: {
+                                                    property: [
+                                                        "openAlternatives",
+                                                        "selectedLocationIndex",
+                                                    ],
+                                                    value: [true, index],
+                                                },
                                             });
                                         }}
                                     >

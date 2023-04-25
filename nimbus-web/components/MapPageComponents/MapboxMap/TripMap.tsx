@@ -77,13 +77,21 @@ const TripMap = () => {
                                             anchor="bottom"
                                             onClick={(e) => {
                                                 onSelect(point.lng, point.lat);
-
                                                 dispatch({
-                                                    type: "TOGGLE_PLACE_DETAILS",
+                                                    type: "MULTI_SET",
                                                     payload: {
-                                                        place: fullPlan[
-                                                            currentFolder
-                                                        ].location_data[index],
+                                                        property: [
+                                                            "openReview",
+                                                            "placeData",
+                                                        ],
+                                                        value: [
+                                                            true,
+                                                            fullPlan[
+                                                                currentFolder
+                                                            ].location_data[
+                                                                index
+                                                            ],
+                                                        ],
                                                     },
                                                 });
 

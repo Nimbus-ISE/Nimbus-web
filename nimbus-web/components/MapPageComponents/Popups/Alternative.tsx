@@ -117,14 +117,16 @@ const Alternative = () => {
                 if (locations.length < alternativeLocations.length)
                     locations.push(...day.location_data);
             });
-            console.log(travelTimes);
 
             dispatch({
-                type: "SET_ALTERNATIVES",
+                type: "MULTI_SET",
                 payload: {
-                    locations: locations,
-                    trips: result,
-                    travelTime: travelTimes,
+                    property: [
+                        "alternatives",
+                        "alternative_trips",
+                        "alternative_travel_time",
+                    ],
+                    value: [locations, result, travelTimes],
                 },
             });
         })();
@@ -139,7 +141,11 @@ const Alternative = () => {
                     }
                     onMouseDown={() => {
                         dispatch({
-                            type: "TOGGLE_ALTERNATIVES",
+                            type: "SET",
+                            payload: {
+                                property: "openAlternatives",
+                                value: false,
+                            },
                         });
                     }}
                 >

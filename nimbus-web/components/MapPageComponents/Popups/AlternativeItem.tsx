@@ -41,8 +41,11 @@ const AlternativeItem = (props: any) => {
                             },
                         });
                         dispatch({
-                            type: "TOGGLE_ALTERNATIVES",
-                            payload: false,
+                            type: "SET",
+                            payload: {
+                                property: "openAlternatives",
+                                value: false,
+                            },
                         });
                     }}
                 />
@@ -62,8 +65,11 @@ const AlternativeItem = (props: any) => {
                 className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300 z-10"
                 onMouseDown={() => {
                     dispatch({
-                        type: "TOGGLE_PLACE_DETAILS",
-                        payload: { place: data },
+                        type: "MULTI_SET",
+                        payload: {
+                            property: ["openReview", "placeData"],
+                            value: [true, data],
+                        },
                     });
                 }}
             >

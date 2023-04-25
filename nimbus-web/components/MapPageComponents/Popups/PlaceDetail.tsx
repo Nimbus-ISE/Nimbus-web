@@ -32,7 +32,10 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         : "bg-black rounded-full w-10 h-10 text-center text-white absolute flex items-center top-[15vh] left-[89vw]  z-50 cursor-pointer  "
                 }
                 onMouseDown={() => {
-                    dispatch({ type: "TOGGLE_PLACE_DETAILS" });
+                    dispatch({
+                        type: "SET",
+                        payload: { property: "openReview", value: false },
+                    });
                 }}
             >
                 <div className="ml-4 text-center">x</div>

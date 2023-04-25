@@ -35,28 +35,37 @@ interface PlanTabContextStateType {
     alternative_travel_time: any;
 }
 
-function reducer(state: PlanTabContextStateType, action: any) {
+function reducer(state: any, action: any) {
     switch (action.type) {
-        case "SET_FULL_PLAN": {
-            const intialCoordinates: any = [];
-            return {
-                ...state,
-                fullPlan: action.payload,
-                initalCoordinates: intialCoordinates,
-            };
+        case "SET": {
+            if (action.payload) {
+                state[action.payload.property] = action.payload.value;
+            }
+
+            return { ...state };
         }
-        case "SET_TRAVEL_TIME": {
-            return {
-                ...state,
-                travelTime: action.payload,
-            };
+        case "MULTI_SET": {
+            if (action.payload) {
+                for (
+                    let index = 0;
+                    index < action.payload.property.length;
+                    index++
+                ) {
+                    state[action.payload.property[index]] =
+                        action.payload.value[index];
+                }
+            }
+
+            return { ...state };
         }
-        case "SET_ARRIVAL_LEAVE_TIME": {
-            return {
-                ...state,
-                arrivalAndLeaveTimes: action.payload,
-            };
+        case "TOGGLE": {
+            if (action.payload) {
+                state[action.payload.property] =
+                    !state[action.payload.property];
+            }
+            return { ...state };
         }
+
         case "CHANGE_PLAN": {
             const changePlan = async (
                 day: number,
@@ -103,6 +112,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 state.fullPlan[state.currentFolder].location_data =
                     remadeDayPlan;
             };
+
             state.travelTime[state.currentFolder] =
                 state.alternative_travel_time[action.payload.index];
 
@@ -115,64 +125,6 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 map_polyline: "",
             };
         }
-        case "DELETE_LOCATION": {
-            state.fullPlan;
-            return { ...state };
-        }
-        case "SET_SELECTED_LOCATION_INDEX": {
-            return { ...state, selectedLocationIndex: action.payload };
-        }
-        case "SET_SCREEN_SIZE": {
-            return { ...state, isBigScreen: action.payload };
-        }
-        case "SET_CURRENT_FOLDER": {
-            return { ...state, currentFolder: action.payload };
-        }
-
-        case "OPEN_FULL_FOLDER":
-            return {
-                ...state,
-                openFullTab: true,
-                closed: false,
-                openAlternatives: false,
-                openReview: false,
-                isClosingFullFolder: false,
-            };
-        case "ANIMATE_CLOSING_FOLDER":
-            return {
-                ...state,
-
-                isClosingFullFolder: true,
-            };
-        case "CLOSE_FULL_FOLDER":
-            return {
-                ...state,
-                openFullTab: false,
-                closed: true,
-                openAlternatives: false,
-                openReview: false,
-                isClosingFullFolder: false,
-            };
-        case "TOGGLE_ALTERNATIVES":
-            return {
-                ...state,
-
-                openAlternatives: !state.openAlternatives,
-            };
-
-        case "TOGGLE_PLACE_DETAILS":
-            if (action.payload) {
-                return {
-                    ...state,
-                    openReview: true,
-                    placeData: action.payload.place,
-                };
-            } else {
-                return {
-                    ...state,
-                    openReview: false,
-                };
-            }
 
         case "INCREMENT_FOLDER": {
             if (state.currentFolderView < 2) {
@@ -217,41 +169,11 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 return state;
             }
         }
-        case "TOGGLE_SAVE_PLAN": {
-            return { ...state, openSavePlan: !state.openSavePlan };
-        }
-        case "SAVE_PLAN": {
-            return { ...state, openSavePlan: false };
-        }
+
         case "SET_ROUTE": {
             return { ...state, map_polyline: action.payload };
         }
-        case "SET_TRIP_PARAMS": {
-            return { ...state, trip_params: action.payload };
-        }
-        case "SET_TRIP_ID": {
-            return { ...state, trip_id: action.payload };
-        }
-        case "SET_IS_SAVE_PLAN": {
-            return {
-                ...state,
-                trip_name: action.payload.trip_name,
-                isSavePlan: true,
-            };
-        }
-        case "SET_ALTERNATIVE_INDEX": {
-            return { ...state, alternative_index: action.payload };
-        }
-        case "SET_ALTERNATIVES": {
-            console.log(action.payload.locations);
 
-            return {
-                ...state,
-                alternatives: action.payload.locations,
-                alternative_trips: action.payload.trips,
-                alternative_travel_time: action.payload.travelTime,
-            };
-        }
         default: {
             console.log("error");
             return state;
