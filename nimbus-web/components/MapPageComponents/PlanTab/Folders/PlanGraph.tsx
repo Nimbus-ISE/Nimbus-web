@@ -6,8 +6,17 @@ import { useEffect } from "react";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
-    const { openFullTab, isClosingFullFolder, isBigScreen, travelTime } =
-        getPlanTabState();
+    const {
+        openFullTab,
+        isClosingFullFolder,
+        isBigScreen,
+        travelTime,
+        currentFolder,
+    } = getPlanTabState();
+
+    useEffect(() => {
+        console.log(travelTime);
+    }, [travelTime]);
 
     return (
         <div className="flex flex-col items-left  mt-4 bg-white ">
@@ -96,13 +105,13 @@ const PlanGraph = (props: PlanGraphProps) => {
                         </div>
                     </div>
 
-                    {props.travelTimes[index] && (
+                    {travelTime[currentFolder][index] && (
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
                                 <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
-                                    {props.travelTimes[index].travel_type ===
-                                        "walk" && (
+                                    {travelTime[currentFolder][index]
+                                        .travel_type === "walk" && (
                                         <img
                                             src="/images/WalkingMan.png"
                                             height={"23"}
@@ -110,8 +119,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                                             className="ml-3 mt-1"
                                         />
                                     )}
-                                    {props.travelTimes[index].travel_type ===
-                                        "drive" && (
+                                    {travelTime[currentFolder][index]
+                                        .travel_type === "drive" && (
                                         <img
                                             src="/images/Car.png"
                                             height={"36"}
@@ -123,21 +132,26 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 <div className="flex gap-4">
                                     <span className="font-bold text-[#45d8d0] text-left">
                                         {capitalizeFirst(
-                                            props.travelTimes[index].travel_type
+                                            travelTime[currentFolder][index]
+                                                .travel_type
                                         )}
                                     </span>
-                                    {props.travelTimes[index]?.travel_dur !== 0
+                                    {travelTime[currentFolder][index]
+                                        ?.travel_dur !== 0
                                         ? ` ~ ${
-                                              props.travelTimes[index]
+                                              travelTime[currentFolder][index]
                                                   ?.travel_dur > 60
                                                   ? (
-                                                        props.travelTimes[index]
-                                                            ?.travel_dur / 60
+                                                        travelTime[
+                                                            currentFolder
+                                                        ][index]?.travel_dur /
+                                                        60
                                                     ).toFixed(1)
-                                                  : props.travelTimes[index]
-                                                        ?.travel_dur
+                                                  : travelTime[currentFolder][
+                                                        index
+                                                    ]?.travel_dur
                                           } ${
-                                              props.travelTimes[index]
+                                              travelTime[currentFolder][index]
                                                   ?.travel_dur > 60
                                                   ? "minutes "
                                                   : "second"

@@ -51,9 +51,8 @@ const SavePlanPopUp = () => {
         savePlan.push({
             name: name,
             day_plan: plan,
-            trip_params: JSON.parse(trip_params),
+            trip_params: trip_params,
         });
-        // console.log(JSON.stringify(savePlan));
 
         await fetch("/api/postSavedPlan", {
             method: "POST",
@@ -69,7 +68,7 @@ const SavePlanPopUp = () => {
         <>
             {isBigScreen && (
                 <button
-                    className="bg-black w-10 h-10 rounded-full absolute left-[81vw] top-[36vh] z-10 text-white"
+                    className="bg-black w-10 h-10 rounded-full absolute left-[75vw] top-[35vh] z-10 text-white"
                     onClick={() => {
                         dispatch({ type: "TOGGLE_SAVE_PLAN" });
                     }}

@@ -6,7 +6,7 @@ import addDate from "@/utils/addDate";
 const Alternative = () => {
     const {
         isBigScreen,
-        alternatives,
+        alternatives: alternativeOptions,
         currentAlternativeView,
         arrivalAndLeaveTimes,
         fullPlan,
@@ -18,15 +18,20 @@ const Alternative = () => {
     const dispatch: any = getPlanTabDispatch();
     const plan: any = [];
     const savePlan: any = [];
+    const locations: any = [];
 
-    const fetchLocationDetails = async (loc_ids: string, day: string) => {
+    const fetchLocationDetails = async (queryObj: any) => {
         const response = await fetch(
-            `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+            `/api/getLocationData?loc_ids=${queryObj}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(queryObj),
+            }
         );
         const data = await response.json();
         return data;
     };
-
     useEffect(() => {
         fullPlan.forEach((day: any, dayIndex: any) => {
             const dayPlan: any = [];
@@ -82,13 +87,14 @@ const Alternative = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(savePlan[0]),
             });
+
             const result = await response.json();
 
             const alternatives: any = [];
-            const queryLocIds: any = [];
+            const queryLocIds: any = {};
             const travelTimes: any = [];
 
-            result.forEach((day: any) => {
+            result.forEach((day: any, index: any) => {
                 const tempResult: any = [];
                 const tempTravelTime: any = [];
                 day.forEach((point: any) => {
@@ -97,36 +103,26 @@ const Alternative = () => {
                 });
 
                 alternatives.push(tempResult[selectedLocationIndex]);
-                queryLocIds.push(tempResult[selectedLocationIndex].loc_id);
+                queryLocIds["day " + index.toString()] = [
+                    Number(tempResult[selectedLocationIndex].loc_id),
+                ];
                 travelTimes.push(tempTravelTime);
             });
-            console.log(travelTimes);
 
             const alternativeLocations: any = await fetchLocationDetails(
-                `[${queryLocIds.toString()}]`,
-                currentFolder
+                queryLocIds
             );
 
-            const ordered_loc_ids: any = [];
-            const correctly_ordered = [];
-            alternativeLocations.location_data?.forEach((point: any) => {
-                const indexOfData = queryLocIds.indexOf(
-                    point.loc_id.toString()
-                );
-
-                if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
+            alternativeLocations.forEach((day: any) => {
+                if (locations.length < alternativeLocations.length)
+                    locations.push(...day.location_data);
             });
-            correctly_ordered.push({
-                day: currentFolder.toString(),
-                location_data: ordered_loc_ids,
-            });
-
-            console.log(correctly_ordered);
+            console.log(travelTimes);
 
             dispatch({
                 type: "SET_ALTERNATIVES",
                 payload: {
-                    locations: correctly_ordered[0].location_data,
+                    locations: locations,
                     trips: result,
                     travelTime: travelTimes,
                 },
@@ -172,11 +168,11 @@ const Alternative = () => {
                             <div
                                 className={
                                     isBigScreen
-                                        ? "flex gap-[0.5rem] place-items-center mt-6 "
+                                        ? "flex gap-[0.5rem]  mt-6 "
                                         : "flex flex-row gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
-                                {alternatives.map(
+                                {alternativeOptions.map(
                                     (location: any, index: any) => (
                                         <AlternativeItem
                                             location={location}
@@ -218,7 +214,9 @@ const Alternative = () => {
                                 )}
                                 <AlternativeItem
                                     location={
-                                        alternatives[currentAlternativeView]
+                                        alternativeOptions[
+                                            currentAlternativeView
+                                        ]
                                     }
                                 />
                             </>

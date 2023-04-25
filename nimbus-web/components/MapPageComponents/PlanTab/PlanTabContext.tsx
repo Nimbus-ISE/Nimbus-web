@@ -70,50 +70,41 @@ function reducer(state: PlanTabContextStateType, action: any) {
                         newDayPlan.push(loc);
                     }
                 );
-                const locIds: any = [];
+                const queryObj: any = {};
 
-                console.log(newDayPlan);
-
-                newDayPlan.forEach((node: any) => {
+                newDayPlan.forEach((node: any, index: any) => {
                     if (node.type === "locations") {
-                        locIds.push(Number(node.loc_id));
+                        queryObj["day " + index.toString()] = [
+                            Number(node.loc_id),
+                        ];
                     }
                 });
 
-                const fetchLocationDetails = async (
-                    loc_ids: string,
-                    day: string
-                ) => {
+                const fetchLocationDetails = async (queryObj: any) => {
                     const response = await fetch(
-                        `/api/getLocationData?loc_ids=${loc_ids}&day=${day}`
+                        `/api/getLocationData?loc_ids=${queryObj}`,
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(queryObj),
+                        }
                     );
                     const data = await response.json();
                     return data;
                 };
-                const newDayPlanDetails = await fetchLocationDetails(
-                    `[${[locIds].toString()}]`,
-                    day.toString()
-                );
+
+                const newDayPlanDetails = await fetchLocationDetails(queryObj);
                 console.log(newDayPlanDetails);
-                const ordered_loc_ids: any = [];
-                const correctly_ordered = [];
-                newDayPlanDetails.location_data.forEach((point: any) => {
-                    const indexOfData = locIds.indexOf(point.loc_id);
-
-                    if (indexOfData >= 0) ordered_loc_ids[indexOfData] = point;
-                });
-                console.log(ordered_loc_ids);
-
-                correctly_ordered.push({
-                    day: day.toString(),
-                    location_data: ordered_loc_ids,
+                const remadeDayPlan: any = [];
+                newDayPlanDetails.forEach((loc: any, index: any) => {
+                    remadeDayPlan.push(...loc.location_data);
                 });
 
-                state.fullPlan[day] = correctly_ordered[0];
-
-                state.travelTime[state.currentFolder] =
-                    state.alternative_travel_time[action.payload.index];
+                state.fullPlan[state.currentFolder].location_data =
+                    remadeDayPlan;
             };
+            state.travelTime[state.currentFolder] =
+                state.alternative_travel_time[action.payload.index];
 
             changePlan(action.payload.day, action.payload.oldLocationIndex);
 
@@ -121,6 +112,7 @@ function reducer(state: PlanTabContextStateType, action: any) {
                 ...state,
                 chosen_alternative_index: action.payload.index,
                 changed: !state.changed,
+                map_polyline: "",
             };
         }
         case "DELETE_LOCATION": {
@@ -251,6 +243,8 @@ function reducer(state: PlanTabContextStateType, action: any) {
             return { ...state, alternative_index: action.payload };
         }
         case "SET_ALTERNATIVES": {
+            console.log(action.payload.locations);
+
             return {
                 ...state,
                 alternatives: action.payload.locations,
