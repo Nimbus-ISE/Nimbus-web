@@ -48,18 +48,22 @@ const TagsSelection = () => {
     // Detecting the progress of the user input
     React.useEffect(() => {
         if (formData) {
-            console.log("update plan progress");
+            // console.log("update plan progress");
             const progress = formDataKeys.map((data, index) => {
                 if (
-                    (10 % index !== 0 || index == 1) &&
-                    (formData[data] || formData[data] == 0)
+                    (5 % index !== 0 || index === 1) &&
+                    (formData[data] || formData[data] === 0)
                 ) {
                     return true;
                 }
-                if (index == 2 && formData[data] > -1) {
+                if (index === 2 && formData[data] > -1) {
                     return true;
                 }
-                if (index == 5 && formData[data] && formData[data].length > 0) {
+                if (
+                    index === 5 &&
+                    formData[data] &&
+                    formData[data].length > 0
+                ) {
                     return true;
                 } else {
                     return false;
@@ -87,6 +91,7 @@ const TagsSelection = () => {
             console.log("continue");
             setIsConfirmActive(true);
         }
+        setIsConfirmActive(true);
     };
 
     return (

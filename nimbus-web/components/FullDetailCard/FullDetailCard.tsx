@@ -49,8 +49,10 @@ const SelectButton = ({ onClick }: SelectButtonProps) => {
             <Button
                 onClick={onClick}
                 variant="contained"
-                color="primary"
-                className="bg-[#00c4cc] rounded-xl"
+                style={{
+                    backgroundColor: "#00c4cc",
+                    borderRadius: "0.5rem",
+                }}
             >
                 <div className="font-bold text-white text-lg font-montserrat">
                     SELECT AS DESTINATION
@@ -198,7 +200,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
                 )}
             </Stack>
             <div className="text-xl my-5 font-semibold text-neutral-700 border-b-[1px] border-neutral-400">
-                USER REVIEWS
+                GOOGLE REVIEWS
             </div>
             <div className="grid grid-cols-1 gap-2">
                 {reviews.map((review) => {

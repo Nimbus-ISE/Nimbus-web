@@ -2,7 +2,6 @@ import useElementSize from "@/hooks/useElementSize";
 import React from "react";
 import Node from "./Node";
 import ProgressBar from "./ProgressBar";
-import useScrollPercentage from "@/hooks/useScrollPercentage";
 import { ScrollContext } from "../Plan";
 
 interface IProps {
