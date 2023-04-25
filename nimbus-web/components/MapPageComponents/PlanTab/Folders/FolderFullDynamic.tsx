@@ -6,6 +6,8 @@ import capitalizeFirst from "@/utils/capitalizeFirst";
 import { FolderFullProps } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 
+import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+
 const FolderFull = (props: FolderFullProps) => {
     const { currentFolderView, fullPlan, travelTime, arrivalAndLeaveTimes } =
         getPlanTabState();
@@ -15,10 +17,14 @@ const FolderFull = (props: FolderFullProps) => {
         <>
             <>
                 <div className={classes.tabs}>
-                    <label htmlFor="tabone" className={classes.checkedLabel}>
-                        Day{" "}
-                        {capitalizeFirst(numberToWords(currentFolderView + 1))}
-                    </label>
+                    {/* <label htmlFor="tabone" className={classes.checkedLabel}>
+                        <div className="text-sm font-normal">
+                            Day{" "}
+                            {capitalizeFirst(
+                                numberToWords(currentFolderView + 1)
+                            )}
+                        </div>
+                    </label> */}
                     <div className={classes.tab}>
                         <div
                             className={
@@ -51,7 +57,7 @@ const FolderFull = (props: FolderFullProps) => {
                             })}
 
                             <button
-                                className=" bg-white  p-2 h-28 rounded-l-xl z-10 border-4 absolute right-0 border-green-500 mt-[38vh] "
+                                className=" bg-black bg-opacity-40 text-white backdrop-blur-md p-2 h-28 rounded-l-xl z-10 absolute right-0 mt-[38vh] shadow-md"
                                 onClick={() => {
                                     dispatch({
                                         type: "SET",
@@ -83,7 +89,7 @@ const FolderFull = (props: FolderFullProps) => {
                                     }, 1100);
                                 }}
                             >
-                                {"X"}
+                                <ChevronLeftRoundedIcon />
                             </button>
                         </div>
                     </div>
@@ -94,13 +100,18 @@ const FolderFull = (props: FolderFullProps) => {
                             index < currentFolderView + 3
                         ) {
                             return (
-                                <label
-                                    htmlFor={`tab${index + 1}`}
-                                    className={classes.checkedLabel}
-                                >
-                                    Day
-                                    {capitalizeFirst(numberToWords(index + 1))}
-                                </label>
+                                // <label
+                                //     htmlFor={`tab${index + 1}`}
+                                //     className={classes.checkedLabel}
+                                // >
+                                //     <div className="text-sm font-normal">
+                                //         Day{" "}
+                                //         {capitalizeFirst(
+                                //             numberToWords(index + 1)
+                                //         )}
+                                //     </div>
+                                // </label>
+                                null
                             );
                         } else {
                             return <></>;

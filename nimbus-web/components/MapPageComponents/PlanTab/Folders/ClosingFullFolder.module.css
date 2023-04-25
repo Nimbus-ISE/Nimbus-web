@@ -45,7 +45,7 @@
     display: block;
     padding: 0.5vw;
     margin-right: 0.2rem;
-    font-weight: bold;
+    font-weight: lighter;
     font-size: smaller;
     transition: background ease 0.2s;
     border-top-right-radius: 10px;

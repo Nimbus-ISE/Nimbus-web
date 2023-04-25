@@ -7,6 +7,7 @@
     height: 100%;
     width: 100%;
     align-items: flex-end;
+    padding-bottom: 20px;
 }
 .mobileTabs {
     text-align: center;
@@ -136,17 +137,26 @@
     background: #fff;
     overflow-y: scroll;
     height: 87.5vh;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 /* .tab::-webkit-scrollbar {
     background-color: #a6a6a6;
     color: #606060;
 } */
-.tab::-webkit-scrollbar-thumb {
-    background: #606060;
+/* .tab::-webkit-scrollbar-thumb {
+    background: #f3f4f6;
 }
 .tab::-webkit-scrollbar {
     width: 10px;
+} */
+
+.tab::-webkit-scrollbar-thumb {
+    background: #f3f4f6;
 }
+.tab::-webkit-scrollbar {
+    width: 0px;
+}
+
 .tab {
     display: block;
     border-top-right-radius: 12px;
@@ -184,6 +194,7 @@
     animation: 0.5s ease-out 0s 1 slideInFromLeft;
     z-index: 20;
 }
+
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);

@@ -1,10 +1,12 @@
-import sql from "../../postgres";
+import sql from "@/postgres";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    const { user_id } = req.query;
+    console.log(req.body, user_id);
     try {
         const query = sql`WITH ins_plan AS (
             INSERT INTO plan (plan_name, est_price_level, plan_sequence)
@@ -13,7 +15,7 @@ export default async function handler(
         )
         , ins_save_plan AS (
             INSERT INTO saved (user_id, plan_id)
-            SELECT 'auth0|642c62dc9e6ad19131004860', temp_id FROM ins_plan
+            SELECT ${user_id}, temp_id FROM ins_plan
             )
         INSERT INTO part_of (plan_id, loc_id)
         SELECT temp_id, unnest(array[25, 26, 27]) FROM ins_plan; 

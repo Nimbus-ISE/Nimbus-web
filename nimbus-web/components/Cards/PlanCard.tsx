@@ -16,12 +16,12 @@ interface IProps {
 const PlanCard = ({ planList, maxPlans }: IProps) => {
     const router = useRouter();
     const [expand, setExpand] = React.useState<boolean>(false);
-    const [cols, setCols] = React.useState<number>(0);
+    const [cols, setCols] = React.useState<number>(1);
     const gridColumnsClass = useGridColumns("plan-card-container");
     const handleOnClick = () => {
         setExpand((prev) => !prev);
     };
-    React.useEffect(() => {
+    React.useLayoutEffect(() => {
         if (gridColumnsClass) setCols(Number(gridColumnsClass.split("-")[2]));
     }, [gridColumnsClass]);
     return (

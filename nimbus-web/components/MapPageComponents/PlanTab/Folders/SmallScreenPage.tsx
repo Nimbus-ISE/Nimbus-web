@@ -6,6 +6,7 @@ import PlaceDetail from "../../Popups/PlaceDetail";
 import SideBar from "./SideBar";
 
 import TripMap from "../../MapboxMap/TripMap";
+import Loading from "@/components/Loading";
 
 const SmallScreenPage = () => {
     const {
@@ -79,8 +80,8 @@ const SmallScreenPage = () => {
             )}
             {map_polyline === "" && (
                 <div className=" bg-[#3e4560] bg-opacity-50 opacity-100 w-full h-[68.5vh] absolute top-0">
-                    <div className="text-white text-3xl font-bold bg-black  absolute text-center top-[35vh] rounded-xl left-[30vw] h-20 w-40">
-                        Loading map...
+                    <div className="absolute top-[50%] left-[45%]">
+                        <Loading />
                     </div>
                 </div>
             )}

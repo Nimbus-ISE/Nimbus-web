@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { PlaceDetailProps } from "../PlanTab/PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
+import CloseIcon from "@mui/icons-material/Close";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData: data } = getPlanTabState();
@@ -44,9 +45,18 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 className={
                     isBigScreen
                         ? "bg-white rounded-xl h-[70%] w-[50%] absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
+                        ? "absolute bg-white rounded-xl h-[70%] w-[50%] top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
                         : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[17vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
                 }
             >
+                <button
+                    className="absolute right-0 z-10 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-none bg-opacity-50"
+                    onClick={() => dispatch({ type: "TOGGLE_PLACE_DETAILS" })}
+                >
+                    <>
+                        <CloseIcon sx={{ height: "20px" }} />
+                    </>
+                </button>
                 {!isBigScreen && (
                     <img
                         src={data?.url}
@@ -73,7 +83,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                         <div className="text-xs">{props.address}</div>
 
-                        <Stars rating={data?.rating} size={40} />
+                        <Stars rating={data?.rating} size={20} />
 
                         <div
                             className={

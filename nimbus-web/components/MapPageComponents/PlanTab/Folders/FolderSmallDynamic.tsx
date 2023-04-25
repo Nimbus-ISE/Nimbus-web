@@ -83,10 +83,12 @@ const FolderSmall = () => {
                                                 : classes.uncheckedLabel
                                         }
                                     >
-                                        Day{" "}
-                                        {capitalizeFirst(
-                                            numberToWords(index + 1)
-                                        )}
+                                        <div className="text-sm font-normal">
+                                            Day{" "}
+                                            {capitalizeFirst(
+                                                numberToWords(index + 1)
+                                            )}
+                                        </div>
                                     </label>
                                     {opendedTab === `tab${index}` && (
                                         <div className={classes.tab}>

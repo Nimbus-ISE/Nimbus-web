@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@mui/material";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 import useScrollPercentage from "@/hooks/useScrollPercentage";
 import React from "react";

@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import AlternativeItem from "./AlternativeItem";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import addDate from "@/utils/addDate";
+import ChevronRightIconRounded from "@mui/icons-material/ChevronRightRounded";
+import ChevronLeftIconRounded from "@mui/icons-material/ChevronLeftRounded";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Alternative = () => {
     const {
@@ -159,6 +162,14 @@ const Alternative = () => {
                         : " absolute  top-[35vh] left-1/2  -translate-x-1/2 -translate-y-1/2 overflow-y-scroll  scrollbar-hide  animate-fade-in z-50"
                 }
             >
+                <button
+                    className="absolute right-0 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
+                    onClick={() => dispatch({ type: "TOGGLE_ALTERNATIVES" })}
+                >
+                    <>
+                        <CloseIcon sx={{ height: "20px" }} />
+                    </>
+                </button>
                 <div
                     className={
                         isBigScreen
@@ -167,7 +178,7 @@ const Alternative = () => {
                     }
                 >
                     <div className="flex flex-col place-items-center ">
-                        <div className="text-2xl text-center font-extrabold text-[#a6a6a6]">
+                        <div className="text-neutral-700 text-xl text-center font-bold mt-5">
                             Alternatives
                         </div>
                         {isBigScreen && (
@@ -198,10 +209,9 @@ const Alternative = () => {
                                             });
                                         }}
                                     >
-                                        <img
-                                            src="/images/Arrow_right.png"
-                                            className="w-16 absolute top-[35vh] right-2 rotate-90"
-                                        />
+                                        <div className="absolute top-[40%] right-2">
+                                            <ChevronRightIconRounded fontSize="large" />
+                                        </div>
                                     </button>
                                 )}
                                 {currentAlternativeView !== 0 && (
@@ -212,10 +222,9 @@ const Alternative = () => {
                                             });
                                         }}
                                     >
-                                        <img
-                                            src="/images/Arrow_right.png"
-                                            className="w-16 absolute top-[35vh] left-2 -rotate-90"
-                                        />
+                                        <div className="absolute top-[40%] left-2">
+                                            <ChevronLeftIconRounded fontSize="large" />
+                                        </div>
                                     </button>
                                 )}
                                 <AlternativeItem

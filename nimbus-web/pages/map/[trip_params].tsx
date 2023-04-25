@@ -91,7 +91,7 @@ export default function map({ trip_params }: any) {
                     const tempTravelTimes: any = [];
                     const tempArrivalAndLeaveTimes: any = [];
                     day?.forEach((node: any, index: any) => {
-                        if (node.type === "location") {
+                        if (node.type === "locations") {
                             tempLocId.push(node.loc_id);
                             tempArrivalAndLeaveTimes.push({
                                 arrival_time: node.arrival_time,
