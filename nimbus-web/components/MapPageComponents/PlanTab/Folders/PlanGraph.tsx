@@ -3,6 +3,7 @@ import { PlanGraphProps, PlaceType } from "../PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { useEffect } from "react";
+import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
@@ -19,7 +20,7 @@ const PlanGraph = (props: PlanGraphProps) => {
     }, [travelTime]);
 
     return (
-        <div className="flex flex-col items-left  mt-4 bg-white ">
+        <div className="flex flex-col items-left  mt-4 bg-white pb-10">
             <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
                 Day {props.dayNumber}
             </div>
@@ -31,8 +32,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow bg-fuchsia-500"
-                                    : "h-24 w-24 rounded-full shadow ml-2"
+                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-fuchsia-500"
+                                    : "h-24 w-24 rounded-full shadow-md ml-2"
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -75,6 +76,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 )}
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <button
+                                        className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 rounded-md p-0.5"
                                         onClick={async () => {
                                             dispatch({
                                                 type: "TOGGLE_ALTERNATIVES",
@@ -86,7 +88,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                             });
                                         }}
                                     >
-                                        <EditIcon />
+                                        <EditIcon fontSize="small" />
                                     </button>
                                 )}
                             </div>
@@ -109,23 +111,23 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
-                                <div className="h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
+                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
                                     {travelTime[currentFolder][index]
                                         .travel_type === "walk" && (
                                         <img
                                             src="/images/WalkingMan.png"
-                                            height={"23"}
-                                            width={"23"}
-                                            className="ml-3 mt-1"
+                                            height={"15"}
+                                            width={"15"}
+                                            className="m-auto"
                                         />
                                     )}
                                     {travelTime[currentFolder][index]
                                         .travel_type === "drive" && (
                                         <img
                                             src="/images/Car.png"
-                                            height={"36"}
-                                            width={"36"}
-                                            className="ml-[0.4rem] mt-2"
+                                            height={"22"}
+                                            width={"22"}
+                                            className="m-auto"
                                         />
                                     )}
                                 </div>
@@ -164,17 +166,20 @@ const PlanGraph = (props: PlanGraphProps) => {
                 </>
             ))}
             {!isBigScreen && (
-                <button
-                    onClick={() => {
-                        document.body.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                >
-                    <img
-                        src={"/backToTopArrow.svg"}
-                        width={150}
-                        className="mt-10 ml-[25vw]"
-                    />
-                </button>
+                <div className="flex w-full justify-center items-center my-4 mt-14">
+                    <button
+                        onClick={() => {
+                            document.body.scrollTo({
+                                top: 0,
+                                behavior: "smooth",
+                            });
+                        }}
+                        className={`w-20 h-9 transition duration-500 text-xs text-white shadow-md
+             bg-neutral-500 backdrop-blur-md rounded-lg z-50`}
+                    >
+                        <KeyboardArrowUpRoundedIcon />
+                    </button>
+                </div>
             )}
         </div>
     );
