@@ -13,8 +13,12 @@ const ClosingFullFolder = () => {
             <>
                 <div className={classes.tabs}>
                     <label htmlFor="tabone" className={classes.checkedLabel}>
-                        Day{" "}
-                        {capitalizeFirst(numberToWords(currentFolderView + 1))}
+                        <div className="text-sm font-normal">
+                            Day{" "}
+                            {capitalizeFirst(
+                                numberToWords(currentFolderView + 1)
+                            )}
+                        </div>
                     </label>
                     <div className={classes.tab}>
                         <div

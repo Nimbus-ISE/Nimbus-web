@@ -19,16 +19,16 @@ const AlternativeItem = (props: any) => {
             <button
                 className={
                     isBigScreen
-                        ? " h-[17vw] w-[17vw] rounded-full hover:scale-105 duration-300"
-                        : " h-[35vw] w-[35vw] rounded-fullhover:scale-105 duration-300 "
+                        ? " h-[10rem] w-[10rem] rounded-full duration-300"
+                        : " h-[35vw] w-[35vw] rounded-full duration-300 "
                 }
             >
                 <img
                     src={data.url?.split(",")[0]}
                     className={
                         isBigScreen
-                            ? " h-[17.5vw] w-[17.5vw] rounded-full hover:scale-105 duration-300"
-                            : " h-[35vw] w-[35vw] rounded-full hover:scale-105 duration-300 "
+                            ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md"
+                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md "
                     }
                     onMouseDown={() => {
                         dispatch({
@@ -47,28 +47,24 @@ const AlternativeItem = (props: any) => {
                     }}
                 />
             </button>
-            <div
-                className={
-                    isBigScreen
-                        ? "text-xl font-bold mt-8 text-center"
-                        : "text-lg font-bold mt-4 text-center"
-                }
-            >
+            <div className="text-lg text-neutral-800 font-bold mt-2 text-center">
                 {data.loc_name}
             </div>
-            <Stars rating={90} size={20} />
-            <div className="text-xs w-44 mt-2">{data.description}</div>
-            <button
-                className="border-0 bg-[#45d8d0] rounded-full p-2 hover:scale-110  duration-300 z-10"
-                onMouseDown={() => {
-                    dispatch({
-                        type: "TOGGLE_PLACE_DETAILS",
-                        payload: { place: data },
-                    });
-                }}
-            >
-                More
-            </button>
+            <Stars rating={4.5} size={15} />
+            <div className="text-[0.5rem] w-44 mt-2">{data.description}</div>
+            <div className="flex w-full h-full justify-center items-end mt-2">
+                <button
+                    className="hover:bg-gray-100 h-7 w-full p-2 rounded-lg duration-300 top-16 right-10 text-[#45D8D0] text-sm flex justify-center items-center border-[1px] border-[#45D8D0] bg-white backdrop-blur-sm bg-opacity-50 animate-fade-in"
+                    onMouseDown={() => {
+                        dispatch({
+                            type: "TOGGLE_PLACE_DETAILS",
+                            payload: { place: data },
+                        });
+                    }}
+                >
+                    More
+                </button>
+            </div>
         </div>
     );
 };

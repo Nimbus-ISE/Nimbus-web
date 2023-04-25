@@ -51,7 +51,7 @@ const NavbarRight = ({ isLoading, user }: IProps) => {
                         textTransform: "none",
                         color: "gray",
                     }}
-                    className="hover:text-tricolorgreen whitespace-nowrap"
+                    className="hover:text-tricolorgreen whitespace-nowrap rounded-lg"
                 >
                     <div className="m-auto font-montserrat">Login</div>
                 </Button>

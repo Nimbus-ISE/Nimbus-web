@@ -100,6 +100,10 @@
     margin: 0;
 }
 
+.trapezoid {
+    box-shadow: 10px 7px 10px -7px rgba(0, 0, 0, 0.25);
+}
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
