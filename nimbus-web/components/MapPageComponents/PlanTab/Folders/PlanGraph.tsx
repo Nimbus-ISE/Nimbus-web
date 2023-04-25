@@ -4,6 +4,8 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { useEffect } from "react";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
+import DirectionsWalkRoundedIcon from "@mui/icons-material/DirectionsWalkRounded";
+import DirectionsCarRoundedIcon from "@mui/icons-material/DirectionsCarRounded";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
@@ -113,24 +115,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
                             <div className="flex gap-10 items-center">
-                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
+                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full text-neutral-800">
                                     {travelTime[currentFolder][index]
                                         .travel_type === "walk" && (
-                                        <img
-                                            src="/images/WalkingMan.png"
-                                            height={"15"}
-                                            width={"15"}
-                                            className="m-auto"
-                                        />
+                                        <DirectionsWalkRoundedIcon className="m-auto" />
                                     )}
                                     {travelTime[currentFolder][index]
                                         .travel_type === "drive" && (
-                                        <img
-                                            src="/images/Car.png"
-                                            height={"22"}
-                                            width={"22"}
-                                            className="m-auto"
-                                        />
+                                        <DirectionsCarRoundedIcon className="m-auto" />
                                     )}
                                 </div>
                                 <div className="flex gap-4">
