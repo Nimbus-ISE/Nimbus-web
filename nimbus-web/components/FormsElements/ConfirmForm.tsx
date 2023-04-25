@@ -40,7 +40,7 @@ const ConfirmForm = () => {
         console.log(formData);
         console.log(payload);
 
-        // pushPayload();
+        pushPayload();
     };
 
     const pushPayload = () => {
