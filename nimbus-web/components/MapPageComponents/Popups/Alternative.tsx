@@ -212,6 +212,7 @@ const Alternative = () => {
                                             currentAlternativeView
                                         ]
                                     }
+                                    index={currentAlternativeView}
                                 />
                             </>
                         )}
