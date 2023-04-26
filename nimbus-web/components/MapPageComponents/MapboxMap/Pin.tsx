@@ -28,9 +28,9 @@ function Pin({ size = 30, fill = "#000", number = 0 }) {
             <text
                 x={number >= 10 ? "4.5" : "8.5"}
                 y="15"
-                stroke="white"
+                color="white"
                 font-weight="lighter"
-                font-family="monospace"
+                font-family="montserrat"
             >
                 {number}
             </text>

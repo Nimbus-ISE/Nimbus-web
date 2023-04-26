@@ -28,18 +28,23 @@ const SideBar = () => {
     //         "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
     //     updated_at: "2023-01-24T01:01:39.063Z",
     // };
-    // // const user = undefined;
 
     const handleToggleSave = () => {
         if (!isLoading && user) {
-            dispatch({ type: "TOGGLE_SAVE_PLAN" });
+            dispatch({
+                type: "TOGGLE",
+                payload: { property: "openSavePlan", value: openSavePlan },
+            });
         } else {
             alert("To save your trip plan, please log in to your account.");
         }
     };
 
     const handleOpenFolder = () => {
-        dispatch({ type: "OPEN_FULL_FOLDER" });
+        dispatch({
+            type: "TOGGLE",
+            payload: { property: "openFullTab", value: openFullTab },
+        });
     };
 
     const handleCloseFolder = () => {

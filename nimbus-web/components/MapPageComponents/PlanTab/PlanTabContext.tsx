@@ -61,8 +61,7 @@ function reducer(state: any, action: any) {
         }
         case "TOGGLE": {
             if (action.payload) {
-                state[action.payload.property] =
-                    !state[action.payload.property];
+                state[action.payload.property] = !action.payload.value;
             }
             return { ...state };
         }
