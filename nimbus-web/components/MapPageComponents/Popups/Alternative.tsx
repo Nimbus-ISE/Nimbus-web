@@ -164,8 +164,8 @@ const Alternative = () => {
                             <div
                                 className={
                                     isBigScreen
-                                        ? "flex gap-[0.5rem]  mt-6 "
-                                        : "flex flex-row gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
+                                        ? "grid grid-cols-3 mt-2"
+                                        : "grid grid-cols-1 gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
                                 {alternativeOptions.map(

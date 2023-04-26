@@ -58,7 +58,7 @@ const SideBar = () => {
                 {isBigScreen && (
                     <>
                         <button
-                            className="hover:bg-gray-100 h-9 p-2 rounded-lg absolute duration-300 transition top-16 right-10 text-[#45D8D0] text-sm flex justify-center items-center border-[1px] border-[#45D8D0] bg-white backdrop-blur-sm bg-opacity-50"
+                            className="hover:bg-gray-100 h-9 p-2 rounded-lg absolute duration-300 transition top-14 right-[24px] text-[#45D8D0] text-sm flex justify-center items-center border-[1px] border-[#45D8D0] bg-white backdrop-blur-sm bg-opacity-50"
                             onClick={handleToggleSave}
                             disabled={isLoading || isLoading == undefined}
                         >
@@ -76,7 +76,7 @@ const SideBar = () => {
                         </button>
 
                         <button
-                            className="trapezoid absolute flex justify-center items-center bg-white top-[36vh] p-2 h-28 w-6 rounded-r-lg z-[99999] right-[-20px] text-neutral-500"
+                            className="trapezoid absolute flex justify-center items-center bg-white top-[36vh] p-2 h-28 w-6 rounded-r-lg right-[-20px] text-neutral-500"
                             onClick={handleOpenFolder}
                         >
                             <ChevronRightIconRounded />
