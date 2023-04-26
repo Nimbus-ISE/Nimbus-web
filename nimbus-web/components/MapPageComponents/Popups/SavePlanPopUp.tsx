@@ -15,17 +15,17 @@ const SavePlanPopUp = () => {
         travelTime,
         trip_params,
     } = getPlanTabState();
-    // const { user, isLoading } = useUser();
+    const { user, isLoading } = useUser();
     const dispatch: any = getPlanTabDispatch();
     const inputRef: any = useRef(null);
     const [transition, setTransition] = React.useState<boolean>();
     const plan: any = [];
     const savePlan: any = [];
-    const user = {
-        ...customClaims,
-        sub: "",
-    };
-    const isLoading = false;
+    // const user = {
+    //     ...customClaims,
+    //     sub: "",
+    // };
+    // const isLoading = false;
 
     async function handleClick() {
         const name = inputRef.current.value;

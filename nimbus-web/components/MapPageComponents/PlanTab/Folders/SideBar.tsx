@@ -14,20 +14,20 @@ import CloseIcon from "@mui/icons-material/Close";
 const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isBigScreen, openSavePlan } = getPlanTabState();
-    // const { user, isLoading } = useUser();
+    const { user, isLoading } = useUser();
 
-    const isLoading = false;
-    const user = {
-        ...customClaims,
-        family_name: "P",
-        given_name: "Nattakit",
-        locale: "en",
-        name: "Nattakit P",
-        nickname: "search35453",
-        picture:
-            "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
-        updated_at: "2023-01-24T01:01:39.063Z",
-    };
+    // const isLoading = false;
+    // const user = {
+    //     ...customClaims,
+    //     family_name: "P",
+    //     given_name: "Nattakit",
+    //     locale: "en",
+    //     name: "Nattakit P",
+    //     nickname: "search35453",
+    //     picture:
+    //         "https://lh3.googleusercontent.com/a/AEdFTp5a3gVM3PRFVmKChA74uW-FS210zmx4Lf7DAWwl4w=s96-c",
+    //     updated_at: "2023-01-24T01:01:39.063Z",
+    // };
     // // const user = undefined;
 
     const handleToggleSave = () => {
