@@ -228,7 +228,7 @@ export default function map({ trip_params }: any) {
                             ${
                                 isBigScreen
                                     ? "grid place-items-center z-50 bg-gradient-to-r from-[#21D7E8] to-[#FFDE59] text-black grid-cols-12 absolute w-full overflow-hidden"
-                                    : "z-50 bg-tricolorgreen text-black absolute w-full overflow-hidden gap-0"
+                                    : "z-50 bg-[#64caca] text-black absolute w-full overflow-hidden gap-0"
                             }
                         `}
                     >

@@ -4,6 +4,7 @@ import { PlaceDetailProps } from "../PlanTab/PlanTabTypes";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
 import Stars from "@/components/Stars";
 import CloseIcon from "@mui/icons-material/Close";
+import { Divider } from "@mui/material";
 
 const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData: data } = getPlanTabState();
@@ -29,12 +30,12 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             <div
                 className={
                     isBigScreen
-                        ? "absolute bg-white rounded-xl h-[65%] w-[50%] top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in"
-                        : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[17vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
+                        ? "shadow-md absolute bg-white rounded-xl h-[65%] w-[50%] top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hidden scrollbar-hide  animate-fade-in"
+                        : "shadow-md bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[17vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hidden scrollbar-hide  animate-fade-in p-2"
                 }
             >
                 <button
-                    className="absolute right-0 z-10 m-2 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-none bg-opacity-50"
+                    className="absolute top-0 right-0 z-10 m-2 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-none bg-opacity-50"
                     onClick={() =>
                         dispatch({
                             type: "SET",
@@ -49,15 +50,17 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 {!isBigScreen && (
                     <img
                         src={data?.url.split(",")[0]}
-                        className="rounded-xl border-2 bg-blue-100 w-[90%] translate-x-[5.5vw] translate-y-[4vh] object-cover"
+                        className="rounded-xl border-2 bg-blue-100 w-[90%] mx-auto mt-5 -mb-5 
+                        object-cover shadow-md"
                     />
                 )}
 
-                <div className="grid grid-cols-12 p-6 gap-6 ">
+                <div className="grid grid-cols-12 p-6 gap-6">
                     {isBigScreen && (
                         <img
                             src={data?.url.split(",")[0]}
-                            className="rounded-xl border-2 bg-blue-100 col-span-7 mt-[2vh] object-cover"
+                            className="rounded-xl border-2 bg-blue-100 col-span-7 object-cover h-60 
+                            w-full shadow-md mx-auto"
                         />
                     )}
 
@@ -78,7 +81,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                             className={
                                 isBigScreen
                                     ? "text-[0.8rem] col-span-12 mt-2"
-                                    : "text-[0.8rem] w-[80vw]"
+                                    : "text-[0.8rem] w-[80vw] pr-2"
                             }
                         >
                             <div className="text-[0.8rem] font-bold mt-2">
@@ -88,12 +91,17 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 ? data?.address + " " + data?.province
                                 : "No address provided"}
 
-                            <div className="text-[0.8rem] col-span-12">
-                                <span className="font-bold">Price Level:</span>
-                                {" " + data?.price_level}
+                            <div className="text-[0.8rem] col-span-12 mt-2">
+                                <span className="font-bold">Price Level: </span>
+                                {" " + data?.price_level} / 4
                             </div>
                         </div>
                     </div>
+                    {!isBigScreen && (
+                        <div className="col-span-12">
+                            <Divider />
+                        </div>
+                    )}
                     <div className="flex flex-col col-span-12">
                         {" "}
                         <div className="text-[0.8rem] font-bold ">
@@ -105,18 +113,25 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 : "No description provided"}
                         </div>
                     </div>
-
-                    {reviewData?.map((review: any) => {
-                        return (
-                            <>
-                                <Review
-                                    review={{
-                                        ...review,
-                                    }}
-                                />
-                            </>
-                        );
-                    })}
+                    <div className="col-span-12">
+                        <Divider />
+                    </div>
+                    <div className="flex flex-col col-span-12 gap-3 mx-auto">
+                        <div className="text-[0.8rem] font-bold ">
+                            Google Reviews
+                        </div>
+                        {reviewData?.map((review: any) => {
+                            return (
+                                <>
+                                    <Review
+                                        review={{
+                                            ...review,
+                                        }}
+                                    />
+                                </>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         </>
