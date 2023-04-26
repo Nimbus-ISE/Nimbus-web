@@ -34,7 +34,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 }
             >
                 <button
-                    className="absolute right-0 z-10 m-2 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-none bg-opacity-50"
+                    className="absolute right-0 z-10 m-1 mt-0 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-none bg-opacity-50"
                     onClick={() =>
                         dispatch({
                             type: "SET",
