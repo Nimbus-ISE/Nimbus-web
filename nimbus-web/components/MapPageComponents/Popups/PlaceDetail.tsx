@@ -29,7 +29,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
             <div
                 className={
                     isBigScreen
-                        ? "absolute bg-white rounded-xl h-[65%] w-[50%] top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in "
+                        ? "absolute bg-white rounded-xl h-[65%] w-[50%] top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2  overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in"
                         : "bg-white rounded-xl h-[45vh] w-[85vw] absolute top-[17vh]  transform translate-x-[10%] overflow-y-scroll overflow-x-hide scrollbar-hide  animate-fade-in p-2"
                 }
             >
@@ -49,7 +49,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 {!isBigScreen && (
                     <img
                         src={data?.url.split(",")[0]}
-                        className="rounded-xl border-2 bg-blue-100 w-[90%]  translate-x-[5.5vw] translate-y-[4vh]"
+                        className="rounded-xl border-2 bg-blue-100 w-[90%] translate-x-[5.5vw] translate-y-[4vh] object-cover"
                     />
                 )}
 
@@ -57,7 +57,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     {isBigScreen && (
                         <img
                             src={data?.url.split(",")[0]}
-                            className="rounded-xl border-2 bg-blue-100 col-span-7 mt-[2vh]"
+                            className="rounded-xl border-2 bg-blue-100 col-span-7 mt-[2vh] object-cover"
                         />
                     )}
 

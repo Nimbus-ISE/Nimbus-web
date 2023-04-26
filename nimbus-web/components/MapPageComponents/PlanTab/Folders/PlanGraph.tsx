@@ -32,8 +32,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-[#45D0D8]"
-                                    : "h-24 w-24 rounded-full cursor-pointer shadow-md ml-2"
+                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover"
+                                    : "h-24 w-24 rounded-full cursor-pointer shadow-md ml-2 object-cover"
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -56,8 +56,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                                 <div
                                     className={
                                         isBigScreen
-                                            ? "text-base text-neutral-800 font-bold ml-4 cursor-pointer text-left"
-                                            : "text-xl text-neutral-800 ml-4 cursor-pointer text-left"
+                                            ? "text-base text-neutral-800 font-bold ml-4 cursor-pointer text-left pr-2 hover:text-neutral-700 hover:drop-shadow-md"
+                                            : "text-lg text-neutral-800 ml-4 cursor-pointer text-left pr-1 hover:text-neutral-700"
                                     }
                                     onMouseDown={() => {
                                         dispatch({
@@ -72,10 +72,22 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         });
                                     }}
                                 >
-                                    {place.loc_name}
+                                    {place.loc_name.length > 24 && !isBigScreen
+                                        ? place.loc_name.substring(0, 24) +
+                                          "..."
+                                        : place.loc_name.length > 41
+                                        ? place.loc_name.substring(0, 41) +
+                                          "..."
+                                        : place.loc_name}
                                 </div>
                                 {(!openFullTab || isClosingFullFolder) && (
-                                    <div className="relative h-[20px] right-2">
+                                    <div
+                                        className={
+                                            isBigScreen
+                                                ? "relative h-[20px] mr-2"
+                                                : "relative h-[20px]"
+                                        }
+                                    >
                                         <button
                                             className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 duration-300 rounded-md p-0.5"
                                             onClick={() => {
@@ -114,7 +126,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                     {travelTime[currentFolder][index] && (
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
-                            <div className="flex gap-10 items-center">
+                            <div className="flex gap-10 items-center mr-2">
                                 <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full text-neutral-800">
                                     {travelTime[currentFolder][index]
                                         .travel_type === "walk" && (
@@ -125,7 +137,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         <DirectionsCarRoundedIcon className="m-auto" />
                                     )}
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 text-sm text-left">
                                     <span className="font-bold text-[#45d8d0] text-left">
                                         {capitalizeFirst(
                                             travelTime[currentFolder][index]
