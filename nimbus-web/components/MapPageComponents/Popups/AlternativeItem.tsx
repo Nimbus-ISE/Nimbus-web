@@ -12,7 +12,7 @@ const AlternativeItem = (props: any) => {
         <div
             className={
                 isBigScreen
-                    ? "flex flex-col m-4 place-items-center gap-2"
+                    ? "flex flex-col m-4 place-items-center gap-2 "
                     : "flex flex-col place-items-center gap-2 z-50 mt-4"
             }
         >
@@ -55,7 +55,9 @@ const AlternativeItem = (props: any) => {
             </div>
 
             <Stars rating={data?.rating} size={15} />
-            <div className="text-[0.5rem] w-44 mt-2">{data.description}</div>
+            <div className="text-xs lg:text-sm mt-2 w-full px-5">
+                {data.description}
+            </div>
             <div className="flex w-full h-full justify-center items-end mt-2">
                 <button
                     className="hover:bg-gray-100 h-7 w-full p-2 rounded-lg duration-300 top-16 right-10 text-[#45D8D0] text-sm flex justify-center items-center border-[1px] border-[#45D8D0] bg-white backdrop-blur-sm bg-opacity-50 animate-fade-in"
