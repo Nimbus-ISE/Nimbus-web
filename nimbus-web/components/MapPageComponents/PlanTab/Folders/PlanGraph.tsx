@@ -101,6 +101,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                         value: [true, index],
                                                     },
                                                 });
+                                                document.body.scrollTo({
+                                                    top: 0,
+                                                    behavior: "smooth",
+                                                });
                                             }}
                                         >
                                             <EditIcon fontSize="small" />
