@@ -110,7 +110,7 @@ const useMap = () => {
         id: "point",
         type: "line",
         paint: {
-            "line-color": "#FF0000",
+            "line-color": "#00CCCC",
             "line-width": 3,
         },
     };

@@ -14,6 +14,7 @@ const SavePlanPopUp = () => {
         arrivalAndLeaveTimes,
         travelTime,
         trip_params,
+        openSavePlan,
     } = getPlanTabState();
     const { user, isLoading } = useUser();
     const dispatch: any = getPlanTabDispatch();
@@ -96,7 +97,17 @@ const SavePlanPopUp = () => {
     }, []);
     React.useEffect(() => {
         if (transition === false)
-            setTimeout(() => dispatch({ type: "TOGGLE_SAVE_PLAN" }), 100);
+            setTimeout(
+                () =>
+                    dispatch({
+                        type: "TOGGLE",
+                        payload: {
+                            property: "openSavePlan",
+                            value: openSavePlan,
+                        },
+                    }),
+                100
+            );
     }, [transition]);
 
     // return (

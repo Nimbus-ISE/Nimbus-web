@@ -34,7 +34,10 @@ const BigScreenPage = () => {
                                 onMouseDown={() => {
                                     dispatch({
                                         type: "TOGGLE",
-                                        payload: { property: "openSavePlan" },
+                                        payload: {
+                                            property: "openSavePlan",
+                                            value: openSavePlan,
+                                        },
                                     });
                                 }}
                             ></div>
