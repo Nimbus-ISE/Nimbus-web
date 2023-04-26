@@ -10,11 +10,13 @@ import SaveIcon from "@mui/icons-material/Save";
 import ChevronRightIconRounded from "@mui/icons-material/ChevronRightRounded";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import CloseIcon from "@mui/icons-material/Close";
+import useViewportHeight from "@/hooks/useViewportHeight";
 
 const SideBar = () => {
     const dispatch: any = getPlanTabDispatch();
     const { openFullTab, isBigScreen, openSavePlan } = getPlanTabState();
     const { user, isLoading } = useUser();
+    const { height } = useViewportHeight();
 
     // const isLoading = false;
     // const user = {
@@ -52,7 +54,12 @@ const SideBar = () => {
     };
 
     return (
-        <div className={" h-full z-10 lg:col-span-4"}>
+        <div
+            style={{
+                height: isBigScreen ? height : "100%",
+            }}
+            className={"z-10 lg:col-span-4 w-full"}
+        >
             <div className="relative">
                 <FolderSmallDynamic />
                 {isBigScreen && (

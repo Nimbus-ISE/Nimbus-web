@@ -1,6 +1,7 @@
 import React from "react";
 import useMapLogic from "@/hooks/useMap";
 import { getPlanTabDispatch, getPlanTabState } from "../PlanTab/PlanTabContext";
+import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
 import Pin from "@/components/MapPageComponents/MapboxMap/Pin";
 import Map, {
     Marker,
@@ -103,15 +104,19 @@ const TripMap = () => {
                                                     anchor="top"
                                                     longitude={point.lng}
                                                     latitude={point.lat}
+                                                    closeButton={false}
                                                 >
-                                                    <div className="font-extrabold">
-                                                        {
-                                                            fullPlan[
-                                                                currentFolder
-                                                            ].location_data[
-                                                                index
-                                                            ].loc_name
-                                                        }
+                                                    <div className="flex justify-center text-center gap-2 w-fit h-full leading-4 text-neutral-700">
+                                                        <PlaceRoundedIcon />
+                                                        <div className="font-semibold font-montserrat px-5 m-auto">
+                                                            {
+                                                                fullPlan[
+                                                                    currentFolder
+                                                                ].location_data[
+                                                                    index
+                                                                ].loc_name
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </Popup>
                                             )}

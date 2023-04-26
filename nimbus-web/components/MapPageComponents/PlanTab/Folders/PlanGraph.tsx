@@ -32,8 +32,8 @@ const PlanGraph = (props: PlanGraphProps) => {
                             src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover"
-                                    : "h-24 w-24 rounded-full cursor-pointer shadow-md ml-2 object-cover"
+                                    ? "h-[30vw] w-[30vw] aspect-square rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover"
+                                    : "h-24 w-24 aspect-square rounded-full cursor-pointer shadow-md ml-2 object-cover"
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -57,7 +57,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                     className={
                                         isBigScreen
                                             ? "text-base text-neutral-800 font-bold ml-4 cursor-pointer text-left pr-2 hover:text-neutral-700 hover:drop-shadow-md"
-                                            : "text-lg text-neutral-800 ml-4 cursor-pointer text-left pr-1 hover:text-neutral-700"
+                                            : "text-lg font-bold text-neutral-800 ml-4 cursor-pointer text-left pr-1 hover:text-neutral-700"
                                     }
                                     onMouseDown={() => {
                                         dispatch({
@@ -100,6 +100,10 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                         ],
                                                         value: [true, index],
                                                     },
+                                                });
+                                                document.body.scrollTo({
+                                                    top: 0,
+                                                    behavior: "smooth",
                                                 });
                                             }}
                                         >
