@@ -116,19 +116,17 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                     <div className="col-span-12">
                         <Divider />
                     </div>
-                    <div className="flex flex-col col-span-12 gap-3 mx-auto">
-                        <div className="text-[0.8rem] font-bold ">
+                    <div className="flex flex-col col-span-12 gap-3 w-full">
+                        <div className="text-[0.8rem] font-bold">
                             Google Reviews
                         </div>
                         {reviewData?.map((review: any) => {
                             return (
-                                <>
-                                    <Review
-                                        review={{
-                                            ...review,
-                                        }}
-                                    />
-                                </>
+                                <Review
+                                    review={{
+                                        ...review,
+                                    }}
+                                />
                             );
                         })}
                     </div>
