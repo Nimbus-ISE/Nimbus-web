@@ -6,7 +6,10 @@ interface placeDataType {
     address: string;
     placeDescription: string;
 }
-interface PlanTabContextStateType {
+interface PlanTabContextKeys {
+    [key: string]: any;
+}
+interface PlanTabContextStateType extends PlanTabContextKeys {
     isBigScreen: boolean;
     openFullTab: boolean;
     closed: boolean;
@@ -36,7 +39,7 @@ interface PlanTabContextStateType {
     alternative_travel_time: any;
 }
 
-function reducer(state: any, action: any) {
+function reducer(state: PlanTabContextStateType, action: any) {
     switch (action.type) {
         case "SET": {
             if (action.payload) {

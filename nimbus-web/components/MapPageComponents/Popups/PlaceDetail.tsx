@@ -9,7 +9,6 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData: data } = getPlanTabState();
     const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
-    // const data = placeData;
 
     const fetchReview = async (loc_id: string) => {
         const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
@@ -95,7 +94,6 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                         </div>
                     </div>
                     <div className="flex flex-col col-span-12">
-                        {" "}
                         <div className="text-[0.8rem] font-bold ">
                             Description
                         </div>
