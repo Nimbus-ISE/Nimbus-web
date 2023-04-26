@@ -4,6 +4,8 @@ import { getPlanTabDispatch, getPlanTabState } from "../PlanTabContext";
 import capitalizeFirst from "@/utils/capitalizeFirst";
 import { useEffect } from "react";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
+import DirectionsWalkRoundedIcon from "@mui/icons-material/DirectionsWalkRounded";
+import DirectionsCarRoundedIcon from "@mui/icons-material/DirectionsCarRounded";
 
 const PlanGraph = (props: PlanGraphProps) => {
     const dispatch: any = getPlanTabDispatch();
@@ -18,20 +20,20 @@ const PlanGraph = (props: PlanGraphProps) => {
     useEffect(() => {}, [travelTime]);
 
     return (
-        <div className="flex flex-col items-left  mt-4 bg-white pb-10">
-            <div className="ml-4 h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-extrabold ">
+        <div className="flex flex-col items-left bg-white mt-2 pb-10">
+            <div className="flex justify-center items-center ml-[18px] h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-bold ">
                 Day {props.dayNumber}
             </div>
             {props.places?.map((place: any, index: any) => (
                 <>
-                    <div className="h-10 w-1 ml-14 bg-[#45d8d0] rounded"></div>
-                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] ">
+                    <div className="h-10 w-1 ml-14 bg-[#45d8d0] "></div>
+                    <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] duration-300">
                         <img
                             src={place?.url.split(",")[0]}
                             className={
                                 !isBigScreen
-                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-fuchsia-500"
-                                    : "h-24 w-24 rounded-full shadow-md ml-2"
+                                    ? "h-[30vw] w-[30vw] rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover"
+                                    : "h-24 w-24 rounded-full cursor-pointer shadow-md ml-2 object-cover"
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -46,50 +48,64 @@ const PlanGraph = (props: PlanGraphProps) => {
                         <div
                             className={
                                 isBigScreen
-                                    ? "flex flex-col "
+                                    ? "flex flex-col w-full"
                                     : "flex flex-col w-[55vw]"
                             }
                         >
-                            <div className="flex gap-2">
-                                {place?.loc_name?.length < 20 && (
-                                    <div
-                                        className={
-                                            isBigScreen
-                                                ? "text-base font-bold ml-4 "
-                                                : "text-xl  ml-4"
-                                        }
-                                    >
-                                        {place.loc_name}
-                                    </div>
-                                )}
-                                {place?.loc_name?.length >= 20 && (
-                                    <div
-                                        className={
-                                            isBigScreen
-                                                ? "text-base  font-bold ml-4 text-left"
-                                                : "text-xl ml-4 text-left"
-                                        }
-                                    >
-                                        {place.loc_name}
-                                    </div>
-                                )}
+                            <div className="flex justify-between">
+                                <div
+                                    className={
+                                        isBigScreen
+                                            ? "text-base text-neutral-800 font-bold ml-4 cursor-pointer text-left pr-2 hover:text-neutral-700 hover:drop-shadow-md"
+                                            : "text-lg text-neutral-800 ml-4 cursor-pointer text-left pr-1 hover:text-neutral-700"
+                                    }
+                                    onMouseDown={() => {
+                                        dispatch({
+                                            type: "MULTI_SET",
+                                            payload: {
+                                                property: [
+                                                    "openReview",
+                                                    "placeData",
+                                                ],
+                                                value: [true, place],
+                                            },
+                                        });
+                                    }}
+                                >
+                                    {place.loc_name.length > 24 && !isBigScreen
+                                        ? place.loc_name.substring(0, 24) +
+                                          "..."
+                                        : place.loc_name.length > 41
+                                        ? place.loc_name.substring(0, 41) +
+                                          "..."
+                                        : place.loc_name}
+                                </div>
                                 {(!openFullTab || isClosingFullFolder) && (
-                                    <button
-                                        onClick={() => {
-                                            dispatch({
-                                                type: "MULTI_SET",
-                                                payload: {
-                                                    property: [
-                                                        "openAlternatives",
-                                                        "selectedLocationIndex",
-                                                    ],
-                                                    value: [true, index],
-                                                },
-                                            });
-                                        }}
+                                    <div
+                                        className={
+                                            isBigScreen
+                                                ? "relative h-[20px] mr-2"
+                                                : "relative h-[20px]"
+                                        }
                                     >
-                                        <EditIcon fontSize="small" />
-                                    </button>
+                                        <button
+                                            className="border-[1px] border-neutral-600 text-neutral-600 hover:text-neutral-400 hover:border-neutral-400 duration-300 rounded-md p-0.5"
+                                            onClick={() => {
+                                                dispatch({
+                                                    type: "MULTI_SET",
+                                                    payload: {
+                                                        property: [
+                                                            "openAlternatives",
+                                                            "selectedLocationIndex",
+                                                        ],
+                                                        value: [true, index],
+                                                    },
+                                                });
+                                            }}
+                                        >
+                                            <EditIcon fontSize="small" />
+                                        </button>
+                                    </div>
                                 )}
                             </div>
 
@@ -110,28 +126,18 @@ const PlanGraph = (props: PlanGraphProps) => {
                     {travelTime[currentFolder][index] && (
                         <>
                             <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
-                            <div className="flex gap-10 items-center">
-                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full">
+                            <div className="flex gap-10 items-center mr-2">
+                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full text-neutral-800">
                                     {travelTime[currentFolder][index]
                                         .travel_type === "walk" && (
-                                        <img
-                                            src="/images/WalkingMan.png"
-                                            height={"15"}
-                                            width={"15"}
-                                            className="m-auto"
-                                        />
+                                        <DirectionsWalkRoundedIcon className="m-auto" />
                                     )}
                                     {travelTime[currentFolder][index]
                                         .travel_type === "drive" && (
-                                        <img
-                                            src="/images/Car.png"
-                                            height={"22"}
-                                            width={"22"}
-                                            className="m-auto"
-                                        />
+                                        <DirectionsCarRoundedIcon className="m-auto" />
                                     )}
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 text-sm text-left">
                                     <span className="font-bold text-[#45d8d0] text-left">
                                         {capitalizeFirst(
                                             travelTime[currentFolder][index]
@@ -175,7 +181,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                             });
                         }}
                         className={`w-20 h-9 transition duration-500 text-xs text-white shadow-md
-             bg-neutral-500 backdrop-blur-md rounded-lg z-50`}
+             bg-neutral-500 backdrop-blur-md rounded-lg z-50 hover:opacity-50`}
                     >
                         <KeyboardArrowUpRoundedIcon />
                     </button>

@@ -19,16 +19,16 @@ const AlternativeItem = (props: any) => {
             <button
                 className={
                     isBigScreen
-                        ? " h-[10rem] w-[10rem] rounded-full duration-300"
-                        : " h-[35vw] w-[35vw] rounded-full duration-300 "
+                        ? " h-[10rem] w-[10rem] rounded-full duration-300 hover:shadow-lg"
+                        : " h-[35vw] w-[35vw] rounded-full duration-300 hover:shadow-lg"
                 }
             >
                 <img
                     src={data.url?.split(",")[0]}
                     className={
                         isBigScreen
-                            ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md"
-                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md "
+                            ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md object-cover"
+                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md object-cover"
                     }
                     onMouseDown={() => {
                         dispatch({
@@ -54,7 +54,7 @@ const AlternativeItem = (props: any) => {
                 {data.loc_name}
             </div>
 
-            <Stars rating={4.5} size={15} />
+            <Stars rating={data?.rating} size={15} />
             <div className="text-[0.5rem] w-44 mt-2">{data.description}</div>
             <div className="flex w-full h-full justify-center items-end mt-2">
                 <button
