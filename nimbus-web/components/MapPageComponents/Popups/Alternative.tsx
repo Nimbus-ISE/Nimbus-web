@@ -152,8 +152,8 @@ const Alternative = () => {
                 <div
                     className={
                         isBigScreen
-                            ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden scrollbar-hide"
-                            : "rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden scrollbar-hide"
+                            ? "shadow-md rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden scrollbar-hide"
+                            : "shadow-md rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden scrollbar-hide"
                     }
                 >
                     <div className="flex flex-col place-items-center h-full w-full">
