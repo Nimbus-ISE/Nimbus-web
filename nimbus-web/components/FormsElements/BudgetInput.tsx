@@ -28,10 +28,6 @@ function valueMapper(value: number) {
 
 const marks = [
     {
-        value: 0,
-        label: "0",
-    },
-    {
         value: 1,
         label: "100",
     },
@@ -53,7 +49,7 @@ const BudgetInput = (props: any) => {
     const { currentValue } = React.useContext(ScrollContext);
     const { formData, setFormDataField } = React.useContext(PlanContext);
     const [value, setValue] = React.useState<number>(
-        formData.budget ? formData.budget : 0
+        formData.budget ? formData.budget : 1
     );
 
     const handleChange = (event: any, newValue: number | number[]) => {
@@ -71,7 +67,7 @@ const BudgetInput = (props: any) => {
     return (
         <>
             <ThemeProvider theme={nimbusTheme}>
-                <div className="flex mx-auto items-center h-full max-w-[15rem] w-full">
+                <div className="flex mx-auto items-center h-full max-w-[15rem] w-full md:scale-100 scale-[90%]">
                     <Slider
                         onChange={handleChange}
                         slots={{
@@ -81,16 +77,14 @@ const BudgetInput = (props: any) => {
                         value={value}
                         valueLabelDisplay="on"
                         step={1}
-                        min={0}
+                        min={1}
                         max={4}
                         color="secondary"
                         marks={marks}
                         valueLabelFormat={(value) => {
                             return (
                                 <div style={{ textAlign: "center" }}>
-                                    {value === 0
-                                        ? "no cost"
-                                        : value === 1
+                                    {value === 1
                                         ? "below 100 THB"
                                         : value === 2
                                         ? "below 500 THB"
