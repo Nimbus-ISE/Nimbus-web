@@ -136,8 +136,8 @@ const Plan = () => {
                                     ? window.innerHeight * 0.1
                                     : 0),
                         }}
-                        className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100
-                        m-auto max-w-[81rem] w-full md:w-[90%] min-w-[280px] overflow-hidden z-10"
+                        className="grid grid-flow-col md:rounded-xl shadow-lg bg-neutral-100 scrollbar-hide
+                        m-auto max-w-[81rem] w-full md:w-[90%] min-w-[250px] overflow-hidden z-10"
                     >
                         {!isConfirmActive ? (
                             <div
