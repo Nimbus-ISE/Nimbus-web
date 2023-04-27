@@ -65,9 +65,9 @@ const ConfirmForm = () => {
         }
     }, [formData]);
     return (
-        <div className="m-auto flex pb-10 h-full mx-auto w-[90%] md:w-[75%] overflow-y-scroll flex flex-col items-center">
+        <div className="m-auto pb-10 h-full mx-auto w-[90%] md:w-[75%] overflow-y-scroll flex flex-col items-center">
             <div className="m-auto w-full">
-                <div className="text-center text-4xl text-neutral-700 font-extrabold px-0 pt-5">
+                <div className="text-center text-2xl sm:text-3xl md:text-4xl text-neutral-700 font-extrabold px-0 pt-5">
                     Confirm Inputs
                 </div>
                 <button

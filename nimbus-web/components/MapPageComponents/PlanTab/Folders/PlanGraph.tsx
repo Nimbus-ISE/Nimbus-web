@@ -101,7 +101,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                         value: [true, index],
                                                     },
                                                 });
-                                                document.body.scrollTo({
+                                                window.scrollTo({
                                                     top: 0,
                                                     behavior: "smooth",
                                                 });
@@ -179,7 +179,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                 <div className="flex w-full justify-center items-center my-4 mt-14">
                     <button
                         onClick={() => {
-                            document.body.scrollTo({
+                            window.scrollTo({
                                 top: 0,
                                 behavior: "smooth",
                             });
