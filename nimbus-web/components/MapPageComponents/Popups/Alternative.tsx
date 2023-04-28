@@ -130,7 +130,7 @@ const Alternative = () => {
                 className={
                     isBigScreen
                         ? "absolute top-[50vh] left-1/3  -translate-x-1/2 -translate-y-[30vh]  overflow-y-scroll scrollbar-hide  animate-fade-in "
-                        : " absolute  top-[35vh] left-1/2  -translate-x-1/2 -translate-y-1/2 overflow-y-scroll  scrollbar-hide  animate-fade-in z-50"
+                        : " absolute top-[35vh] left-1/2  -translate-x-1/2 -translate-y-1/2 overflow-y-scroll  scrollbar-hide  animate-fade-in z-50"
                 }
             >
                 <button
@@ -152,11 +152,11 @@ const Alternative = () => {
                 <div
                     className={
                         isBigScreen
-                            ? "rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden"
-                            : "rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden"
+                            ? "shadow-md rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden scrollbar-hide"
+                            : "shadow-md rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden scrollbar-hide"
                     }
                 >
-                    <div className="flex flex-col place-items-center ">
+                    <div className="flex flex-col place-items-center h-full w-full">
                         <div className="text-neutral-700 text-xl text-center font-bold mt-5">
                             Alternatives
                         </div>
@@ -164,7 +164,7 @@ const Alternative = () => {
                             <div
                                 className={
                                     isBigScreen
-                                        ? "grid grid-cols-3 mt-2"
+                                        ? "grid grid-cols-3 mt-2 m-auto w-full h-full scrollbar-hide"
                                         : "grid grid-cols-1 gap-[5vw] place-items-center overflow-x-scroll h-[35vh] w-[40vw] scrollbar-hide mt-6"
                                 }
                             >
@@ -179,7 +179,7 @@ const Alternative = () => {
                             </div>
                         )}
                         {!isBigScreen && (
-                            <>
+                            <div className="pb-5">
                                 {currentAlternativeView < 2 && (
                                     <button
                                         onClick={() => {
@@ -214,7 +214,7 @@ const Alternative = () => {
                                     }
                                     index={currentAlternativeView}
                                 />
-                            </>
+                            </div>
                         )}
                     </div>
                 </div>

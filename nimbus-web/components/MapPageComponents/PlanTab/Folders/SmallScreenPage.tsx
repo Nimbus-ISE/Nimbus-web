@@ -29,7 +29,7 @@ const SmallScreenPage = () => {
                         <div>
                             {openReview && (
                                 <div
-                                    className="bg-[#3e4560] bg-opacity-50 opacity-100 z-10  w-full  h-[68.5vh] absolute top-0 "
+                                    className="bg-[#3e4560] bg-opacity-50 opacity-100 z-10 w-full h-[68.5vh] absolute top-0 "
                                     onMouseDown={() => {
                                         dispatch({
                                             type: "SET",

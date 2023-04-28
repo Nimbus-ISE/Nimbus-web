@@ -31,34 +31,27 @@ const ImagePagination = ({
     loc_name,
     isLargerThanMedium,
 }: ImagePaginationProps) => {
-    const [imageList, setImageList] = useState(url[0]);
+    const [imageList] = useState(url);
     const [currentPage, setCurrentPage] = useState(0);
     const isLargerThanLarge = useMediaQuery("(min-width: 1024px)");
-    const pageNumbers = [];
-
-    for (let i = 0; i < url.length; i++) {
-        pageNumbers.push(i);
-    }
     const handleNext = () => {
         setCurrentPage(currentPage + 1);
-        setImageList(url[currentPage + 1]);
     };
     const handleBack = () => {
         setCurrentPage(currentPage - 1);
-        setImageList(url[currentPage - 1]);
     };
     return (
         <Stack width={isLargerThanLarge ? "60%" : "100%"}>
             {isLargerThanMedium ? (
                 <img
                     className="h-72 rounded-t-xl object-cover aspect-ratio shadow-md"
-                    src={imageList}
+                    src={imageList[currentPage]}
                     alt={loc_name}
                 />
             ) : (
                 <img
                     className="h-80 shadow-md aspect-video object-cover rounded-t-xl"
-                    src={imageList}
+                    src={imageList[currentPage]}
                     alt={loc_name}
                 />
             )}
@@ -80,11 +73,11 @@ const ImagePagination = ({
                     <ArrowBackIosIcon sx={{ fontSize: 15 }} />
                 </IconButton>
                 <Stack spacing={1} direction="row">
-                    {pageNumbers.map((number) => {
+                    {url.map((item, index) => {
                         return (
                             <DotPagination
-                                key={number}
-                                show={currentPage == number}
+                                key={item}
+                                show={currentPage == index}
                             />
                         );
                     })}
