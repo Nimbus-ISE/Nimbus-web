@@ -21,19 +21,41 @@ const PlanGraph = (props: PlanGraphProps) => {
 
     return (
         <div className="flex flex-col items-left bg-white mt-2 pb-10">
-            <div className="flex justify-center items-center ml-[18px] h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-bold ">
+            <div
+                className={
+                    "flex justify-center items-center h-8 w-20 rounded-2xl bg-[#45d8d0] text-center text-white font-bold " +
+                    (window.innerWidth < 1024 && window.innerWidth > 500
+                        ? "ml-[calc(10vw-2px)]"
+                        : !isBigScreen
+                        ? "ml-[calc(15vw-38px)]"
+                        : "ml-[18px]")
+                }
+            >
                 Day {props.dayNumber}
             </div>
             {props.places?.map((place: any, index: any) => (
                 <>
-                    <div className="h-10 w-1 ml-14 bg-[#45d8d0] "></div>
+                    <div
+                        className={
+                            "h-10 w-1 bg-[#45d8d0] " +
+                            (window.innerWidth < 1024 && window.innerWidth > 500
+                                ? "ml-[calc(10vw+36px-1px)]"
+                                : !isBigScreen
+                                ? "ml-[calc(15vw-1px)]"
+                                : "ml-[calc(56px-1px)]")
+                        }
+                    ></div>
                     <div className="flex flex-row items-center text-xs rounded-xl hover:bg-[#efeded] duration-300">
                         <img
                             src={place?.url.split(",")[0]}
                             className={
-                                !isBigScreen
-                                    ? "h-[30vw] w-[30vw] aspect-square rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover"
-                                    : "h-24 w-24 aspect-square rounded-full cursor-pointer shadow-md ml-2 object-cover"
+                                "aspect-square rounded-full cursor-pointer shadow-md bg-[#45D0D8] object-cover " +
+                                (window.innerWidth < 1024 &&
+                                window.innerWidth > 500
+                                    ? "h-[20vw] w-[20vw] ml-9"
+                                    : !isBigScreen
+                                    ? "h-[30vw] w-[30vw]"
+                                    : "h-24 w-24 ml-2")
                             }
                             onMouseDown={() => {
                                 dispatch({
@@ -72,13 +94,16 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         });
                                     }}
                                 >
-                                    {place.loc_name.length > 24 && !isBigScreen
-                                        ? place.loc_name.substring(0, 24) +
-                                          "..."
-                                        : place.loc_name.length > 41
-                                        ? place.loc_name.substring(0, 41) +
-                                          "..."
-                                        : place.loc_name}
+                                    <div
+                                        className={
+                                            "lineClamp-2" +
+                                            (window.innerWidth > 300
+                                                ? ""
+                                                : " text-sm")
+                                        }
+                                    >
+                                        {place.loc_name}
+                                    </div>
                                 </div>
                                 {(!openFullTab || isClosingFullFolder) && (
                                     <div
@@ -129,9 +154,29 @@ const PlanGraph = (props: PlanGraphProps) => {
 
                     {travelTime[currentFolder][index] && (
                         <>
-                            <div className="h-10 w-1 ml-14 bg-[#45d8d0]"></div>
+                            <div
+                                className={
+                                    "h-10 w-1 bg-[#45d8d0] " +
+                                    (window.innerWidth < 1024 &&
+                                    window.innerWidth > 500
+                                        ? "ml-[calc(10vw+36px-1px)]"
+                                        : !isBigScreen
+                                        ? "ml-[calc(15vw-1px)]"
+                                        : "ml-[calc(56px-1px)]")
+                                }
+                            ></div>
                             <div className="flex gap-10 items-center mr-2">
-                                <div className="flex h-14 w-14 ml-[1.9rem] bg-white border-[#45d8d0] border-4 rounded-full text-neutral-800">
+                                <div
+                                    className={
+                                        "flex h-14 w-14 bg-white border-[#45d8d0] border-4 rounded-full text-neutral-800 aspect-square " +
+                                        (window.innerWidth < 1024 &&
+                                        window.innerWidth > 500
+                                            ? "ml-[calc(10vw+36px-27px)]"
+                                            : !isBigScreen
+                                            ? "ml-[calc(15vw-27px)]"
+                                            : "ml-[calc(48px+8px-27px)]")
+                                    }
+                                >
                                     {travelTime[currentFolder][index]
                                         .travel_type === "walk" && (
                                         <DirectionsWalkRoundedIcon className="m-auto" />
@@ -141,7 +186,14 @@ const PlanGraph = (props: PlanGraphProps) => {
                                         <DirectionsCarRoundedIcon className="m-auto" />
                                     )}
                                 </div>
-                                <div className="flex gap-4 text-sm text-left">
+                                <div
+                                    className={
+                                        "flex gap-4 text-left " +
+                                        (window.innerWidth > 300
+                                            ? "text-sm"
+                                            : "text-[12px]")
+                                    }
+                                >
                                     <span className="font-bold text-[#45d8d0] text-left">
                                         {capitalizeFirst(
                                             travelTime[currentFolder][index]
