@@ -104,6 +104,13 @@
     box-shadow: 10px 7px 10px -7px rgba(0, 0, 0, 0.25);
 }
 
+.lineClamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }

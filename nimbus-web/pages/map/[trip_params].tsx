@@ -17,7 +17,7 @@ import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
 
 export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
-    const screenSize = useMediaQuery("(min-width:1000px)");
+    const screenSize = useMediaQuery("(min-width:1024px)");
     const { height } = useViewportHeight();
     const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
     const [isMounted, setIsMounted] = useState(false);
