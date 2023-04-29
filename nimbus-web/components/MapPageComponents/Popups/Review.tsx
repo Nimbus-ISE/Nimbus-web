@@ -27,9 +27,9 @@ const Review = ({ review }: IProps) => {
                     />
                 )}
                 <div className="flex flex-col gap-2">
-                    <div className="flex flex-wrap items-center pr-2">
-                        <div className="text-sm font-bold whitespace-nowrap w-fit mr-2">
-                            {truncateWithDot(author, 23)}
+                    <div className="flex flex-wrap items-center min-w-0">
+                        <div className="break-all text-sm font-bold w-full lineClamp-2">
+                            {author}
                         </div>
                         <div className="my-auto">
                             <Stars size={12} rating={Number(review_rating)} />

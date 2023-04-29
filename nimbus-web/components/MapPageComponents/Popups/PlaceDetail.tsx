@@ -38,7 +38,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 }}
             >
                 <button
-                    className="absolute top-0 right-0 z-10 m-2 hover:bg-opacity-75 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-800 text-sm flex justify-center items-center bg-white bg-opacity-1 backdrop-blur-sm"
+                    className="absolute top-0 right-0 z-10 m-2 hover:bg-opacity-75 h-7 w-7 p-2 rounded-lg duration-300 text-neutral-700 text-sm flex justify-center items-center bg-white bg-opacity-1 backdrop-blur-sm"
                     onClick={() =>
                         dispatch({
                             type: "SET",
@@ -91,7 +91,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 className={
                                     isBigScreen
                                         ? "text-2xl font-extrabold "
-                                        : "text-xl font-extrabold w-[80vw] pr-[16px]"
+                                        : "text-xl font-extrabold"
                                 }
                             >
                                 {data?.loc_name}
@@ -106,7 +106,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 className={
                                     isBigScreen
                                         ? "text-[0.8rem] col-span-12 mt-2"
-                                        : "text-[0.8rem] w-[80vw] pr-2"
+                                        : "text-[0.8rem]"
                                 }
                             >
                                 <div className="text-[0.8rem] font-bold mt-2">
@@ -117,6 +117,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                         ? data?.address + " " + data?.province
                                         : "No address provided"}
                                 </div>
+
                                 <div className="text-[0.8rem] col-span-12 mt-2">
                                     <span className="font-bold">
                                         Price Level:{" "}
@@ -126,12 +127,14 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                             </div>
                         </div>
                         {!isBigScreen && (
-                            <div className="col-span-12">
+                            <div className="col-span-12 leading-3">
+                                <br></br>
                                 <Divider />
+                                <br></br>
                             </div>
                         )}
+
                         <div className="flex flex-col col-span-12">
-                            {" "}
                             <div className="text-[0.8rem] font-bold ">
                                 Description
                             </div>
@@ -141,8 +144,11 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                     : "No description provided"}
                             </div>
                         </div>
-                        <div className="col-span-12">
+
+                        <div className="col-span-12 leading-3">
+                            <br></br>
                             <Divider />
+                            <br></br>
                         </div>
                         <div className="flex flex-col col-span-12 gap-3 w-full">
                             <div className="text-[0.8rem] font-bold">
