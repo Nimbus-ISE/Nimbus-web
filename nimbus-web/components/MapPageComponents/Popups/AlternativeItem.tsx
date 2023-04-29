@@ -20,15 +20,24 @@ const AlternativeItem = (props: any) => {
             <button
                 className={
                     isBigScreen
-                        ? " h-[10rem] w-[10rem] rounded-full duration-300"
+                        ? " h-[9rem] w-[9rem] rounded-full duration-300"
                         : " h-[35vw] w-[35vw] rounded-full duration-300"
                 }
+                onMouseDown={() => {
+                    dispatch({
+                        type: "MULTI_SET",
+                        payload: {
+                            property: ["openReview", "placeData"],
+                            value: [true, data],
+                        },
+                    });
+                }}
             >
                 <img
                     src={data.url?.split(",")[0]}
                     className={
                         isBigScreen
-                            ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md object-cover"
+                            ? " h-[9rem] w-[9rem] rounded-full duration-300 shadow-md object-cover"
                             : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md object-cover"
                     }
                 />
@@ -38,9 +47,7 @@ const AlternativeItem = (props: any) => {
             </div>
 
             <Stars rating={data?.rating} size={15} />
-            <div className="text-xs lg:text-sm mt-2 w-[90%] px-5">
-                {data.description}
-            </div>
+            <div className="text-[12px] mt-2 w-[90%]">{data.description}</div>
             <div className="flex flex-col w-full max-w-[15rem] h-full justify-between items-end mt-2 z-[11] mb-5">
                 <div />
                 <div className="w-full flex flex-col gap-3">
