@@ -96,7 +96,7 @@ const AlternativeItem = (props: any) => {
                             });
                         }}
                     >
-                        More
+                        More Info
                     </button>
                 </div>
             </div>

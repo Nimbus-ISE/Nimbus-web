@@ -6,7 +6,6 @@ import ChevronRightIconRounded from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftIconRounded from "@mui/icons-material/ChevronLeftRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
-
 import Modal from "@mui/material/Modal";
 import Dialog from "@mui/material/Dialog";
 
@@ -129,7 +128,15 @@ const Alternative = () => {
 
     return (
         <>
-            <Dialog open={true} maxWidth={"md"} className="largeBorder">
+            <Dialog
+                open={true}
+                maxWidth={"md"}
+                PaperProps={{
+                    style: {
+                        backgroundColor: "transparent",
+                    },
+                }}
+            >
                 <button
                     className="absolute right-0 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
                     onClick={() =>
