@@ -138,7 +138,7 @@ const Alternative = () => {
                 }}
             >
                 <button
-                    className="absolute right-0 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
+                    className="absolute right-0 m-3 hover:bg-gray-100 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-800 text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
                     onClick={() =>
                         dispatch({
                             type: "SET",
@@ -191,8 +191,9 @@ const Alternative = () => {
                                                 type: "INCREMENT_ALTERNATIVE",
                                             });
                                         }}
+                                        className=""
                                     >
-                                        <div className="absolute top-[40%] right-2">
+                                        <div className="absolute top-[30%] right-2 bg-white backdrop-blur-sm bg-opacity-25 rounded-full">
                                             <ChevronRightIconRounded fontSize="large" />
                                         </div>
                                     </button>
@@ -205,7 +206,7 @@ const Alternative = () => {
                                             });
                                         }}
                                     >
-                                        <div className="absolute top-[40%] left-2">
+                                        <div className="absolute top-[30%] left-2 bg-white backdrop-blur-sm bg-opacity-25 rounded-full">
                                             <ChevronLeftIconRounded fontSize="large" />
                                         </div>
                                     </button>

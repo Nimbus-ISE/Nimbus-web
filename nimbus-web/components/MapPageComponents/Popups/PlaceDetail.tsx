@@ -38,7 +38,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 }}
             >
                 <button
-                    className="absolute top-0 right-0 z-10 m-2 hover:bg-opacity-75 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center  bg-opacity-50 backdrop-blur-sm"
+                    className="absolute top-0 right-0 z-10 m-2 hover:bg-opacity-75 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-800 text-sm flex justify-center items-center bg-white bg-opacity-1 backdrop-blur-sm"
                     onClick={() =>
                         dispatch({
                             type: "SET",
@@ -53,18 +53,20 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                 <div
                     className={
                         isBigScreen
-                            ? "shadow-md rounded-xl bg-white p-2 overflow-y-auto overflow-x-hidden"
-                            : "shadow-md rounded-xl bg-white p-4 overflow-y-auto overflow-x-hidden scrollbar-hide"
+                            ? "shadow-md rounded-xl bg-white p-2 overflow-y-auto overflow-x-hidden scrollbar-hide "
+                            : "shadow-md rounded-xl bg-white px-4 pb-4 overflow-y-auto scrollbar-hide "
                     }
                 >
+                    {" "}
                     {!isBigScreen && (
-                        <img
-                            src={data?.url.split(",")[0]}
-                            className="rounded-xl bg-[#45D8D0] w-[90%] mx-auto mt-5 -mb-5 
-                        object-cover shadow-md"
-                        />
+                        <div className="-mx-4">
+                            <img
+                                src={data?.url.split(",")[0]}
+                                className=" bg-[#45D8D0] h-40 w-full -mb-5
+                         object-cover shadow-md"
+                            />
+                        </div>
                     )}
-
                     <div
                         className={
                             "gap-6 " +
@@ -89,7 +91,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 className={
                                     isBigScreen
                                         ? "text-2xl font-extrabold "
-                                        : "text-xl font-extrabold w-[80vw]"
+                                        : "text-xl font-extrabold w-[80vw] pr-[16px]"
                                 }
                             >
                                 {data?.loc_name}
@@ -110,7 +112,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
                                 <div className="text-[0.8rem] font-bold mt-2">
                                     Address
                                 </div>
-                                <div className="text-[0.8rem]">
+                                <div className="text-[0.8rem] pr-[16px]">
                                     {data?.address && data?.province
                                         ? data?.address + " " + data?.province
                                         : "No address provided"}
