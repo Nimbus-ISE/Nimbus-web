@@ -178,6 +178,10 @@
     -moz-appearance: textfield;
 }
 
+/* .largeBorder {
+    border-radius: 12px;
+} */
+
 /* button {
     color: black;
     font-weight: 500;

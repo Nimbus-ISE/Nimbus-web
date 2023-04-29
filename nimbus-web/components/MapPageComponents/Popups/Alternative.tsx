@@ -6,6 +6,8 @@ import ChevronRightIconRounded from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftIconRounded from "@mui/icons-material/ChevronLeftRounded";
 import CloseIcon from "@mui/icons-material/Close";
 import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
+import Modal from "@mui/material/Modal";
+import Dialog from "@mui/material/Dialog";
 
 const Alternative = () => {
     const {
@@ -126,15 +128,17 @@ const Alternative = () => {
 
     return (
         <>
-            <div
-                className={
-                    isBigScreen
-                        ? "absolute top-[50vh] left-1/3  -translate-x-1/2 -translate-y-[30vh]  overflow-y-scroll scrollbar-hide  animate-fade-in "
-                        : " absolute top-[35vh] left-1/2  -translate-x-1/2 -translate-y-1/2 overflow-y-scroll  scrollbar-hide  animate-fade-in z-50"
-                }
+            <Dialog
+                open={true}
+                maxWidth={"md"}
+                PaperProps={{
+                    style: {
+                        backgroundColor: "transparent",
+                    },
+                }}
             >
                 <button
-                    className="absolute right-0 m-3 hover:bg-gray-100 h-8 w-8 p-2 rounded-full duration-300 text-[#45D8D0] text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
+                    className="absolute right-0 m-3 hover:bg-gray-100 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-800 text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
                     onClick={() =>
                         dispatch({
                             type: "SET",
@@ -152,13 +156,13 @@ const Alternative = () => {
                 <div
                     className={
                         isBigScreen
-                            ? "shadow-md rounded-xl bg-white h-[70vh] w-[60vw] p-2 overflow-y-scroll overflow-x-hidden scrollbar-hide"
-                            : "shadow-md rounded-xl bg-white h-[45vh] w-[90vw] p-4 mb-14 overflow-y-scroll overflow-x-hidden scrollbar-hide"
+                            ? "shadow-md rounded-xl bg-white p-2 overflow-y-auto overflow-x-hidden"
+                            : "shadow-md rounded-xl bg-white p-4 overflow-y-auto overflow-x-hidden scrollbar-hide"
                     }
                 >
                     <div className="flex flex-col place-items-center h-full w-full">
                         <div className="text-neutral-700 text-xl text-center font-bold mt-5">
-                            Alternatives
+                            Select Alternative
                         </div>
                         {isBigScreen && (
                             <div
@@ -187,8 +191,9 @@ const Alternative = () => {
                                                 type: "INCREMENT_ALTERNATIVE",
                                             });
                                         }}
+                                        className=""
                                     >
-                                        <div className="absolute top-[40%] right-2">
+                                        <div className="absolute top-[30%] right-2 bg-white backdrop-blur-sm bg-opacity-25 rounded-full">
                                             <ChevronRightIconRounded fontSize="large" />
                                         </div>
                                     </button>
@@ -201,7 +206,7 @@ const Alternative = () => {
                                             });
                                         }}
                                     >
-                                        <div className="absolute top-[40%] left-2">
+                                        <div className="absolute top-[30%] left-2 bg-white backdrop-blur-sm bg-opacity-25 rounded-full">
                                             <ChevronLeftIconRounded fontSize="large" />
                                         </div>
                                     </button>
@@ -218,7 +223,7 @@ const Alternative = () => {
                         )}
                     </div>
                 </div>
-            </div>
+            </Dialog>
         </>
     );
 };
