@@ -104,23 +104,38 @@ export default function map({ trip_params }: any) {
                     },
                 });
             }
-
-            if (!initialized) {
-                dispatch({
-                    type: "SET",
-                    payload: {
-                        property: "travelTime",
-                        value: trip.travelTimes,
-                    },
-                });
-            }
-            dispatch({
+            const dispatchObj: any = {
                 type: "MULTI_SET",
                 payload: {
-                    property: ["arrivalAndLeaveTimes", "trip_id"],
-                    value: [trip.arrivalAndLeaveTimes, trip.trip_id],
+                    property: [],
+                    value: [],
                 },
-            });
+            };
+            if (!initialized) {
+                const property: any = [
+                    "travelTime",
+                    "arrivalAndLeaveTimes",
+                    "trip_id",
+                ];
+                const value: any = [
+                    trip.travelTimes,
+                    trip.arrivalAndLeaveTimes,
+                    trip.trip_id,
+                ];
+                dispatchObj.payload.property =
+                    dispatchObj.payload.property.concat(property);
+                dispatchObj.payload.value =
+                    dispatchObj.payload.value.concat(value);
+            } else {
+                const property: any = ["arrivalAndLeaveTimes", "trip_id"];
+                const value: any = [trip.arrivalAndLeaveTimes, trip.trip_id];
+                dispatchObj.payload.property =
+                    dispatchObj.payload.property.concat(property);
+                dispatchObj.payload.value =
+                    dispatchObj.payload.value.concat(value);
+            }
+
+            dispatch(dispatchObj);
 
             const tempPinState: Array<Array<string>> = [];
             const getLocationDetailObject: any = {};
