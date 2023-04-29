@@ -138,7 +138,7 @@ const Alternative = () => {
                 }}
             >
                 <button
-                    className="absolute right-0 m-3 hover:bg-gray-100 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-800 text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
+                    className="absolute right-0 m-3 hover:bg-gray-100 h-7 w-7 p-2 rounded-xl duration-300 text-neutral-700 text-sm flex justify-center items-center bg-white backdrop-blur-sm bg-opacity-50"
                     onClick={() =>
                         dispatch({
                             type: "SET",
