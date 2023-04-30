@@ -34,10 +34,7 @@ export default function map({ trip_params }: any) {
     const trip_params_object = JSON.parse(trip_params);
 
     useEffect(() => {
-        dispatch({
-            type: "SET",
-            payload: { property: "isBigScreen", value: screenSize },
-        });
+        console.log(trip_params_object);
         if (trip_params_object.name !== undefined) {
             dispatch({
                 type: "MULTI_SET",
@@ -96,13 +93,13 @@ export default function map({ trip_params }: any) {
                 trip["travelTimes"] = travelTimes;
                 trip["arrivalAndLeaveTimes"] = arrivalAndLeaveTimes;
                 trip["trip_id"] = trip_params_object.name;
-                dispatch({
+                /*dispatch({
                     type: "MULTI_SET",
                     payload: {
                         property: ["trip_name", "isSavePlan"],
                         value: [trip_params_object.name, true],
                     },
-                });
+                });*/
             }
             const dispatchObj: any = {
                 type: "MULTI_SET",
