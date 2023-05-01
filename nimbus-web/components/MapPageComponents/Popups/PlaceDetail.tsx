@@ -11,10 +11,9 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     const { isBigScreen, placeData: data } = getPlanTabState();
     const [reviewData, setReviewData] = useState([]);
     const dispatch: any = getPlanTabDispatch();
-    // const data = placeData;
 
     const fetchReview = async (loc_id: string) => {
-        const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
+        const res = await fetch(`/api/ tReview/?loc_id=${loc_id}`);
         const plan = await res.json();
         return plan;
     };

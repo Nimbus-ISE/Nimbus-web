@@ -66,6 +66,7 @@ export default function map({ trip_params }: any) {
             let trip: any = [];
             if (trip_params_object.name === undefined) {
                 trip = await fetchTrip();
+                console.log(trip);
             } else {
                 const dayPlans = trip_params_object.day_plan;
                 const locIds: any = [];
@@ -154,6 +155,7 @@ export default function map({ trip_params }: any) {
             fetchLocationDetails(getLocationDetailObject).then(
                 async (result) => {
                     const coordinates: Array<Array<string>> = [];
+                    console.log(result);
 
                     if (!isMounted && !initialized) {
                         dispatch({
