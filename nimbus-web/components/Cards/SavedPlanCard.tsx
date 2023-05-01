@@ -81,7 +81,7 @@ export default function SavedPlanCard({
                     >
                         <FontAwesomeIcon
                             icon={faMapLocationDot}
-                            className="w-24 h-24 aspect-auto m-auto invert drop-shadow-lg fill-white"
+                            className="w-24 h-24 aspect-auto m-auto drop-shadow-lg text-white"
                         />
                     </div>
                     <div className="px-6 py-2 pb-0">
