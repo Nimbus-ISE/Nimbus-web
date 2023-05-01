@@ -34,7 +34,7 @@ const FolderEffect = () => {
         });
     };
     return (
-        <div className="text-black">
+        <div className="text-neutral-800">
             {books.map((item, index) => {
                 if (index >= indexBound[0] && index <= indexBound[1]) {
                     return <div className={`${item.name}`}>{item.name}</div>;

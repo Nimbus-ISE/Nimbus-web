@@ -34,7 +34,7 @@ const MobileCardExtender = ({ obj, expand, index }: IProps) => {
                     } absolute flex top-0 bottom-0 left-0 right-0 transition duration-500 p-5`}
                 >
                     <div className="m-auto">
-                        <h1 className="font-extrabold text-4xl text-black">
+                        <h1 className="font-extrabold text-4xl text-neutral-800">
                             {obj.loc_name}
                         </h1>
                         <div className="flex font-bold text-base text-neutral-800 py-1">

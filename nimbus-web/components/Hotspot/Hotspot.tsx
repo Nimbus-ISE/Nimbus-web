@@ -55,7 +55,7 @@ const Hotspot = ({ props }: IProps) => {
     return (
         <div
             id="hotspot"
-            className="relative flex text-black h-full w-screen bg-neutral-200 md:py-16 py-10 overflow-hidden"
+            className="relative flex text-neutral-800 h-full w-screen bg-neutral-200 md:py-16 py-10 overflow-hidden"
         >
             <div className="flex flex-col md:flex-row m-auto z-30 justify-center p-1 w-full md:scale-125">
                 <div

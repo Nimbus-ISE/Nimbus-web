@@ -49,7 +49,7 @@ const Slider = ({ title, locationList, shape, onClickCallback }: IProps) => {
     return (
         <div
             id={`slider-container-${title}`}
-            className="h-full w-full md:w-[80%] mx-auto overflow-hidden text-black pt-5 pb-6 drop-shadow-sm"
+            className="h-full w-full md:w-[80%] mx-auto overflow-hidden text-neutral-800 pt-5 pb-6 drop-shadow-sm"
         >
             <div className="px-5 font-montserrat font-bold text-3xl text-left">
                 {title}

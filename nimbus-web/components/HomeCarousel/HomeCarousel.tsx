@@ -61,7 +61,7 @@ const HomeCarousel = () => {
     return (
         <div
             id="carousel"
-            className="relative flex flex-col md:flex-row text-black h-[40rem] py-5 overflow-hidden"
+            className="relative flex flex-col md:flex-row text-neutral-800 h-[40rem] py-5 overflow-hidden"
         >
             {carouselList.map((carouselObj, index) => {
                 return (

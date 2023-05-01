@@ -36,15 +36,7 @@ export default async function handler(
     FROM location_data L
     LEFT OUTER JOIN image I
     ON L.loc_id = I.loc_id
-    WHERE  L.loc_id IN  ${sql([loc_ids])} GROUP BY L.loc_id
-    ORDER BY CASE
-                    ${loc_ids.map(
-                        (locId: any, index: any) => sql`
-                    WHEN L.loc_id = ${locId} THEN ${index + 1}
-                    `
-                    )}
-                    ELSE ${loc_ids.length + 1}
-                END`;
+    WHERE  L.loc_id IN  ${sql(loc_ids)} GROUP BY L.loc_id`;
 
     try {
         const location_data: Array<Location> = await query;
@@ -67,7 +59,7 @@ export default async function handler(
                 day: index,
                 location_data: correct_return_obj.slice(0, len),
             });
-            location_data.splice(0, len);
+            correct_return_obj.splice(0, len);
         });
 
         // console.log(location_data);

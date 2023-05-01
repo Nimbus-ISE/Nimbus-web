@@ -50,7 +50,7 @@ const LocationInput = () => {
     return (
         <SearchBar
             valueCallback={handleValueCallback}
-            className="relative flex justify-between text-black my-auto w-full max-w-[30rem] h-12 text-sm z-10"
+            className="relative flex justify-between text-neutral-800 my-auto w-full max-w-[30rem] h-12 text-sm z-10"
             inputClassName="w-full h-full bg-gray-100 shadow-md
             rounded-xl px-8 text-neutral-700 leading-tight border-[1px]
             hover:opacity-70 transition"

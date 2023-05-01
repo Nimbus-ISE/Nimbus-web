@@ -4,7 +4,7 @@ const ButtonBack = ({ onClick, className }: any) => {
     return (
         <button
             onClick={onClick}
-            className={`text-black font-bold py-0 px-1 h-10 rounded-xl hover:scale-105 duration-300 ${className}`}
+            className={`text-neutral-800 font-bold py-0 px-1 h-10 rounded-xl hover:scale-105 duration-300 ${className}`}
             style={{ backgroundColor: "white" }}
         >
             <div className="flex justify-start items-center">

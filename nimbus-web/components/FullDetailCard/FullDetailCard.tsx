@@ -86,7 +86,7 @@ const FullDetailCard = ({ location }: FullDetailCardProps) => {
     };
 
     return (
-        <div className="relative text-black mx-auto p-5 md:p-12 w-full max-w-screen-xl">
+        <div className="relative text-neutral-800 mx-auto p-5 md:p-12 w-full max-w-screen-xl">
             <Stack spacing={3} pb={2}>
                 <Stack
                     direction={isLargerThanLarge ? "row" : "column"}

@@ -69,7 +69,7 @@ const Upgrade = ({ user }: { user: UserProfile }) => {
         }
     };
     return (
-        <div className="relative grid place-items-center min-h-screen h-full bg-neutral-100 text-black">
+        <div className="relative grid place-items-center min-h-screen h-full bg-neutral-100 text-neutral-800">
             <img
                 src="/images/home1.webp"
                 className="absolute object-cover object-bottom top-0 bottom-0 left-0 right-0 w-full h-full opacity-30 aspect-video"
