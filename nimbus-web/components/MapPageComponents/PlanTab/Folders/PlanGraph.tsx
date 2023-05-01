@@ -33,7 +33,7 @@ const PlanGraph = (props: PlanGraphProps) => {
             >
                 Day {props.dayNumber}
             </div>
-            {props.places?.map((place: any, index: any) => (
+            {props.places?.map((place: any, index: number) => (
                 <>
                     <div
                         className={
@@ -102,7 +102,7 @@ const PlanGraph = (props: PlanGraphProps) => {
                                                 : " text-sm")
                                         }
                                     >
-                                        {place.loc_name}
+                                        {index + 1}) {place.loc_name}
                                     </div>
                                 </div>
                                 {(!openFullTab || isClosingFullFolder) && (
