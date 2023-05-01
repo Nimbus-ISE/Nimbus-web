@@ -67,7 +67,7 @@ export default async function handler(
                 day: index,
                 location_data: correct_return_obj.slice(0, len),
             });
-            location_data.splice(0, len);
+            correct_return_obj.splice(0, len);
         });
 
         // console.log(location_data);
