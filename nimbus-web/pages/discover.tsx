@@ -23,7 +23,7 @@ const discover = ({ locationProp }: any) => {
         }
     };*/
     return (
-        <div className="relative flex flex-col min-h-screen h-full w-full bg-neutral-100 text-black">
+        <div className="relative flex flex-col min-h-screen h-full w-full bg-neutral-100 text-neutral-800">
             <Background />
             <div
                 id="discover-page-container"

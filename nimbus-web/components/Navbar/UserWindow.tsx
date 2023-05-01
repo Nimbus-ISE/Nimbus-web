@@ -38,7 +38,7 @@ const UserWindow = ({ user }: { user: any }) => {
             className={`absolute flex flex-col p-2 top-[68px] -right-2 bg-white 
             shadow-md w-56 ${
                 premium_type === "None" ? "h-52" : "h-40"
-            } rounded-xl text-black`}
+            } rounded-xl text-neutral-800`}
         >
             <div className="flex p-2">
                 <UserProfile src={user.picture} size={40} />

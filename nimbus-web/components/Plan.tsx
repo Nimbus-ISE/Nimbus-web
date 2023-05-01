@@ -118,7 +118,7 @@ const Plan = () => {
             >
                 <div
                     style={{ height: height }}
-                    className="relative flex text-black overflow-hidden bg-neutral-100"
+                    className="relative flex text-neutral-800 overflow-hidden bg-neutral-100"
                 >
                     {isLoading ? (
                         <div className="absolute z-50 top-0 bottom-0 left-0 right-0 m-auto flex bg-neutral-100">

@@ -22,7 +22,7 @@ export default function Home({ trendingList }: IProps) {
             <Head>
                 <title>Nimbus</title>
             </Head>
-            <div className="relative flex flex-col min-h-screen h-full w-screen overflow-x-hidden bg-neutral-100 text-black">
+            <div className="relative flex flex-col min-h-screen h-full w-screen overflow-x-hidden bg-neutral-100 text-neutral-800">
                 {!isLargerThanMedium ? (
                     <div className="absolute flex top-5 left-0 right-0 w-full z-20">
                         <div className="flex flex-wrap gap-2 w-fit mx-auto px-2">

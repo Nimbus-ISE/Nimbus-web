@@ -78,7 +78,7 @@ const SearchBar = ({
             className={
                 className
                     ? className
-                    : `relative flex justify-between text-black my-auto w-56 xl:w-72 h-8 text-sm z-10`
+                    : `relative flex justify-between text-neutral-800 my-auto w-56 xl:w-72 h-8 text-sm z-10`
             }
         >
             <input

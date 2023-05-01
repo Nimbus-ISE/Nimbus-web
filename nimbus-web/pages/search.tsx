@@ -33,7 +33,7 @@ const search = () => {
         }
     };
     return (
-        <div className="relative flex min-h-screen w-full bg-neutral-100 text-black">
+        <div className="relative flex min-h-screen w-full bg-neutral-100 text-neutral-800">
             <Background />
             <div
                 id="search-page-container"

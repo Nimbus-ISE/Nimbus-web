@@ -14,7 +14,7 @@ const Review = ({ review }: IProps) => {
     return (
         <>
             <div
-                className={` text-black bg-white rounded-2xl border-2 col-span-12 flex gap-4 items-center shadow-sm h-fit
+                className={` text-neutral-800 bg-white rounded-2xl border-2 col-span-12 flex gap-4 items-center shadow-sm h-fit
                     ${isBigScreen ? "p-4" : "p-3"}`}
             >
                 {isBigScreen && (

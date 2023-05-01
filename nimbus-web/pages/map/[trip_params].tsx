@@ -219,7 +219,7 @@ export default function map({ trip_params }: any) {
             </Head>
             {isLoading && (
                 <div
-                    className="flex w-full bg-white text-black"
+                    className="flex w-full bg-white text-neutral-800"
                     style={{
                         height: height,
                     }}
@@ -241,8 +241,8 @@ export default function map({ trip_params }: any) {
                         className={`
                             ${
                                 isBigScreen
-                                    ? "grid place-items-center z-50 bg-gradient-to-r from-[#21D7E8] to-[#FFDE59] text-black grid-cols-12 absolute w-full overflow-hidden"
-                                    : "z-50 bg-[#64caca] text-black absolute w-full overflow-hidden gap-0"
+                                    ? "grid place-items-center z-50 bg-gradient-to-r from-[#21D7E8] to-[#FFDE59] text-neutral-800 grid-cols-12 absolute w-full overflow-hidden"
+                                    : "z-50 bg-[#64caca] text-neutral-800 absolute w-full overflow-hidden gap-0"
                             }
                         `}
                     >
