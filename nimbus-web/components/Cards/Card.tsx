@@ -24,6 +24,7 @@ export default function Card({ location }: { location: any }) {
                         width={288}
                         src={location.url}
                         alt={location.loc_name}
+                        style={{ objectFit: "cover" }}
                     />
                     <div className="px-6 py-4 pb-0">
                         <div className="text-left font-bold whitespace-nowrap text-sm mb-1 text-slate-700">

@@ -49,15 +49,15 @@ const BigScreenPage = () => {
                         {openReview && (
                             <div
                                 className=" bg-[#3e4560] bg-opacity-50 w-full h-full fixed bottom-0 left-1/3 "
-                                onMouseDown={() => {
-                                    dispatch({
-                                        type: "SET",
-                                        payload: {
-                                            property: "openReview",
-                                            value: false,
-                                        },
-                                    });
-                                }}
+                                // onMouseDown={() => {
+                                //     dispatch({
+                                //         type: "SET",
+                                //         payload: {
+                                //             property: "openReview",
+                                //             value: false,
+                                //         },
+                                //     });
+                                // }}
                             >
                                 <PlaceDetail
                                     placeTitle={placeData.placeTitle}

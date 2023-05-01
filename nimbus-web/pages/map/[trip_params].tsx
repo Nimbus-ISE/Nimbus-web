@@ -17,7 +17,7 @@ import fetchLocationDetails from "@/utils/api/fetchLocationDetails";
 
 export default function map({ trip_params }: any) {
     const dispatch: any = getPlanTabDispatch();
-    const screenSize = useMediaQuery("(min-width:1000px)");
+    const screenSize = useMediaQuery("(min-width:1024px)");
     const { height } = useViewportHeight();
     const { isBigScreen, currentFolder, fullPlan, changed } = getPlanTabState();
     const [isMounted, setIsMounted] = useState(false);
@@ -34,10 +34,7 @@ export default function map({ trip_params }: any) {
     const trip_params_object = JSON.parse(trip_params);
 
     useEffect(() => {
-        dispatch({
-            type: "SET",
-            payload: { property: "isBigScreen", value: screenSize },
-        });
+        console.log(trip_params_object);
         if (trip_params_object.name !== undefined) {
             dispatch({
                 type: "MULTI_SET",
@@ -96,31 +93,46 @@ export default function map({ trip_params }: any) {
                 trip["travelTimes"] = travelTimes;
                 trip["arrivalAndLeaveTimes"] = arrivalAndLeaveTimes;
                 trip["trip_id"] = trip_params_object.name;
-                dispatch({
+                /*dispatch({
                     type: "MULTI_SET",
                     payload: {
                         property: ["trip_name", "isSavePlan"],
                         value: [trip_params_object.name, true],
                     },
-                });
+                });*/
             }
-
-            if (!initialized) {
-                dispatch({
-                    type: "SET",
-                    payload: {
-                        property: "travelTime",
-                        value: trip.travelTimes,
-                    },
-                });
-            }
-            dispatch({
+            const dispatchObj: any = {
                 type: "MULTI_SET",
                 payload: {
-                    property: ["arrivalAndLeaveTimes", "trip_id"],
-                    value: [trip.arrivalAndLeaveTimes, trip.trip_id],
+                    property: [],
+                    value: [],
                 },
-            });
+            };
+            if (!initialized) {
+                const property: any = [
+                    "travelTime",
+                    "arrivalAndLeaveTimes",
+                    "trip_id",
+                ];
+                const value: any = [
+                    trip.travelTimes,
+                    trip.arrivalAndLeaveTimes,
+                    trip.trip_id,
+                ];
+                dispatchObj.payload.property =
+                    dispatchObj.payload.property.concat(property);
+                dispatchObj.payload.value =
+                    dispatchObj.payload.value.concat(value);
+            } else {
+                const property: any = ["arrivalAndLeaveTimes", "trip_id"];
+                const value: any = [trip.arrivalAndLeaveTimes, trip.trip_id];
+                dispatchObj.payload.property =
+                    dispatchObj.payload.property.concat(property);
+                dispatchObj.payload.value =
+                    dispatchObj.payload.value.concat(value);
+            }
+
+            dispatch(dispatchObj);
 
             const tempPinState: Array<Array<string>> = [];
             const getLocationDetailObject: any = {};

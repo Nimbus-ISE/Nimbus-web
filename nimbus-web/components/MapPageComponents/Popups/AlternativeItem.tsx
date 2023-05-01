@@ -14,22 +14,47 @@ const AlternativeItem = (props: any) => {
             className={
                 isBigScreen
                     ? "flex flex-col m-4 place-items-center gap-2 "
-                    : "flex flex-col place-items-center gap-2 z-50 mt-4"
+                    : "flex flex-col place-items-center gap-2 z-50 "
             }
         >
             <button
+                // className={
+                //     isBigScreen
+                //         ? " h-[9rem] w-[9rem] rounded-full duration-300"
+                //         : " h-[35vw] w-[35vw] rounded-full duration-300"
+                // }
                 className={
-                    isBigScreen
-                        ? " h-[10rem] w-[10rem] rounded-full duration-300"
-                        : " h-[35vw] w-[35vw] rounded-full duration-300"
+                    "rounded-full duration-300 " +
+                    (window.innerWidth < 1024 && window.innerWidth > 500
+                        ? "h-[20vw] w-[20vw]"
+                        : !isBigScreen
+                        ? "h-[35vw] w-[35vw]"
+                        : "h-[9rem] w-[9rem]")
                 }
+                onMouseDown={() => {
+                    dispatch({
+                        type: "MULTI_SET",
+                        payload: {
+                            property: ["openReview", "placeData"],
+                            value: [true, data],
+                        },
+                    });
+                }}
             >
                 <img
                     src={data.url?.split(",")[0]}
+                    // className={
+                    //     isBigScreen
+                    //         ? " h-[9rem] w-[9rem] rounded-full duration-300 shadow-md object-cover"
+                    //         : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md object-cover"
+                    // }
                     className={
-                        isBigScreen
-                            ? " h-[10rem] w-[10rem] rounded-full duration-300 shadow-md object-cover"
-                            : " h-[35vw] w-[35vw] rounded-full duration-300 shadow-md object-cover"
+                        "aspect-square rounded-full cursor-pointer duration-300 shadow-md bg-[#45D0D8] object-cover " +
+                        (window.innerWidth < 1024 && window.innerWidth > 500
+                            ? "h-[20vw] w-[20vw]"
+                            : !isBigScreen
+                            ? "h-[35vw] w-[35vw]"
+                            : "h-[9rem] w-[9rem]")
                     }
                 />
             </button>
@@ -38,7 +63,7 @@ const AlternativeItem = (props: any) => {
             </div>
 
             <Stars rating={data?.rating} size={15} />
-            <div className="text-xs lg:text-sm mt-2 w-[90%] px-5">
+            <div className="text-[12px] mt-2 w-[90%] max-w-[20rem]">
                 {data.description}
             </div>
             <div className="flex flex-col w-full max-w-[15rem] h-full justify-between items-end mt-2 z-[11] mb-5">
@@ -89,7 +114,7 @@ const AlternativeItem = (props: any) => {
                             });
                         }}
                     >
-                        More
+                        More Info
                     </button>
                 </div>
             </div>
