@@ -22,6 +22,8 @@ export default async function handler(
     };
 
     const loc_ids_obj = req.body;
+    // console.log(req.body);
+
     let loc_ids: any = [];
     const lengthOfDays: any = [];
 
@@ -49,14 +51,28 @@ export default async function handler(
 
         const return_obj: any = [];
 
+        // console.log(location_data);
+        const correct_return_obj: any = [];
+
+        location_data.forEach((location: any, index: any) => {
+            const cor_index = loc_ids.indexOf(location.loc_id);
+            console.log(cor_index);
+
+            correct_return_obj[cor_index] = location;
+        });
+        console.log("Hello", correct_return_obj);
+
         lengthOfDays.forEach((len: any, index: any) => {
             return_obj.push({
                 day: index,
-                location_data: location_data.slice(0, len),
+                location_data: correct_return_obj.slice(0, len),
             });
             location_data.splice(0, len);
         });
-        // console.log(return_obj);
+
+        // console.log(location_data);
+
+        // console.log(correct_return_obj);
 
         res.status(200).json(return_obj);
     } catch (e) {

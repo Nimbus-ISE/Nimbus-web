@@ -13,7 +13,7 @@ const PlaceDetail = (props: PlaceDetailProps) => {
     const dispatch: any = getPlanTabDispatch();
 
     const fetchReview = async (loc_id: string) => {
-        const res = await fetch(`/api/getReview/?loc_id=${loc_id}`);
+        const res = await fetch(`/api/ tReview/?loc_id=${loc_id}`);
         const plan = await res.json();
         return plan;
     };
