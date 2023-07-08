@@ -10,6 +10,13 @@ Nimbus Travel Planner is a web application that empowers users to effortlessly p
 - Further customize the generated travel plans with alternative places
 - Save the generated travel plans for easy reference or edit them later
 
+## Screenshots
+![image](https://github.com/Nimbus-ISE/Nimbus-web/assets/70953480/33f0c364-aebd-444c-9cac-d8c136452a8d)
+![image](https://github.com/Nimbus-ISE/Nimbus-web/assets/70953480/1d65f7c7-694d-44f1-a29a-b0c5f2c74907)
+![image](https://github.com/Nimbus-ISE/Nimbus-web/assets/70953480/f97af1d4-eb8a-473b-91e5-f5d178cc0471)
+![image](https://github.com/Nimbus-ISE/Nimbus-web/assets/70953480/fe44f8c1-d7e6-4d7f-9237-2894b41911d7)
+![image](https://github.com/Nimbus-ISE/Nimbus-web/assets/70953480/84132456-e3b0-4422-974a-2ec40d459733)
+
 ## Technologies Used
 
 - Next.js for the frontend and the backend
